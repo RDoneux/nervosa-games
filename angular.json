@@ -93,7 +93,9 @@
             "stylePreprocessorOptions": {
               "includePaths": ["./src/pre-processor-styles"]
             },
-            "scripts": []
+            "codeCoverage": true,
+            "scripts": [],
+            "karmaConfig": "karma.conf.js"
           }
         }
       }

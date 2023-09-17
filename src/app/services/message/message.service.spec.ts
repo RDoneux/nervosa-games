@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { MessageService } from './message.service';
 import { filter } from 'rxjs';
+import { ISystemMessage } from './i-system-message';
 
 describe('MessageService', () => {
   let service: MessageService;
@@ -34,4 +35,14 @@ describe('MessageService', () => {
       });
     service.send({ stream: 'testStream', payload: 'test', sender: 'test' });
   });
+  describe('#getStreams$', () => {
+    it('should recieve a message on requested stream', () => {
+      service.getStreams$(['specifiedStream']).subscribe({
+        next: (value: ISystemMessage) => {
+          expect(value.payload).toBe("testStreamSpecificMessage")
+        }
+      })
+      service.send({stream: 'specifiedStream', payload: 'testStreamSpecificMessage', sender: ''})
+    })
+  })
 });

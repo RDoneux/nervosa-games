@@ -3,9 +3,11 @@ import packageJson from '../../../../package.json';
 import { isDevMode } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
+/* istanbul ignore next */
 export const debug = (namespace: string) =>
   dbg(`${packageJson.name}:${namespace}`);
 
+/* istanbul ignore next */
 export function debugInit(): void {
   dbg.enable(
     environment.debug
@@ -20,3 +22,4 @@ export function debugInit(): void {
   );
   welcome(`State: ${isDevMode() ? 'Development' : 'Production'}`);
 }
+

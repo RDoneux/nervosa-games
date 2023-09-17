@@ -7,6 +7,7 @@ import { debugInit } from './services/debug/debug';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  /* istanbul ignore next */
   ngOnInit(): void {
     debugInit();
   }
