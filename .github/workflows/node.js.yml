@@ -1,23 +1,11 @@
 name: Angular CI
-on:
-  push:
-    branches: [ main ]  
-  pull_request:
-    branches: [ main ]  
-  workflow_dispatch:
+on: push
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
     
     steps:
-      - uses: actions/checkout@v2
-      
-        with:
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-      
+      - uses: actions/checkout@v2      
       - name: npm install and npm run CI commands
         run: |
           npm i
