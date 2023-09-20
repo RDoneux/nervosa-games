@@ -5,8 +5,6 @@ import { INavigationRoute } from '../../interfaces/i-navigation-route.interface'
 
 @Component({
   selector: 'app-navigation-links-desktop',
-  standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './navigation-links-desktop.component.html',
   styleUrls: ['./navigation-links-desktop.component.scss']
 })

@@ -6,8 +6,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navigation-links-mobile',
-  standalone: true,
-  imports: [CommonModule, LeftDrawComponent, RouterLink, RouterLinkActive],
   templateUrl: './navigation-links-mobile.component.html',
   styleUrls: ['./navigation-links-mobile.component.scss'],
 })

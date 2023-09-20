@@ -4,8 +4,6 @@ import { debug } from 'src/app/services/debug/debug';
 
 @Component({
   selector: 'app-cart-icon',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './cart-icon.component.html',
   styleUrls: ['./cart-icon.component.scss'],
 })
