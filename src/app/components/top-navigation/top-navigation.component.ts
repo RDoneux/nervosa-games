@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { INavigationRoute } from './interfaces/i-navigation-route.interface';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CartIconComponent } from '../cart-icon/cart-icon.component';
+import { CartIconComponent } from './components/cart-icon/cart-icon.component';
+import { NavigationLinksDesktopComponent } from './components/navigation-links-desktop/navigation-links-desktop.component';
+import { NavigationLinksMobileComponent } from './components/navigation-links-mobile/navigation-links-mobile.component';
+import { HomeIconComponent } from './components/home-icon/home-icon.component';
 
 @Component({
   selector: 'app-top-navigation',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, CartIconComponent],
+  imports: [
+    CommonModule,
+    HomeIconComponent,
+    CartIconComponent,
+    NavigationLinksDesktopComponent,
+    NavigationLinksMobileComponent,
+  ],
   templateUrl: './top-navigation.component.html',
   styleUrls: ['./top-navigation.component.scss'],
 })

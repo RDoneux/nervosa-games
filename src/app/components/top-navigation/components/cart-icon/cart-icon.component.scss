@@ -1,7 +1,13 @@
 @import 'variables';
+@import 'mixins';
 
 :host {
     display: block;
+    flex: 1 1 auto;
+
+    @include tablet-down {
+        flex: 0 0 auto;
+    }
 }
 
 .cart-icon {
@@ -14,6 +20,10 @@
 
     padding: 15px 20px;
     border-radius: 5px;
+
+    @include tablet-down {
+        padding: 0;
+    }
 
     .cart-icon__content-wrapper {
         cursor: pointer;

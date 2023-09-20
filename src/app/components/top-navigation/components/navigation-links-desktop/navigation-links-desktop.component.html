@@ -1,0 +1,10 @@
+<ul class="top-navigation__navigation-routes-list">
+  <li
+    class="top-navigation__navigation-item"
+    *ngFor="let route of routes"
+    [routerLink]="route.route"
+    [routerLinkActive]="'active-route'"
+  >
+    {{ route.label }}
+  </li>
+</ul>

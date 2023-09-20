@@ -1,0 +1,46 @@
+@import 'variables';
+@import 'mixins';
+
+$navlink-selected-colour: rgba(255, 255, 255, .2);
+
+:host {
+    @include tablet-down {
+        display: none;
+    }
+}
+
+ul.top-navigation__navigation-routes-list li {
+    cursor: pointer;
+}
+
+ul.top-navigation__navigation-routes-list {
+    list-style: none;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    padding: 0;
+    margin: 0;
+    margin-left: 20px;
+
+    li.top-navigation__navigation-item {
+        color: $text-light-colour;
+        font-size: 22px;
+        text-align: center;
+        padding: 15px 20px;
+        border-radius: 5px;
+
+        transition: transform 100ms linear, background-color 250ms linear;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &.active-route {
+            transform: scale(1);
+            background-color: $navlink-selected-colour;
+        }
+    }
+}

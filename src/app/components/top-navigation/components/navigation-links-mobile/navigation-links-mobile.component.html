@@ -1,0 +1,18 @@
+<span class="material-symbols-outlined" (click)="showMenu = !showMenu">
+  menu
+</span>
+<app-left-draw [show]="showMenu">
+  <h1 class="top-navigation__title">Menu</h1>
+  <hr>
+  <ul class="top-navigation__navigation-routes-list">
+    <li
+      class="top-navigation__navigation-item"
+      *ngFor="let route of routes"
+      (click)="showMenu = false"
+      [routerLink]="route.route"
+      [routerLinkActive]="'active-route'"
+    >
+      {{ route.label }}
+    </li>
+  </ul>
+</app-left-draw>

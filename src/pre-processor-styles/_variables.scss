@@ -5,9 +5,17 @@
 $primary-accent-colour: #E2A91C;
 $secondary-accent-colour: #558999;
 $text-dark-colour: #444444;
-$text-light-colour: #FFFFFF;
+$text-light-colour: #EFFFFF;
+$shadow-colour: #0000004d;
+$background-colour: #FFFFFF;
 
 /**
                 FONTS
 **/
-$primary-font: Arial, Helvetica, 'sans-serif';
+$primary-font: "Trebuchet MS", Tahoma, sans-serif;
+
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$extra-large: 1200px;
+$massive: 1400px;

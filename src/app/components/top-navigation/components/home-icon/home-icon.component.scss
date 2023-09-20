@@ -1,0 +1,16 @@
+@import 'mixins';
+
+:host {
+    @include tablet-down {
+        justify-self: center;
+    }
+}
+
+img.top-navigation__logo {
+    height: 85px;
+    cursor: pointer;
+
+    @include tablet-down {
+        height: 65px;
+    }
+}

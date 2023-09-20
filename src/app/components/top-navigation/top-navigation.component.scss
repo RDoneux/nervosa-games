@@ -1,6 +1,5 @@
 @import 'variables';
-
-$navlink-selected-colour: rgba(255, 255, 255, .2);
+@import 'mixins';
 
 nav.top-navigation {
     width: 100%;
@@ -8,59 +7,20 @@ nav.top-navigation {
 
     background-color: $secondary-accent-colour;
 
-    box-shadow: 0 4px 5px #999;
+    box-shadow: 0 4px 5px $shadow-colour;
 
     display: flex;
     align-items: center;
 
     padding: 0 20px;
 
-    img.top-navigation__logo,
-    ul.top-navigation__navigation-routes-list li {
-        cursor: pointer;
+    @include tablet-down {
+
+        height: 70px;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
     }
-
-    img.top-navigation__logo {
-        height: 85px;
-    }
-
-    ul.top-navigation__navigation-routes-list {
-        list-style: none;
-        width: 55%;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-
-        padding: 0;
-        margin: 0;
-        margin-left: 20px;
-
-        li.top-navigation__navigation-item {
-            color: $text-light-colour;
-            font-size: 22px;
-            text-align: center;
-            padding: 15px 20px;
-            border-radius: 5px;
-
-            transition: transform 100ms linear, background-color 250ms linear;
-
-            &:hover {
-                transform: scale(1.05);
-            }
-
-            &.active-route {
-                transform: scale(1);
-                background-color: $navlink-selected-colour;
-            }
-        }
-    }
-
-    app-cart-icon {
-        flex: 1 1 auto;
-    }
-
-
-    
 
 }
