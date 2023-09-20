@@ -1,0 +1,20 @@
+<nav class="top-navigation">
+  <img
+    class="top-navigation__logo"
+    src="assets/icons/nervosa-games-icon.svg"
+    alt="Nervosa Games Logo"
+    [routerLink]="'/home'"
+  />
+  <ul class="top-navigation__navigation-routes-list">
+    <li
+      class="top-navigation__navigation-item"
+      *ngFor="let route of routes"
+      [routerLink]="route.route"
+      [routerLinkActive]="'active-route'"
+    >
+      {{ route.label }}
+    </li>
+  </ul>
+
+  <app-cart-icon></app-cart-icon>
+</nav>

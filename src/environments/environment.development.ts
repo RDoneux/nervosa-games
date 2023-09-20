@@ -1,5 +1,5 @@
 import { IEnvironment } from "./i-environment";
 
 export const environment: IEnvironment = {
-    debug: ['welcome']
+    debug: ['welcome', 'method-not-implemented']
 };

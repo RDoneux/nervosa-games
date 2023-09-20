@@ -1,0 +1,37 @@
+@import 'variables';
+
+:host {
+    display: block;
+}
+
+.cart-icon {
+    color: $text-light-colour;
+    font-size: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding: 15px 20px;
+    border-radius: 5px;
+
+    .cart-icon__content-wrapper {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    &:hover .cart-icon__content-wrapper {
+        transform: scale(1.05);
+    }
+
+
+    .material-symbols-outlined {
+        margin-right: 6px;
+        font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+    }
+}
