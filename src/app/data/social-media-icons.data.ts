@@ -1,4 +1,4 @@
-import { ISocialMediaIconLink } from '../interfaces/i-social-media-icon-link.interface';
+import { ISocialMediaIconLink } from '../components/top-navigation/interfaces/i-social-media-icon-link.interface';
 
 export const socialMediaIcons: ISocialMediaIconLink[] = [
   {

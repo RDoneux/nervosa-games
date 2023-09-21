@@ -1,4 +1,4 @@
-import { INavigationRoute } from '../interfaces/i-navigation-route.interface';
+import { INavigationRoute } from '../components/top-navigation/interfaces/i-navigation-route.interface';
 
 export const nervosaGamesSiteRoutes: INavigationRoute[] = [
   { label: 'Shop', route: '/shop' },
