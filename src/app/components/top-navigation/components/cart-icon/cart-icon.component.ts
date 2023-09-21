@@ -8,6 +8,8 @@ import { debug } from 'src/app/services/debug/debug';
   styleUrls: ['./cart-icon.component.scss'],
 })
 export class CartIconComponent {
+
+  /* istanbul ignore next */
   onCartSelected() {
     debug('method-not-implemented')(
       'onCartSelected method not currently implemented'

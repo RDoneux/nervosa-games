@@ -1,16 +1,30 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 
 import { NavigationLinksMobileComponent } from './navigation-links-mobile.component';
 import { LeftDrawComponent } from 'src/app/components/left-draw/left-draw.component';
+import { ElementRef } from '@angular/core';
 
 describe('NavigationLinksMobileComponent', () => {
   let component: NavigationLinksMobileComponent;
   let fixture: ComponentFixture<NavigationLinksMobileComponent>;
 
-  beforeEach(() => {
+  const mockElementRef: any = {
+    nativeElement: {
+      offsetWidth: 100,
+      // contains: (event: MouseEvent) => {},
+    },
+  };
+
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [NavigationLinksMobileComponent],
-      imports: [LeftDrawComponent]
+      imports: [LeftDrawComponent],
+      providers: [{ provide: ElementRef, useValue: mockElementRef }],
     });
     fixture = TestBed.createComponent(NavigationLinksMobileComponent);
     component = fixture.componentInstance;
@@ -19,5 +33,22 @@ describe('NavigationLinksMobileComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('#menuClosed', () => {
+    it('should set menu to closed state on click outside component', () => {
+      component.showMenu = true;
+      component.menuClosed(new MouseEvent('click'));
+      expect(component.showMenu).toBeFalse();
+    });
+    it('should do nothing if the click event is inside the component', () => {
+      component.showMenu = true;
+      spyOn(component, 'getElement').and.returnValue({
+        contains: (event: MouseEvent) => true
+      });
+      component.menuClosed(new MouseEvent('click'));
+      expect(component.getElement).toHaveBeenCalled();
+      expect(component.showMenu).toBeTrue();
+    });
   });
 });

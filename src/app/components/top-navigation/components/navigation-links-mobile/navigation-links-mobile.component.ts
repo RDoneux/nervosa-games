@@ -17,8 +17,12 @@ export class NavigationLinksMobileComponent {
   constructor(private elementRef: ElementRef) {}
 
   @HostListener('window:click', ['$event'])
-  private menuClosed(event: MouseEvent) {
-    if (this.elementRef.nativeElement.contains(event.target)) return;
+  public menuClosed(event: MouseEvent) {
+    if (this.getElement().contains(event.target)) return;
     this.showMenu = false;
+  }
+
+  public getElement(): any {
+    return this.elementRef.nativeElement;
   }
 }
