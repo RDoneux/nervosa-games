@@ -1,0 +1,30 @@
+@import 'variables';
+
+h1,
+h6,
+p,
+ul {
+    color: $text-dark-colour;
+}
+
+h1 {
+    font-size: 16px;
+}
+
+h6 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+}
+
+p {
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 22px;
+}
+
+ul {
+    font-size: 14px;
+    line-height: 22px;
+}

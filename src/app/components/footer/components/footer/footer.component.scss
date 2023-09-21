@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .footer {
     display: grid;
 
@@ -20,12 +22,25 @@
 
         :not(:first-child):before {
             content: '|';
-            padding: 0 15px;
+            padding: 0 10px;
         }
     }
 
     .footer__version {
         justify-self: flex-end;
+    }
+
+    @include laptop-down {
+        grid-template-columns: 1fr auto;
+        align-items: left;
+        justify-items: left;
+
+        .footer-links__wrapper {
+            grid-column: 1 / span 2;
+            // justify-content: center;
+            // text-align: center;
+            // align-self: center;
+        }
     }
 
 }

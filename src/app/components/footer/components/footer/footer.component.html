@@ -1,7 +1,16 @@
 <footer class="footer">
   <div class="footer-links__wrapper">
-    <span *ngFor="let link of footerLinks">{{ link.label }}</span>
+    <span *ngFor="let link of footerLinks" (click)="openModal(link)">{{
+      link.label
+    }}</span>
   </div>
   <span>Nervosa Games. Created by Rob Doneux</span>
   <span class="footer__version">Version: {{ version }}</span>
 </footer>
+
+<app-modal
+  [show]="this.showModal"
+  [component]="modalContent"
+  (closeRequested)="this.showModal = false"
+>
+</app-modal>

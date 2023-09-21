@@ -1,0 +1,39 @@
+@import 'variables';
+
+.modal__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0000008e;
+
+    .modal__page {
+        width: 80vw;
+        height: 80vh;
+        box-shadow: 4px 4px 4px $shadow-colour;
+
+        background: $background-colour;
+
+        border-radius: 2px;
+
+        padding: 15px;
+        padding-top: 25px;
+
+        overflow-y: auto;
+        position: relative;
+
+        .material-symbols-outlined {
+            color: $text-dark-colour;
+            float: right;
+            cursor: pointer;
+
+        }
+    }
+}

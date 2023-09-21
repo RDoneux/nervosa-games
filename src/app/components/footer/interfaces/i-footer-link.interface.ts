@@ -1,4 +1,6 @@
+import { Type } from "@angular/core";
+
 export interface IFooterLink {
   label: string;
-  content: string;
+  content: Type<unknown>;
 }

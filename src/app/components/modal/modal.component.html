@@ -1,1 +1,8 @@
-<p>modal works!</p>
+<section *ngIf="show" @fade class="modal__background">
+  <div #modalPage class="modal__page">
+    <span class="material-symbols-outlined" (click)="requestClose()">
+      close
+    </span>
+    <ng-container #viewContainerRef></ng-container>
+  </div>
+</section>
