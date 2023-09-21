@@ -7,6 +7,9 @@ import { CartIconComponent } from './components/cart-icon/cart-icon.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TopNavigationComponent } from './components/top-navigation/top-navigation.component';
 import { LeftDrawComponent } from '../left-draw/left-draw.component';
+import { ProductSearchComponent } from './components/product-search/product-search.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,8 +18,16 @@ import { LeftDrawComponent } from '../left-draw/left-draw.component';
     NavigationLinksMobileComponent,
     HomeIconComponent,
     CartIconComponent,
+    ProductSearchComponent,
+    SignInComponent,
   ],
-  imports: [CommonModule, RouterLink, RouterLinkActive, LeftDrawComponent],
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    LeftDrawComponent,
+    FormsModule,
+  ],
   exports: [TopNavigationComponent],
 })
 export class TopNavigationModule {}

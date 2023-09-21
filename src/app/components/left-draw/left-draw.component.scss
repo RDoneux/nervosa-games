@@ -17,6 +17,8 @@
 
     padding: 10px;
 
+    z-index: $menu;
+
     &.show {
         transform: translateX(0);
     }

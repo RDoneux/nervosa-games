@@ -1,0 +1,67 @@
+@import 'variables';
+@import 'mixins';
+
+div.product-search {
+
+    margin: 15px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+    display: flex;
+    position: relative;
+    overflow: hidden;
+
+    @include mobile-down {
+        flex-direction: column;
+        align-items: center;
+        border-top-right-radius: 20px;
+    }
+
+    .product-search__social-media-icon-wrapper {
+        width: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        img {
+            width: 40px;
+            cursor: pointer;
+
+            transition: filter 150ms linear;
+
+            &:hover {
+                filter: invert(60%)
+            }
+        }
+    }
+
+    .product-search__search-input {
+        margin-left: 30px;
+
+        height: 44px;
+
+        border-radius: 30px;
+        outline: none;
+        border: 1px solid #999999;
+
+        padding: 0 50px;
+        color: $text-dark-colour;
+        font-size: 16px;
+
+        flex: 1 1 auto;
+
+        background-image: url('/assets/icons/magnifying-glass.svg');
+        background-repeat: no-repeat;
+        background-size: 30px;
+        background-position-y: 50%;
+        background-position-x: 10px;
+
+        @include mobile-down {
+            order: -1;
+            margin-bottom: 10px;
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+
+}

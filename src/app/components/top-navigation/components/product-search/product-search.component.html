@@ -1,0 +1,18 @@
+<div class="product-search">
+  <span class="product-search__social-media-icon-wrapper">
+    <a
+      *ngFor="let icon of socialMediaIconLinks"
+      [href]="icon.href"
+      target="_blank"
+    >
+      <img [src]="icon.assetLink" [alt]="icon.alt" />
+    </a>
+  </span>
+  <input
+    class="product-search__search-input"
+    type="search"
+    placeholder="Search our products..."
+    [ngModel]="searchTerm"
+  />
+  <app-sign-in></app-sign-in>
+</div>

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { INavigationRoute } from '../../interfaces/i-navigation-route.interface';
+import { nervosaGamesSiteRoutes } from '../../data/navigation-routes.data';
+import { ISocialMediaIconLink } from '../../interfaces/i-social-media-icon-link.interface';
+import { socialMediaIcons } from '../../data/social-media-icons.data';
 
 @Component({
   selector: 'app-top-navigation',
@@ -7,11 +10,6 @@ import { INavigationRoute } from '../../interfaces/i-navigation-route.interface'
   styleUrls: ['./top-navigation.component.scss'],
 })
 export class TopNavigationComponent {
-  public routes: INavigationRoute[] = [
-    { label: 'Shop', route: '/shop' },
-    { label: 'Services', route: '/services' },
-    { label: 'News', route: '/news' },
-    { label: 'Games', route: '/games' },
-    { label: 'About Us', route: '/about-us' },
-  ];
+  public routes: INavigationRoute[] = nervosaGamesSiteRoutes;
+  public socialMediaIcons: ISocialMediaIconLink[] = socialMediaIcons;
 }
