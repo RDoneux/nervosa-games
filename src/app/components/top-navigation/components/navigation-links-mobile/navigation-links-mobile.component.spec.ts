@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavigationLinksMobileComponent } from './navigation-links-mobile.component';
+import { LeftDrawComponent } from 'src/app/components/left-draw/left-draw.component';
 
 describe('NavigationLinksMobileComponent', () => {
   let component: NavigationLinksMobileComponent;
@@ -8,7 +9,8 @@ describe('NavigationLinksMobileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NavigationLinksMobileComponent]
+      declarations: [NavigationLinksMobileComponent],
+      imports: [LeftDrawComponent]
     });
     fixture = TestBed.createComponent(NavigationLinksMobileComponent);
     component = fixture.componentInstance;

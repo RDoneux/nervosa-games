@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeIconComponent } from './home-icon.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomeIconComponent', () => {
   let component: HomeIconComponent;
@@ -8,7 +9,8 @@ describe('HomeIconComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HomeIconComponent]
+      declarations: [HomeIconComponent],
+      imports: [RouterTestingModule]
     });
     fixture = TestBed.createComponent(HomeIconComponent);
     component = fixture.componentInstance;

@@ -8,7 +8,7 @@ describe('NavigationLinksDesktopComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NavigationLinksDesktopComponent]
+      declarations: [NavigationLinksDesktopComponent]
     });
     fixture = TestBed.createComponent(NavigationLinksDesktopComponent);
     component = fixture.componentInstance;

@@ -8,7 +8,7 @@ describe('CartIconComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CartIconComponent]
+      declarations: [CartIconComponent]
     });
     fixture = TestBed.createComponent(CartIconComponent);
     component = fixture.componentInstance;
