@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { canActivateInDevModeGuard } from './guards/can-activate-in-dev-mode.guard';
 
 const routes: Routes = [
   {
@@ -37,7 +38,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./routes/home/home.module').then((m) => m.HomeModule),
   },
-  { path: 'checkout', loadChildren: () => import('./routes/checkout/checkout.module').then(m => m.CheckoutModule) },
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('./routes/checkout/checkout.module').then((m) => m.CheckoutModule),
+  },
+  {
+    path: 'playpen',
+    loadChildren: () =>
+      import('./routes/playpen/playpen.module').then((m) => m.PlaypenModule),
+    canActivate: [canActivateInDevModeGuard],
+  },
+  { path: 'unauthorised', loadChildren: () => import('./routes/not-authorised/not-authorised.module').then(m => m.NotAuthorisedModule) },
   {
     path: '**',
     loadChildren: () =>
