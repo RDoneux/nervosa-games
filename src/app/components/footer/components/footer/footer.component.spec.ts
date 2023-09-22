@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { IFooterLink } from '../../interfaces/i-footer-link.interface';
+import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -8,7 +11,8 @@ describe('FooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FooterComponent]
+      declarations: [FooterComponent],
+      imports: [ModalComponent],
     });
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
@@ -17,5 +21,17 @@ describe('FooterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('#openModal', () => {
+    it('should open modal and set modal content', () => {
+      const footer: IFooterLink = {
+        label: '',
+        content: PrivacyPolicyComponent,
+      };
+      component.openModal(footer);
+      expect(component.showModal).toBeTrue();
+      expect(component.modalContent).toBeDefined();
+    });
   });
 });

@@ -1,15 +1,23 @@
 import {
   AfterViewInit,
   Component,
+  ComponentFactory,
+  ComponentRef,
   ElementRef,
+  EmbeddedViewRef,
+  EnvironmentInjector,
   EventEmitter,
   HostListener,
+  Injector,
   Input,
+  NgModuleRef,
   OnChanges,
   Output,
+  TemplateRef,
   Type,
   ViewChild,
   ViewContainerRef,
+  ViewRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { fadeInOut } from 'src/app/animations/fade-in-out.animation';
@@ -46,8 +54,11 @@ export class ModalComponent implements OnChanges {
     if (!this.component || !this.show) return;
     const orderedContainer: ViewContainerRef = await new Promise((resolve) => {
       const checkIfDefined = () => {
-        if (this.orderedViewContainer) resolve(this.orderedViewContainer);
-        setTimeout(checkIfDefined, 100);
+        const timeout = setTimeout(checkIfDefined, 100);
+        if (this.orderedViewContainer) {
+          clearTimeout(timeout);
+          resolve(this.orderedViewContainer);
+        }
       };
       checkIfDefined();
     });
