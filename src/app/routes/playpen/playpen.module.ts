@@ -4,14 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PlaypenRoutingModule } from './playpen-routing.module';
 import { PlaypenComponent } from './playpen.component';
 
-
 @NgModule({
-  declarations: [
-    PlaypenComponent
-  ],
-  imports: [
-    CommonModule,
-    PlaypenRoutingModule
-  ]
+  declarations: [PlaypenComponent],
+  imports: [CommonModule, PlaypenRoutingModule],
 })
-export class PlaypenModule { }
+export class PlaypenModule {}
