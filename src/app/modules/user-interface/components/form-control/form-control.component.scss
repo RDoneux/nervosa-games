@@ -1,0 +1,71 @@
+@import 'variables';
+
+.nerv-g-form-control-container {
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    position: relative;
+
+    .nerv-g-form-control-label {
+        order: 0;
+        position: absolute;
+        left: 10px;
+        pointer-events: none;
+        color: #aaa;
+
+        transition: transform 250ms ease-out, font-size 250ms ease-out;
+
+        &.retract-label {
+            transform: translate(-10px, -20px);
+            color: $text-dark-colour;
+            font-size: 12px;
+        }
+
+    }
+
+    .nerv-g-form-control-input {
+        order: 1;
+
+        padding-top: 10px;
+        padding-bottom: 3px;
+        padding-left: 10px;
+
+        color: $text-dark-colour;
+
+        border: none;
+        border-bottom: 1px solid $text-dark-colour;
+
+        transition: box-shadow 100ms linear, border-bottom 100ms linear;
+        
+        &.ng-invalid.ng-touched {
+            box-shadow: 0 3px 4px -3px $danger-colour;
+
+        }
+
+        &:active,
+        &:focus {
+            border: none;
+            outline: none;
+            border-bottom: 1px solid $secondary-accent-colour;
+            box-shadow: 0 3px 4px -3px $secondary-accent-colour;
+
+            ~.nerv-g-form-control-label {
+                @extend .retract-label
+            }
+        }
+    }
+}
+
+.nerv-g-form-control-error {
+    transition: opacity 250ms linear;
+    opacity: 1;
+
+    color: $danger-colour;
+    font-size: 12px;
+    &.hide {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,10 @@
+<div class="nerv-g-form-control-container" #container>
+  <ng-content></ng-content>
+  <label class="nerv-g-form-control-label" [class.retract-label]="hasContent">{{
+    label
+  }}</label>
+</div>
+<app-form-control-error
+  [ngModel]="ngModel"
+  [errors]="errors"
+></app-form-control-error>

@@ -1,1 +1,8 @@
-<p>Playpen works!</p>
+<div class="playpen-grid">
+  <app-form-control
+    [label]="'Test Form Control Text Component'"
+    [errors]="[{ error: 'minlength', message: 'must be longer' }]"
+  >
+    <input type="text" [ngModel]="testValues.text" minlength="4" required />
+  </app-form-control>
+</div>
