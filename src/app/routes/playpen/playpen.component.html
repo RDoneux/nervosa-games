@@ -5,4 +5,13 @@
   >
     <input type="text" [ngModel]="testValues.text" minlength="4" required />
   </app-form-control>
+
+  <app-form-control
+    [label]="'Test Dropdown element'"
+  >
+    <select [ngModel]="testValues.dropdown">
+      <option selected></option>
+      <option>Option number 1</option>
+    </select>
+  </app-form-control>
 </div>
