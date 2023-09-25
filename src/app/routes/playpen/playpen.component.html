@@ -1,6 +1,6 @@
 <div class="playpen-grid">
   <app-form-control
-    [label]="'Test Form Control Text Component'"
+    [label]="'Test Form Control Text Component with super long label that is going to exceed the width of the component'"
     [errors]="[{ error: 'minlength', message: 'must be longer' }]"
   >
     <input type="text" [ngModel]="testValues.text" minlength="4" required />
