@@ -112,4 +112,12 @@
       <input type="checkbox" [(ngModel)]="testValues.checkboxGroup.four" />
     </app-form-control>
   </div>
+
+  <app-form-control
+    [label]="
+      'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+    "
+  >
+  <textarea [(ngModel)]="testValues.textArea"></textarea>
+  </app-form-control>
 </div>

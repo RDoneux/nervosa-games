@@ -9,6 +9,23 @@
 
     position: relative;
 
+    &.static-layout {
+        .nerv-g-form-control-label {
+            top: 0;
+            left: 0;
+            color: $text-dark-colour;
+
+            &.retract-label {
+                transform: translateY(0);
+                font-size: inherit;
+            }
+        }
+
+        .nerv-g-form-control-input {
+            margin-top: 18px;
+        }
+    }
+
     &.inline-layout {
         flex-direction: row;
         justify-content: flex-start;

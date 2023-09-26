@@ -18,5 +18,6 @@ export class PlaypenComponent {
       three: false,
       four: false,
     },
+    textArea: ''
   };
 }

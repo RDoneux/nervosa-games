@@ -30,21 +30,23 @@ export class FormControlComponent implements AfterViewInit {
 
   @ContentChild(NgModel) ngModel: NgModel | undefined;
 
-  public inputElement!: HTMLInputElement | HTMLSelectElement;
+  public inputElement!:
+    | HTMLInputElement
+    | HTMLSelectElement
+    | HTMLTextAreaElement;
   public hasContent!: boolean;
-  public inlineLayout!: boolean;
+  public layout: 'INLINE' | 'STATIC' | 'DEFAULT' = 'DEFAULT';
   public id!: string;
 
   ngAfterViewInit(): void {
     this.inputElement = this.formControlContainer.children[0] as
       | HTMLInputElement
-      | HTMLSelectElement;
+      | HTMLSelectElement
+      | HTMLTextAreaElement;
 
-    this.validateComponent();
+    setTimeout(() => (this.determineLayout(), this.validateComponent()));
 
     this.inputElement.classList.add('nerv-g-form-control-input');
-
-    setTimeout(() => this.determineInlineLayout());
 
     this.ngModel?.valueChanges?.subscribe({
       next: (newValue: string) => this.handleValueChange(newValue),
@@ -55,8 +57,11 @@ export class FormControlComponent implements AfterViewInit {
     this.hasContent = newValue.length > 0 ? true : false;
   }
 
-  determineInlineLayout(): void {
-    this.inlineLayout = ['checkbox', 'radio'].includes(this.inputElement.type);
+  determineLayout(): void {
+    if (['checkbox', 'radio'].includes(this.inputElement.type))
+      this.layout = 'INLINE';
+    if (['TEXTAREA'].includes(this.inputElement.nodeName))
+      this.layout = 'STATIC';
   }
 
   validateComponent(): void {

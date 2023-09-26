@@ -1,6 +1,7 @@
 <div
   class="nerv-g-form-control-container"
-  [class.inline-layout]="inlineLayout"
+  [class.inline-layout]="layout === 'INLINE'"
+  [class.static-layout]="layout === 'STATIC'"
   #container
 >
   <ng-content></ng-content>
