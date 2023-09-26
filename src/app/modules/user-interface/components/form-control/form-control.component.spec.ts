@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 
 import { FormControlComponent } from './form-control.component';
 import { FormControlErrorComponent } from '../form-control-error/form-control-error.component';
@@ -26,11 +31,12 @@ describe('FormControlComponent', () => {
   });
 
   describe('#afterViewInit', () => {
-    it('should call the validate component method', () => {
+    it('should call the validate component method', fakeAsync(() => {
       spyOn(component, 'validateComponent');
       component.ngAfterViewInit();
+      tick();
       expect(component.validateComponent).toHaveBeenCalledTimes(1);
-    });
+    }));
   });
 
   describe('#handleValueChange', () => {
