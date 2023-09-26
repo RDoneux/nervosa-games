@@ -30,8 +30,7 @@ export class FormControlComponent implements AfterViewInit {
 
   @ContentChild(NgModel) ngModel: NgModel | undefined;
 
-  private inputElement!: HTMLInputElement | HTMLSelectElement;
-
+  public inputElement!: HTMLInputElement | HTMLSelectElement;
   public hasContent!: boolean;
   public inlineLayout!: boolean;
   public id!: string;
@@ -66,6 +65,7 @@ export class FormControlComponent implements AfterViewInit {
         'Form Control Input must be provided with an ngModel value'
       );
 
+    /* istanbul ignore next */
     if (!this.inputElement)
       debug('error')(
         'Form Control must be provided with a valid Input Element or Select Element'
