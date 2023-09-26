@@ -9,6 +9,37 @@
 
     position: relative;
 
+    &.inline-layout {
+        flex-direction: row;
+        justify-content: flex-start;
+
+        .nerv-g-form-control-input {
+
+            &.ng-invalid.ng-touched {
+                box-shadow: 0 0 2px 0 $danger-colour;
+            }
+
+            &:active,
+            &:focus {
+                box-shadow: 0 0 2px 0 $secondary-accent-colour;
+            }
+
+        }
+
+        .nerv-g-form-control-label {
+            margin-right: 8px;
+            position: relative;
+            order: 1;
+            color: $text-dark-colour;
+            pointer-events: inherit;
+
+            &.retract-label {
+                transform: translate(0);
+                font-size: inherit;
+            }
+        }
+    }
+
     .nerv-g-form-control-label {
         order: 0;
         position: absolute;
@@ -49,7 +80,6 @@
 
         &.ng-invalid.ng-touched {
             box-shadow: 0 3px 4px -3px $danger-colour;
-
         }
 
         &:active,

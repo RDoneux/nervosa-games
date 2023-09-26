@@ -1,6 +1,6 @@
 .playpen-grid{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 25%);
     padding: 20px;
     column-gap: 20px;
 }

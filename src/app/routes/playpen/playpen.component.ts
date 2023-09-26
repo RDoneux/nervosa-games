@@ -9,5 +9,14 @@ export class PlaypenComponent {
   public testValues = {
     text: '',
     dropdown: '',
+    checkbox: '',
+    radio: '',
+    radioGroup: '',
+    checkboxGroup: {
+      one: false,
+      two: false,
+      three: false,
+      four: false,
+    },
   };
 }

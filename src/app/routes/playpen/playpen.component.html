@@ -1,17 +1,115 @@
 <div class="playpen-grid">
   <app-form-control
-    [label]="'Test Form Control Text Component with super long label that is going to exceed the width of the component'"
+    [label]="
+      'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+    "
     [errors]="[{ error: 'minlength', message: 'must be longer' }]"
   >
-    <input type="text" [ngModel]="testValues.text" minlength="4" required />
+    <input type="text" [(ngModel)]="testValues.text" minlength="4" required />
   </app-form-control>
 
-  <app-form-control
-    [label]="'Test Dropdown element'"
-  >
-    <select [ngModel]="testValues.dropdown">
+  <app-form-control [label]="'Test Dropdown element'">
+    <select [(ngModel)]="testValues.dropdown">
       <option selected></option>
       <option>Option number 1</option>
     </select>
   </app-form-control>
+
+  <app-form-control
+    [label]="
+      'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+    "
+  >
+    <input type="checkbox" [(ngModel)]="testValues.checkbox" required />
+  </app-form-control>
+
+  <app-form-control
+    [label]="
+      'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+    "
+  >
+    <input type="radio" [(ngModel)]="testValues.checkbox" />
+  </app-form-control>
+
+  <div>
+    <app-form-control
+      [label]="
+        'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+      "
+    >
+      <input
+        type="radio"
+        name="formControlGroup"
+        [(ngModel)]="testValues.radioGroup"
+        value="one"
+      />
+    </app-form-control>
+    <app-form-control
+      [label]="
+        'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+      "
+    >
+      <input
+        type="radio"
+        name="formControlGroup"
+        [(ngModel)]="testValues.radioGroup"
+        value="two"
+      />
+    </app-form-control>
+    <app-form-control
+      [label]="
+        'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+      "
+    >
+      <input
+        type="radio"
+        name="formControlGroup"
+        [(ngModel)]="testValues.radioGroup"
+        value="three"
+      />
+    </app-form-control>
+    <app-form-control
+      [label]="
+        'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+      "
+    >
+      <input
+        type="radio"
+        name="formControlGroup"
+        [(ngModel)]="testValues.radioGroup"
+        value="four"
+      />
+    </app-form-control>
+  </div>
+
+  <div>
+    <app-form-control
+      [label]="
+        'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+      "
+    >
+      <input type="checkbox" [(ngModel)]="testValues.checkboxGroup.one" />
+    </app-form-control>
+    <app-form-control
+      [label]="
+        'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+      "
+    >
+      <input type="checkbox" [(ngModel)]="testValues.checkboxGroup.two" />
+    </app-form-control>
+    <app-form-control
+      [label]="
+        'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+      "
+    >
+      <input type="checkbox" [(ngModel)]="testValues.checkboxGroup.three" />
+    </app-form-control>
+    <app-form-control
+      [label]="
+        'Test Form Control Text Component with super long label that is going to exceed the width of the component'
+      "
+    >
+      <input type="checkbox" [(ngModel)]="testValues.checkboxGroup.four" />
+    </app-form-control>
+  </div>
 </div>

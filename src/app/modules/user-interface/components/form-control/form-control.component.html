@@ -1,8 +1,15 @@
-<div class="nerv-g-form-control-container" #container>
+<div
+  class="nerv-g-form-control-container"
+  [class.inline-layout]="inlineLayout"
+  #container
+>
   <ng-content></ng-content>
-  <label class="nerv-g-form-control-label" [class.retract-label]="hasContent">{{
-    label
-  }}</label>
+  <label
+    class="nerv-g-form-control-label"
+    [for]="id"
+    [class.retract-label]="hasContent"
+    >{{ label }}</label
+  >
 </div>
 <app-form-control-error
   [ngModel]="ngModel"

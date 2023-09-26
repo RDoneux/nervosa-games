@@ -10,6 +10,7 @@ import {
 import { NgModel } from '@angular/forms';
 import { debug } from 'src/app/services/debug/debug';
 import { IFormControlError } from '../../interfaces/i-form-control-error.interface';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'app-form-control',
@@ -32,15 +33,19 @@ export class FormControlComponent implements AfterViewInit {
   private inputElement!: HTMLInputElement | HTMLSelectElement;
 
   public hasContent!: boolean;
+  public inlineLayout!: boolean;
+  public id!: string;
 
   ngAfterViewInit(): void {
-    this.validateComponent();
-
     this.inputElement = this.formControlContainer.children[0] as
       | HTMLInputElement
       | HTMLSelectElement;
 
+    this.validateComponent();
+
     this.inputElement.classList.add('nerv-g-form-control-input');
+
+    setTimeout(() => this.determineInlineLayout());
 
     this.ngModel?.valueChanges?.subscribe({
       next: (newValue: string) => this.handleValueChange(newValue),
@@ -51,10 +56,22 @@ export class FormControlComponent implements AfterViewInit {
     this.hasContent = newValue.length > 0 ? true : false;
   }
 
+  determineInlineLayout(): void {
+    this.inlineLayout = ['checkbox', 'radio'].includes(this.inputElement.type);
+  }
+
   validateComponent(): void {
     if (!this.ngModel)
       debug('error')(
         'Form Control Input must be provided with an ngModel value'
       );
+
+    if (!this.inputElement)
+      debug('error')(
+        'Form Control must be provided with a valid Input Element or Select Element'
+      );
+
+    this.id = this.inputElement.id.length ? this.inputElement.id : v4();
+    this.inputElement.id = this.id;
   }
 }
