@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "nervosa-games": {
+      "hosting": {
+        "nervosa-games": [
+          "nervosa-games"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "nervosa-games"
+  }
+}
