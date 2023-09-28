@@ -29,6 +29,7 @@
     &.inline-layout {
         flex-direction: row;
         justify-content: flex-start;
+        align-items: center;
 
         .nerv-g-form-control-input {
 
@@ -85,6 +86,8 @@
         padding-top: 10px;
         padding-bottom: 3px;
         padding-left: 10px;
+
+        height: $form-control-height;
 
         background: transparent;
 
