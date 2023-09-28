@@ -1,3 +1,4 @@
 export interface IEnvironment {
-    debug: string[]
+    debug: string[];
+    firebase: any
 }
