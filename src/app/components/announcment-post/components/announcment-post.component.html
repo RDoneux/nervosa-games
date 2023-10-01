@@ -1,4 +1,9 @@
-<div *ngIf="announcementPost" class="announcement-post__container">
+<div
+  *ngIf="announcementPost"
+  class="announcement-post__container"
+  [routerLink]="linkBase"
+  [queryParams]="{ id: announcementPost.id }"
+>
   <img
     class="announcement-post__background-image"
     [src]="announcementPost.backgroundImageUrl"
