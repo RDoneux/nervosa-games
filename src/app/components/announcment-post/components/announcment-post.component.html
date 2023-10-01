@@ -1,0 +1,34 @@
+<div *ngIf="anouncementPost" class="announcement-post__container">
+  <img
+    class="announcement-post__background-image"
+    [src]="anouncementPost.backgroundImageUrl"
+    [alt]="anouncementPost.backgroundImageAlt"
+  />
+  <div class="header">
+    <h5 *ngIf="poster">
+      {{ poster.firstName }} {{ poster.lastName }}
+      <span *ngIf="poster.isAdmin" class="material-symbols-outlined padding-left">
+        award_star
+      </span>
+    </h5>
+    <h5>{{ anouncementPost.date }}</h5>
+  </div>
+
+  <h1>{{ anouncementPost.title }}</h1>
+  <div class="footer">
+    <span>
+      <h5 class="horizontal-spacing">
+        <span class="material-symbols-outlined offset-top"> visibility </span
+        >{{ anouncementPost.seenBy }}
+      </h5>
+      <h5 class="horizontal-spacing">
+        <span class="material-symbols-outlined offset-top"> chat_bubble </span
+        >{{ anouncementPost.comments.length }}
+      </h5>
+    </span>
+    <h5>
+      <span class="material-symbols-outlined offset-top"> favorite </span
+      >{{ anouncementPost.likedBy }}
+    </h5>
+  </div>
+</div>

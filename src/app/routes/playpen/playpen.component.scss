@@ -4,3 +4,9 @@
     padding: 20px;
     column-gap: 1%;
 }
+.announcement-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 32%);
+    padding: 10px;
+    column-gap: 1%;
+}

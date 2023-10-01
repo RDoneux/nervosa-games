@@ -1,4 +1,4 @@
-<div class="playpen-grid">
+<!-- <div class="playpen-grid">
   <app-form-control
     [label]="
       'Test Form Control Text Component with super long label that is going to exceed the width of the component'
@@ -118,10 +118,16 @@
       'Test Form Control Text Component with super long label that is going to exceed the width of the component'
     "
   >
-  <textarea [(ngModel)]="testValues.textArea"></textarea>
+    <textarea [(ngModel)]="testValues.textArea"></textarea>
   </app-form-control>
 
   <button>Default Button</button>
 
   <input type="button" value="Input Button" />
-</div>
+</div> -->
+
+<section class="announcement-grid">
+  <app-announcment-post
+    [anouncementPost]="announcementPost"
+  ></app-announcment-post>
+</section>

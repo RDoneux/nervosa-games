@@ -5,6 +5,7 @@ import { PlaypenRoutingModule } from './playpen-routing.module';
 import { PlaypenComponent } from './playpen.component';
 import { UserInterfaceModule } from 'src/app/modules/user-interface/user-interface.module';
 import { FormsModule } from '@angular/forms';
+import { AnnouncmentPostComponent } from 'src/app/components/announcment-post/components/announcment-post.component';
 
 @NgModule({
   declarations: [PlaypenComponent],
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     PlaypenRoutingModule,
     UserInterfaceModule,
     FormsModule,
+    AnnouncmentPostComponent
   ],
 })
 export class PlaypenModule {}
