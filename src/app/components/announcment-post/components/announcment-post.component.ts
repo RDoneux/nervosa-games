@@ -18,7 +18,7 @@ import { IUser } from 'src/app/interfaces/i-user.interface';
   styleUrls: ['./announcment-post.component.scss'],
 })
 export class AnnouncmentPostComponent implements AfterViewInit {
-  @Input({ required: true }) anouncementPost!: IAnnouncementPost;
+  @Input({ required: true }) announcementPost!: IAnnouncementPost;
 
   public poster!: IUser;
 
@@ -27,7 +27,7 @@ export class AnnouncmentPostComponent implements AfterViewInit {
   async ngAfterViewInit(): Promise<void> {
     new Promise<void>(() => {
       const checkForAnnouncementPostToBeDefined = () => {
-        this.anouncementPost
+        this.announcementPost
           ? this.findPosterInformation()
           : setTimeout(checkForAnnouncementPostToBeDefined, 100);
       };
@@ -38,7 +38,7 @@ export class AnnouncmentPostComponent implements AfterViewInit {
   findPosterInformation(): void {
     this.firebase
       .collection('users', (ref) =>
-        ref.where('id', '==', this.anouncementPost.posterId)
+        ref.where('id', '==', this.announcementPost.posterId)
       )
       .valueChanges()
       .subscribe({
