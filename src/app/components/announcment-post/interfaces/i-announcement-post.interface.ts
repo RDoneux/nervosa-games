@@ -6,7 +6,7 @@ export interface IAnnouncementPost {
   seenBy: number;
   likedBy: number;
   posterId: string;
-  date: Date;
+  timestamp: any;
 
   title: string;
   content: string;

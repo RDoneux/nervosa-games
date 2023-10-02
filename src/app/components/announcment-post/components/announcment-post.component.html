@@ -19,7 +19,7 @@
         award_star
       </span>
     </h5>
-    <h5>{{ announcementPost.date }}</h5>
+    <h5>{{ announcementPost.timestamp.toDate() | date : "MMM dd" }}</h5>
   </div>
 
   <h1>{{ announcementPost.title }}</h1>

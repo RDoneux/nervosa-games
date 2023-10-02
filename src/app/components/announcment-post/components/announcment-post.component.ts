@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IAnnouncementPost } from '../interfaces/i-announcement-post.interface';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -18,7 +18,7 @@ export class AnnouncmentPostComponent implements AfterViewInit {
   public poster!: IUser;
   public linkBase: string = '/news/post';
 
-  constructor(private firebase: AngularFirestore) {}
+  constructor(private firebase: AngularFirestore, public elementRef: ElementRef) {}
 
   async ngAfterViewInit(): Promise<void> {
     new Promise<void>(() => {
