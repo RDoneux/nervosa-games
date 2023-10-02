@@ -22,15 +22,15 @@ export class PlaypenComponent {
   //   textArea: ''
   // };
 
-  announcementPost!: IAnnouncementPost;
-  constructor(private firestore: AngularFirestore) {
-    firestore
-      .collection('posts')
-      .valueChanges()
-      .subscribe({
-        next: (value) => {
-          this.announcementPost = value[0] as IAnnouncementPost;
-        },
-      });
-  }
+  // announcementPost!: IAnnouncementPost;
+  // constructor(private firestore: AngularFirestore) {
+  //   firestore
+  //     .collection('posts')
+  //     .valueChanges()
+  //     .subscribe({
+  //       next: (value) => {
+  //         this.announcementPost = value[0] as IAnnouncementPost;
+  //       },
+  //     });
+  // }
 }
