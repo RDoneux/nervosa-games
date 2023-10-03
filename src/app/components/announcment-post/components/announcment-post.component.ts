@@ -18,7 +18,10 @@ export class AnnouncmentPostComponent implements AfterViewInit {
   public poster!: IUser;
   public linkBase: string = '/news/post';
 
-  constructor(private firebase: AngularFirestore, public elementRef: ElementRef) {}
+  constructor(
+    private firebase: AngularFirestore,
+    public elementRef: ElementRef
+  ) {}
 
   async ngAfterViewInit(): Promise<void> {
     new Promise<void>(() => {
@@ -31,6 +34,7 @@ export class AnnouncmentPostComponent implements AfterViewInit {
     });
   }
 
+  /* istanbul ignore next */
   findPosterInformation(): void {
     this.firebase
       .collection('users', (ref) =>

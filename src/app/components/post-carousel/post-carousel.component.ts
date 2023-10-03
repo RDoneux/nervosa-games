@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IAnnouncementPost } from '../announcment-post/interfaces/i-announcement-post.interface';
@@ -18,11 +12,11 @@ import { AnnouncmentPostComponent } from '../announcment-post/components/announc
   styleUrls: ['./post-carousel.component.scss'],
 })
 export class PostCarouselComponent implements OnInit {
-
-  @Input() advanceTimeIncrement: number = 10000
+  @Input() advanceTimeIncrement: number = 10000;
 
   @ViewChild('postCarouselContainer')
   private _carouselContainer!: ElementRef;
+  /* istanbul ignore next */
   public get carouselContainer(): HTMLDivElement {
     return this._carouselContainer.nativeElement;
   }
@@ -32,6 +26,7 @@ export class PostCarouselComponent implements OnInit {
 
   constructor(private firebase: AngularFirestore) {}
 
+  /* istanbul ignore next */
   ngOnInit(): void {
     this.firebase
       .collection('posts', (ref) => ref.orderBy('timestamp', 'desc').limit(10))

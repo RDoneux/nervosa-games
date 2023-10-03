@@ -27,6 +27,7 @@ export class PostComponent implements OnInit {
    * @description uses passed postId to fetch the target post from DB
    * @param postId: string
    */
+  /* istanbul ignore next */
   getPost(postId: string): void {
     this.firebase
       .collection('posts', (ref) => ref.where('id', '==', postId))

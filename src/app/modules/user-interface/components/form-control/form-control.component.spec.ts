@@ -8,6 +8,8 @@ import {
 import { FormControlComponent } from './form-control.component';
 import { FormControlErrorComponent } from '../form-control-error/form-control-error.component';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { from } from 'rxjs';
+import { NgModel } from '@angular/forms';
 
 describe('FormControlComponent', () => {
   let component: FormControlComponent;
@@ -37,6 +39,20 @@ describe('FormControlComponent', () => {
       tick();
       expect(component.validateComponent).toHaveBeenCalledTimes(1);
     }));
+    it('should call #determinLayout', fakeAsync(() => {
+      spyOn(component, 'determineLayout');
+      component.ngAfterViewInit();
+      tick();
+      expect(component.determineLayout).toHaveBeenCalledTimes(1);
+    }));
+    it('should call #handleViewChange when ngModel value changes', () => {
+      spyOn(component, 'handleValueChange');
+      component.ngModel = { valueChanges: from('new value') } as NgModel;
+
+      component.ngAfterViewInit();
+
+      expect(component.handleValueChange).toHaveBeenCalled();
+    });
   });
 
   describe('#handleValueChange', () => {
@@ -72,6 +88,33 @@ describe('FormControlComponent', () => {
       const expectedUUID: string = component.id;
 
       expect(component.inputElement.id).toEqual(expectedUUID);
+    });
+  });
+
+  describe('#determinLayout', () => {
+    it('should use default layout if input is not of type checkbox, radio or textarea', () => {
+      component.inputElement = {
+        type: 'text',
+        nodeName: 'input',
+      } as HTMLInputElement;
+      component.determineLayout();
+
+      expect(component.layout).toEqual('DEFAULT');
+    });
+    it('should use INLINE layout if input is of type checkbox or radio', () => {
+      component.inputElement = {
+        type: 'checkbox',
+        nodeName: 'input',
+      } as HTMLInputElement;
+      component.determineLayout();
+
+      expect(component.layout).toEqual('INLINE');
+    });
+    it('should use STATIC layout if input is of type TextArea', () => {
+      component.inputElement = { nodeName: 'TEXTAREA' } as HTMLTextAreaElement;
+      component.determineLayout();
+
+      expect(component.layout).toEqual('STATIC');
     });
   });
 });
