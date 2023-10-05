@@ -1,1 +1,6 @@
-<p>news works!</p>
+<div class="news__container">
+  <app-announcment-post
+    *ngFor="let post of posts"
+    [announcementPost]="post"
+  ></app-announcment-post>
+</div>

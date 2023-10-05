@@ -9,7 +9,10 @@ export interface IAnnouncementPost {
   timestamp: any;
 
   title: string;
+  subTitle: string;
   content: string;
+
+  tags: string[];
 
   backgroundImageUrl: string;
   backgroundImageAlt: string;

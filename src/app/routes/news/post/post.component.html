@@ -1,1 +1,32 @@
-{{ post | json}}
+<div *ngIf="post && user" class="post__container">
+  <h5 class="post__username">
+    {{ user.firstName }} {{ user.lastName }} |
+    {{ post.timestamp.toDate() | date : "MMM dd" }}
+  </h5>
+  <h1 class="post__title">{{ post.title }}</h1>
+  <p class="post__sub-title" [innerHTML]="post.subTitle"></p>
+
+  <img
+    class="post__image"
+    [src]="post.backgroundImageUrl"
+    [alt]="post.backgroundImageAlt"
+  />
+
+  <p class="post__content" [innerHTML]="post.content"></p>
+
+  <div class="post__share-tag-wrapper">
+    <span class="material-symbols-outlined"> share </span>
+
+    <div class="share-tag__tag-wrapper">
+      <h5 *ngFor="let tag of post.tags">{{ tag }}</h5>
+    </div>
+  </div>
+
+  <div class="appreciation__wrapper">
+    <div class="views-comments__wrapper">
+      <h6>{{ post.seenBy }} views</h6>
+      <h6>{{ post.comments.length }} comments</h6>
+    </div>
+    <app-like-button [postId]="post.id"></app-like-button>
+  </div>
+</div>
