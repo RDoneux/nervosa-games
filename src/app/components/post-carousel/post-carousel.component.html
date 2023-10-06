@@ -1,4 +1,8 @@
-<div #postCarouselContainer class="post-carousel__container">
+<div
+  #postCarouselContainer
+  class="post-carousel__container"
+  [style.--total-posts]="posts.length"
+>
   <app-announcment-post
     *ngFor="let post of posts"
     [style.--desired-translation]="offsetX + 'px'"
@@ -7,18 +11,3 @@
     [announcementPost]="post"
   ></app-announcment-post>
 </div>
-
-<!--    [style.transform]="
-      'translateX(' +
-      offsetX +
-      'px) scale(' +
-      calculateScale(announcmentPost) +
-      ') rotate3d(0, 1, 0, ' +
-      calculateRotation(announcmentPost) +
-      'deg)'
-    " -->
-
-<!-- [style.--desired-translation]="offsetX - calculateRotation(announcmentPost) + 'px'"
-    [style.--desired-scale]="calculateScale(announcmentPost)"
-    [style.--desired-rotation]="calculateRotation(announcmentPost) + 'deg'"
-    [style.--desired-z-translation]="calculateZTranslation(announcmentPost) + 'px'" -->

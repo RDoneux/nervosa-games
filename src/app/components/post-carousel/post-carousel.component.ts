@@ -37,7 +37,8 @@ export class PostCarouselComponent implements OnInit {
         },
       });
 
-    setInterval(() => this.incrementCarousel(), this.advanceTimeIncrement);
+    if (window.innerWidth > 576)
+      setInterval(() => this.incrementCarousel(), this.advanceTimeIncrement);
   }
 
   incrementCarousel(): void {

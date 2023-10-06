@@ -1,47 +1,30 @@
+@import 'mixins';
+
 .post-carousel__container {
     margin: 0 16px;
 
-    display: flex;
-    justify-content: flex-start;
-    // align-items: flex-start;
-    // width: fit-content;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(var(--total-posts), 33%);
+    column-gap: 1%;
+    grid-template-rows: 1fr;
 
-    // display: grid;
-    // grid-template-columns: repeat(3, 32%);
-    // grid-template-rows: 1fr;
-    // column-gap: 1%;
-    // perspective: 600px;
-    // overflow-x: hidden;
-    // overflow-y:visible;
+    overflow-x: hidden;
 
-    // transform: perspective(400px);
-    // transform: perspective(400px) rotateY(var(--desired-rotation));
-
-
+    @include mobile-down {
+        grid-template-columns: 1fr;
+        row-gap: 1%
+    }
 
     .post {
-        min-width: 31%;
         transform: translateX(var(--desired-translation));
         transition: transform 1000ms ease-in-out;
-        margin: 0 1%;
 
         &:first-child {
             margin-left: 0;
         }
+
         &:last-child {
             margin-right: 0;
         }
-        &:not(:first-child):not(:last-child) {
-            // margin: 0 1%;
-
-        }
     }
-
-    // .post {
-    //     // transition: transform 1000ms ease-in-out;
-    //     // opacity: calc(var(--desired-scale));
-    //     // transform: translateZ(var(--desired-z-translation));
-    //     // transform-origin: center
-    // }
 }

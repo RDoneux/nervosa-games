@@ -1,8 +1,14 @@
 @import 'variables';
+@import 'mixins';
 
 .post__container {
 
     padding: 20px 20%;
+
+    @include tablet-down {
+        padding: 20px;
+    }
+
 
     .post__username {
         font-weight: 100;
