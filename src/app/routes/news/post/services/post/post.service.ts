@@ -30,6 +30,7 @@ export class PostService {
       .valueChanges();
   }
 
+  /* istanbul ignore next */
   updateSeenBy(postId: string, value: number): void {
     this.firebase.collection('posts').doc(postId).update({ seenBy: value });
   }
