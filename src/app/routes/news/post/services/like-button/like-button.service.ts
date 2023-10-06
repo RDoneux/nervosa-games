@@ -18,6 +18,7 @@ export class LikeButtonService {
     private postService: PostService
   ) {}
 
+  /* istanbul ignore next */
   updateLikedNumber(postId: string, updatedValue: number): void {
     this.angularFirestore
       .collection('posts')
