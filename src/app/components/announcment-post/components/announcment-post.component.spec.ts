@@ -5,20 +5,10 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IAnnouncementPost } from '../interfaces/i-announcement-post.interface';
+import { mockedAnnouncementPost } from 'src/app/data/test-data.spec';
 
 describe('AnnouncmentPostComponent', () => {
-  const mockAnnouncementPost: IAnnouncementPost = {
-    id: 'test-id',
-    seenBy: 0,
-    likedBy: 1,
-    posterId: 'test-poster-id',
-    timestamp: new Date(),
-    title: 'test-title',
-    backgroundImageAlt: 'test-alt-background',
-    backgroundImageUrl: 'test-background-url',
-    content: 'test-content',
-    comments: [{ userId: 'test-user-id', comment: 'test-comment' }],
-  };
+  const mockAnnouncementPost: IAnnouncementPost = mockedAnnouncementPost
 
   let component: AnnouncmentPostComponent;
   let fixture: ComponentFixture<AnnouncmentPostComponent>;

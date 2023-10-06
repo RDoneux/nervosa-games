@@ -13,19 +13,9 @@ import { environment } from 'src/environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { IAnnouncementPost } from '../announcment-post/interfaces/i-announcement-post.interface';
+import { mockedAnnouncementPost } from 'src/app/data/test-data.spec';
 
-const mockAnnouncementPost: IAnnouncementPost = {
-  id: 'test-id',
-  seenBy: 0,
-  likedBy: 1,
-  posterId: 'test-poster-id',
-  timestamp: new Date(),
-  title: 'test-title',
-  backgroundImageAlt: 'test-alt-background',
-  backgroundImageUrl: 'test-background-url',
-  content: 'test-content',
-  comments: [{ userId: 'test-user-id', comment: 'test-comment' }],
-};
+const mockAnnouncementPost: IAnnouncementPost = mockedAnnouncementPost
 
 describe('PostCarouselComponent', () => {
   let component: PostCarouselComponent;
@@ -84,10 +74,10 @@ describe('PostCarouselComponent', () => {
       spyOnProperty(component, 'carouselContainer').and.returnValue({
         offsetWidth: 3,
       } as HTMLDivElement);
-      component.posts = []
+      component.posts = [];
       component.incrementCarousel();
 
-      expect(component.offsetX).toEqual(0)
+      expect(component.offsetX).toEqual(0);
     });
   });
 });

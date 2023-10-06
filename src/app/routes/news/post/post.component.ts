@@ -14,6 +14,8 @@ export class PostComponent implements OnInit {
   public post!: IAnnouncementPost;
   public user!: IUser;
 
+  private postSubscription!: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private postService: PostService
@@ -27,16 +29,13 @@ export class PostComponent implements OnInit {
   }
 
   private fetchPost(value: any): void {
-    const postSubscription: Subscription = this.postService
-      .getPost(value['id'])
-      .subscribe({
-        next: (post: IAnnouncementPost[]) => {
-          this.post = post[0];
-          this.fetchUser(post[0].posterId);
-          this.updateSeenBy(post[0].id, post[0].seenBy);
-          postSubscription.unsubscribe();
-        },
-      });
+    this.postSubscription = this.postService.getPost(value['id']).subscribe({
+      next: (post: IAnnouncementPost[]) => {
+        this.post = post[0];
+        this.fetchUser(post[0].posterId);
+        this.updateSeenBy(post[0].id, post[0].seenBy);
+      },
+    });
   }
 
   private fetchUser(posterId: string): void {
@@ -49,5 +48,6 @@ export class PostComponent implements OnInit {
 
   private updateSeenBy(postId: string, currentSeenByValue: number): void {
     this.postService.updateSeenBy(postId, currentSeenByValue + 1);
+    this.postSubscription?.unsubscribe();
   }
 }
