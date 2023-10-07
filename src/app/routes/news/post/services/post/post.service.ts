@@ -24,9 +24,9 @@ export class PostService {
   }
 
   /* istanbul ignore next */
-  getUser(userId: string): Observable<IUser[]> {
+  getUser(userEmail: string): Observable<IUser[]> {
     return this.firebase
-      .collection<IUser>('users', (ref) => ref.where('id', '==', userId))
+      .collection<IUser>('users', (ref) => ref.where('email', '==', userEmail))
       .valueChanges();
   }
 

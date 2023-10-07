@@ -38,7 +38,7 @@ export class AnnouncmentPostComponent implements AfterViewInit {
   findPosterInformation(): void {
     this.firebase
       .collection('users', (ref) =>
-        ref.where('id', '==', this.announcementPost.posterId)
+        ref.where('email', '==', this.announcementPost.posterId)
       )
       .valueChanges()
       .subscribe({

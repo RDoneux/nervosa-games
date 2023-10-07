@@ -1,6 +1,6 @@
 <div *ngIf="post && user" class="post__container">
   <h5 class="post__username">
-    {{ user.firstName }} {{ user.lastName }} |
+    {{ user.displayName }} |
     {{ post.timestamp.toDate() | date : "MMM dd" }}
   </h5>
   <h1 class="post__title">{{ post.title }}</h1>
