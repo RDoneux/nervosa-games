@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { LoginOptionsModule } from './components/login-options/login-options.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     AppRoutingModule,
     TopNavigationModule,
     FooterModule,
+    LoginOptionsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),

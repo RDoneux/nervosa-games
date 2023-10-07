@@ -21,7 +21,7 @@ export class MessageService {
     distinctUntilChanged()
   ) as Connectable<any>;
 
-  public send(value: ISystemMessage) {
+  public send(value: ISystemMessage): void {
     this.baseSubject.next(value);
   }
 

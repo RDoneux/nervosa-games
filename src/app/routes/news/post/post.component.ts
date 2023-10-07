@@ -4,6 +4,7 @@ import { IAnnouncementPost } from 'src/app/components/announcment-post/interface
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import { PostService } from './services/post/post.service';
 import { Subscription } from 'rxjs';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-post',
@@ -18,13 +19,22 @@ export class PostComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private postService: PostService
+    private postService: PostService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     // get the post id from query params
     this.route.queryParams.subscribe({
       next: (value: any) => this.fetchPost(value),
+    });
+  }
+
+  public requestLogin(): void {
+    this.messageService.send({
+      stream: 'login',
+      sender: this.constructor.name,
+      payload: 'login request',
     });
   }
 

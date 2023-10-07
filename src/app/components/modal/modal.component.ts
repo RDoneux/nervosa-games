@@ -1,23 +1,14 @@
 import {
-  AfterViewInit,
   Component,
-  ComponentFactory,
-  ComponentRef,
   ElementRef,
-  EmbeddedViewRef,
-  EnvironmentInjector,
   EventEmitter,
   HostListener,
-  Injector,
   Input,
-  NgModuleRef,
   OnChanges,
   Output,
-  TemplateRef,
   Type,
   ViewChild,
   ViewContainerRef,
-  ViewRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { fadeInOut } from 'src/app/animations/fade-in-out.animation';
@@ -33,6 +24,10 @@ import { fadeInOut } from 'src/app/animations/fade-in-out.animation';
 export class ModalComponent implements OnChanges {
   @Input({ required: true }) show!: boolean;
   @Input() component!: Type<unknown>;
+  @Input() size: { width: string; height: string } = {
+    width: '80vw',
+    height: '90vh',
+  };
 
   @Output() closeRequested: EventEmitter<null> = new EventEmitter();
 
@@ -42,7 +37,7 @@ export class ModalComponent implements OnChanges {
 
   @HostListener('click', ['$event'])
   onClickOutsidePage(event: MouseEvent): void {
-    if (this.modalPage.nativeElement.contains(event.target)) return;
+    if (this.modalPage?.nativeElement.contains(event.target)) return;
     this.requestClose();
   }
 

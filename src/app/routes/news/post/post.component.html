@@ -33,6 +33,9 @@
   <h2>Recent Posts</h2>
   <app-post-carousel></app-post-carousel>
 
-  <app-comment-section [existingComments]="post.comments"></app-comment-section>
+  <app-comment-section
+    [existingComments]="post.comments"
+    (click)="requestLogin()"
+  ></app-comment-section>
 </div>
 
