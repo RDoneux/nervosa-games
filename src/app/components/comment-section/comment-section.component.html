@@ -1,0 +1,9 @@
+<section>
+  <form>
+    <app-form-control> 
+        <textarea class="comment-text-area" placeholder="Write a comment..."></textarea>
+    </app-form-control>
+  </form>
+</section>
+
+<div *ngFor="let comment of existingComments">{{ comment.comment }}</div>
