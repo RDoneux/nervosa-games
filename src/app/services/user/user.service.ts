@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IUser } from 'src/app/interfaces/i-user.interface';
-import { UserCredential, User } from 'firebase/auth';
+import { User } from 'firebase/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, ReplaySubject } from 'rxjs';
 
@@ -14,10 +14,7 @@ export class UserService {
     this.angularFirestore.collection('users').doc(user.email).set(user);
   }
 
-  generateNervosaUserFromGoogleUser(
-    userCredential: UserCredential
-  ): Observable<IUser> {
-    const user: User = userCredential.user;
+  generateNervosaUserFromGoogleUser(user: User): Observable<IUser> {
     const iUserReplaySubject: ReplaySubject<IUser> = new ReplaySubject();
 
     this.getAdminList().subscribe({

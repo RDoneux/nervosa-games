@@ -4,9 +4,9 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   UserCredential,
+  User,
 } from 'firebase/auth';
 import { from, Observable, ReplaySubject } from 'rxjs';
-import { IUser } from 'src/app/interfaces/i-user.interface';
 import { UserService } from '../../user/user.service';
 
 @Injectable({
@@ -15,18 +15,15 @@ import { UserService } from '../../user/user.service';
 export class GoogleSignInService {
   constructor(private userService: UserService) {}
 
-  signInWithPopup(): Observable<IUser> {
+  signInWithPopup(): Observable<User> {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
-    const userObservable: ReplaySubject<IUser> = new ReplaySubject();
+    const userObservable: ReplaySubject<User> = new ReplaySubject(1);
 
     from(signInWithPopup(auth, provider)).subscribe({
       next: (result: UserCredential) => {
-        console.log(result)
-        this.userService.generateNervosaUserFromGoogleUser(result).subscribe({
-          next: (result: IUser) => userObservable.next(result),
-        });
+        userObservable.next(result.user);
       },
       error: (error: any) => {},
     });

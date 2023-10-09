@@ -5,6 +5,7 @@ import { IUser } from 'src/app/interfaces/i-user.interface';
 import { PostService } from './services/post/post.service';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'src/app/services/message/message.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-post',
@@ -15,15 +16,23 @@ export class PostComponent implements OnInit {
   public post!: IAnnouncementPost;
   public user!: IUser;
 
+  public currentLoggedInUser: IUser | null = null;
+
   private postSubscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
-    private messageService: MessageService
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
+    this.loginService.getCurrentLoggedInUser().subscribe({
+      next: (user: IUser | null) => {
+        this.currentLoggedInUser = user;
+      },
+    });
+
     // get the post id from query params
     this.route.queryParams.subscribe({
       next: (value: any) => this.fetchPost(value),
@@ -31,10 +40,10 @@ export class PostComponent implements OnInit {
   }
 
   public requestLogin(): void {
-    this.messageService.send({
-      stream: 'login',
-      sender: this.constructor.name,
-      payload: 'login request',
+    this.loginService.requestUserLogsIn().subscribe({
+      next: (response: IUser | null) => {
+        console.log('printed in component', response);
+      },
     });
   }
 
