@@ -1,6 +1,6 @@
 import { Component, OnInit, Type } from '@angular/core';
-import { MessageService } from 'src/app/services/message/message.service';
 import { LoginOptionsContentComponent } from '../login-options-content/login-options-content.component';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-login-options',
@@ -12,12 +12,12 @@ export class LoginOptionsComponent implements OnInit {
   public loginOptionsContent: Type<LoginOptionsContentComponent> =
     LoginOptionsContentComponent;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.messageService.getStreams$(['login']).subscribe({
-      next: () => {
-        this.show = true;
+    this.loginService.loginRequests().subscribe({
+      next: (state: 'OPEN' | 'CLOSE') => {
+        this.show = state === 'OPEN';
       },
     });
   }
