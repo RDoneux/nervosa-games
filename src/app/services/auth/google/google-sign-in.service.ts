@@ -7,13 +7,12 @@ import {
   User,
 } from 'firebase/auth';
 import { from, Observable, ReplaySubject } from 'rxjs';
-import { UserService } from '../../user/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoogleSignInService {
-  constructor(private userService: UserService) {}
+  constructor() {}
 
   signInWithPopup(): Observable<User> {
     const provider = new GoogleAuthProvider();

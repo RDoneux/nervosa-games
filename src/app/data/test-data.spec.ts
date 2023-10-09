@@ -13,12 +13,12 @@ export const mockedAnnouncementPost: IAnnouncementPost = {
   content: 'test-content',
   subTitle: 'test-subtitle',
   tags: ['test-tag-one', 'test-tag-two'],
-  comments: [{ userId: 'test-user-id', comment: 'test-comment' }],
+  comments: [{ userId: 'test-user-id', comment: 'test-comment', likedBy: 1 }],
 };
 
 export const mockedUser: IUser = {
-  firstName: 'mock-user-first-name',
-  lastName: 'mock-user-last-name',
+  displayName: 'mock-user-display-name',
   isAdmin: false,
   id: 'mock-user-id',
+  email: 'test-user-email',
 };
