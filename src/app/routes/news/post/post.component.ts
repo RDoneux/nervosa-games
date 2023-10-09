@@ -4,7 +4,6 @@ import { IAnnouncementPost } from 'src/app/components/announcment-post/interface
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import { PostService } from './services/post/post.service';
 import { Subscription } from 'rxjs';
-import { MessageService } from 'src/app/services/message/message.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
