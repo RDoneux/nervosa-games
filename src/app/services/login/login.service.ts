@@ -55,6 +55,7 @@ export class LoginService {
   }
 
   loginSuccess(user: User): void {
+    console.log(user)
     this._loginRequests.next('CLOSE');
     this.submitLoginDetails(user);
   }
