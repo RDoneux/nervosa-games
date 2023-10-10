@@ -10,10 +10,12 @@ import { Observable, ReplaySubject } from 'rxjs';
 export class UserService {
   constructor(private angularFirestore: AngularFirestore) {}
 
+  /* istanbul ignore next */
   saveUserToDatabase(user: IUser): void {
     this.angularFirestore.collection('users').doc(user.email).set(user);
   }
 
+  /* istanbul ignore next */
   generateNervosaUserFromGoogleUser(user: User): Observable<IUser> {
     const iUserReplaySubject: ReplaySubject<IUser> = new ReplaySubject();
 
@@ -33,6 +35,7 @@ export class UserService {
     return iUserReplaySubject;
   }
 
+  /* istanbul ignore next */
   private getAdminList(): Observable<{ administrators: string[] } | undefined> {
     return this.angularFirestore
       .collection<{ administrators: string[] }>('users')

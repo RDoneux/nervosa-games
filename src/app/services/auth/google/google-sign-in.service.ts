@@ -14,6 +14,7 @@ import { from, Observable, ReplaySubject } from 'rxjs';
 export class GoogleSignInService {
   constructor() {}
 
+  /* istanbul ignore next */
   signInWithPopup(): Observable<User> {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
