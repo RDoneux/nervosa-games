@@ -1,4 +1,4 @@
-<div #container [style.--width]="container.offsetWidth + 'px'" class="sign-in">
+<div #container [style.--width]="width + 'px'" class="sign-in">
   <div class="sign-in__wrapper" *ngIf="!user" (click)="onSignIn()">
     <span class="material-symbols-outlined"> account_circle </span>
     <p class="sign-in__text">Sign in...</p>

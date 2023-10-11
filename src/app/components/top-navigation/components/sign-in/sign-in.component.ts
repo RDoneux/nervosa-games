@@ -1,7 +1,12 @@
 import {
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
+  OnChanges,
   OnInit,
   TemplateRef,
   ViewChild,
@@ -14,8 +19,9 @@ import { LoginService } from 'src/app/services/login/login.service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, AfterViewChecked {
   public user: IUser | null = null;
+  public width: number = 0;
 
   @ViewChild('container')
   private _componentContainer!: ElementRef;
@@ -24,7 +30,10 @@ export class SignInComponent implements OnInit {
   }
   @ContentChild(TemplateRef) signOut!: TemplateRef<HTMLDivElement>;
 
-  constructor(private loginService: LoginService) {}
+  constructor(
+    private loginService: LoginService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loginService.getCurrentLoggedInUser().subscribe({
@@ -32,9 +41,16 @@ export class SignInComponent implements OnInit {
     });
   }
 
+  ngAfterViewChecked(): void {
+    this.width = this.componentContainer.offsetWidth;
+    this.changeDetectorRef.detectChanges();
+  }
+
   onSignIn(): void {
     this.loginService.requestUserLogsIn().subscribe({
-      next: (user: IUser | null) => (this.user = user),
+      next: (user: IUser | null) => {
+        this.user = user;
+      },
     });
   }
 
