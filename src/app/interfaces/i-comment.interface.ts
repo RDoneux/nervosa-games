@@ -1,5 +1,9 @@
+import { Timestamp } from '@angular/fire/firestore';
+
 export interface IComment {
-  userId: string;
+  userDisplayName: string;
+  userImageUrl: string;
   comment: string;
   likedBy: number;
+  datePosted: Timestamp;
 }

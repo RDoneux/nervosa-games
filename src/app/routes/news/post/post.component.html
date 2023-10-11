@@ -33,10 +33,10 @@
   <h2>Recent Posts</h2>
   <app-post-carousel></app-post-carousel>
 
-  {{ currentLoggedInUser | json }}
-
   <app-comment-section
-    [existingComments]="post.comments"
+    [postId]="post.id"
+    [postId]="post.id"
+    [user]="user"
     (click)="requestLogin()"
   ></app-comment-section>
 </div>

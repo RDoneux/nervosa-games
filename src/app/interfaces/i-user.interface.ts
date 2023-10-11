@@ -3,4 +3,5 @@ export interface IUser {
   isAdmin: boolean;
   email: string;
   id: string;
+  profilePicture: string | null;
 }

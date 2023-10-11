@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, take } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, from, take } from 'rxjs';
 import { IUser } from 'src/app/interfaces/i-user.interface';
-import { onAuthStateChanged, getAuth, User, Auth } from 'firebase/auth';
+import {
+  onAuthStateChanged,
+  getAuth,
+  User,
+  Auth,
+  signOut,
+} from 'firebase/auth';
 import { UserService } from '../user/user.service';
+import { debug } from '../debug/debug';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +53,15 @@ export class LoginService {
     return this._loginDetails;
   }
 
+  requestLogout(): void {
+    const auth: Auth = getAuth();
+    signOut(auth)
+      .then(() => window.location.reload())
+      .catch((error) => {
+        debug('error')(error);
+      });
+  }
+
   loginRequests(): Observable<'OPEN' | 'CLOSE'> {
     return this._loginRequests;
   }
@@ -55,7 +71,6 @@ export class LoginService {
   }
 
   loginSuccess(user: User): void {
-    console.log(user)
     this._loginRequests.next('CLOSE');
     this.submitLoginDetails(user);
   }

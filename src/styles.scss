@@ -25,7 +25,8 @@ label,
 li,
 input,
 textarea,
-button {
+button,
+small {
     font-family: $primary-font
 }
 
@@ -42,5 +43,10 @@ button {
 
     &:hover {
         background: lighten($secondary-accent-colour, 2)
+    }
+
+    &[disabled] {
+        background: $disabled-colour;
+        cursor: not-allowed;
     }
 }

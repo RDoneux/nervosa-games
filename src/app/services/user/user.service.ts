@@ -23,6 +23,7 @@ export class UserService {
       next: (adminList: { administrators: string[] } | undefined) => {
         const nervosaGamesUser: IUser = {
           displayName: user.displayName ?? 'unknown',
+          profilePicture: user.photoURL,
           isAdmin:
             adminList?.administrators.includes(user.email ?? '') ?? false,
           email: user.email ?? 'unknown',
