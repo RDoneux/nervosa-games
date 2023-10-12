@@ -61,8 +61,15 @@
             filter: invert(60%)
         }
 
-        &.logout {
+        &.icon {
             font-size: 30px;
+            right: 15px;
+        }
+
+        &.admin-dashboard{
+            padding-right: 8px;
+            margin-right: 8px; 
+            border-right: 1px solid $text-dark-colour;
         }
     }
 

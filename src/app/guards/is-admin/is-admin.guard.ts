@@ -9,7 +9,13 @@ export const isAdminGuard: CanActivateFn = () => {
   return new Promise((resolve) => {
     loginService.getCurrentLoggedInUser().subscribe({
       next: (user: IUser | null) => {
-        resolve(user ? user.isAdmin : router.navigate(['/unauthorised']));
+        resolve(
+          user
+            ? user.isAdmin
+              ? true
+              : router.navigate(['/unauthorised'])
+            : router.navigate(['/unauthorised'])
+        );
       },
     });
   });
