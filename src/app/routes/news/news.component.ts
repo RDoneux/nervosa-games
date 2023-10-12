@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IAnnouncementPost } from 'src/app/components/announcment-post/interfaces/i-announcement-post.interface';
+import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 
 @Component({
   selector: 'app-news',
@@ -10,16 +10,17 @@ import { IAnnouncementPost } from 'src/app/components/announcment-post/interface
 export class NewsComponent implements OnInit {
   public posts!: IAnnouncementPost[];
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestoreService: FirestoreService) {}
 
   ngOnInit(): void {
-    this.firestore
-      .collection('posts', (ref) => ref.orderBy('timestamp', 'desc'))
+    this.firestoreService
+      .getFirestore()
+      .collection<IAnnouncementPost>('posts', (ref) =>
+        ref.orderBy('timestamp', 'desc')
+      )
       .valueChanges()
       .subscribe({
-        next: (posts) => {
-          this.posts = posts as IAnnouncementPost[];
-        },
+        next: (posts: IAnnouncementPost[]) => (this.posts = posts),
       });
   }
 }
