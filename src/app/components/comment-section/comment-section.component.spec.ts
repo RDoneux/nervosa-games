@@ -1,8 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CommentSectionComponent } from './comment-section.component';
-import { AngularFireModule, FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment';
 import {
   mockedAnnouncementPost,
   mockedComment,
@@ -12,6 +9,8 @@ import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { IComment } from 'src/app/interfaces/i-comment.interface';
 import { Timestamp } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
 
 describe('CommentSectionComponent', () => {
   let component: CommentSectionComponent;
@@ -22,7 +21,10 @@ describe('CommentSectionComponent', () => {
   beforeEach(() => {
     firestoreServiceMock = getFirestoreStub([mockedAnnouncementPost]);
     TestBed.configureTestingModule({
-      imports: [CommentSectionComponent],
+      imports: [
+        CommentSectionComponent,
+        AngularFireModule.initializeApp(environment.firebase),
+      ],
       providers: [
         { provide: FirestoreService, useValue: firestoreServiceMock },
       ],

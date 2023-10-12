@@ -28,6 +28,7 @@ describe('FooterComponent', () => {
       const footer: IFooterLink = {
         label: '',
         content: PrivacyPolicyComponent,
+        url: 'test-url',
       };
       component.openModal(footer);
       expect(component.showModal).toBeTrue();
