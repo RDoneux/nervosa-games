@@ -8,8 +8,9 @@ import { CartIconComponent } from '../cart-icon/cart-icon.component';
 import { ProductSearchComponent } from '../product-search/product-search.component';
 import { LeftDrawComponent } from 'src/app/components/left-draw/left-draw.component';
 import { SignInComponent } from '../sign-in/sign-in.component';
-import { RouterLink } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
 
 describe('TopNavigationComponent', () => {
   let component: TopNavigationComponent;
@@ -24,9 +25,12 @@ describe('TopNavigationComponent', () => {
         HomeIconComponent,
         CartIconComponent,
         ProductSearchComponent,
-        SignInComponent
+        SignInComponent,
       ],
       imports: [FormsModule, LeftDrawComponent, RouterTestingModule],
+      providers: [
+        { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+      ],
     });
     fixture = TestBed.createComponent(TopNavigationComponent);
     component = fixture.componentInstance;

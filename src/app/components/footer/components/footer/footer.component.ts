@@ -1,9 +1,7 @@
 import { Component, Type } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { IFooterLink } from '../../interfaces/i-footer-link.interface';
 import { footerLinks } from 'src/app/data/footer-links.data';
 import packageJson from '../../../../../../package.json';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 @Component({
   selector: 'app-footer',

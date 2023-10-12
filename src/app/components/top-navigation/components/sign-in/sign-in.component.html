@@ -1,4 +1,17 @@
-<div class="sign-in">
-  <span class="material-symbols-outlined"> account_circle </span>
-  <p class="sign-in__text">Sign In</p>
+<div #container [style.--width]="width + 'px'" class="sign-in">
+  <div class="sign-in__wrapper" *ngIf="!user" (click)="onSignIn()">
+    <span class="material-symbols-outlined"> account_circle </span>
+    <p class="sign-in__text">Sign in...</p>
+  </div>
+
+  <ng-container *ngIf="user">
+    <img class="sign-in__profile-picture" [src]="user.profilePicture" />
+    <div class="user-info__wrapper">
+      <small>Logged in as: </small>
+      <p>{{ user.displayName }}</p>
+    </div>
+    <span class="material-symbols-outlined logout" (click)="onSignOut()">
+      logout
+    </span>
+  </ng-container>
 </div>

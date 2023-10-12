@@ -9,7 +9,6 @@ div.product-search {
 
     display: flex;
     position: relative;
-    overflow: hidden;
 
     @include mobile-down {
         flex-direction: column;

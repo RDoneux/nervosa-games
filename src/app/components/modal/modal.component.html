@@ -1,5 +1,5 @@
 <section *ngIf="show" @fade class="modal__background">
-  <div #modalPage class="modal__page">
+  <div #modalPage [style.width]="size.width" [style.height]="size.height" class="modal__page">
     <span class="material-symbols-outlined" (click)="requestClose()">
       close
     </span>

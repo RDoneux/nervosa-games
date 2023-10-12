@@ -1,0 +1,14 @@
+<div
+  #postCarouselContainer
+  *ngIf="posts"
+  class="post-carousel__container"
+  [style.--total-posts]="posts.length"
+>
+  <app-announcment-post
+    *ngFor="let post of posts"
+    [style.--desired-translation]="offsetX + 'px'"
+    class="post"
+    #announcmentPost
+    [announcementPost]="post"
+  ></app-announcment-post>
+</div>

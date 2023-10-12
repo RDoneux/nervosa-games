@@ -1,0 +1,31 @@
+<section class="comment__container">
+  <h1>Comments</h1>
+  <form>
+    <app-form-control>
+      <textarea
+        [(ngModel)]="newComment.comment"
+        name="commentArea"
+        class="comment-text-area"
+        placeholder="Write a comment..."
+        (focus)="hasFocus = true"
+        (focusout)="hasFocus = false"
+      ></textarea>
+    </app-form-control>
+  </form>
+
+  <div class="button-wrapper" [class.focus]="hasFocus">
+    <button (click)="onCancel()" class="cancel">Cancel</button>
+    <button (click)="onPublish()" [disabled]="newComment.comment.length === 0">
+      Publish
+    </button>
+  </div>
+
+  <div class="existing-comments" *ngFor="let comment of existingComments">
+    <div class="poster__info">
+      <img [src]="comment.userImageUrl" />
+      <h6>{{ comment.userDisplayName }}</h6>
+      <small>{{comment.datePosted.toMillis() | date}}</small>
+    </div>
+    <p>{{ comment.comment }}</p>
+  </div>
+</section>

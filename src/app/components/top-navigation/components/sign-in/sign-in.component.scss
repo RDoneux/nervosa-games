@@ -1,28 +1,46 @@
 @import 'variables';
 @import 'mixins';
 
-.sign-in {
+:host {
+
+    overflow-x: hidden;
+    overflow-y: visible;
+    width: fit-content;
+
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 1px;
+    top: 1px;
+
+    border-radius: 25px;
+
+}
+
+.sign-in {
+
     cursor: pointer;
 
     display: flex;
     align-items: center;
+    overflow: hidden;
+    height: 42px;
 
-    height: 44px;
-    width: 130px;
+    background: white;
 
     border-radius: 30px;
 
-    transform: translateX(calc(130px - 44px));
+    transform: translateX(calc(var(--width) - 42px));
 
     transition: transform 250ms ease-out, background-color 250ms linear;
 
-    &:hover {
+    &:hover,
+    &:active {
         transform: translateX(0);
-        background: $secondary-accent-colour;
-        background: linear-gradient(90deg, #bfe9bf00 15%, transparentize($secondary-accent-colour, .3) 100%);
+
+        ~.sign-out__container {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
     }
 
     .material-symbols-outlined {
@@ -38,15 +56,84 @@
         &:hover {
             filter: invert(60%)
         }
+
+        &.logout {
+            font-size: 30px;
+        }
+    }
+
+    .sign-in__wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-info__wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 0px 16px 0px 10px;
+        border-right: 1px solid $text-dark-colour;
+        margin-right: 25px;
+
+        small {
+            font-size: 10px;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+            color: $secondary-accent-colour;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+
+        }
+    }
+
+    .sign-in__profile-picture {
+        width: 43px;
+        border-radius: 50%;
     }
 
     .sign-in__text {
         margin: 0;
         padding: 0;
-        color: $text-dark-colour;
+        margin-right: 20px;
+        color: $secondary-accent-colour;
 
         width: 100%;
         display: block;
     }
 
+}
+
+
+.sign-out__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+
+    &:hover,
+    &:active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+
+        .sign-out {
+            pointer-events: inherit;
+        }
+    }
+
+    transition: transform 350ms 350ms ease-out,
+    opacity 200ms 350ms ease-out;
+
+    .sign-out {
+        margin: 5px;
+        padding: 0 8px;
+        width: 100%;
+    }
 }

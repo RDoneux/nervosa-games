@@ -1,0 +1,30 @@
+@import 'mixins';
+
+.post-carousel__container {
+    margin: 0 16px;
+
+    display: grid;
+    grid-template-columns: repeat(var(--total-posts), 33%);
+    column-gap: 1%;
+    grid-template-rows: 1fr;
+
+    overflow-x: hidden;
+
+    @include mobile-down {
+        grid-template-columns: 1fr;
+        row-gap: 1%
+    }
+
+    .post {
+        transform: translateX(var(--desired-translation));
+        transition: transform 1000ms ease-in-out;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
