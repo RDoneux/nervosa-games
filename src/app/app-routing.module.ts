@@ -50,6 +50,7 @@ const routes: Routes = [
     canActivate: [canActivateInDevModeGuard],
   },
   { path: 'unauthorised', loadChildren: () => import('./routes/not-authorised/not-authorised.module').then(m => m.NotAuthorisedModule) },
+  { path: 'policies', loadChildren: () => import('./routes/policies/policies.module').then(m => m.PoliciesModule) },
   {
     path: '**',
     loadChildren: () =>

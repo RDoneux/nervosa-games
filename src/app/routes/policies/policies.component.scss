@@ -1,0 +1,42 @@
+@import 'variables';
+
+section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    ul {
+        width: 600px;
+        margin: 0;
+        padding: 0;
+
+        li {
+
+            .material-symbols-outlined {
+                margin-right: 10px;
+            }
+
+            display: flex;
+            align-items: center;
+
+            list-style: none;
+            padding: 15px;
+            margin: 5px 0;
+
+            background: rgb(85, 137, 153);
+            background: linear-gradient(90deg, rgba(85, 137, 153, 1) 0%, rgba(85, 137, 153, 0) 100%);
+            color: $text-light-colour;
+
+            cursor: pointer;
+
+            transition: background-color 200ms linear;
+
+            &:hover {
+                background: rgb(85, 137, 153);
+            }
+        }
+    }
+}

@@ -14,7 +14,7 @@ import {
   ViewContainerRef,
   ViewRef,
 } from '@angular/core';
-import { PrivacyPolicyComponent } from '../footer/components/privacy-policy/privacy-policy.component';
+import { PrivacyPolicyComponent } from '../../routes/policies/privacy-policy/components/privacy-policy/privacy-policy.component';
 
 describe('ModalComponent', () => {
   let component: ModalComponent;

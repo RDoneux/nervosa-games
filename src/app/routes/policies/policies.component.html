@@ -1,0 +1,9 @@
+<section>
+  <h1>Nervosa Games Policy List</h1>
+  <ul>
+    <li *ngFor="let policy of footerLinks" [routerLink]="[policy.url]">
+      <span class="material-symbols-outlined"> policy </span>
+      {{ policy.label }}
+    </li>
+  </ul>
+</section>
