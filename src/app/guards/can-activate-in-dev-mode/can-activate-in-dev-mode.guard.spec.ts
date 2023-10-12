@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 
 import { canActivateInDevModeGuard } from './can-activate-in-dev-mode.guard';
-import { UtilsService } from '../services/utils/utils.service';
+import { UtilsService } from '../../services/utils/utils.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('canActivateInDevModeGuard', () => {

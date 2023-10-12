@@ -35,7 +35,9 @@ export class SignInComponent implements OnInit, AfterViewChecked {
   /* istanbul ignore next */
   ngOnInit(): void {
     this.loginService.getCurrentLoggedInUser().subscribe({
-      next: (user: IUser | null) => (this.user = user),
+      next: (user: IUser | null) => {
+        this.user = user;
+      },
     });
   }
 
