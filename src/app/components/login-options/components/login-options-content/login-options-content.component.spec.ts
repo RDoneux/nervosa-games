@@ -5,6 +5,7 @@ import { GoogleSignInService } from 'src/app/services/auth/google/google-sign-in
 import { mockedUser } from 'src/app/data/test-data.spec';
 import { of } from 'rxjs';
 import { User } from 'firebase/auth';
+import { FacebookSignInService } from 'src/app/services/auth/facebook/facebook-sign-in.service';
 
 describe('LoginOptionsContentComponent', () => {
   let component: LoginOptionsContentComponent;
@@ -12,10 +13,14 @@ describe('LoginOptionsContentComponent', () => {
 
   let loginServiceMock: jasmine.SpyObj<LoginService>;
   let googleSigninServiceMock: jasmine.SpyObj<GoogleSignInService>;
+  let facebookSigninServiceMock: jasmine.SpyObj<FacebookSignInService>;
 
   beforeEach(() => {
     loginServiceMock = jasmine.createSpyObj('LoginService', ['loginSuccess']);
     googleSigninServiceMock = jasmine.createSpyObj('GoogleSigninService', [
+      'signInWithPopup',
+    ]);
+    facebookSigninServiceMock = jasmine.createSpyObj('FacebookSigninService', [
       'signInWithPopup',
     ]);
     TestBed.configureTestingModule({
@@ -23,6 +28,7 @@ describe('LoginOptionsContentComponent', () => {
       providers: [
         { provide: LoginService, useValue: loginServiceMock },
         { provide: GoogleSignInService, useValue: googleSigninServiceMock },
+        { provide: FacebookSignInService, useValue: facebookSigninServiceMock },
       ],
     });
     fixture = TestBed.createComponent(LoginOptionsContentComponent);
@@ -42,6 +48,20 @@ describe('LoginOptionsContentComponent', () => {
       component.loginWithGoogle();
 
       expect(googleSigninServiceMock.signInWithPopup).toHaveBeenCalled();
+      expect(loginServiceMock.loginSuccess).toHaveBeenCalledOnceWith(
+        mockedUser as unknown as User
+      );
+    });
+  });
+
+  describe('#loginWithFacebook', () => {
+    it('should call loginService with user obtained from facebookLoginService', () => {
+      facebookSigninServiceMock.signInWithPopup.and.returnValue(
+        of(mockedUser as unknown as User)
+      );
+      component.loginWithFacebook();
+
+      expect(facebookSigninServiceMock.signInWithPopup).toHaveBeenCalled();
       expect(loginServiceMock.loginSuccess).toHaveBeenCalledOnceWith(
         mockedUser as unknown as User
       );

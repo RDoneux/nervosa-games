@@ -1,6 +1,15 @@
 import { Timestamp } from '@angular/fire/firestore';
 import { IAnnouncementPost } from '../components/announcment-post/interfaces/i-announcement-post.interface';
 import { IUser } from '../interfaces/i-user.interface';
+import { IComment } from '../interfaces/i-comment.interface';
+
+export const mockedComment: IComment = {
+  userDisplayName: 'test-user-display-name',
+  userImageUrl: 'test-user-image-url',
+  datePosted: Timestamp.now(),
+  comment: 'test-comment',
+  likedBy: 1,
+};
 
 export const mockedAnnouncementPost: IAnnouncementPost = {
   id: 'test-id',
@@ -14,15 +23,7 @@ export const mockedAnnouncementPost: IAnnouncementPost = {
   content: 'test-content',
   subTitle: 'test-subtitle',
   tags: ['test-tag-one', 'test-tag-two'],
-  comments: [
-    {
-      userDisplayName: 'test-user-display-name',
-      userImageUrl: 'test-user-image-url',
-      datePosted: Timestamp.now(),
-      comment: 'test-comment',
-      likedBy: 1,
-    },
-  ],
+  comments: [mockedComment],
 };
 
 export const mockedUser: IUser = {

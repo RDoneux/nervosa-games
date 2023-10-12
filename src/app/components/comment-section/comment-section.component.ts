@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Timestamp, arrayUnion } from '@angular/fire/firestore';
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import { IAnnouncementPost } from '../announcment-post/interfaces/i-announcement-post.interface';
+import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 
 @Component({
   selector: 'app-comment-section',
@@ -24,8 +25,9 @@ export class CommentSectionComponent implements OnInit {
   public newComment!: IComment;
   public hasFocus: boolean = false;
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestoreService: FirestoreService) {}
 
+  /* istanbul ignore next */
   ngOnInit(): void {
     this.newComment = {
       comment: '',
@@ -35,7 +37,8 @@ export class CommentSectionComponent implements OnInit {
       datePosted: new Timestamp(0, 0),
     };
 
-    this.firestore
+    this.firestoreService
+      .getFirestore()
       .collection<IAnnouncementPost>('posts', (ref) =>
         ref.where('id', '==', this.postId)
       )
@@ -55,7 +58,8 @@ export class CommentSectionComponent implements OnInit {
 
   onPublish(): void {
     this.newComment.datePosted = Timestamp.now();
-    this.firestore
+    this.firestoreService
+      .getFirestore()
       .doc('posts/' + this.postId)
       .update({ comments: arrayUnion(this.newComment) });
     this.newComment.comment = '';

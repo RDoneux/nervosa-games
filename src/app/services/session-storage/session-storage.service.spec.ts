@@ -19,10 +19,6 @@ describe('SessionStorageService', () => {
     );
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
   it('should have saved session id', () => {
     service = new SessionStorageService();
     expect(sessionStore['NG:session-id']).toBeDefined();

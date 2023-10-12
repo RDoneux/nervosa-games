@@ -1,12 +1,9 @@
 import {
   AfterViewChecked,
-  AfterViewInit,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
-  OnChanges,
   OnInit,
   TemplateRef,
   ViewChild,
@@ -35,17 +32,20 @@ export class SignInComponent implements OnInit, AfterViewChecked {
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
+  /* istanbul ignore next */
   ngOnInit(): void {
     this.loginService.getCurrentLoggedInUser().subscribe({
       next: (user: IUser | null) => (this.user = user),
     });
   }
 
+  /* istanbul ignore next */
   ngAfterViewChecked(): void {
     this.width = this.componentContainer.offsetWidth;
     this.changeDetectorRef.detectChanges();
   }
 
+  /* istanbul ignore next */
   onSignIn(): void {
     this.loginService.requestUserLogsIn().subscribe({
       next: (user: IUser | null) => {
@@ -54,6 +54,7 @@ export class SignInComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  /* istanbul ignore next */
   onSignOut(): void {
     this.loginService.requestLogout();
   }

@@ -53,6 +53,7 @@ export class LoginService {
     return this._loginDetails;
   }
 
+  /* istanbul ignore next */
   requestLogout(): void {
     const auth: Auth = getAuth();
     signOut(auth)

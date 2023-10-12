@@ -1,6 +1,7 @@
+import { CollectionReference } from '@angular/fire/firestore';
 import { of } from 'rxjs';
 
-export function getFirestoreStub<T>(returnObject: any) {
+export function getFirestoreStub(returnObject: any) {
   return {
     getFirestore: jasmine.createSpy().and.returnValue({
       collection: jasmine.createSpy().and.returnValue({
@@ -8,6 +9,10 @@ export function getFirestoreStub<T>(returnObject: any) {
           valueChanges: jasmine.createSpy().and.returnValue(of(returnObject)),
         }),
         valueChanges: jasmine.createSpy().and.returnValue(of(returnObject)),
+      }),
+      doc: jasmine.createSpy().and.returnValue({
+        valueChanges: jasmine.createSpy().and.returnValue(of(returnObject)),
+        update: jasmine.createSpy(),
       }),
     }),
   };

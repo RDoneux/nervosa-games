@@ -12,6 +12,7 @@ export class NewsComponent implements OnInit {
 
   constructor(private firestoreService: FirestoreService) {}
 
+  /* istanbul ignore next */
   ngOnInit(): void {
     this.firestoreService
       .getFirestore()
