@@ -49,7 +49,7 @@ export class LoginService {
 
   /* istanbul ignore next */
   getCurrentLoggedInUser(): Observable<IUser | null> {
-    return this._loginDetails;
+    return this._loginDetails.pipe(take(1));
   }
 
   /* istanbul ignore next */

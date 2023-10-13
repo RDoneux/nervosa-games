@@ -8,6 +8,7 @@ import { Timestamp, arrayUnion } from '@angular/fire/firestore';
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import { IAnnouncementPost } from '../announcment-post/interfaces/i-announcement-post.interface';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-comment-section',
@@ -18,22 +19,25 @@ import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 })
 export class CommentSectionComponent implements OnInit {
   @Input({ required: true }) postId!: string;
-  @Input({ required: true }) user!: IUser;
+  @Input({ required: true }) user!: IUser | null;
 
   public existingComments!: IComment[];
 
   public newComment!: IComment;
   public hasFocus: boolean = false;
 
-  constructor(private firestoreService: FirestoreService) {}
+  constructor(
+    private firestoreService: FirestoreService,
+    private loginService: LoginService
+  ) {}
 
   /* istanbul ignore next */
   ngOnInit(): void {
     this.newComment = {
       comment: '',
       likedBy: 0,
-      userDisplayName: this.user.displayName,
-      userImageUrl: this.user.profilePicture ?? '',
+      userDisplayName: this.user?.displayName ?? 'unknown',
+      userImageUrl: this.user?.profilePicture ?? '',
       datePosted: new Timestamp(0, 0),
     };
 
@@ -56,7 +60,23 @@ export class CommentSectionComponent implements OnInit {
     );
   }
 
+  onFocus(): void {
+    this.hasFocus = true;
+    this.loginService.requestUserLogsIn().subscribe({
+      next: (response: IUser | null) => {
+        this.user = response;
+      },
+    });
+  }
+
   onPublish(): void {
+    if (!this.user) {
+      this.onFocus();
+      return;
+    }
+
+    this.newComment.userDisplayName = this.user.displayName;
+    this.newComment.userImageUrl = this.user.profilePicture ?? '';
     this.newComment.datePosted = Timestamp.now();
     this.firestoreService
       .getFirestore()

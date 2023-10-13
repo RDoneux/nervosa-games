@@ -7,7 +7,7 @@
         name="commentArea"
         class="comment-text-area"
         placeholder="Write a comment..."
-        (focus)="hasFocus = true"
+        (focus)="onFocus()"
         (focusout)="hasFocus = false"
       ></textarea>
     </app-form-control>
