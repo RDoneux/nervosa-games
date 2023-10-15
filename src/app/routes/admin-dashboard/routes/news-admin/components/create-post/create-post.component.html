@@ -1,0 +1,18 @@
+<form>
+  <app-form-control label="Title">
+    <input type="text" [(ngModel)]="post.title" name="title" />
+  </app-form-control>
+
+  <app-form-control label="Sub Title">
+    <input type="text" [(ngModel)]="post.subTitle" name="subTitle" />
+  </app-form-control>
+
+  <!-- image upload -->
+
+  <app-form-control label="Content">
+    <input type="text" [(ngModel)]="post.content" name="content" />
+  </app-form-control>
+
+  <input type="reset" value="Cancel" />
+  <input type="submit" value="Create Post"/>
+</form>
