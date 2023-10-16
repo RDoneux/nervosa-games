@@ -75,7 +75,7 @@ export class CommentSectionComponent implements OnInit {
     }
 
     this.newComment.userDisplayName = this.user.displayName;
-    this.newComment.userImageUrl = this.user.profilePicture ?? '';
+    this.newComment.userImageUrl = this.user.profilePicture;
     this.newComment.datePosted = Timestamp.now();
     this.firestoreService
       .getFirestore()

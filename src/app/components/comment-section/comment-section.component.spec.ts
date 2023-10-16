@@ -8,7 +8,11 @@ import {
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { IComment } from 'src/app/interfaces/i-comment.interface';
-import { Timestamp, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import {
+  Timestamp,
+  getFirestore,
+  provideFirestore,
+} from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -121,6 +125,16 @@ describe('CommentSectionComponent', () => {
   });
 
   describe('#onPublish', () => {
+    it('should call #onFocus if user is not defined', () => {
+      spyOn(component, 'onFocus');
+
+      component.user = null;
+
+      component.onPublish();
+
+      expect(component.onFocus).toHaveBeenCalled();
+    });
+
     it('should request firestoreService updates record', () => {
       component.onPublish();
 
