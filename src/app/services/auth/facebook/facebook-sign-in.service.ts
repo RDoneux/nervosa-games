@@ -21,11 +21,8 @@ export class FacebookSignInService {
 
     const userObservable: ReplaySubject<User> = new ReplaySubject();
 
-    console.log("outside signin with popup")
-
     from(signInWithPopup(auth, provider)).subscribe({
       next: (result: UserCredential) => {
-        console.log("result", result)
         userObservable.next(result.user);
       },
       error: (error: any) => {

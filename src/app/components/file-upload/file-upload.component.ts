@@ -48,15 +48,12 @@ export class FileUploadComponent implements OnInit {
   onDragOver(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-
-    console.log('drag enter');
   }
 
   @HostListener('dragleave', ['$event'])
   public onDragLeave(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('drag leave');
   }
 
   @HostListener('drop', ['$event'])
@@ -66,8 +63,6 @@ export class FileUploadComponent implements OnInit {
     this.onUpload({
       target: { files: event.dataTransfer.files },
     } as unknown as Event);
-
-    console.log('drop');
   }
 
   ngOnInit(): void {}

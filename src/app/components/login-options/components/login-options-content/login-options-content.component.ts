@@ -27,7 +27,6 @@ export class LoginOptionsContentComponent {
   loginWithFacebook(): void {
     this.facebookSigninService.signInWithPopup().subscribe({
       next: (user: User) => {
-        console.log("1", user)
         this.loginService.loginSuccess(user);
       },
     });
