@@ -23,7 +23,7 @@ import { UtilsService } from 'src/app/services/utils/utils.service';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
 })
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent {
   @Input({ required: true }) uploadPath!: string;
 
   @Output() downloadUrl: EventEmitter<string> = new EventEmitter();
@@ -64,8 +64,6 @@ export class FileUploadComponent implements OnInit {
       target: { files: event.dataTransfer.files },
     } as unknown as Event);
   }
-
-  ngOnInit(): void {}
 
   onUpload(event: Event): void {
     this.loading = true;
@@ -108,12 +106,13 @@ export class FileUploadComponent implements OnInit {
   }
 
   onResume(): void {
+    console.log(this.task)
     this.task.resume();
     this.loadingState = 'LOADING';
   }
 
   onCancel(): void {
-    this.task.resume();
+    this.task.cancel();
   }
 
   onDelete(): void {
