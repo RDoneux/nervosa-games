@@ -6,18 +6,16 @@ import { NewsAdminComponent } from './news-admin.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { UserInterfaceModule } from 'src/app/modules/user-interface/user-interface.module';
 import { FormsModule } from '@angular/forms';
-
+import { FileUploadComponent } from 'src/app/components/file-upload/file-upload.component';
 
 @NgModule({
-  declarations: [
-    NewsAdminComponent,
-    CreatePostComponent
-  ],
+  declarations: [NewsAdminComponent, CreatePostComponent],
   imports: [
     CommonModule,
     NewsAdminRoutingModule,
     UserInterfaceModule,
-    FormsModule
-  ]
+    FormsModule,
+    FileUploadComponent,
+  ],
 })
-export class NewsAdminModule { }
+export class NewsAdminModule {}

@@ -1,0 +1,114 @@
+@import 'variables';
+
+.drop-zone {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    background: #f5f5f5;
+    border-radius: 5px;
+    padding: 10px;
+    border: 2px dashed lighten($text-disabled-colour, 15);
+
+    height: 180px;
+
+    position: relative;
+
+    .progress__container,
+    .loaded-file {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+    }
+
+    .progress__container {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        bottom: -3px;
+
+        progress {
+            border: none;
+            height: 10px;
+            flex: 1 1 auto;
+        }
+
+        .progress-control__wrapper {
+            position: relative;
+            top: 1px;
+            padding-left: 5px;
+            margin-left: 5px;
+
+            span {
+                cursor: pointer;
+
+                &:hover {
+                    color: lighten($text-disabled-colour, 10)
+                }
+            }
+
+            .selected {
+                color: lighten($text-disabled-colour, 10);
+                cursor: inherit;
+            }
+        }
+    }
+
+    h2,
+    span {
+        margin: 0;
+        color: $text-disabled-colour;
+    }
+
+    .browse-files {
+        background: $secondary-accent-colour;
+        padding: 5px 25px;
+        border-radius: 3px;
+        color: $text-light-colour;
+        cursor: pointer;
+    }
+}
+
+.loaded-file {
+    display: flex;
+    padding: 0 20px;
+    justify-content: space-between;
+    height: 44px;
+    align-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    .green-background {
+        color: $success-colour;
+    }
+
+    background: transparentize($color: $success-colour, $amount: .9);
+
+    .loaded-file__name-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            margin-right: 20px;
+        }
+    }
+
+    h6 {
+        margin: 0;
+        margin-right: 20px;
+        font-weight: 100;
+        color: $text-dark-colour;
+    }
+
+    .delete {
+        cursor: pointer;
+        color: lighten($text-dark-colour, 25)
+    }
+}
+
+input[type="file"] {
+    display: none;
+}

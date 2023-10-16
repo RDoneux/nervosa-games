@@ -1,18 +1,47 @@
-<form>
-  <app-form-control label="Title">
-    <input type="text" [(ngModel)]="post.title" name="title" />
+<form #createPostForm="ngForm" class="create-post__form" (submit)="onSubmit()">
+  <h1>Create new post...</h1>
+  <app-form-control label="Post Title">
+    <input type="text" [(ngModel)]="post.title" name="title" required />
   </app-form-control>
 
-  <app-form-control label="Sub Title">
-    <input type="text" [(ngModel)]="post.subTitle" name="subTitle" />
+  <app-form-control label="Post Sub Title">
+    <textarea
+      placeholder="Post overview here..."
+      [(ngModel)]="post.subTitle"
+      name="subTitle"
+      rows="5"
+    ></textarea>
   </app-form-control>
 
-  <!-- image upload -->
+  <app-file-upload
+    [uploadPath]="'site-announcement-post-images'"
+    (downloadUrl)="addDownloadUrl($event)"
+  ></app-file-upload>
+
+  <app-form-control label="Image Description">
+    <input
+      type="text"
+      [(ngModel)]="post.backgroundImageAlt"
+      name="imageDescription"
+    />
+  </app-form-control>
 
   <app-form-control label="Content">
-    <input type="text" [(ngModel)]="post.content" name="content" />
+    <textarea
+      class="content-text-area"
+      placeholder="Main body here..."
+      [(ngModel)]="post.content"
+      name="content"
+      rows="15"
+      required
+    ></textarea>
   </app-form-control>
 
-  <input type="reset" value="Cancel" />
-  <input type="submit" value="Create Post"/>
+  <input class="button-half-width" type="reset" value="Cancel" />
+  <input
+    class="button-half-width"
+    type="submit"
+    value="Create Post"
+    [disabled]="!createPostForm.valid"
+  />
 </form>

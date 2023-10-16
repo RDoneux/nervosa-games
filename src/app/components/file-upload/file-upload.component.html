@@ -1,0 +1,39 @@
+<div class="drop-zone">
+  <h2>Drag & drop files here</h2>
+  <span>or</span>
+  <label class="browse-files" [for]="uniqueId">Browse Files</label>
+
+  <div *ngIf="loading" class="progress__container">
+    <progress max="100" [value]="uploadProgress | async"></progress>
+    <div class="progress-control__wrapper">
+      <span
+        [class.selected]="loadingState === 'LOADING'"
+        (click)="onResume()"
+        class="material-symbols-outlined"
+      >
+        play_circle
+      </span>
+      <span
+        [class.selected]="loadingState === 'PAUSED'"
+        (click)="onPause()"
+        class="material-symbols-outlined"
+      >
+        pause_circle
+      </span>
+      <span (click)="onCancel()" class="material-symbols-outlined">
+        stop_circle
+      </span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loadedFileName && loadedFileSize && !loading" class="loaded-file">
+  <div class="loaded-file__name-wrapper">
+    <span class="material-symbols-outlined green-background"> task_alt </span>
+    <h6>{{ loadedFileName }}</h6>
+  </div>
+  <h6>{{ loadedFileSize }}</h6>
+  <span (click)="onDelete()" class="material-symbols-outlined delete"> delete </span>
+</div>
+
+<input [id]="uniqueId" type="file" (change)="onUpload($event)" />

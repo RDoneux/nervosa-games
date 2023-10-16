@@ -1,4 +1,3 @@
-import { CollectionReference } from '@angular/fire/firestore';
 import { of } from 'rxjs';
 
 export function getFirestoreStub(returnObject: any) {

@@ -1,0 +1,29 @@
+:host {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-post__form {
+    width: 70%;
+    max-width: 800px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    row-gap: 30px;
+    column-gap: 60px;
+
+    h1,
+    app-form-control,
+    app-file-upload {
+        grid-column: 1 / span 2;
+    }
+
+    textarea {
+        white-space: pre-wrap;
+    }
+
+}
