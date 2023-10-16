@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { IComment } from 'src/app/interfaces/i-comment.interface';
 import { UserInterfaceModule } from 'src/app/modules/user-interface/user-interface.module';
 import { FormsModule } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Timestamp, arrayUnion } from '@angular/fire/firestore';
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import { IAnnouncementPost } from '../announcment-post/interfaces/i-announcement-post.interface';

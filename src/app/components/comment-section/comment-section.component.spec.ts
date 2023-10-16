@@ -8,25 +8,33 @@ import {
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { IComment } from 'src/app/interfaces/i-comment.interface';
-import { Timestamp } from '@angular/fire/firestore';
+import { Timestamp, getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+import { LoginService } from 'src/app/services/login/login.service';
+import { of } from 'rxjs';
 
 describe('CommentSectionComponent', () => {
   let component: CommentSectionComponent;
   let fixture: ComponentFixture<CommentSectionComponent>;
 
   let firestoreServiceMock: any;
+  let loginServiceMock: jasmine.SpyObj<LoginService>;
 
   beforeEach(() => {
     firestoreServiceMock = getFirestoreStub([mockedAnnouncementPost]);
+    loginServiceMock = jasmine.createSpyObj('LoginService', [
+      'requestUserLogsIn',
+    ]);
     TestBed.configureTestingModule({
       imports: [
         CommentSectionComponent,
-        AngularFireModule.initializeApp(environment.firebase),
+        // AngularFireModule.initializeApp(environment.firebase),
+        // provideFirestore(() => getFirestore()),
       ],
       providers: [
         { provide: FirestoreService, useValue: firestoreServiceMock },
+        { provide: LoginService, useValue: loginServiceMock },
       ],
     });
     fixture = TestBed.createComponent(CommentSectionComponent);
@@ -131,6 +139,21 @@ describe('CommentSectionComponent', () => {
       component.newComment.comment = 'test-comment';
       component.onCancel();
       expect(component.newComment.comment).toEqual('');
+    });
+  });
+
+  describe('#onFocus', () => {
+    beforeEach(() => {
+      loginServiceMock.requestUserLogsIn.and.returnValue(of(mockedUser));
+    });
+    it('should update global hasFocus variable to true', () => {
+      component.hasFocus = false;
+      component.onFocus();
+      expect(component.hasFocus).toBeTrue();
+    });
+    it('should call loginService #requestUserLogsIn', () => {
+      component.onFocus();
+      expect(component.user).toEqual(mockedUser);
     });
   });
 });
