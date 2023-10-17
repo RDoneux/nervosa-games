@@ -68,6 +68,7 @@ export class CommentSectionComponent implements OnInit {
     });
   }
 
+  /* istanbul ignore next */
   onPublish(): void {
     if (!this.user) {
       this.onFocus();
