@@ -18,6 +18,7 @@ export class LoginService {
   private _loginRequests: ReplaySubject<'OPEN' | 'CLOSE'> = new ReplaySubject();
   private _loginDetails: ReplaySubject<IUser | null> = new ReplaySubject(1);
 
+  /* istanbul ignore next */
   constructor(private userService: UserService) {
     const auth = getAuth();
     onAuthStateChanged(auth, (firebaseUser: User | null) => {

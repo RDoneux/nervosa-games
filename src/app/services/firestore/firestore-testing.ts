@@ -12,6 +12,7 @@ export function getFirestoreStub(returnObject: any) {
       doc: jasmine.createSpy().and.returnValue({
         valueChanges: jasmine.createSpy().and.returnValue(of(returnObject)),
         update: jasmine.createSpy(),
+        set: jasmine.createSpy()
       }),
     }),
   };

@@ -9,6 +9,7 @@ export const isAdminGuard: CanActivateFn = () => {
   return new Promise((resolve) => {
     loginService.getCurrentLoggedInUser().subscribe({
       next: (user: IUser | null) => {
+        console.log(user)
         resolve(
           user
             ? user.isAdmin

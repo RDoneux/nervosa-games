@@ -1,14 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  ActivatedRouteSnapshot,
-  CanActivateFn,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router } from '@angular/router';
 
 import { canActivateInDevModeGuard } from './can-activate-in-dev-mode.guard';
 import { UtilsService } from '../../services/utils/utils.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { fakeRouterState } from 'src/app/data/test-data.spec';
 
 describe('canActivateInDevModeGuard', () => {
   let isInDevMode: boolean = false;
@@ -46,9 +42,3 @@ describe('canActivateInDevModeGuard', () => {
     });
   });
 });
-
-function fakeRouterState(url: string): RouterStateSnapshot {
-  return {
-    url,
-  } as RouterStateSnapshot;
-}

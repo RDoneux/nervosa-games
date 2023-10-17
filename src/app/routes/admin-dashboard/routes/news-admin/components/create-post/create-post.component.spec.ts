@@ -6,6 +6,11 @@ import { CreatePostService } from '../../services/create-post.service';
 import { NewsAdminModule } from '../../news-admin.module';
 import { StorageService } from 'src/app/services/cloud-storage/storage.service';
 import { getStorageStub } from 'src/app/services/cloud-storage/storage-testing';
+import {
+  mockedAnnouncementPost,
+  mockedUser,
+} from 'src/app/data/test-data.spec';
+import { of } from 'rxjs';
 
 describe('CreatePostComponent', () => {
   let component: CreatePostComponent;
@@ -26,7 +31,7 @@ describe('CreatePostComponent', () => {
       providers: [
         { provide: LoginService, useValue: loginServiceMock },
         { provide: CreatePostService, useValue: createPostServiceMock },
-        { provide: StorageService, useValue: getStorageStub('')},
+        { provide: StorageService, useValue: getStorageStub('') },
       ],
     });
     fixture = TestBed.createComponent(CreatePostComponent);
@@ -36,5 +41,45 @@ describe('CreatePostComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('#addDownloadUrl', () => {
+    it('should set the post backgroundImageUrl variable to given argument', () => {
+      component.post.backgroundImageUrl = '';
+      component.addDownloadUrl('test-download-url');
+
+      expect(component.post.backgroundImageUrl).toEqual('test-download-url');
+    });
+  });
+
+  describe('#onSubmit', () => {
+    beforeEach(() => {
+      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+    });
+
+    it('should request #getCurrentLoggedInUser from LoginService', () => {
+      component.onSubmit();
+
+      expect(loginServiceMock.getCurrentLoggedInUser).toHaveBeenCalledTimes(1);
+    });
+
+    it('should set posterId, timestamp', () => {
+      component.post = mockedAnnouncementPost;
+      component.post.timestamp = undefined;
+      component.post.posterId = '';
+
+      component.onSubmit();
+
+      expect(component.post.posterId).toEqual(mockedUser.email);
+      expect(component.post.timestamp).toBeDefined();
+    });
+
+    it('should set posterId to INVALID if user is not set', () => {
+      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(null));
+
+      component.onSubmit();
+
+      expect(component.post.posterId).toEqual('INVALID');
+    });
   });
 });

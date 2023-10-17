@@ -106,7 +106,6 @@ export class FileUploadComponent {
   }
 
   onResume(): void {
-    console.log(this.task)
     this.task.resume();
     this.loadingState = 'LOADING';
   }
