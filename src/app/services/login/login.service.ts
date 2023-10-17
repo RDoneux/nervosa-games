@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, from, take } from 'rxjs';
+import { Observable, ReplaySubject, take } from 'rxjs';
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import {
   onAuthStateChanged,
@@ -16,12 +16,25 @@ import { debug } from '../debug/debug';
 })
 export class LoginService {
   private _loginRequests: ReplaySubject<'OPEN' | 'CLOSE'> = new ReplaySubject();
-  private _currentUser: IUser | null = null;
-  private _loginDetails: BehaviorSubject<IUser | null> = new BehaviorSubject(
-    this._currentUser
-  );
+  private _loginDetails: ReplaySubject<IUser | null> = new ReplaySubject(1);
 
-  constructor(private userService: UserService) {}
+  /* istanbul ignore next */
+  constructor(private userService: UserService) {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (firebaseUser: User | null) => {
+      if (firebaseUser) {
+        this.userService
+          .generateNervosaUserFromGoogleUser(firebaseUser)
+          .subscribe({
+            next: (user: IUser) => {
+              this._loginDetails.next(user);
+            },
+          });
+      } else {
+        this._loginDetails.next(null);
+      }
+    });
+  }
 
   /* istanbul ignore next */
   requestUserLogsIn(): Observable<IUser | null> {
@@ -37,20 +50,7 @@ export class LoginService {
 
   /* istanbul ignore next */
   getCurrentLoggedInUser(): Observable<IUser | null> {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (firebaseUser: User | null) => {
-      if (firebaseUser) {
-        this.userService
-          .generateNervosaUserFromGoogleUser(firebaseUser)
-          .subscribe({
-            next: (user: IUser) => this._loginDetails.next(user),
-          });
-      } else {
-        this._loginDetails.next(null);
-      }
-      onAuthStateChanged(auth, () => {});
-    });
-    return this._loginDetails;
+    return this._loginDetails.pipe(take(1));
   }
 
   /* istanbul ignore next */

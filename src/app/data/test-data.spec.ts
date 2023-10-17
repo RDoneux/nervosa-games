@@ -2,6 +2,13 @@ import { Timestamp } from '@angular/fire/firestore';
 import { IAnnouncementPost } from '../components/announcment-post/interfaces/i-announcement-post.interface';
 import { IUser } from '../interfaces/i-user.interface';
 import { IComment } from '../interfaces/i-comment.interface';
+import { RouterStateSnapshot } from '@angular/router';
+
+export function fakeRouterState(url: string): RouterStateSnapshot {
+  return {
+    url,
+  } as RouterStateSnapshot;
+}
 
 export const mockedComment: IComment = {
   userDisplayName: 'test-user-display-name',

@@ -1,4 +1,9 @@
-<div #container [style.--width]="width + 'px'" class="sign-in">
+<div
+  #container
+  [style.--width]="width + 'px'"
+  class="sign-in"
+  [class.signed-out]="!user"
+>
   <div class="sign-in__wrapper" *ngIf="!user" (click)="onSignIn()">
     <span class="material-symbols-outlined"> account_circle </span>
     <p class="sign-in__text">Sign in...</p>
@@ -10,7 +15,14 @@
       <small>Logged in as: </small>
       <p>{{ user.displayName }}</p>
     </div>
-    <span class="material-symbols-outlined logout" (click)="onSignOut()">
+    <span
+      *ngIf="user.isAdmin"
+      class="material-symbols-outlined icon admin-dashboard"
+      [routerLink]="'/admin-dashboard'"
+    >
+      admin_panel_settings
+    </span>
+    <span class="material-symbols-outlined icon" (click)="onSignOut()">
       logout
     </span>
   </ng-container>

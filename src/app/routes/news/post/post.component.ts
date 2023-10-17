@@ -13,7 +13,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class PostComponent implements OnInit {
   public post!: IAnnouncementPost;
-  public user!: IUser;
+  public user!: IUser | null;
 
   public currentLoggedInUser: IUser | null = null;
 
@@ -22,7 +22,7 @@ export class PostComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
-    private loginService: LoginService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -35,14 +35,6 @@ export class PostComponent implements OnInit {
     // get the post id from query params
     this.route.queryParams.subscribe({
       next: (value: any) => this.fetchPost(value),
-    });
-  }
-
-  public requestLogin(): void {
-    this.loginService.requestUserLogsIn().subscribe({
-      next: (response: IUser | null) => {
-        console.log('printed in component', response);
-      },
     });
   }
 

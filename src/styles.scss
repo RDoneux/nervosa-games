@@ -31,6 +31,8 @@ small {
 }
 
 input[type="button"],
+input[type="submit"],
+input[type="reset"],
 button {
     height: $form-control-height;
     background: $secondary-accent-colour;

@@ -14,10 +14,9 @@
             top: 0;
             left: 0;
             color: $text-dark-colour;
-
+            font-size: 12px;
             &.retract-label {
                 transform: translateY(0);
-                font-size: inherit;
             }
         }
 

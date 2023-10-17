@@ -75,13 +75,4 @@ describe('PostComponent', () => {
       expect(postServiceMock.updateSeenBy).toHaveBeenCalledTimes(1);
     });
   });
-
-  describe('#requestLogin', () => {
-    it('should request user logs in', () => {
-      loginServiceMock.requestUserLogsIn.and.returnValue(of(mockedUser));
-      component.requestLogin();
-
-      expect(loginServiceMock.requestUserLogsIn).toHaveBeenCalled();
-    });
-  });
 });

@@ -1,0 +1,15 @@
+<section class="admin-dashboard__container">
+  <div class="admin-navigation__wrapper">
+    <div
+      *ngFor="let route of adminRoutes; index as i"
+      class="admin-navigation__item"
+      [class.span-two]="
+        i === adminRoutes.length - 1 && adminRoutes.length % 2 === 1
+      "
+      [routerLink]="route.route"
+    >
+      <span class="material-symbols-outlined"> {{ route.materialIcon }} </span>
+      <h1>{{ route.label }}</h1>
+    </div>
+  </div>
+</section>

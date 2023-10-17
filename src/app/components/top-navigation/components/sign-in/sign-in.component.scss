@@ -25,12 +25,16 @@
     height: 42px;
 
     background: white;
+    width: fit-content;
 
     border-radius: 30px;
-
     transform: translateX(calc(var(--width) - 42px));
 
     transition: transform 250ms ease-out, background-color 250ms linear;
+
+    &.signed-out {
+        width: 150px;
+    }
 
     &:hover,
     &:active {
@@ -57,8 +61,15 @@
             filter: invert(60%)
         }
 
-        &.logout {
+        &.icon {
             font-size: 30px;
+            right: 15px;
+        }
+
+        &.admin-dashboard{
+            padding-right: 8px;
+            margin-right: 8px; 
+            border-right: 1px solid $text-dark-colour;
         }
     }
 

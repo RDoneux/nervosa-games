@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { canActivateInDevModeGuard } from './guards/can-activate-in-dev-mode.guard';
+import { canActivateInDevModeGuard } from './guards/can-activate-in-dev-mode/can-activate-in-dev-mode.guard';
+import { isAdminGuard } from './guards/is-admin/is-admin.guard';
 
 const routes: Routes = [
   {
@@ -49,8 +50,26 @@ const routes: Routes = [
       import('./routes/playpen/playpen.module').then((m) => m.PlaypenModule),
     canActivate: [canActivateInDevModeGuard],
   },
-  { path: 'unauthorised', loadChildren: () => import('./routes/not-authorised/not-authorised.module').then(m => m.NotAuthorisedModule) },
-  { path: 'policies', loadChildren: () => import('./routes/policies/policies.module').then(m => m.PoliciesModule) },
+  {
+    path: 'unauthorised',
+    loadChildren: () =>
+      import('./routes/not-authorised/not-authorised.module').then(
+        (m) => m.NotAuthorisedModule
+      ),
+  },
+  {
+    path: 'policies',
+    loadChildren: () =>
+      import('./routes/policies/policies.module').then((m) => m.PoliciesModule),
+  },
+  {
+    path: 'admin-dashboard',
+    loadChildren: () =>
+      import('./routes/admin-dashboard/admin-dashboard.module').then(
+        (m) => m.AdminDashboardModule
+      ),
+    canActivate: [isAdminGuard],
+  },
   {
     path: '**',
     loadChildren: () =>
