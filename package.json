@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && cd functions && npm run build",
     "watch": "ng build --watch --configuration development",
+    "test:commit": "npm run test:production && npm run build",
     "test:development": "ng test --karma-config karma-development.conf.js",
     "test:production": "ng test --karma-config karma-production.conf.js",
-    "deploy": "ng deploy"
+    "deploy": "firebase deploy --only functions,hosting"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +22,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "audit": "^0.0.6",
     "debug": "^4.3.4",
     "lodash": "^4.17.21",
     "rxjs": "~7.8.0",
