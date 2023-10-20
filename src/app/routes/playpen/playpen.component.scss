@@ -10,3 +10,10 @@
     padding: 10px;
     column-gap: 1%;
 }
+
+.product-grid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 100px;
+    padding: 20px;
+}

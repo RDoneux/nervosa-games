@@ -3,6 +3,7 @@ import { IAnnouncementPost } from '../components/announcment-post/interfaces/i-a
 import { IUser } from '../interfaces/i-user.interface';
 import { IComment } from '../interfaces/i-comment.interface';
 import { RouterStateSnapshot } from '@angular/router';
+import { IProduct } from '../components/product/interfaces/i-product.interface';
 
 export function fakeRouterState(url: string): RouterStateSnapshot {
   return {
@@ -39,4 +40,15 @@ export const mockedUser: IUser = {
   isAdmin: false,
   id: 'mock-user-id',
   email: 'test-user-email',
+};
+
+export const mockedProduct: IProduct = {
+  imageDescription: 'test-product-image-description',
+  imageUrl: 'test-product-image-url',
+  title: 'test-product-title',
+  itemNumber: 1,
+  price: 2,
+  id: 'test-product-id',
+  tags: ['test-tag-one', 'test-tag-two'],
+  dateUploaded: Timestamp.now()
 };

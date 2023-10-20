@@ -1,0 +1,59 @@
+@import 'variables';
+
+.product__container {
+    width: 100%;
+
+    display: grid;
+    grid-template: repeat(2, 1fr);
+
+    position: relative;
+    overflow: hidden;
+
+    .product__image {
+        width: 100%;
+        grid-column: 1 /span 2;
+    }
+
+    .product__title,
+    .product__item-number,
+    .product__price {
+        font-size: 16px;
+        font-weight: 100;
+        margin: 2px 0;
+        color: $text-dark-colour;
+    }
+
+    .product__item-number {
+        &::before {
+            content: 'x';
+        }
+
+        text-align: center;
+    }
+
+    .product__price {
+        font-size: 12px;
+
+        &::before {
+            content: '£'
+        }
+    }
+
+
+    .product__new-tag {
+        width: 80px;
+        height: 36px;
+        background: $primary-accent-colour;
+        position: absolute;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3019607843);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        color: white;
+        transform: rotate(-45deg);
+        top: -3px;
+        left: -28px;
+        font-size: 12px;
+        padding: 4px;
+    }
+}

@@ -74,7 +74,7 @@ export class FileUploadComponent {
     if (!fileList) return;
 
     const randomId = Math.random().toString(36).substring(2);
-    this.ref = this.storageService.getStorage().ref(`test/${randomId}`);
+    this.ref = this.storageService.getStorage().ref(`${this.uploadPath}/${randomId}`);
 
     const targetFile: File = fileList[0];
 
