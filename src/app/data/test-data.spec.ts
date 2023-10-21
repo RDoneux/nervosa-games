@@ -40,6 +40,7 @@ export const mockedUser: IUser = {
   isAdmin: false,
   id: 'mock-user-id',
   email: 'test-user-email',
+  likedProducts: ['liked-product-one', 'liked-product-two'],
 };
 
 export const mockedProduct: IProduct = {
@@ -50,5 +51,6 @@ export const mockedProduct: IProduct = {
   price: 2,
   id: 'test-product-id',
   tags: ['test-tag-one', 'test-tag-two'],
-  dateUploaded: Timestamp.now()
+  dateUploaded: Timestamp.now(),
+  description: 'test-product-description',
 };

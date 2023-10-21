@@ -43,6 +43,7 @@ button {
     cursor: pointer;
     border-radius: 2px;
     box-shadow: 2px 2px 2px 0 $shadow-colour;
+    width: 100%;
 
     &:hover {
         background: lighten($secondary-accent-colour, 2)

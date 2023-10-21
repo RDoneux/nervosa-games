@@ -1,0 +1,49 @@
+<div *ngIf="product" class="product__container">
+  <img
+    class="product__image"
+    [src]="product.imageUrl"
+    [alt]="product.imageDescription"
+  />
+  <h1 class="product__title">{{ product.title }}</h1>
+  <h1 class="product__item-number">{{ product.itemNumber }}</h1>
+  <h3 class="product__price">
+    {{ product.price }}
+  </h3>
+  <span *ngIf="isLiked" class="material-symbols-outlined favorite-on-card">
+    favorite
+  </span>
+
+  <div
+    *ngIf="newPeriod && product.dateUploaded.toDate() < newPeriod.toDate()"
+    class="product__new-tag"
+  >
+    NEW
+  </div>
+
+  <div class="product__overlay">
+    <span title="Add to cart" class="material-symbols-outlined">
+      shopping_bag
+    </span>
+    <span
+      title="Add to favorites"
+      (click)="onFavorite()"
+      class="material-symbols-outlined favorite"
+      [class.favorited]="isLiked"
+    >
+      favorite
+    </span>
+    <span
+      title="See more information"
+      (click)="onShowMoreDetail()"
+      class="material-symbols-outlined"
+    >
+      open_in_new
+    </span>
+  </div>
+</div>
+
+<app-more-detail
+  *ngIf="showMoreDetails"
+  [product]="product"
+  (closeRequested)="onRequestClose()"
+></app-more-detail>

@@ -9,4 +9,5 @@ export interface IProduct {
   id: string;
   tags: string[];
   dateUploaded: Timestamp;
+  description: string;
 }

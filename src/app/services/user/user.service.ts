@@ -1,46 +1,51 @@
 import { Injectable } from '@angular/core';
 import { IUser } from 'src/app/interfaces/i-user.interface';
-import { User } from 'firebase/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, ReplaySubject } from 'rxjs';
+import { FirestoreService } from '../firestore/firestore.service';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private angularFirestore: AngularFirestore) {}
+  private userLikedProducts!: ReplaySubject<string[] | null>;
 
-  /* istanbul ignore next */
-  saveUserToDatabase(user: IUser): void {
-    this.angularFirestore.collection('users').doc(user.email).set(user);
-  }
+  constructor(private loginService: LoginService) {}
 
-  /* istanbul ignore next */
-  generateNervosaUserFromGoogleUser(user: User): Observable<IUser> {
-    const iUserReplaySubject: ReplaySubject<IUser> = new ReplaySubject();
+  getUserProductLikedList(): Observable<string[] | null> {
+    if (!this.userLikedProducts) {
+      this.userLikedProducts = new ReplaySubject();
+    }
 
-    this.getAdminList().subscribe({
-      next: (adminList: { administrators: string[] } | undefined) => {
-        const nervosaGamesUser: IUser = {
-          displayName: user.displayName ?? 'unknown',
-          profilePicture: user.photoURL,
-          isAdmin:
-            adminList?.administrators.includes(user.email ?? '') ?? false,
-          email: user.email ?? 'unknown',
-          id: user.uid,
-        };
-        this.saveUserToDatabase(nervosaGamesUser);
-        iUserReplaySubject.next(nervosaGamesUser);
+    this.loginService.getCurrentLoggedInUser().subscribe({
+      next: (user: IUser | null) => {
+        this.userLikedProducts.next(user?.likedProducts ?? null);
       },
     });
-    return iUserReplaySubject;
+    return this.userLikedProducts;
   }
 
-  /* istanbul ignore next */
-  private getAdminList(): Observable<{ administrators: string[] } | undefined> {
-    return this.angularFirestore
-      .collection<{ administrators: string[] }>('users')
-      .doc('administrators')
-      .valueChanges();
+  addProductToLikedList(productId: string): void {
+    this.loginService.getCurrentLoggedInUser().subscribe({
+      next: (user: IUser | null) => {
+        if (!user) return;
+        user.likedProducts.push(productId);
+        this.userLikedProducts.next(user.likedProducts);
+        this.loginService.saveUserToDatabase(user);
+      },
+    });
+  }
+
+  removeProductFromLikedList(productId: string): void {
+    this.loginService.getCurrentLoggedInUser().subscribe({
+      next: (user: IUser | null) => {
+        if (!user) return;
+        user.likedProducts = user.likedProducts.filter(
+          (value: string) => value !== productId
+        );
+        this.userLikedProducts.next(user.likedProducts);
+        this.loginService.saveUserToDatabase(user);
+      },
+    });
   }
 }
