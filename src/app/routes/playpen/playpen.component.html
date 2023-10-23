@@ -134,11 +134,21 @@
 
 <!-- <app-post-carousel></app-post-carousel> -->
 
-<div class="product-grid">
+<!-- <div class="product-grid">
   <app-product [product]="likedTestProduct"></app-product>
   <app-product [product]="testProduct"></app-product>
   <app-product [product]="testProductNotNew"></app-product>
   <app-product [product]="testProductNotNew"></app-product>
   <app-product [product]="testProductNotNew"></app-product>
   <app-product [product]="testProductNotNew"></app-product>
-</div>
+</div> -->
+
+<app-product-group
+  [title]="'Test product group'"
+  [tag]="'first'"
+></app-product-group>
+
+<app-product-group
+  [title]="'Second Test product group'"
+  [tag]="'second'"
+></app-product-group>

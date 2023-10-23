@@ -53,4 +53,5 @@ export const mockedProduct: IProduct = {
   tags: ['test-tag-one', 'test-tag-two'],
   dateUploaded: Timestamp.now(),
   description: 'test-product-description',
+  isLiked: false
 };

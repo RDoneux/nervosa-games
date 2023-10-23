@@ -1,0 +1,27 @@
+import { Injectable } from '@angular/core';
+import { IProduct } from '../../product/interfaces/i-product.interface';
+import { Observable } from 'rxjs';
+import { FirestoreService } from 'src/app/services/firestore/firestore.service';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ProductGroupService {
+  constructor(private firestoreService: FirestoreService) {}
+
+  getProductsFromTag(tagList: string): Observable<IProduct[]> {
+    return this.firestoreService
+      .getFirestore()
+      .collection<IProduct>('products', (ref) =>
+        ref.where('tags', 'array-contains', tagList)
+      )
+      .valueChanges();
+  }
+
+  sortProductsByFavorites(products: IProduct[]): IProduct[] {
+    if (!products) return [];
+    return products.sort((a: IProduct, b: IProduct) =>
+      a.isLiked === b.isLiked ? 0 : a.isLiked ? -1 : 1
+    );
+  }
+}

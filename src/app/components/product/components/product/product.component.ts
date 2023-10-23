@@ -16,7 +16,6 @@ export class ProductComponent implements OnInit {
 
   public newPeriod!: Timestamp;
   public showMoreDetails: boolean = false;
-  public isLiked: boolean = false;
 
   constructor(
     private globalVariablesService: GlobalVariableService,
@@ -34,14 +33,6 @@ export class ProductComponent implements OnInit {
         )),
     });
 
-    this.userService.getUserProductLikedList().subscribe({
-      next: (userLikedList: string[] | null) => {
-        this.isLiked = userLikedList
-          ? userLikedList.includes(this.product.id)
-          : false;
-      },
-    });
-
   }
 
   onShowMoreDetail(): void {
@@ -53,8 +44,8 @@ export class ProductComponent implements OnInit {
   }
 
   onFavorite(): void {
-    this.isLiked = !this.isLiked
-    this.isLiked
+    this.product.isLiked = !this.product.isLiked
+    this.product.isLiked
       ? this.userService.addProductToLikedList(this.product.id)
       : this.userService.removeProductFromLikedList(this.product.id);
   }

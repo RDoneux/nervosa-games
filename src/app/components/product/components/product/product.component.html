@@ -9,7 +9,7 @@
   <h3 class="product__price">
     {{ product.price }}
   </h3>
-  <span *ngIf="isLiked" class="material-symbols-outlined favorite-on-card">
+  <span *ngIf="product.isLiked" class="material-symbols-outlined favorite-on-card">
     favorite
   </span>
 
@@ -28,7 +28,7 @@
       title="Add to favorites"
       (click)="onFavorite()"
       class="material-symbols-outlined favorite"
-      [class.favorited]="isLiked"
+      [class.favorited]="product.isLiked"
     >
       favorite
     </span>

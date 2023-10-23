@@ -10,4 +10,5 @@ export interface IProduct {
   tags: string[];
   dateUploaded: Timestamp;
   description: string;
+  isLiked: boolean;
 }
