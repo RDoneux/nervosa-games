@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .product-group__container {
     display: flex;
@@ -22,11 +23,12 @@
         color: $text-dark-colour;
     }
 
-    .product-group__description{
+    .product-group__description {
         margin-top: 20px;
         font-size: 14px;
         font-weight: 100;
         color: $text-dark-colour;
+        text-align: center;
     }
 
     .product-group__wrapper {
@@ -35,9 +37,24 @@
         justify-content: center;
         width: 100%;
         flex-wrap: wrap;
+
         app-product {
             width: calc(100% / 8);
             margin: 0 30px;
+
+            @include laptop-down {
+                width: calc(100% / 4)
+            }
+
+            @include tablet-down {
+                width: calc(100% / 3)
+            }
+
+            @include mobile-down {
+                // width: 100%;
+                // width: calc(100% / 2);
+                margin: 0px;
+            }
         }
     }
 }
