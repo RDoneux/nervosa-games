@@ -8,6 +8,7 @@
 
     margin: 0 20px;
     margin-top: 50px;
+    margin-bottom: 50px;
     position: relative;
 
     h1 {
@@ -21,8 +22,15 @@
         color: $text-dark-colour;
     }
 
+    .product-group__description{
+        margin-top: 20px;
+        font-size: 14px;
+        font-weight: 100;
+        color: $text-dark-colour;
+    }
+
     .product-group__wrapper {
-        margin-top: 50px;
+        margin-top: 30px;
         display: flex;
         justify-content: center;
         width: 100%;

@@ -16,6 +16,7 @@ import { take } from 'rxjs';
 export class ProductGroupComponent implements OnInit {
   @Input({ required: true }) title!: string;
   @Input({ required: true }) tag!: string;
+  @Input() description!: string;
 
   public products!: IProduct[];
 
