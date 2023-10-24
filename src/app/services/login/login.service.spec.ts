@@ -1,21 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LoginService } from './login.service';
-import { UserService } from '../user/user.service';
 
 import { User } from 'firebase/auth';
 import { mockedUser } from 'src/app/data/test-data.spec';
+import { getFirestoreStub } from '../firestore/firestore-testing';
+import { FirestoreService } from '../firestore/firestore.service';
 
 describe('LoginService', () => {
   let service: LoginService;
-  let userServiceMock: jasmine.SpyObj<UserService>;
+  let firestoreServiceMock: any;
 
   beforeEach(() => {
-    userServiceMock = jasmine.createSpyObj('UserService', [
-      'generateNervosaUserFromGoogleUser',
-    ]);
+    firestoreServiceMock = getFirestoreStub('');
     TestBed.configureTestingModule({
-      providers: [{ provide: UserService, useValue: userServiceMock }],
+      providers: [
+        { provide: FirestoreService, useValue: firestoreServiceMock },
+      ],
     });
     service = TestBed.inject(LoginService);
   });

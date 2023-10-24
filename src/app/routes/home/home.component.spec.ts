@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { PostCarouselComponent } from 'src/app/components/post-carousel/post-carousel.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+import { HomeModule } from './home.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -11,8 +12,7 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
-      imports: [PostCarouselComponent],
+      imports: [HomeModule],
       providers: [
         { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
       ],
