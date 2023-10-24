@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-top: 1px solid $text-dark-colour;
+    border-top: 1px solid #ccc;
 
     margin: 0 20px;
     margin-top: 50px;
@@ -39,7 +39,7 @@
         flex-wrap: wrap;
 
         app-product {
-            width: calc(100% / 8);
+            width: calc(100% / 6);
             margin: 0 30px;
 
             @include laptop-down {
