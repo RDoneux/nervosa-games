@@ -54,3 +54,15 @@ button {
         cursor: not-allowed;
     }
 }
+
+.nervosa-games__form {
+    width: 70%;
+    max-width: 800px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    row-gap: 30px;
+    column-gap: 60px;
+
+}

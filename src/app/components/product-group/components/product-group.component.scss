@@ -28,7 +28,8 @@
         width: 100%;
         flex-wrap: wrap;
         app-product {
-            width: 150px;
+            width: calc(100% / 8);
+            margin: 0 30px;
         }
     }
 }

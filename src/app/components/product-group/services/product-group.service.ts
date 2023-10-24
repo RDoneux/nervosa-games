@@ -13,7 +13,7 @@ export class ProductGroupService {
     return this.firestoreService
       .getFirestore()
       .collection<IProduct>('products', (ref) =>
-        ref.where('tags', 'array-contains', tagList)
+        ref.where('tags', 'array-contains', tagList.toLowerCase())
       )
       .valueChanges();
   }

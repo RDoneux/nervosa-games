@@ -1,4 +1,8 @@
-<form #createPostForm="ngForm" class="create-post__form" (submit)="onSubmit()">
+<form
+  #createPostForm="ngForm"
+  class="create-post__form nervosa-games__form"
+  (submit)="onSubmit()"
+>
   <h1>Create new post...</h1>
   <app-form-control label="Post Title">
     <input type="text" [(ngModel)]="post.title" name="title" required />

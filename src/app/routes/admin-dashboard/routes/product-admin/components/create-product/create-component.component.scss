@@ -6,16 +6,18 @@
     justify-content: center;
 }
 
-.create-post__form {
+.nervosa-games__form {
 
-    h1,
+    margin: 10% 0;
+
     app-form-control,
-    app-file-upload {
+    app-file-upload,
+    app-tag-manager,
+    h1 {
         grid-column: 1 / span 2;
     }
 
-    textarea {
-        white-space: pre-wrap;
+    .single-row {
+        grid-column: span 1;
     }
-
 }
