@@ -12,7 +12,7 @@ describe('MoreDetailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ProductModule, ModalComponent, BrowserAnimationsModule]
+      imports: [ProductModule, ModalComponent, BrowserAnimationsModule],
     });
     fixture = TestBed.createComponent(MoreDetailComponent);
     component = fixture.componentInstance;
@@ -24,5 +24,13 @@ describe('MoreDetailComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('#onCloseRequested', () => {
+    it('should emit on closeRequested eventEmitter', () => {
+      spyOn(component.closeRequested, 'emit');
+      component.onCloseRequested();
+      expect(component.closeRequested.emit).toHaveBeenCalled();
+    });
   });
 });
