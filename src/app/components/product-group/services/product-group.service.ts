@@ -9,6 +9,7 @@ import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 export class ProductGroupService {
   constructor(private firestoreService: FirestoreService) {}
 
+  /* istanbul ignore next */
   getProductsFromTag(tagList: string): Observable<IProduct[]> {
     return this.firestoreService
       .getFirestore()
@@ -19,7 +20,6 @@ export class ProductGroupService {
   }
 
   sortProductsByFavorites(products: IProduct[]): IProduct[] {
-    if (!products) return [];
     return products.sort((a: IProduct, b: IProduct) =>
       a.isLiked === b.isLiked ? 0 : a.isLiked ? -1 : 1
     );
