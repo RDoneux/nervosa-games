@@ -41,9 +41,9 @@ describe('ProductGroupService', () => {
   describe('#sortProductsByFavorites', () => {
     it('should sort products placing favorited items first', () => {
       const productList: IProduct[] = [
-        mockedProduct,
+        { ...mockedProduct, isLiked: false },
         { ...mockedProduct, isLiked: true },
-        mockedProduct,
+        { ...mockedProduct, isLiked: false },
         { ...mockedProduct, isLiked: true },
       ];
       const result = service.sortProductsByFavorites(productList);
