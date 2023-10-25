@@ -41,6 +41,7 @@ export class LoginService {
    * @param {User} user
    * @returns {Observable<IUser>}
    */
+  /* istanbul ignore next */
   updateOrCreateNervosaGamesUser(user: User): Observable<IUser> {
     const iUserReplaySubject: ReplaySubject<IUser> = new ReplaySubject();
 
@@ -52,6 +53,7 @@ export class LoginService {
       .subscribe({
         next: (iUser: IUser[] | null) => {
           let nervosaGamesUser: IUser | null = iUser ? iUser[0] : null;
+          console.log(iUser);
           if (nervosaGamesUser) {
             this.updateExistingNervosaUserFromGoogleUser(
               user,
@@ -182,7 +184,7 @@ export class LoginService {
   }
 
   /* istanbul ignore next */
-  private getAdminList(): Observable<{ administrators: string[] } | undefined> {
+  getAdminList(): Observable<{ administrators: string[] } | undefined> {
     return this.angularFirestore
       .getFirestore()
       .collection<{ administrators: string[] }>('users')
