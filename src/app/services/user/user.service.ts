@@ -8,15 +8,12 @@ import { LoginService } from '../login/login.service';
   providedIn: 'root',
 })
 export class UserService {
-  private userLikedProducts!: ReplaySubject<string[] | null>;
+  private userLikedProducts: ReplaySubject<string[] | null> =
+    new ReplaySubject();
 
   constructor(private loginService: LoginService) {}
 
   getUserProductLikedList(): Observable<string[] | null> {
-    if (!this.userLikedProducts) {
-      this.userLikedProducts = new ReplaySubject();
-    }
-
     this.loginService.getCurrentLoggedInUser().subscribe({
       next: (user: IUser | null) => {
         this.userLikedProducts.next(user?.likedProducts ?? null);
