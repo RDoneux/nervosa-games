@@ -49,12 +49,17 @@ export class FormControlComponent implements AfterViewInit {
     this.inputElement.classList.add('nerv-g-form-control-input');
 
     this.ngModel?.valueChanges?.subscribe({
-      next: (newValue: string) => this.handleValueChange(newValue),
+      next: (newValue: string | number) => this.handleValueChange(newValue),
     });
   }
 
-  handleValueChange(newValue: string): void {
-    this.hasContent = newValue.length > 0 ? true : false;
+  handleValueChange(newValue: string | number): void {
+    this.hasContent =
+      typeof newValue === 'string'
+        ? newValue.length > 0
+          ? true
+          : false
+        : true;
   }
 
   determineLayout(): void {

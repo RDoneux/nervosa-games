@@ -1,0 +1,23 @@
+:host {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nervosa-games__form {
+
+    margin: 10% 0;
+
+    app-form-control,
+    app-file-upload,
+    app-tag-manager,
+    h1 {
+        grid-column: 1 / span 2;
+    }
+
+    .single-row {
+        grid-column: span 1;
+    }
+}

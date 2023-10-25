@@ -1,0 +1,13 @@
+<h3>{{ label }}</h3>
+<app-form-control [label]="'Add Tag'"
+  ><input type="text" [(ngModel)]="tagDraft" name="tagDraft"
+/></app-form-control>
+<div class="tag-manager__container">
+  <div *ngFor="let tag of tags" class="tag-manager__wrapper">
+    <span class="material-symbols-outlined"> label </span>
+    <span>{{ tag }}</span>
+    <span class="material-symbols-outlined close" (click)="removeTag(tag)">
+      close
+    </span>
+  </div>
+</div>

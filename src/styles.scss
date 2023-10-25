@@ -11,6 +11,7 @@ body {
     width: 100vw;
 
     overflow-x: hidden;
+
 }
 
 h1,
@@ -20,6 +21,7 @@ h4,
 h5,
 h6,
 span,
+div,
 p,
 label,
 li,
@@ -42,6 +44,7 @@ button {
     cursor: pointer;
     border-radius: 2px;
     box-shadow: 2px 2px 2px 0 $shadow-colour;
+    width: 100%;
 
     &:hover {
         background: lighten($secondary-accent-colour, 2)
@@ -51,4 +54,16 @@ button {
         background: $disabled-colour;
         cursor: not-allowed;
     }
+}
+
+.nervosa-games__form {
+    width: 70%;
+    max-width: 800px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    row-gap: 30px;
+    column-gap: 60px;
+
 }

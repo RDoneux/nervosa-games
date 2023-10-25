@@ -6,4 +6,9 @@ export const adminLinks: IAdminRoute[] = [
     label: 'News Dashboard',
     materialIcon: 'mail',
   },
+  {
+    route: '/admin-dashboard/products-admin',
+    label: 'Product Dashboard',
+    materialIcon: 'inventory_2'
+  }
 ];

@@ -1,0 +1,75 @@
+<form
+  #createProductForm="ngForm"
+  class="nervosa-games__form"
+  (ngSubmit)="onSubmit()"
+>
+  <h1>Create a new product...</h1>
+
+  <app-form-control [label]="'Product Title'">
+    <input [(ngModel)]="product.title" name="productTitle" required />
+  </app-form-control>
+
+  <app-form-control [label]="'Product Description'">
+    <textarea
+      [(ngModel)]="product.description"
+      name="productDescription"
+      required
+    ></textarea>
+  </app-form-control>
+
+  <app-file-upload
+    [uploadPath]="'site-product-images'"
+    (downloadUrl)="addDownloadUrl($event)"
+  ></app-file-upload>
+
+  <app-form-control [label]="'Product Image Description'">
+    <input
+      [(ngModel)]="product.imageDescription"
+      name="productImageDescription"
+    />
+  </app-form-control>
+
+  <app-form-control
+    class="single-row"
+    [label]="'Product Item Number'"
+    [errors]="[
+      { error: 'min', message: 'Product number must be greater than 0' }
+    ]"
+  >
+    <input
+      type="number"
+      min="1"
+      [(ngModel)]="product.itemNumber"
+      name="productItemNumber"
+      required
+    />
+  </app-form-control>
+
+  <app-form-control
+    class="single-row"
+    [label]="'Product Price'"
+    [errors]="[
+      { error: 'min', message: 'Product price must be greater than 0' }
+    ]"
+  >
+    <input
+      type="number"
+      min="1"
+      [(ngModel)]="product.price"
+      name="productPrice"
+      required
+    />
+  </app-form-control>
+
+  <app-tag-manager
+    [label]="'Product Tags'"
+    (tagsChanged)="updateTags($event)"
+  ></app-tag-manager>
+
+  <input type="reset" value="Reset Form" />
+  <input
+    type="submit"
+    value="Create Product"
+    [disabled]="!createProductForm.valid"
+  />
+</form>

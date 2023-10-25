@@ -12,6 +12,13 @@ const routes: Routes = [
         (m) => m.NewsAdminModule
       ),
   },
+  {
+    path: 'products-admin',
+    loadChildren: () =>
+      import('./routes/product-admin/product-admin.module').then(
+        (m) => m.ProductAdminModule
+      ),
+  },
 ];
 
 @NgModule({

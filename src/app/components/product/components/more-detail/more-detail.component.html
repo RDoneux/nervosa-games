@@ -1,0 +1,22 @@
+<app-modal [show]="true" (closeRequested)="onCloseRequested()">
+  <div class="more-detail__container">
+    <img
+      class="more-detail__image"
+      [src]="product.imageUrl"
+      [alt]="product.imageDescription"
+    />
+    <div>
+      <h1 class="product__header-wrapper">
+        <span>{{ [product.title] }}</span>
+        <span class="more-detail__price">{{ product.price }}</span>
+      </h1>
+      <h5>
+        Contains {{ product.itemNumber }} item{{
+          product.itemNumber != 1 ? "s" : ""
+        }}
+      </h5>
+    </div>
+    <p>{{ product.description }}</p>
+    <button>Add to Cart</button>
+  </div>
+</app-modal>

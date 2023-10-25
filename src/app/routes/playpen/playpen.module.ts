@@ -6,7 +6,8 @@ import { PlaypenComponent } from './playpen.component';
 import { UserInterfaceModule } from 'src/app/modules/user-interface/user-interface.module';
 import { FormsModule } from '@angular/forms';
 import { AnnouncmentPostComponent } from 'src/app/components/announcment-post/components/announcment-post.component';
-import { PostCarouselComponent } from 'src/app/components/post-carousel/post-carousel.component';
+import { ProductModule } from 'src/app/components/product/product.module';
+import { ProductGroupComponent } from 'src/app/components/product-group/components/product-group.component';
 
 @NgModule({
   declarations: [PlaypenComponent],
@@ -16,6 +17,8 @@ import { PostCarouselComponent } from 'src/app/components/post-carousel/post-car
     UserInterfaceModule,
     FormsModule,
     AnnouncmentPostComponent,
+    ProductModule,
+    ProductGroupComponent
   ],
 })
 export class PlaypenModule {}
