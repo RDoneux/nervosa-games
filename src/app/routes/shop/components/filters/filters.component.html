@@ -1,0 +1,18 @@
+<aside class="filters__container">
+  <app-text-search
+    [value]="searchObject.textSearch"
+    (update)="onTextSearchUpdate($event)"
+  ></app-text-search>
+  <app-game-select
+    [optionSelected]="searchObject.gameSelect"
+    (update)="onGameSelectUpdate($event)"
+  ></app-game-select>
+  <app-price-select
+    [priceRange]="searchObject.priceRange"
+    (update)="onPriceRangeUpdate($event)"
+  ></app-price-select>
+  <app-type-options
+    [typeArray]="searchObject.types"
+    (update)="onTypeUpdate($event)"
+  ></app-type-options>
+</aside>

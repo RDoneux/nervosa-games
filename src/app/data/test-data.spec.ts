@@ -47,11 +47,12 @@ export const mockedProduct: IProduct = {
   imageDescription: 'test-product-image-description',
   imageUrl: 'test-product-image-url',
   title: 'test-product-title',
+  searchTitle: 'test-search-title',
   itemNumber: 1,
   price: 2,
   id: 'test-product-id',
   tags: ['test-tag-one', 'test-tag-two'],
   dateUploaded: Timestamp.now(),
   description: 'test-product-description',
-  isLiked: false
+  isLiked: false,
 };

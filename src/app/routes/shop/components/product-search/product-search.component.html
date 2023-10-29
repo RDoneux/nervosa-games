@@ -1,0 +1,9 @@
+<!-- {{products | json}} -->
+<!-- <span *ngFor="let product of products">
+  <p>
+    {{ product.title }} | {{ product.price }} | {{ product.tags }} |
+    {{ product.type }}
+  </p>
+</span> -->
+
+<app-product class="product" *ngFor="let product of products" [product]="product"></app-product>

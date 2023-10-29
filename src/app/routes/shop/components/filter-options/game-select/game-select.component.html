@@ -1,0 +1,6 @@
+<app-form-control [label]="'Game'">
+  <select [ngModel]="optionSelected" (ngModelChange)="onChange($event)">
+    <option></option>
+    <option *ngFor="let option of options">{{ option.name }}</option>
+  </select>
+</app-form-control>
