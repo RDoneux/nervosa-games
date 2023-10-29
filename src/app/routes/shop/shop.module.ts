@@ -11,8 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { GameSelectComponent } from './components/filter-options/game-select/game-select.component';
 import { PriceSelectComponent } from './components/filter-options/price-select/price-select.component';
 import { TypeOptionsComponent } from './components/filter-options/type-options/type-options.component';
-import { ProductComponent } from 'src/app/components/product/components/product/product.component';
 import { ProductModule } from 'src/app/components/product/product.module';
+import { LeftDrawComponent } from 'src/app/components/left-draw/left-draw.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { ProductModule } from 'src/app/components/product/product.module';
     FormsModule,
     UserInterfaceModule,
     ProductModule,
+    LeftDrawComponent
   ],
 })
 export class ShopModule {}

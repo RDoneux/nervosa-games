@@ -1,18 +1,48 @@
-<aside class="filters__container">
-  <app-text-search
-    [value]="searchObject.textSearch"
-    (update)="onTextSearchUpdate($event)"
-  ></app-text-search>
-  <app-game-select
-    [optionSelected]="searchObject.gameSelect"
-    (update)="onGameSelectUpdate($event)"
-  ></app-game-select>
-  <app-price-select
-    [priceRange]="searchObject.priceRange"
-    (update)="onPriceRangeUpdate($event)"
-  ></app-price-select>
-  <app-type-options
-    [typeArray]="searchObject.types"
-    (update)="onTypeUpdate($event)"
-  ></app-type-options>
+<aside class="filters__container__desktop">
+  <div class="filters__wrapper">
+    <app-text-search
+      [value]="searchObject.textSearch"
+      (update)="onTextSearchUpdate($event)"
+    ></app-text-search>
+    <app-game-select
+      [optionSelected]="searchObject.gameSelect"
+      (update)="onGameSelectUpdate($event)"
+    ></app-game-select>
+    <app-price-select
+      [priceRange]="searchObject.priceRange"
+      (update)="onPriceRangeUpdate($event)"
+    ></app-price-select>
+    <app-type-options
+      [typeArray]="searchObject.types"
+      (update)="onTypeUpdate($event)"
+    ></app-type-options>
+  </div>
 </aside>
+
+<app-left-draw [show]="show" class="filters__container__mobile">
+  <div class="filters__container__mobile-wrapper" #leftDrawMobile>
+    <div class="show-hide-filters" (click)="show = !show" [class.show]="show">
+      <span class="material-symbols-outlined"> tune </span>
+    </div>
+
+    <h3>Filters</h3>
+    <div class="filters__wrapper">
+      <app-text-search
+        [value]="searchObject.textSearch"
+        (update)="onTextSearchUpdate($event)"
+      ></app-text-search>
+      <app-game-select
+        [optionSelected]="searchObject.gameSelect"
+        (update)="onGameSelectUpdate($event)"
+      ></app-game-select>
+      <app-price-select
+        [priceRange]="searchObject.priceRange"
+        (update)="onPriceRangeUpdate($event)"
+      ></app-price-select>
+      <app-type-options
+        [typeArray]="searchObject.types"
+        (update)="onTypeUpdate($event)"
+      ></app-type-options>
+    </div>
+  </div>
+</app-left-draw>

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
+} from '@angular/core';
 import { IFiltersObject } from '../../interfaces/i-filters-object';
 import { MessageService } from 'src/app/services/message/message.service';
 import { IPriceRange } from '../../interfaces/i-price-range.interface';
@@ -10,6 +15,14 @@ import { TProduct } from '../../types/t-product.type';
   styleUrls: ['./filters.component.scss'],
 })
 export class FiltersComponent {
+  @ViewChild('leftDrawMobile')
+  private _mobileDraw!: ElementRef;
+  public get mobileDraw(): any {
+    return this._mobileDraw.nativeElement;
+  }
+
+  public show: boolean = false;
+
   constructor(private messageService: MessageService) {}
 
   public searchObject: IFiltersObject = {
@@ -18,6 +31,12 @@ export class FiltersComponent {
     priceRange: { min: 0, max: 100 },
     types: ['minature', 'scenery', 'supporting_material'],
   };
+
+  @HostListener('window:click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (this.mobileDraw.contains(event.target)) return;
+    this.show = false;
+  }
 
   ngAfterViewInit(): void {
     this.send();

@@ -53,7 +53,6 @@ export class LoginService {
       .subscribe({
         next: (iUser: IUser[] | null) => {
           let nervosaGamesUser: IUser | null = iUser ? iUser[0] : null;
-          console.log(iUser);
           if (nervosaGamesUser) {
             this.updateExistingNervosaUserFromGoogleUser(
               user,
