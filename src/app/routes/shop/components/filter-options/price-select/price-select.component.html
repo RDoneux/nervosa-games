@@ -1,0 +1,39 @@
+<app-collapsable-section [label]="'Cost'" [collapsed]="true">
+  <div class="range-wrapper">
+    <app-form-control [label]="'Min Price'">
+      <input
+        [(ngModel)]="priceRange.min"
+        (change)="this.updateMinValue()"
+        type="range"
+        min="0"
+        max="100"
+        step="5"
+        list="markers"
+      />
+    </app-form-control>
+    <h5>{{ priceRange.min }}</h5>
+  </div>
+
+  <div class="range-wrapper">
+    <app-form-control [label]="'Max Price'">
+      <input
+        [(ngModel)]="priceRange.max"
+        (change)="this.updateMinValue()"
+        type="range"
+        min="0"
+        max="100"
+        step="5"
+        list="markers"
+      />
+    </app-form-control>
+    <h5>{{ priceRange.max }}</h5>
+  </div>
+
+  <datalist id="markers">
+    <option value="0"></option>
+    <option value="25"></option>
+    <option value="50"></option>
+    <option value="75"></option>
+    <option value="100"></option>
+  </datalist>
+</app-collapsable-section>

@@ -1,8 +1,5 @@
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { INavigationRoute } from '../../interfaces/i-navigation-route.interface';
-import { LeftDrawComponent } from 'src/app/components/left-draw/left-draw.component';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navigation-links-mobile',

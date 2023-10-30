@@ -29,6 +29,14 @@
     />
   </app-form-control>
 
+  <app-form-control [label]="'Product Type'" required>
+    <select [(ngModel)]="product.type" name="productType">
+      <option value="scenery">Scenery</option>
+      <option value="minature">Minature</option>
+      <option value="supporting_material">Supporting Material</option>
+    </select>
+  </app-form-control>
+
   <app-form-control
     class="single-row"
     [label]="'Product Item Number'"

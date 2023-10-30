@@ -1,0 +1,31 @@
+<app-collapsable-section [label]="'Product Types'" [collapsed]="true">
+  <app-form-control [label]="'Scenery'">
+    <input
+      type="checkbox"
+      (change)="onChange('scenery')"
+      checked="true"
+      [ngModel]="minature"
+      name="minature"
+    />
+  </app-form-control>
+
+  <app-form-control [label]="'Minatures'">
+    <input
+      type="checkbox"
+      (change)="onChange('minature')"
+      checked="true"
+      [ngModel]="scenery"
+      name="scenery"
+    />
+  </app-form-control>
+
+  <app-form-control [label]="'Supporting Material'">
+    <input
+      type="checkbox"
+      (change)="onChange('supporting_material')"
+      checked="true"
+      [ngModel]="supportingMaterial"
+      name="supportingMaterial"
+    />
+  </app-form-control>
+</app-collapsable-section>

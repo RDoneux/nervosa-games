@@ -1,0 +1,18 @@
+<section class="collapsable-section__container" [style.max-height]="contentHeight + 62 + 'px'" [class.collapsed]="collapsed">
+  <div
+    class="collapsable-section__head-wrapper"
+    (click)="onToggleCollapse()"
+  >
+    <h5>{{ label }}</h5>
+    <span class="material-symbols-outlined" [class.rotate]="collapsed">
+      expand_more
+    </span>
+  </div>
+  <div
+    #collapsableContent
+    class="collapsable-section__content-wrapper"
+    [class.collapsed]="collapsed"
+  >
+    <ng-content></ng-content>
+  </div>
+</section>

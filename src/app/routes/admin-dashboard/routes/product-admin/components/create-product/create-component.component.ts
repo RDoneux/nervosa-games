@@ -14,6 +14,7 @@ export class CreateComponentComponent {
     imageUrl: '',
     imageDescription: '',
     title: '',
+    searchTitle: '',
     itemNumber: 0,
     price: 0,
     id: v4(),
@@ -21,6 +22,7 @@ export class CreateComponentComponent {
     dateUploaded: Timestamp.now(),
     description: '',
     isLiked: false,
+    type: 'minature'
   };
 
   public product: IProduct = this.emptyProduct;
@@ -37,6 +39,7 @@ export class CreateComponentComponent {
 
   onSubmit(): void {
     this.product.dateUploaded = Timestamp.now();
+    this.product.searchTitle = this.product.title.toLowerCase();
     this.createProductService.uploadNewProduct(this.product);
     this.product = this.emptyProduct;
   }

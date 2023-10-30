@@ -1,0 +1,7 @@
+<app-form-control [label]="'Search for a product...'">
+  <input
+    type="text"
+    [ngModel]="value"
+    (ngModelChange)="updateNotifier.next($event)"
+  />
+</app-form-control>

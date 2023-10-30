@@ -17,5 +17,8 @@ export function getFirestoreStub(returnObject: any) {
         set: jasmine.createSpy(),
       }),
     }),
+    getAuth: jasmine
+      .createSpy()
+      .and.returnValue({ onAuthStateChanged: jasmine.createSpy() }),
   };
 }

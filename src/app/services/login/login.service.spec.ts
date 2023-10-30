@@ -1,19 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LoginService } from './login.service';
-
 import { User } from 'firebase/auth';
 import { mockedUser } from 'src/app/data/test-data.spec';
-import { getFirestoreStub } from '../firestore/firestore-testing';
 import { FirestoreService } from '../firestore/firestore.service';
+import { getFirestoreStub } from '../firestore/firestore-testing';
 import { of } from 'rxjs';
+
+import { LoginService } from './login.service';
 
 describe('LoginService', () => {
   let service: LoginService;
-  let firestoreServiceMock: any;
+  let firestoreServiceMock: any = getFirestoreStub('');
 
   beforeEach(() => {
     firestoreServiceMock = getFirestoreStub('');
+
     TestBed.configureTestingModule({
       providers: [
         { provide: FirestoreService, useValue: firestoreServiceMock },
