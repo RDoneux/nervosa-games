@@ -8,7 +8,7 @@ describe('CollapsableSectionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CollapsableSectionComponent]
+      declarations: [CollapsableSectionComponent],
     });
     fixture = TestBed.createComponent(CollapsableSectionComponent);
     component = fixture.componentInstance;
@@ -17,5 +17,31 @@ describe('CollapsableSectionComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('#onToggleCollapse', () => {
+    it('should toggle the collapse variable', () => {
+      component.collapsed = false;
+
+      component.onToggleCollapse();
+
+      expect(component.collapsed).toBeTrue();
+
+      component.onToggleCollapse();
+
+      expect(component.collapsed).toBeFalse();
+    });
+  });
+
+  describe('#ngAfterViewInit', () => {
+    it('should set contentHeight equal to collapsableContent scrollHeight', () => {
+      spyOnProperty(component, 'content').and.returnValue({
+        scrollHeight: 1,
+      } as HTMLElement);
+
+      component.ngAfterViewInit();
+
+      expect(component.contentHeight).toEqual(1);
+    });
   });
 });

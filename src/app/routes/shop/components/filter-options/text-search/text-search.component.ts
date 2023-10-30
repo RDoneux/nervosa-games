@@ -27,7 +27,7 @@ export class TextSearchComponent implements OnInit {
       .subscribe((update) => this.onChange(update));
   }
 
-  private onChange(value: string) {
+  onChange(value: string) {
     this.update.emit(value.toLowerCase());
   }
 }

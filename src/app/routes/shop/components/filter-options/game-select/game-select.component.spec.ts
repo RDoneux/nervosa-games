@@ -9,7 +9,7 @@ describe('GameSelectComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ShopModule]
+      imports: [ShopModule],
     });
     fixture = TestBed.createComponent(GameSelectComponent);
     component = fixture.componentInstance;
@@ -18,5 +18,17 @@ describe('GameSelectComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('#onChange', () => {
+    it('should emit value converted to lower case', () => {
+      spyOn(component.update, 'emit');
+
+      component.onChange('ThIs Is ThE vAlUe');
+
+      expect(component.update.emit).toHaveBeenCalledOnceWith(
+        'this is the value'
+      );
+    });
   });
 });

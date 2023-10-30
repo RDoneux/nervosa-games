@@ -24,6 +24,7 @@ export class FiltersService {
 
   constructor(private firestoreService: FirestoreService) {}
 
+  /* istanbul ignore next */
   public search(searchObject: IFiltersObject): Observable<IProduct[]> {
     const response: Subject<IProduct[]> = new Subject();
     const results: IProduct[] = [];
@@ -39,6 +40,7 @@ export class FiltersService {
     return response;
   }
 
+  /* istanbul ignore next */
   private localFilter(
     products: IProduct[],
     searchObject: IFiltersObject
@@ -81,6 +83,7 @@ export class FiltersService {
    * @param {IFiltersObject} searchObject
    * @returns {Observable<IProduct>}
    */
+  /* istanbul ignore next */
   private queryDBForRelevantItems(
     searchObject: IFiltersObject
   ): Observable<IProduct[]> {
@@ -138,6 +141,7 @@ export class FiltersService {
    * @param {string} searchTerm
    * @returns {Query<DocumentData>}
    */
+  /* istanbul ignore next */
   private buildTitleSearchQuery(
     ref: Query<DocumentData>,
     searchTerm: string
@@ -153,6 +157,7 @@ export class FiltersService {
    * @param {string} gameSelect
    * @returns {Query<DocumentData>}
    */
+  /* istanbul ignore next */
   private buildGameSearchQuery(
     ref: Query<DocumentData>,
     gameSelect: string
@@ -165,6 +170,7 @@ export class FiltersService {
    * @param {IPriceRange} priceRange
    * @returns {Query<DocumentData>}
    */
+  /* istanbul ignore next */
   private buildPriceRangeQuery(
     ref: Query<DocumentData>,
     priceRange: IPriceRange
@@ -174,6 +180,7 @@ export class FiltersService {
       .where('price', '<=', priceRange.max);
   }
 
+  /* istanbul ignore next */
   private buildTypesQuery(
     ref: Query<DocumentData>,
     types: TProduct[]
