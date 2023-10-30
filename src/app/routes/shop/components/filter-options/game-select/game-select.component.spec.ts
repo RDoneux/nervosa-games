@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameSelectComponent } from './game-select.component';
+import { ShopModule } from '../../../shop.module';
 
 describe('GameSelectComponent', () => {
   let component: GameSelectComponent;
@@ -8,7 +9,7 @@ describe('GameSelectComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GameSelectComponent]
+      imports: [ShopModule]
     });
     fixture = TestBed.createComponent(GameSelectComponent);
     component = fixture.componentInstance;

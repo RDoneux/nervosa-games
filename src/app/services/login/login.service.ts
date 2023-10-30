@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject, take } from 'rxjs';
+import { FirestoreService } from '../firestore/firestore.service';
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import {
   onAuthStateChanged,
@@ -9,7 +10,6 @@ import {
   signOut,
 } from 'firebase/auth';
 import { debug } from '../debug/debug';
-import { FirestoreService } from '../firestore/firestore.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,18 +20,20 @@ export class LoginService {
 
   /* istanbul ignore next */
   constructor(private angularFirestore: FirestoreService) {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (firebaseUser: User | null) => {
-      if (firebaseUser) {
-        this.updateOrCreateNervosaGamesUser(firebaseUser).subscribe({
-          next: (user: IUser) => {
-            this._loginDetails.next(user);
-          },
-        });
-      } else {
-        this._loginDetails.next(null);
+    onAuthStateChanged(
+      this.angularFirestore.getAuth(),
+      (firebaseUser: User | null) => {
+        if (firebaseUser) {
+          this.updateOrCreateNervosaGamesUser(firebaseUser).subscribe({
+            next: (user: IUser) => {
+              this._loginDetails.next(user);
+            },
+          });
+        } else {
+          this._loginDetails.next(null);
+        }
       }
-    });
+    );
   }
 
   /**

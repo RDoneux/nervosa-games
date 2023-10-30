@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TextSearchComponent } from './text-search.component';
+import { ShopModule } from '../../../shop.module';
 
 describe('TextSearchComponent', () => {
   let component: TextSearchComponent;
@@ -8,7 +9,7 @@ describe('TextSearchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TextSearchComponent]
+      imports: [ShopModule],
     });
     fixture = TestBed.createComponent(TextSearchComponent);
     component = fixture.componentInstance;

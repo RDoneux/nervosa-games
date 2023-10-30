@@ -55,4 +55,5 @@ export const mockedProduct: IProduct = {
   dateUploaded: Timestamp.now(),
   description: 'test-product-description',
   isLiked: false,
+  type: 'minature',
 };

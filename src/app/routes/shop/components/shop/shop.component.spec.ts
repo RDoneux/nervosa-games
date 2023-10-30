@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShopComponent } from './shop.component';
+import { ShopModule } from '../../shop.module';
+import { FirestoreService } from 'src/app/services/firestore/firestore.service';
+import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 
 describe('ShopComponent', () => {
   let component: ShopComponent;
@@ -8,7 +11,10 @@ describe('ShopComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ShopComponent]
+      imports: [ShopModule],
+      providers: [
+        { provide: FirestoreService, useValue: getFirestoreStub('') },
+      ],
     });
     fixture = TestBed.createComponent(ShopComponent);
     component = fixture.componentInstance;

@@ -35,7 +35,7 @@ export class FiltersComponent {
   @HostListener('window:click', ['$event'])
   onClick(event: MouseEvent) {
     if (this.mobileDraw.contains(event.target)) return;
-    this.show = false;
+      this.show = false;
   }
 
   ngAfterViewInit(): void {

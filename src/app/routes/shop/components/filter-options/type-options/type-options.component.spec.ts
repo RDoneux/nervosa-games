@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TypeOptionsComponent } from './type-options.component';
+import { ShopModule } from '../../../shop.module';
 
 describe('TypeOptionsComponent', () => {
   let component: TypeOptionsComponent;
@@ -8,7 +9,7 @@ describe('TypeOptionsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TypeOptionsComponent]
+      imports: [ShopModule]
     });
     fixture = TestBed.createComponent(TypeOptionsComponent);
     component = fixture.componentInstance;
