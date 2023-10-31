@@ -1,6 +1,13 @@
 <div class="cart-icon">
-  <div class="cart-icon__content-wrapper" (click)="onCartSelected()">
+  <div class="cart-icon__content-wrapper" (click)="onCartSelected($event)">
     <span class="material-symbols-outlined"> sell </span>
-    <span class="top-navigation__navigation-item">Cart</span>
+    <span class="top-navigation__navigation-item"
+      >Cart ({{ itemsInCart.length }})</span
+    >
   </div>
 </div>
+
+<app-cart-sliding-draw
+  [show]="showDraw"
+  (requestClose)="onCloseDraw()"
+></app-cart-sliding-draw>

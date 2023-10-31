@@ -28,7 +28,8 @@ li,
 input,
 textarea,
 button,
-small {
+small,
+header {
     font-family: $primary-font
 }
 
@@ -48,6 +49,10 @@ button {
 
     &:hover {
         background: lighten($secondary-accent-colour, 2)
+    }
+
+    &.primary {
+        background: $primary-accent-colour
     }
 
     &[disabled] {

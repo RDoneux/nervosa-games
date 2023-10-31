@@ -1,0 +1,22 @@
+<app-left-draw [show]="show" [location]="'right'">
+  <div class="sliding-content__container" #slidingDraw>
+    <header class="sliding-content__header">
+      <span class="material-symbols-outlined" (click)="show = false">
+        arrow_forward_ios
+      </span>
+      <h1>Cart</h1>
+    </header>
+    <div class="sliding-content__product-section">
+      <app-cart-sliding-draw-product
+        *ngFor="let cartItem of cartItems"
+        [cartItem]="cartItem"
+        (requestRemoved)="onRequestProductRemoved(cartItem)"
+        (updated)="onProductUpdated($event)"
+      ></app-cart-sliding-draw-product>
+    </div>
+    <h1 class="sliding-content__price">Subtotal: &pound;{{ price }}</h1>
+    <button class="primary" [routerLink]="'/checkout'" (click)="onClose()">
+      Checkout
+    </button>
+  </div>
+</app-left-draw>

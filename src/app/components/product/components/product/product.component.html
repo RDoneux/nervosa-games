@@ -8,7 +8,10 @@
   <h3 class="product__price">
     {{ product.price }}
   </h3>
-  <span *ngIf="product.isLiked" class="material-symbols-outlined favorite-on-card">
+  <span
+    *ngIf="product.isLiked"
+    class="material-symbols-outlined favorite-on-card"
+  >
     favorite
   </span>
 
@@ -20,7 +23,11 @@
   </div>
 
   <div class="product__overlay">
-    <span title="Add to cart" class="material-symbols-outlined">
+    <span
+      title="Add to cart"
+      class="material-symbols-outlined"
+      (click)="onAddToCart()"
+    >
       shopping_bag
     </span>
     <span

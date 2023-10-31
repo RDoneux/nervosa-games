@@ -12,7 +12,7 @@ import { GameSelectComponent } from './components/filter-options/game-select/gam
 import { PriceSelectComponent } from './components/filter-options/price-select/price-select.component';
 import { TypeOptionsComponent } from './components/filter-options/type-options/type-options.component';
 import { ProductModule } from 'src/app/components/product/product.module';
-import { LeftDrawComponent } from 'src/app/components/left-draw/left-draw.component';
+import { LeftDrawComponent } from 'src/app/components/left-draw/components/left-draw.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { LeftDrawComponent } from 'src/app/components/left-draw/left-draw.compon
     FormsModule,
     UserInterfaceModule,
     ProductModule,
-    LeftDrawComponent
+    LeftDrawComponent,
   ],
 })
 export class ShopModule {}

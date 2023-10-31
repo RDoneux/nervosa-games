@@ -5,6 +5,7 @@ import { IGlobalVariables } from 'src/app/interfaces/i-global-variables.interfac
 import { Timestamp } from '@angular/fire/firestore';
 import { GlobalVariableService } from 'src/app/services/global-variables/global-variable.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -19,7 +20,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private globalVariablesService: GlobalVariableService,
-    private userService: UserService
+    private userService: UserService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +34,6 @@ export class ProductComponent implements OnInit {
           )
         )),
     });
-
   }
 
   onShowMoreDetail(): void {
@@ -43,8 +44,12 @@ export class ProductComponent implements OnInit {
     this.showMoreDetails = false;
   }
 
+  onAddToCart(): void {
+    this.cartService.addCartItem(this.product);
+  }
+
   onFavorite(): void {
-    this.product.isLiked = !this.product.isLiked
+    this.product.isLiked = !this.product.isLiked;
     this.product.isLiked
       ? this.userService.addProductToLikedList(this.product.id)
       : this.userService.removeProductFromLikedList(this.product.id);
