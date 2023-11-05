@@ -8,5 +8,8 @@
     {{ cartItem.title }} &times;{{ cartItem.itemNumber }}
   </h5>
   <h5 class="cart-item-product__price">{{ cartItem.price }}</h5>
-  <app-quantity-selector (valueChanged)="onQuantityChanged($event)"></app-quantity-selector>
+  <app-quantity-selector
+    (valueChanged)="onQuantityChanged($event)"
+    [value]="cartItem.quantity"
+  ></app-quantity-selector>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, from, of } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { IProduct } from 'src/app/components/product/interfaces/i-product.interface';
 import { ICartItem } from 'src/app/interfaces/i-cart-item.interface';
 
@@ -7,9 +7,9 @@ import { ICartItem } from 'src/app/interfaces/i-cart-item.interface';
   providedIn: 'root',
 })
 export class CartService {
-  private cartItems: ICartItem[] = [];
-  private cartItems$: Subject<ICartItem[]> = new Subject();
-  private price$: Subject<number> = new Subject();
+  public cartItems: ICartItem[] = [];
+  private cartItems$: ReplaySubject<ICartItem[]> = new ReplaySubject();
+  private price$: ReplaySubject<number> = new ReplaySubject();
 
   constructor() {}
 
@@ -33,11 +33,14 @@ export class CartService {
   }
 
   updateCartItem(cartItem: ICartItem): void {
-    let existingCartItem = this.cartItems.find(
-      (cartItem: ICartItem) => cartItem.id === cartItem.id
+    let existingCartIndex: number = this.cartItems.findIndex(
+      (cartItemLoop: ICartItem) => cartItemLoop.id === cartItem.id
     );
-    if (!cartItem) return;
-    existingCartItem = cartItem;
+
+    if (existingCartIndex === -1) return;
+    this.cartItems[existingCartIndex] = cartItem;
+
+    this.cartItems$.next(this.cartItems);
     this.price$.next(this.calculatePrice());
   }
 
@@ -50,6 +53,14 @@ export class CartService {
 
   generateCartItemFromIProduct(product: IProduct): ICartItem {
     return { ...product, quantity: 1 };
+  }
+
+  calculateProductPriceIncludingQuantity(cartItem: ICartItem): number {
+    // const cartItem: ICartItem | undefined = this.cartItems.find(
+    //   (iteratedItem: ICartItem) => (iteratedItem.id = id)
+    // );
+    // if (!cartItem) return 0;
+    return cartItem.quantity * cartItem.price;
   }
 
   private calculatePrice(): number {

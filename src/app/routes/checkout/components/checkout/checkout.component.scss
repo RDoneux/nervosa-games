@@ -1,0 +1,12 @@
+.checkout__container {
+    display: flex;
+    height: 100%;
+
+    app-cart-items {
+        width: 70%;
+    }
+
+    app-order-summary {
+        width: 30%;
+    }
+}

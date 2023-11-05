@@ -1,0 +1,24 @@
+@import 'variables';
+
+.cart-item__container {
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+
+    color: $text-dark-colour;
+
+    h1 {
+        font-weight: 100;
+    }
+
+    .cart-item__item-wrapper {
+        flex: 1 1 auto;
+
+        border-top: 2px solid $text-dark-colour;
+        border-bottom: 2px solid $text-dark-colour;
+    }
+}
