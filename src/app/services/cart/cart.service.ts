@@ -49,6 +49,7 @@ export class CartService {
       (productFromList: IProduct) => productFromList.id !== product.id
     );
     this.cartItems$.next(this.cartItems);
+    this.price$.next(this.calculatePrice())
   }
 
   generateCartItemFromIProduct(product: IProduct): ICartItem {
