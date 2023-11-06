@@ -21,10 +21,18 @@ export class CartItemComponent implements OnInit {
   }
 
   onQuantityChanged(event: number): void {
+    if (event === 0) {
+      this.onRemoveItem();
+      return;
+    }
     this.cartItem.quantity = event;
     this.totalPrice = this.cartService.calculateProductPriceIncludingQuantity(
       this.cartItem
     );
     this.cartService.updateCartItem(this.cartItem);
+  }
+
+  onRemoveItem(): void {
+    this.cartService.removeCartItem(this.cartItem);
   }
 }

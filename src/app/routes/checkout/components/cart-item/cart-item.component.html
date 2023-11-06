@@ -17,5 +17,5 @@
   <h5 class="cart-item-checkout__total-price">
     &pound;{{ totalPrice | number : "1.2" }}
   </h5>
-  <h5 class="cart-item-checkout__remove">&times;</h5>
+  <h5 class="cart-item-checkout__remove" (click)="onRemoveItem()">&times;</h5>
 </div>

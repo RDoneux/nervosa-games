@@ -37,6 +37,11 @@
         .cart-item-checkout__price {
             margin: 10px;
         }
+
+    }
+
+    .cart-item-checkout__remove {
+        cursor: pointer;
     }
 
     app-quantity-selector {

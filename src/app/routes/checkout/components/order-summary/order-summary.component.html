@@ -1,1 +1,18 @@
-<p>order-summary works!</p>
+<div class="order-summary__container">
+  <h1>Order Summary</h1>
+
+  <h4>
+    <span>Subtotal:</span> <span>&pound;{{ subtotal }}</span>
+  </h4>
+  <h4>
+    <span>Delivery:</span> <span>&pound;{{ delivery }}</span>
+  </h4>
+  <span>England, United Kingdom</span>
+
+  <h3 class="order-summary__total">
+    <span>Total:</span> <span>&pound;{{ total | number : "1.2" }}</span>
+  </h3>
+  <span class="order-summary__tax-included">Tax Included</span>
+
+  <button class="primary">Checkout</button>
+</div>

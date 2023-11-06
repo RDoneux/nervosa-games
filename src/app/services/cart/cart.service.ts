@@ -56,10 +56,6 @@ export class CartService {
   }
 
   calculateProductPriceIncludingQuantity(cartItem: ICartItem): number {
-    // const cartItem: ICartItem | undefined = this.cartItems.find(
-    //   (iteratedItem: ICartItem) => (iteratedItem.id = id)
-    // );
-    // if (!cartItem) return 0;
     return cartItem.quantity * cartItem.price;
   }
 
