@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartSlidingDrawComponent } from './cart-sliding-draw.component';
+import { CartModule } from '../cart.module';
+import { QuantitySelectorComponent } from 'src/app/components/quantity-selector/quantity-selector.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SlidingDrawComponent', () => {
   let component: CartSlidingDrawComponent;
@@ -8,7 +11,7 @@ describe('SlidingDrawComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CartSlidingDrawComponent],
+      imports: [CartModule, QuantitySelectorComponent, RouterTestingModule]
     });
     fixture = TestBed.createComponent(CartSlidingDrawComponent);
     component = fixture.componentInstance;

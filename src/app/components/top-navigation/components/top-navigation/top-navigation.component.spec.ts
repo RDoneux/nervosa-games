@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { NavigationLinksDesktopComponent } from '../navigation-links-desktop/navigation-links-desktop.component';
 import { CartIconComponent } from '../cart-icon/cart-icon.component';
 import { ProductSearchComponent } from '../product-search/product-search.component';
-import { LeftDrawComponent } from 'src/app/components/left-draw/left-draw.component';
 import { SignInComponent } from '../sign-in/sign-in.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+import { LeftDrawComponent } from 'src/app/components/left-draw/components/left-draw.component';
+import { CartModule } from 'src/app/modules/cart/cart.module';
 
 describe('TopNavigationComponent', () => {
   let component: TopNavigationComponent;
@@ -27,7 +28,7 @@ describe('TopNavigationComponent', () => {
         ProductSearchComponent,
         SignInComponent,
       ],
-      imports: [FormsModule, LeftDrawComponent, RouterTestingModule],
+      imports: [FormsModule, LeftDrawComponent, RouterTestingModule, CartModule],
       providers: [
         { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
       ],

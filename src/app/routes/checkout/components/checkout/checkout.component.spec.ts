@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckoutComponent } from './checkout.component';
+import { CheckoutModule } from '../../checkout.module';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -8,7 +9,7 @@ describe('CheckoutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CheckoutComponent]
+      imports: [CheckoutModule]
     });
     fixture = TestBed.createComponent(CheckoutComponent);
     component = fixture.componentInstance;

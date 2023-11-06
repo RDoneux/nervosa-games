@@ -4,6 +4,7 @@ import { IUser } from '../interfaces/i-user.interface';
 import { IComment } from '../interfaces/i-comment.interface';
 import { RouterStateSnapshot } from '@angular/router';
 import { IProduct } from '../components/product/interfaces/i-product.interface';
+import { ICartItem } from '../interfaces/i-cart-item.interface';
 
 export function fakeRouterState(url: string): RouterStateSnapshot {
   return {
@@ -57,3 +58,5 @@ export const mockedProduct: IProduct = {
   isLiked: false,
   type: 'minature',
 };
+
+export const mockedCartItem: ICartItem = { ...mockedProduct, quantity: 1 };

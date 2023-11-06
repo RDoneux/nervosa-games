@@ -8,7 +8,7 @@ describe('QuantitySelectorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [QuantitySelectorComponent]
+      imports: [QuantitySelectorComponent],
     });
     fixture = TestBed.createComponent(QuantitySelectorComponent);
     component = fixture.componentInstance;
