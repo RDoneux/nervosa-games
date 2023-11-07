@@ -15,12 +15,6 @@ import { ICartItem } from 'src/app/interfaces/i-cart-item.interface';
   styleUrls: ['./cart-icon.component.scss'],
 })
 export class CartIconComponent implements OnInit {
-  @ViewChild('slidingDraw')
-  private _draw!: ElementRef;
-  public get draw(): any {
-    return this._draw.nativeElement;
-  }
-
   public itemsInCart: ICartItem[] = [];
   public showDraw: boolean = false;
 

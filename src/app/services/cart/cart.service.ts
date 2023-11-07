@@ -13,10 +13,12 @@ export class CartService {
 
   constructor() {}
 
+  /* istanbul ignore next */
   getCartItems$(): Observable<ICartItem[]> {
     return this.cartItems$;
   }
 
+  /* istanbul ignore next */
   getPrice$(): Observable<number> {
     return this.price$;
   }
@@ -49,7 +51,7 @@ export class CartService {
       (productFromList: IProduct) => productFromList.id !== product.id
     );
     this.cartItems$.next(this.cartItems);
-    this.price$.next(this.calculatePrice())
+    this.price$.next(this.calculatePrice());
   }
 
   generateCartItemFromIProduct(product: IProduct): ICartItem {

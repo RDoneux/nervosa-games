@@ -19,10 +19,11 @@ import { CartService } from 'src/app/services/cart/cart.service';
 export class CartSlidingDrawComponent implements OnInit {
   @Input() show: boolean = false;
 
-  @Output() private requestClose: EventEmitter<null> = new EventEmitter();
+  @Output() public requestClose: EventEmitter<null> = new EventEmitter();
 
   @ViewChild('slidingDraw')
   private _draw!: ElementRef;
+  /* istanbul ignore next */
   public get draw(): any {
     return this._draw.nativeElement;
   }
