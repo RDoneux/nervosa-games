@@ -1,0 +1,44 @@
+@import 'variables';
+@import 'mixins';
+
+.left-draw {
+    height: 100vh;
+    width: 400px;
+
+    @include tablet-down {
+        width: 65%;
+    }
+
+    position: fixed;
+
+    background: $background-colour;
+
+    display: none;
+
+    &.left,
+    &.right {
+        display: block;
+        top: 0;
+        transition: transform 350ms ease-out;
+    }
+
+    &.left {
+        left: 0;
+        box-shadow: 3px 0 5px $shadow-colour;
+
+        transform: translateX(-110%);
+    }
+
+    &.right {
+        right: 0;
+        box-shadow: -3px 0 5px $shadow-colour;
+
+        transform: translateX(110%);
+    }
+
+    z-index: $menu;
+
+    &.show {
+        transform: translateX(0);
+    }
+}

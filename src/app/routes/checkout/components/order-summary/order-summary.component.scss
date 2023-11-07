@@ -1,0 +1,36 @@
+@import 'variables';
+
+.order-summary__container {
+    color: $text-dark-colour;
+
+    padding: 0 20px;
+
+    h1 {
+        font-weight: 100;
+        border-bottom: 2px solid $text-dark-colour;
+        font-size: 26px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    h1,
+    h4,
+    h3 {
+        font-weight: 100;
+
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .order-summary__total{
+        padding-top: 15px;
+        margin-bottom: 0;
+        border-top: 2px solid $text-dark-colour;
+    }
+
+    .order-summary__tax-included{
+        font-size: 10px;
+        display: block;
+        padding-bottom: 30px;
+    }
+}

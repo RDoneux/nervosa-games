@@ -6,8 +6,8 @@ import {
 } from '@angular/core/testing';
 
 import { NavigationLinksMobileComponent } from './navigation-links-mobile.component';
-import { LeftDrawComponent } from 'src/app/components/left-draw/left-draw.component';
 import { ElementRef } from '@angular/core';
+import { LeftDrawComponent } from 'src/app/components/left-draw/components/left-draw.component';
 
 describe('NavigationLinksMobileComponent', () => {
   let component: NavigationLinksMobileComponent;

@@ -1,0 +1,21 @@
+<div class="cart-item-checkout__container">
+  <div class="cart-item-checkout__image-wrapper">
+    <img
+      class="cart-item-checkout__image"
+      [src]="cartItem.imageUrl"
+      [alt]="cartItem.imageDescription"
+    />
+  </div>
+  <div class="cart-item-checkout__title-wrapper">
+    <h5 class="cart-item-checkout__title">{{ cartItem.title }}</h5>
+    <h5 class="cart-item-checkout__price">&pound;{{ cartItem.price }}</h5>
+  </div>
+  <app-quantity-selector
+    (valueChanged)="onQuantityChanged($event)"
+    [value]="cartItem.quantity"
+  ></app-quantity-selector>
+  <h5 class="cart-item-checkout__total-price">
+    &pound;{{ totalPrice | number : "1.2" }}
+  </h5>
+  <h5 class="cart-item-checkout__remove" (click)="onRemoveItem()">&times;</h5>
+</div>

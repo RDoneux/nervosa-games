@@ -1,0 +1,38 @@
+@import 'variables';
+
+.cart-item-product__container {
+    display: grid;
+    grid-template-columns: 50% auto;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    column-gap: 10px;
+
+    padding: 20px 0;
+    border-bottom: 1px solid lighten($text-dark-colour, 35);
+
+    .cart-item-product__image {
+        height: 120px;
+        max-width: 100%;
+        grid-row: span 3;
+        align-self: center;
+        justify-self: center;
+    }
+
+    .cart-item-product__title,
+    .cart-item-product__price {
+        margin: 0;
+        font-weight: 100;
+    }
+
+    .cart-item-product__title {
+        align-self: flex-end;
+    }
+
+    .cart-item-product__price {
+        align-self: center;
+
+        &::before {
+            content: '£'
+        }
+    }
+}

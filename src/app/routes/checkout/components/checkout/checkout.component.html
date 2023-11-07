@@ -1,0 +1,10 @@
+<!-- {{ cartItems | json }}
+
+--------------------
+
+{{ price }} -->
+
+<div class="checkout__container">
+  <app-cart-items [cartItems]="cartItems"></app-cart-items>
+  <app-order-summary></app-order-summary>
+</div>

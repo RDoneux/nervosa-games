@@ -1,0 +1,15 @@
+<div class="cart-item-product__container">
+  <img
+    class="cart-item-product__image"
+    [src]="cartItem.imageUrl"
+    [alt]="cartItem.imageDescription"
+  />
+  <h5 class="cart-item-product__title">
+    {{ cartItem.title }} &times;{{ cartItem.itemNumber }}
+  </h5>
+  <h5 class="cart-item-product__price">{{ cartItem.price }}</h5>
+  <app-quantity-selector
+    (valueChanged)="onQuantityChanged($event)"
+    [value]="cartItem.quantity"
+  ></app-quantity-selector>
+</div>

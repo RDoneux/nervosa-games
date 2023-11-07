@@ -4,12 +4,13 @@ import { NavigationLinksDesktopComponent } from './components/navigation-links-d
 import { NavigationLinksMobileComponent } from './components/navigation-links-mobile/navigation-links-mobile.component';
 import { HomeIconComponent } from './components/home-icon/home-icon.component';
 import { CartIconComponent } from './components/cart-icon/cart-icon.component';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { TopNavigationComponent } from './components/top-navigation/top-navigation.component';
-import { LeftDrawComponent } from '../left-draw/left-draw.component';
+import { LeftDrawComponent } from '../left-draw/components/left-draw.component';
 import { ProductSearchComponent } from './components/product-search/product-search.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { FormsModule } from '@angular/forms';
+import { CartModule } from 'src/app/modules/cart/cart.module';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,10 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    RouterLink,
-    RouterLinkActive,
+    RouterModule,
     LeftDrawComponent,
     FormsModule,
+    CartModule,
   ],
   exports: [TopNavigationComponent],
 })

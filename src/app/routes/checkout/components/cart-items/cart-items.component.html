@@ -1,0 +1,9 @@
+<section class="cart-item__container">
+  <h1>My Cart</h1>
+  <div class="cart-item__item-wrapper">
+    <app-cart-item
+      *ngFor="let cartItem of cartItems; trackBy: trackByFn"
+      [cartItem]="cartItem"
+    ></app-cart-item>
+  </div>
+</section>

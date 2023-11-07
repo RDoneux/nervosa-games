@@ -4,8 +4,9 @@ import { ProductComponent } from './product.component';
 import { ProductModule } from '../../product.module';
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
-import { mockedProduct } from 'src/app/data/test-data.spec';
+import { mockedCartItem, mockedProduct } from 'src/app/data/test-data.spec';
 import { UserService } from 'src/app/services/user/user.service';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -13,6 +14,7 @@ describe('ProductComponent', () => {
 
   let firestoreServiceMock: any;
   let userServiceMock: jasmine.SpyObj<UserService>;
+  let cartServiceMock: jasmine.SpyObj<CartService>;
 
   beforeEach(() => {
     firestoreServiceMock = getFirestoreStub('');
@@ -20,11 +22,13 @@ describe('ProductComponent', () => {
       'addProductToLikedList',
       'removeProductFromLikedList',
     ]);
+    cartServiceMock = jasmine.createSpyObj('CartService', ['addCartItem']);
     TestBed.configureTestingModule({
       imports: [ProductModule],
       providers: [
         { provide: FirestoreService, useValue: firestoreServiceMock },
         { provide: UserService, useValue: userServiceMock },
+        { provide: CartService, useValue: cartServiceMock },
       ],
     });
     fixture = TestBed.createComponent(ProductComponent);
@@ -90,4 +94,13 @@ describe('ProductComponent', () => {
         expect(userServiceMock.addProductToLikedList).not.toHaveBeenCalled();
       });
   });
+
+  describe('#onAddToCart', () => {
+    it('should call CartService #addCartItem', () => {
+      component.product = mockedCartItem;
+      component.onAddToCart();
+
+      expect(cartServiceMock.addCartItem).toHaveBeenCalledOnceWith(mockedCartItem);
+    })
+  })
 });
