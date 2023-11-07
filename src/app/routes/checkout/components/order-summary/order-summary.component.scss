@@ -5,6 +5,8 @@
 
     padding: 0 20px;
 
+    margin-bottom: 30px;
+
     h1 {
         font-weight: 100;
         border-bottom: 2px solid $text-dark-colour;
@@ -22,13 +24,13 @@
         justify-content: space-between;
     }
 
-    .order-summary__total{
+    .order-summary__total {
         padding-top: 15px;
         margin-bottom: 0;
         border-top: 2px solid $text-dark-colour;
     }
 
-    .order-summary__tax-included{
+    .order-summary__tax-included {
         font-size: 10px;
         display: block;
         padding-bottom: 30px;

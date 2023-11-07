@@ -1,6 +1,12 @@
+@import 'mixins';
+
 .checkout__container {
     display: flex;
     height: 100%;
+
+    @include tablet-down {
+        flex-direction: column;
+    }
 
     app-cart-items {
         width: 70%;
@@ -8,5 +14,14 @@
 
     app-order-summary {
         width: 30%;
+    }
+
+    @include tablet-down {
+
+        app-cart-items,
+        app-order-summary {
+            width: 100%;
+
+        }
     }
 }

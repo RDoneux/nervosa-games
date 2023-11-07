@@ -29,6 +29,10 @@
         cursor: pointer;
         display: flex;
         align-items: center;
+
+        @include mobile-down {
+            font-size: 16px;
+        }
     }
 
     &:hover .cart-icon__content-wrapper {
@@ -45,4 +49,3 @@
             'opsz' 24
     }
 }
-

@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .sliding-content__container {
     height: 100%;
@@ -32,9 +33,17 @@
                 'opsz' 24
         }
 
-        h1 {
+        h1.sliding-content__title {
             font-size: 48px;
             font-weight: 100;
+        }
+
+        @include mobile-down {
+            height: 100px;
+            h1.sliding-content__title,
+            .material-symbols-outlined {
+                font-size: 28px;
+            }
         }
 
     }
