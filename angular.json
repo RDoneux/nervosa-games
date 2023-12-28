@@ -80,10 +80,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "nervosa-games:build:production"
+              "buildTarget": "nervosa-games:build:production"
             },
             "development": {
-              "browserTarget": "nervosa-games:build:development"
+              "buildTarget": "nervosa-games:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "nervosa-games:build"
+            "buildTarget": "nervosa-games:build"
           }
         },
         "test": {
