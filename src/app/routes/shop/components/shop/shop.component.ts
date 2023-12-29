@@ -11,6 +11,7 @@ export class ShopComponent implements OnInit {
   constructor(private firestoreService: FirestoreService) {}
 
   redirectToSumupStore: boolean = true;
+  redirectUrl!: string;
 
   /* istanbul ignore next */
   ngOnInit(): void {
@@ -21,7 +22,8 @@ export class ShopComponent implements OnInit {
       .valueChanges()
       .subscribe({
         next: (res: IStoreGeneralSettings | undefined) => {
-          this.redirectToSumupStore = res?.redirectToSumupStore ?? true
+          this.redirectToSumupStore = res?.redirectToSumupStore ?? true;
+          this.redirectUrl = res?.sumupStoreURL ?? '/'
           this.shouldRedirect(res);
         },
       });
@@ -32,7 +34,11 @@ export class ShopComponent implements OnInit {
     if (generalSettings?.redirectToSumupStore) {
       // site is configured to redirect to the sumup store
       if (window.history.state.navigationId > 1) {
-        window.location.href = generalSettings.sumupStoreURL;
+        if (generalSettings.openInNewTab) {
+          window.open(generalSettings.sumupStoreURL, '_blank');
+        } else {
+          window.location.href = generalSettings.sumupStoreURL;
+        }
       } else {
         window.location.href = '/';
       }

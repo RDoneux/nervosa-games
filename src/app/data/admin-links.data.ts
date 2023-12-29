@@ -9,6 +9,11 @@ export const adminLinks: IAdminRoute[] = [
   {
     route: '/admin-dashboard/products-admin',
     label: 'Product Dashboard',
-    materialIcon: 'inventory_2'
-  }
+    materialIcon: 'inventory_2',
+  },
+  {
+    route: '/admin-dashboard/general-settings',
+    label: 'General Site Settings',
+    materialIcon: 'settings',
+  },
 ];

@@ -29,8 +29,14 @@ input,
 textarea,
 button,
 small,
-header {
+header,
+a {
     font-family: $primary-font
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
 
 input[type="button"],
@@ -57,9 +63,12 @@ button {
 
     &[disabled] {
         background: $disabled-colour;
+        color: white;
         cursor: not-allowed;
     }
 }
+
+
 
 .nervosa-games__form {
     width: 70%;
@@ -70,5 +79,10 @@ button {
 
     row-gap: 30px;
     column-gap: 60px;
+
+    input[disabled]:not([type="submit"]):not([type="button"]):not([type="reset"]):not(button) {
+        color: $disabled-colour;
+        cursor: not-allowed;
+    }
 
 }

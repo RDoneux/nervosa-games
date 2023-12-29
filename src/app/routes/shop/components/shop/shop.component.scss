@@ -1,5 +1,11 @@
 @import 'mixins';
 
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .shop__container {
     display: flex;
 
@@ -21,4 +27,16 @@
             width: 100%;
         }
     }
+}
+
+.external-shop-link{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+img {
+    position: relative;
+    height: calc(100vh - 335px);
+    object-fit: cover;
 }

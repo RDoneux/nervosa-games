@@ -19,6 +19,13 @@ const routes: Routes = [
         (m) => m.ProductAdminModule
       ),
   },
+  {
+    path: 'general-settings',
+    loadChildren: () =>
+      import('./routes/general-settings/general-settings.module').then(
+        (m) => m.GeneralSettingsModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -1,5 +1,11 @@
+@if(!redirectToSumupStore) {
 <div class="shop__container">
-  @if(!redirectToSumupStore) {
   <app-filters></app-filters> <app-product-search></app-product-search>
-  }
 </div>
+} @else {
+<div class="external-shop-link">
+  <h1>Our shop is currently hosted externally</h1>
+  <img src="https://firebasestorage.googleapis.com/v0/b/nervosa-games.appspot.com/o/site-inbuilt-images%2F220880-P1KV8M-746.jpg?alt=media&token=e7595344-e78c-462a-a18e-2feda0a0ebeb">
+  <button><a [href]="redirectUrl" target="_blank">Click here to visit it</a></button>
+</div>
+}

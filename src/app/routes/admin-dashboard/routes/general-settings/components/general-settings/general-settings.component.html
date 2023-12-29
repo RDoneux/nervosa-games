@@ -1,0 +1,42 @@
+<h1>Store</h1>
+<form
+  #generalSettingsForm="ngForm"
+  class="store-settings__form nervosa-games__form"
+  (submit)="onSubmit(generalSettingsForm)"
+>
+  <app-form-control label="Redirect to Sumup store">
+    <input
+      type="checkbox"
+      [(ngModel)]="storeGeneralSettings.redirectToSumupStore"
+      name="redirectToSumupStore"
+    />
+  </app-form-control>
+  <app-form-control label="Open in new tab">
+    <input
+      type="checkbox"
+      [(ngModel)]="storeGeneralSettings.openInNewTab"
+      [disabled]="!storeGeneralSettings.redirectToSumupStore"
+      name="openInNewTab"
+    />
+  </app-form-control>
+  <app-form-control label="Sumup Redirect URL">
+    <input
+      type="text"
+      [(ngModel)]="storeGeneralSettings.sumupStoreURL"
+      [disabled]="!storeGeneralSettings.redirectToSumupStore"
+      name="sumupRedirectURL"
+    />
+  </app-form-control>
+
+
+
+  <input
+    class="button-full-width"
+    type="submit"
+    value="Save"
+    [disabled]="
+      !generalSettingsForm.valid ||
+      generalSettingsForm.pristine
+    "
+  />
+</form>
