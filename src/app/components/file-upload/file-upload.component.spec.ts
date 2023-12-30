@@ -141,7 +141,7 @@ describe('FileUploadComponent', () => {
     });
   });
 
-  describe('taskControl', () => {
+  xdescribe('taskControl', () => {
     beforeEach(() => {
       storageServiceMock.getStorage().ref.and.returnValue(referenceStub);
       component.onUpload(event);

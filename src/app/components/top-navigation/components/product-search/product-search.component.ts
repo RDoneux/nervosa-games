@@ -35,10 +35,9 @@ export class ProductSearchComponent implements OnInit {
       if (this.storeGeneralSettings.redirectToSumupStore) {
         window.open(
           `${this.storeGeneralSettings.sumupStoreURL}/search?search=${this.searchTerm}`,
-          '_blank'
+          this.storeGeneralSettings.openInNewTab ? '_blank' : ''
         );
       } else {
-        
         // handle the search internally
       }
       this.searchTerm = '';
