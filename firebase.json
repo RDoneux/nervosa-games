@@ -4,7 +4,7 @@
       "target": "nervosa-games",
       "source": ".",
       "frameworksBackend": {},
-      "rewrites": [{ "source": "**", "function": "app" }]
+      "rewrites": [{ "source": "**", "destination": "/index.html" }]
     }
   ],
   "functions": [
