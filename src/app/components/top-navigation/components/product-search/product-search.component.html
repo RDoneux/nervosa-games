@@ -12,7 +12,9 @@
     class="product-search__search-input"
     type="search"
     placeholder="Search our products..."
-    [ngModel]="searchTerm"
+    name="globalSearch"
+    [(ngModel)]="searchTerm"
+    (keypress)="onKeyPress($event)"
   />
   <app-sign-in></app-sign-in>
 </div>
