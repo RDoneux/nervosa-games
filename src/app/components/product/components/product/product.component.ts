@@ -7,7 +7,7 @@ import { GlobalVariableService } from 'src/app/services/global-variables/global-
 import { UserService } from 'src/app/services/user/user.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
-import { camelCase, snakeCase, kebabCase } from 'lodash-es';
+import { kebabCase } from 'lodash-es';
 
 @Component({
   selector: 'app-product',
@@ -59,13 +59,13 @@ export class ProductComponent implements OnInit {
   }
 
   onClick(): void {
-    if (!this.storeGeneralSettings || !this.storeGeneralSettings.openInNewTab)
+    if (!this.storeGeneralSettings || !this.storeGeneralSettings.redirectToSumupStore)
       return;
     window.open(
       `${this.storeGeneralSettings.sumupStoreURL}/product/${kebabCase(
         this.product.title
       )}`,
-      '_blank'
+      this.storeGeneralSettings.openInNewTab ? '_blank' : ''
     );
   }
 }

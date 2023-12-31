@@ -7,6 +7,8 @@ import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { mockedCartItem, mockedProduct } from 'src/app/data/test-data.spec';
 import { UserService } from 'src/app/services/user/user.service';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
+import { IProduct } from '../../interfaces/i-product.interface';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -100,7 +102,62 @@ describe('ProductComponent', () => {
       component.product = mockedCartItem;
       component.onAddToCart();
 
-      expect(cartServiceMock.addCartItem).toHaveBeenCalledOnceWith(mockedCartItem);
-    })
-  })
+      expect(cartServiceMock.addCartItem).toHaveBeenCalledOnceWith(
+        mockedCartItem
+      );
+    });
+  });
+
+  describe('#onClick', () => {
+    beforeEach(() => {
+      spyOn(window, 'open');
+    });
+    it('should do nothing if store general settings is false or if openInNewTab is false', () => {
+      component.storeGeneralSettings = undefined;
+
+      component.onClick();
+
+      expect(window.open).not.toHaveBeenCalled();
+
+      component.storeGeneralSettings = {
+        openInNewTab: false,
+      } as IStoreGeneralSettings;
+
+      component.onClick();
+
+      expect(window.open).not.toHaveBeenCalled();
+    });
+
+    it('should call window open with given url and product title', () => {
+      component.storeGeneralSettings = {
+        openInNewTab: true,
+        sumupStoreURL: 'test-url',
+        redirectToSumupStore: true,
+      };
+      component.product = { title: 'Test Title' } as IProduct;
+
+      component.onClick();
+
+      expect(window.open).toHaveBeenCalledOnceWith(
+        'test-url/product/test-title',
+        '_blank'
+      );
+    });
+
+    it('should not redirect to new tab if setting requests open in current tab', () => {
+      component.storeGeneralSettings = {
+        openInNewTab: false,
+        sumupStoreURL: 'test-url',
+        redirectToSumupStore: true,
+      };
+      component.product = { title: 'Test Title' } as IProduct;
+
+      component.onClick();
+
+      expect(window.open).toHaveBeenCalledOnceWith(
+        'test-url/product/test-title',
+        ''
+      );
+    });
+  });
 });

@@ -40,7 +40,10 @@ describe('CartService', () => {
 
       service.addCartItem(mockedCartItem);
 
-      expect(service.cartItems.push).toHaveBeenCalledOnceWith(mockedCartItem);
+      expect(service.cartItems.push).toHaveBeenCalledOnceWith({
+        ...mockedCartItem,
+        quantity: 1,
+      });
     });
   });
 
