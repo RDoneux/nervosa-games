@@ -5,6 +5,8 @@ import { ProductGroupService } from '../services/product-group.service';
 import { IProduct } from '../../product/interfaces/i-product.interface';
 import { UserService } from 'src/app/services/user/user.service';
 import { take } from 'rxjs';
+import { FirestoreService } from 'src/app/services/firestore/firestore.service';
+import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
 
 @Component({
   selector: 'app-product-group',
@@ -19,10 +21,12 @@ export class ProductGroupComponent implements OnInit {
   @Input() description!: string;
 
   public products!: IProduct[];
+  public storeGeneralSettings!: IStoreGeneralSettings | undefined;
 
   constructor(
     private productGroupService: ProductGroupService,
-    private userService: UserService
+    private userService: UserService,
+    private firestoreService: FirestoreService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +34,15 @@ export class ProductGroupComponent implements OnInit {
       this.products = res;
       this.initaliseProductsLikedValue(this.products);
     });
+    this.firestoreService
+      .getFirestore()
+      .collection('general-settings')
+      .doc<IStoreGeneralSettings>('store')
+      .valueChanges()
+      .subscribe({
+        next: (res: IStoreGeneralSettings | undefined) =>
+          (this.storeGeneralSettings = res),
+      });
   }
 
   initaliseProductsLikedValue(products: IProduct[]): IProduct[] {

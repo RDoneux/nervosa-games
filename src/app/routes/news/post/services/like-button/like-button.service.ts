@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
-import _ from 'lodash';
+import { pull } from 'lodash-es';
 import { Observable } from 'rxjs';
 import { IAnnouncementPost } from 'src/app/components/announcment-post/interfaces/i-announcement-post.interface';
 import { PostService } from '../post/post.service';
@@ -47,7 +47,7 @@ export class LikeButtonService {
       this.localStorageService.get(this.localStoragePostPrefix) ?? '[]'
     );
     if (!likedPosts.includes(postId)) return;
-    _.pull(likedPosts, postId);
+    pull(likedPosts, postId);
     this.localStorageService.save(
       this.localStoragePostPrefix,
       JSON.stringify(likedPosts)

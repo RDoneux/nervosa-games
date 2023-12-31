@@ -8,7 +8,7 @@ import {
 import { NgModel } from '@angular/forms';
 import { IFormControlError } from '../../interfaces/i-form-control-error.interface';
 import { defaultFormControlError } from '../../data/d-form-control-error.data';
-import _ from 'lodash';
+import {unionBy} from 'lodash-es';
 
 @Component({
   selector: 'app-form-control-error',
@@ -24,7 +24,7 @@ export class FormControlErrorComponent implements OnInit, AfterViewInit {
   public error!: string;
 
   ngOnInit(): void {
-    this.errors = _.unionBy(this.errors, this.defaultErrorList, 'error');
+    this.errors = unionBy(this.errors, this.defaultErrorList, 'error');
   }
 
   ngAfterViewInit(): void {

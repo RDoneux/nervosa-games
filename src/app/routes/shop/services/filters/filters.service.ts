@@ -13,7 +13,7 @@ import { IProduct } from 'src/app/components/product/interfaces/i-product.interf
 import { DocumentData } from '@angular/fire/firestore';
 import { Query } from '@angular/fire/compat/firestore';
 import { IPriceRange } from '../../interfaces/i-price-range.interface';
-import _ from 'lodash';
+import { uniqBy } from 'lodash-es';
 import { TProduct } from '../../types/t-product.type';
 
 @Injectable({
@@ -73,7 +73,7 @@ export class FiltersService {
       );
     }
 
-    return _.uniqBy(response, 'id');
+    return uniqBy(response, 'id');
   }
 
   /**

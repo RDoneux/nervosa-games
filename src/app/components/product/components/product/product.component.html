@@ -1,4 +1,4 @@
-<div *ngIf="product" class="product__container">
+<div *ngIf="product" class="product__container" (click)="onClick()">
   <img
     class="product__image"
     [src]="product.imageUrl"
@@ -22,6 +22,7 @@
     NEW
   </div>
 
+  @if(!storeGeneralSettings || !storeGeneralSettings.openInNewTab) {
   <div class="product__overlay">
     <span
       title="Add to cart"
@@ -46,6 +47,7 @@
       open_in_new
     </span>
   </div>
+  }
 </div>
 
 <app-more-detail
