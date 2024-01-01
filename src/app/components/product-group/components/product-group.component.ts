@@ -7,7 +7,6 @@ import { UserService } from 'src/app/services/user/user.service';
 import { take } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-product-group',
@@ -33,7 +32,6 @@ export class ProductGroupComponent implements OnInit {
   ngOnInit(): void {
     this.productGroupService
       .getProductsFromTag(this.tag)
-      .pipe(takeUntilDestroyed())
       .subscribe((res) => {
         this.products = res;
         this.initaliseProductsLikedValue(this.products);
@@ -43,7 +41,6 @@ export class ProductGroupComponent implements OnInit {
       .collection('general-settings')
       .doc<IStoreGeneralSettings>('store')
       .valueChanges()
-      .pipe(takeUntilDestroyed())
       .subscribe({
         next: (res: IStoreGeneralSettings | undefined) =>
           (this.storeGeneralSettings = res),

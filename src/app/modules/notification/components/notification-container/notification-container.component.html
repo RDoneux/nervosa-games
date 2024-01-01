@@ -1,0 +1,7 @@
+@if(globalNotifications) {
+<section [@grow]="globalNotifications.length">
+  @for(notification of globalNotifications; track notification) {
+  <app-notification [notification]="notification"></app-notification>
+  }
+</section>
+}

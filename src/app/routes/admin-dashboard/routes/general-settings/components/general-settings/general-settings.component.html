@@ -1,4 +1,5 @@
 <h1>Store</h1>
+@if(storeGeneralSettings) {
 <form
   #generalSettingsForm="ngForm"
   class="store-settings__form nervosa-games__form"
@@ -28,15 +29,11 @@
     />
   </app-form-control>
 
-
-
   <input
     class="button-full-width"
     type="submit"
     value="Save"
-    [disabled]="
-      !generalSettingsForm.valid ||
-      generalSettingsForm.pristine
-    "
+    [disabled]="!generalSettingsForm.valid || generalSettingsForm.pristine"
   />
 </form>
+}
