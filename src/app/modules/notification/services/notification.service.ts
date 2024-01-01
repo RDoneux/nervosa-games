@@ -18,9 +18,10 @@ export class NotificationService {
   showNotification(
     title: string,
     type: NotificationType,
-    timer?: number
+    timer?: number,
+    id?: string
   ): void {
-    this.notifications.push({ title, type, id: v4(), timer });
+    this.notifications.push({ title, type, id: id ? id : v4(), timer });
     this._globalNotifications.next(this.notifications);
   }
 

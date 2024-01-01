@@ -1,16 +1,30 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 
 import { NotificationComponent } from './notification.component';
 import { NotificationModule } from '../../notification.module';
 import { NotificationType } from '../../interfaces/i-notification';
+import { NotificationService } from '../../services/notification.service';
 
 describe('NotificationComponent', () => {
   let component: NotificationComponent;
   let fixture: ComponentFixture<NotificationComponent>;
 
+  let notificationServiceMock: jasmine.SpyObj<NotificationService>;
+
   beforeEach(async () => {
+    notificationServiceMock = jasmine.createSpyObj('NotificationService', [
+      'removeNotification',
+    ]);
     await TestBed.configureTestingModule({
       imports: [NotificationModule],
+      providers: [
+        { provide: NotificationService, useValue: notificationServiceMock },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NotificationComponent);
@@ -25,5 +39,44 @@ describe('NotificationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('#ngOnInit', () => {
+    it('should do nothing if notification.timer is undefined', () => {
+      component.notification.timer = undefined;
+
+      component.ngOnInit();
+
+      expect(component.timeLeft).toBeUndefined();
+    });
+    it('should set timeLeft to notification.timer', () => {
+      component.notification.timer = 10;
+      component.ngOnInit();
+
+      expect(component.timeLeft).toEqual(10);
+    });
+    it('should call #onClose after given duration is passed', fakeAsync(() => {
+      spyOn(component, 'onClose');
+      component.notification.timer = 100;
+      component.ngOnInit();
+
+      expect(component.onClose).not.toHaveBeenCalled();
+
+      tick(100);
+
+      expect(component.onClose).toHaveBeenCalledTimes(1);
+    }));
+  });
+
+  describe('#onClose', () => {
+    it('should call notification service #removeNotification with own id', () => {
+      component.notification.id = 'test-id';
+
+      component.onClose();
+
+      expect(
+        notificationServiceMock.removeNotification
+      ).toHaveBeenCalledOnceWith('test-id');
+    });
   });
 });
