@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotificationComponent } from './notification.component';
+import { NotificationModule } from '../../notification.module';
+import { NotificationType } from '../../interfaces/i-notification';
 
 describe('NotificationComponent', () => {
   let component: NotificationComponent;
@@ -8,12 +10,16 @@ describe('NotificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotificationComponent]
-    })
-    .compileComponents();
-    
+      imports: [NotificationModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(NotificationComponent);
     component = fixture.componentInstance;
+
+    component.notification = {
+      type: NotificationType.SUCCESS,
+      title: 'test-title',
+    };
     fixture.detectChanges();
   });
 

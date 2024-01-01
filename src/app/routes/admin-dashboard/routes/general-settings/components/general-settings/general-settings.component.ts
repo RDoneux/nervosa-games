@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { from } from 'rxjs';
+import { of } from 'rxjs';
 import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
 import { NotificationType } from 'src/app/modules/notification/interfaces/i-notification';
 import { NotificationService } from 'src/app/modules/notification/services/notification.service';
@@ -35,7 +35,7 @@ export class GeneralSettingsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    from(
+    of(
       this.firestoreService
         .getFirestore()
         .collection('general-settings')
