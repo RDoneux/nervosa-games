@@ -30,10 +30,12 @@ export class ProductGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productGroupService.getProductsFromTag(this.tag).subscribe((res) => {
-      this.products = res;
-      this.initaliseProductsLikedValue(this.products);
-    });
+    this.productGroupService
+      .getProductsFromTag(this.tag)
+      .subscribe((res) => {
+        this.products = res;
+        this.initaliseProductsLikedValue(this.products);
+      });
     this.firestoreService
       .getFirestore()
       .collection('general-settings')

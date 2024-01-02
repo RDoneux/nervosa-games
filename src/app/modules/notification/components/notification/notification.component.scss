@@ -1,0 +1,96 @@
+@import 'variables';
+
+:host {
+    width: 100%;
+    display: block;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 60%;
+    height: 60px;
+
+    margin-bottom: 10px;
+}
+
+.notification-container {
+
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr auto;
+    column-gap: 30px;
+
+    align-items: center;
+
+    border-radius: 5px;
+    box-shadow: 0 2px 4px $shadow-colour;
+    color: $text-dark-colour;
+    backdrop-filter: blur(5px);
+    background: transparentize(white, .3);
+
+    .timer {
+        height: 3px;
+        grid-column: 1 / span 3;
+        align-self: end;
+    }
+
+    &.success {
+        background: transparentize($success-colour, .7);
+        border-left: 4px solid $success-colour;
+
+        span.material-symbols-outlined {
+            color: $success-colour;
+        }
+
+        .timer {
+            background: $success-colour;
+        }
+    }
+
+    &.warning {
+        background: transparentize($primary-accent-colour, .7);
+        border-left: 4px solid $primary-accent-colour;
+
+        span.material-symbols-outlined {
+            color: $primary-accent-colour;
+        }
+    }
+
+    &.info {
+        background: transparentize($secondary-accent-colour, .7);
+        border-left: 4px solid $secondary-accent-colour;
+
+        span.material-symbols-outlined {
+            color: $secondary-accent-colour;
+        }
+    }
+
+    &.danger {
+        background: transparentize($danger-colour, .7);
+        border-left: 4px solid $danger-colour;
+
+        span.material-symbols-outlined {
+            color: $danger-colour;
+        }
+    }
+
+    span.material-symbols-outlined {
+        font-size: 32px;
+        padding-left: 10px;
+
+        &.close {
+            color: $text-dark-colour;
+            cursor: pointer;
+            padding-right: 10px;
+
+            &:hover {
+                color: lighten($text-dark-colour, 15);
+            }
+        }
+    }
+
+}

@@ -1,0 +1,14 @@
+<div class="notification-container" [class]="notification.type">
+  <span class="material-symbols-outlined">
+    @switch(notification.type) { @case('success') { check_circle } @case('info')
+    {info} @case('warning') {warning} @case('danger') {error} }
+  </span>
+  {{ notification.title }}
+  <span class="material-symbols-outlined close" (click)="onClose()">close</span>
+  @if(notification.timer){
+  <div
+    class="timer"
+    [style.width]="(timeLeft * 100) / notification.timer + '%'"
+  ></div>
+  }
+</div>
