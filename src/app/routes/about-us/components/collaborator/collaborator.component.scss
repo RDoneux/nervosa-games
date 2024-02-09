@@ -1,5 +1,6 @@
 .collaborator {
     display: grid;
+    column-gap: 50px;
 
     &.primary {
         grid-template-columns: auto 1fr;
@@ -15,11 +16,18 @@
         grid-template-columns: 1fr;
         justify-items: center;
         max-width: 500px;
+
+        .collaborator__title-wrapper {
+            width: 100%;
+        }
     }
 
     .collaborator__picture {
-        display: relative;
+        display: flex;
         grid-row: 1 / span 2;
+
+        align-items: flex-end;
+        justify-content: center;
 
         .profile-picture {
             object-fit: cover;
@@ -28,14 +36,21 @@
             border-radius: 50%;
         }
 
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        a {
+            position: absolute;
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 30%;
+                transition: transform 150ms linear;
+                &:hover {
+                    transform: scale(1.1)
+                }
+            }
         }
     }
 
-    .collaborator__text{
+    .collaborator__text {
         line-height: 40px;
     }
 

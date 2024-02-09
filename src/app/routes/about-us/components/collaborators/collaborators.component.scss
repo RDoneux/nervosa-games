@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-    row-gap: 5rem;
+    row-gap: 8rem;
 
     app-collaborator[level="primary"] {
         grid-column: 1 / span 2;
