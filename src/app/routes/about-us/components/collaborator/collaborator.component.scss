@@ -1,0 +1,44 @@
+.collaborator {
+    display: grid;
+
+    &.primary {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr;
+        margin-bottom: 5rem;
+
+        .collaborator__text {
+            grid-column: 2;
+        }
+    }
+
+    &.secondary {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        max-width: 500px;
+    }
+
+    .collaborator__picture {
+        display: relative;
+        grid-row: 1 / span 2;
+
+        .profile-picture {
+            object-fit: cover;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    }
+
+    .collaborator__text{
+        line-height: 40px;
+    }
+
+
+
+}

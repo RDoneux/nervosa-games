@@ -1,0 +1,21 @@
+<div class="collaborator" [class]="level">
+  <div class="collaborator__picture">
+    <img
+      class="profile-picture"
+      [src]="collaborator.image"
+      [alt]="collaborator.name"
+    />
+    <a [href]="collaborator.linkedIn"
+      ><img class="social-icon" src="/assets/icons/linked-in.svg"
+    /></a>
+  </div>
+
+  <div class="collaborator__title-wrapper">
+    <h1 class="collaborator__name">{{ collaborator.name }}</h1>
+    <h4 class="collaborator__title">
+      {{ collaborator.title.toUpperCase() }}
+    </h4>
+  </div>
+
+  <p class="collaborator__text">{{ collaborator.text }}</p>
+</div>

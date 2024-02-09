@@ -4,10 +4,11 @@ export interface IAboutUsCollaborators extends IAboutUsData {
   key: {
     founder: ICollaborator;
     marketingManager: ICollaborator;
+    developer: ICollaborator;
   };
 }
 
-interface ICollaborator {
+export interface ICollaborator {
   name: string;
   image: string;
   title: string;
