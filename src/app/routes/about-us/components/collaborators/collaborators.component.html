@@ -1,0 +1,16 @@
+@if(collaborators){
+<img
+  [src]="collaborators.key.founder.image"
+  [alt]="collaborators.key.founder.name"
+/>
+<h1>{{ collaborators.key.founder.name }}</h1>
+<h4>{{ collaborators.key.founder.title }}</h4>
+<p>{{ collaborators.key.founder.text }}</p>
+<img
+  [src]="collaborators.key.marketingManager.image"
+  [alt]="collaborators.key.marketingManager.name"
+/>
+<h1>{{ collaborators.key.marketingManager.name }}</h1>
+<h4>{{ collaborators.key.marketingManager.title }}</h4>
+<p>{{ collaborators.key.marketingManager.text }}</p>
+}
