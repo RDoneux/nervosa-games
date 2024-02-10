@@ -42,15 +42,18 @@ export class ContactUsComponent {
   public send(form: NgForm): void {
     if (form.valid) {
       of(
-        this.firestoreService.getFirestore().collection('mail').add({
-          to: 'robertdoneux@gmail.com',
-          from: this.email,
-          sender: this.name,
-          message: {
-            subject: this.subject,
-            text: this.message            
-          }
-        })
+        this.firestoreService
+          .getFirestore()
+          .collection('mail')
+          .add({
+            to: 'robertdoneux@gmail.com',
+            from: this.email,
+            sender: this.name,
+            message: {
+              subject: this.subject,
+              text: this.message,
+            },
+          })
       ).subscribe({
         next: () =>
           this.notificationService.showNotification(
@@ -65,15 +68,7 @@ export class ContactUsComponent {
             5000
           ),
       });
-      this.reset();
+      form.resetForm();
     }
-  }
-
-  reset(): void {
-    this.token = undefined;
-    this.name = '';
-    this.email = '';
-    this.subject = '';
-    this.message = '';
   }
 }

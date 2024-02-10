@@ -1,18 +1,20 @@
-<div
-  class="nerv-g-form-control-container"
-  [class.inline-layout]="layout === 'INLINE'"
-  [class.static-layout]="layout === 'STATIC'"
-  #container
->
-  <ng-content></ng-content>
-  <label
-    class="nerv-g-form-control-label"
-    [for]="id"
-    [class.retract-label]="hasContent"
-    >{{ label }}</label
+<div class="nerv-g-form-control-wrapper">
+  <div
+    class="nerv-g-form-control-container"
+    [class.inline-layout]="layout === 'INLINE'"
+    [class.static-layout]="layout === 'STATIC'"
+    #container
   >
+    <ng-content></ng-content>
+    <label
+      class="nerv-g-form-control-label"
+      [for]="id"
+      [class.retract-label]="hasContent"
+      >{{ label }}</label
+    >
+  </div>
+  <app-form-control-error
+    [ngModel]="ngModel"
+    [errors]="errors"
+  ></app-form-control-error>
 </div>
-<app-form-control-error
-  [ngModel]="ngModel"
-  [errors]="errors"
-></app-form-control-error>
