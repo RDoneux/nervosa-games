@@ -1,2 +1,5 @@
 <app-title-text [text]="text"></app-title-text>
 <app-collaborators [collaborators]="collaborators"></app-collaborators>
+@if(text) {
+<app-footer-text [text]="text.contact"></app-footer-text>
+}

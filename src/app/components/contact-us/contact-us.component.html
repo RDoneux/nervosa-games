@@ -1,0 +1,28 @@
+<h3 id="contact-us" class="title">Please fill out all of the fields below:</h3>
+<form #form="ngForm" (submit)="send(form)">
+  <app-form-control label="Name" id="name">
+    <input [(ngModel)]="name" name="name" required />
+  </app-form-control>
+
+  <app-form-control label="Email">
+    <input [(ngModel)]="email" name="email" required />
+  </app-form-control>
+
+  <app-form-control label="Subject">
+    <input [(ngModel)]="subject" name="subject" required />
+  </app-form-control>
+
+  <app-form-control label="Message">
+    <textarea [(ngModel)]="message" name="message" rows="5" required></textarea>
+  </app-form-control>
+
+  <re-captcha
+    id="recaptcha"
+    name="recaptcha"
+    [(ngModel)]="token"
+    #recaptcha="ngModel"
+    required
+  ></re-captcha>
+
+  <input type="submit" value="Send" [disabled]="form.invalid"/>
+</form>

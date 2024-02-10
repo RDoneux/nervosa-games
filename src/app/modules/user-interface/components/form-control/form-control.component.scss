@@ -1,5 +1,10 @@
 @import 'variables';
 
+:host {
+    display: block;
+    height: 50px;
+}
+
 .nerv-g-form-control-container {
 
     display: flex;
@@ -13,10 +18,10 @@
         .nerv-g-form-control-label {
             top: 0;
             left: 0;
-            color: $text-dark-colour;
-            font-size: 12px;
+            transform: translate(5px, 5px);
+
             &.retract-label {
-                transform: translateY(0);
+                transform: translate(0);
             }
         }
 

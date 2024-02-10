@@ -1,4 +1,5 @@
 export interface IEnvironment {
     debug: string[];
-    firebase: any
+    firebase: any;
+    siteKey: string
 }
