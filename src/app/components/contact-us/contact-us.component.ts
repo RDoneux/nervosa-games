@@ -42,11 +42,14 @@ export class ContactUsComponent {
   public send(form: NgForm): void {
     if (form.valid) {
       of(
-        this.firestoreService.getFirestore().collection('emails').add({
-          name: this.name,
-          email: this.email,
-          subject: this.subject,
-          message: this.message,
+        this.firestoreService.getFirestore().collection('mail').add({
+          to: 'robertdoneux@gmail.com',
+          from: this.email,
+          sender: this.name,
+          message: {
+            subject: this.subject,
+            text: this.message            
+          }
         })
       ).subscribe({
         next: () =>
