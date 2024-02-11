@@ -3,10 +3,17 @@
   development:
 </h3>
 
-@if(playTesters) {
-<div class="play-tester__wrapper">
-  @for(tester of playTesters.data; track tester) {
-  <div #playTester class="play-tester__container">{{ tester }}</div>
+<div class="scroll-wrapper">
+  @if(playTesters) {
+  <div class="play-testers__one">
+    @for(tester of playTesters.data; track tester) {
+    <div #playTester class="play-tester__container">{{ tester }}</div>
+    }
+  </div>
+  <div class="play-testers__two">
+    @for(tester of playTesters.data; track tester) {
+    <div #playTester class="play-tester__container">{{ tester }}</div>
+    }
+  </div>
   }
 </div>
-}
