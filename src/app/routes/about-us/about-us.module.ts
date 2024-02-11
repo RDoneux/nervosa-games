@@ -7,8 +7,8 @@ import { TitleTextComponent } from './components/title-text/title-text.component
 import { CollaboratorsComponent } from './components/collaborators/collaborators.component';
 import { CollaboratorComponent } from './components/collaborator/collaborator.component';
 import { ContactUsComponent } from 'src/app/components/contact-us/contact-us.component';
-import { FooterComponent } from 'src/app/components/footer/components/footer/footer.component';
 import { FooterTextComponent } from './components/footer-text/footer-text.component';
+import { PlayTestersComponent } from './components/play-testers/play-testers.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import { FooterTextComponent } from './components/footer-text/footer-text.compon
     CollaboratorsComponent,
     CollaboratorComponent,
     FooterTextComponent,
+    PlayTestersComponent,
   ],
   imports: [CommonModule, AboutUsRoutingModule, ContactUsComponent],
 })
