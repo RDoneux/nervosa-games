@@ -14,6 +14,11 @@ nav.top-navigation {
 
     padding: 0 20px;
 
+    &.home {
+        box-shadow: 0 4px 5px transparentize(black, .2);
+    }
+
+
     @include tablet-down {
 
         height: 70px;

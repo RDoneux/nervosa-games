@@ -1,3 +1,50 @@
+@import 'variables';
+
+.hero-image__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    margin-bottom: 30px;
+    top: -74px;
+
+    &::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgb(255, 255, 255);
+        background: linear-gradient(180deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, 1) 100%);
+    }
+
+    .hero-image {
+        width: 100%;
+        object-fit: cover;
+        height: 600px;
+    }
+
+    .title-wrapper {
+        position: absolute;
+        background: transparentize($text-dark-colour, .1);
+        padding: 5px 10%;
+        h3 {
+            font-size: 12px;
+        }
+
+        h1,
+        h3 {
+            color: $text-light-colour;
+            // backdrop-filter: blur(4px);
+            // background: transparentize($color: $text-light-colour, $amount: .7);
+            border-radius: 5px;
+            // width: 100%;
+            text-align: center;
+        }
+    }
+}
+
 app-product-group {
     margin-top: 40px;
 }

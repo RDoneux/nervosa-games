@@ -2,6 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ISocialMediaIconLink } from '../../interfaces/i-social-media-icon-link.interface';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-product-search',
@@ -10,14 +17,18 @@ import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interfac
 })
 export class ProductSearchComponent implements OnInit {
   @Input({ required: true }) socialMediaIconLinks: ISocialMediaIconLink[] = [];
+  @Input({required: true}) url!: string;
 
   public searchTerm!: string;
 
   private storeGeneralSettings!: IGeneralSettings;
 
-  constructor(private firestoreService: FirestoreService) {}
+  constructor(
+    private firestoreService: FirestoreService,
+  ) {}
 
   ngOnInit(): void {
+
     this.firestoreService
       .getFirestore()
       .collection('general')

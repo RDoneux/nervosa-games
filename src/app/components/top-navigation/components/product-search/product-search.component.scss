@@ -63,4 +63,9 @@ div.product-search {
         }
     }
 
+    &.home .product-search__search-input{
+        background-color: transparentize(white, .9);
+        color: white;
+    }
+
 }

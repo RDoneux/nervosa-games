@@ -1,4 +1,4 @@
-<nav class="top-navigation">
+<nav class="top-navigation" [class]="url">
   <app-navigation-links-mobile [routes]="routes"></app-navigation-links-mobile>
 
   <app-home-icon></app-home-icon>
@@ -14,4 +14,5 @@
 
 <app-product-search
   [socialMediaIconLinks]="socialMediaIcons"
+  [url]="url"
 ></app-product-search>
