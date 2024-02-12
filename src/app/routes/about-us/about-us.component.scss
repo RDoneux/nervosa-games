@@ -1,4 +1,11 @@
+@import 'mixins';
+
 :host {
     padding: 1rem 5rem;
     display: block;
+    overflow-x: hidden;
+
+    @include mobile-down {
+        padding: 1rem;   
+    }
 }

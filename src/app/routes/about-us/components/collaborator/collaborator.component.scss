@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .collaborator {
     display: grid;
     column-gap: 50px;
@@ -38,11 +40,13 @@
 
         a {
             position: absolute;
+
             .social-icon {
                 width: 40px;
                 height: 40px;
                 border-radius: 30%;
                 transition: transform 150ms linear;
+
                 &:hover {
                     transform: scale(1.1)
                 }
@@ -54,6 +58,9 @@
         line-height: 30px;
     }
 
-
+    @include mobile-down {
+        display: flex;
+        flex-direction: column;
+    }
 
 }
