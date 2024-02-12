@@ -1,4 +1,4 @@
-import { IEnvironment } from "./i-environment";
+import { IEnvironment } from './i-environment';
 
 export const environment: IEnvironment = {
   firebase: {
@@ -10,5 +10,6 @@ export const environment: IEnvironment = {
     messagingSenderId: '630663851149',
     measurementId: 'G-6MPXZZQJGB',
   },
-    debug: ['welcome', 'method-not-implemented', 'error']
+  debug: ['welcome', 'method-not-implemented', 'error'],
+  siteKey: '6LdN-W0pAAAAAMySlu0NUzcilMMIfmJvYAeQTk2s',
 };

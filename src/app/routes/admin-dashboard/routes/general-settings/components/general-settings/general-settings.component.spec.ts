@@ -5,7 +5,7 @@ import { GeneralSettingsModule } from '../../general-settings.module';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { NgForm } from '@angular/forms';
-import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
+import { IStoreGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 
 describe('GeneralSettingsComponent', () => {
   let component: GeneralSettingsComponent;

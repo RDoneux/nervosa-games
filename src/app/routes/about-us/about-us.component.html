@@ -1,1 +1,6 @@
-<p>about-us works!</p>
+<app-title-text [text]="text"></app-title-text>
+<app-collaborators [collaborators]="collaborators"></app-collaborators>
+<app-play-testers [playTesters]="playTesters"></app-play-testers>
+@if(text) {
+<app-footer-text [text]="text.contact"></app-footer-text>
+}

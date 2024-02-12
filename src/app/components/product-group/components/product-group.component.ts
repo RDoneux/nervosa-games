@@ -6,7 +6,7 @@ import { IProduct } from '../../product/interfaces/i-product.interface';
 import { UserService } from 'src/app/services/user/user.service';
 import { take } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
-import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
+import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 
 @Component({
   selector: 'app-product-group',
@@ -21,7 +21,7 @@ export class ProductGroupComponent implements OnInit {
   @Input() description!: string;
 
   public products!: IProduct[];
-  public storeGeneralSettings!: IStoreGeneralSettings | undefined;
+  public storeGeneralSettings!: IGeneralSettings | undefined;
 
   constructor(
     private productGroupService: ProductGroupService,
@@ -38,11 +38,11 @@ export class ProductGroupComponent implements OnInit {
       });
     this.firestoreService
       .getFirestore()
-      .collection('general-settings')
-      .doc<IStoreGeneralSettings>('store')
+      .collection('general')
+      .doc<IGeneralSettings>('settings')
       .valueChanges()
       .subscribe({
-        next: (res: IStoreGeneralSettings | undefined) =>
+        next: (res: IGeneralSettings | undefined) =>
           (this.storeGeneralSettings = res),
       });
   }

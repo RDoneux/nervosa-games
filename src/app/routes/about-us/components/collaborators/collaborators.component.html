@@ -1,0 +1,14 @@
+@if(collaborators){
+<app-collaborator
+  [collaborator]="collaborators.key.founder"
+  level="primary"
+></app-collaborator>
+<app-collaborator
+  [collaborator]="collaborators.key.marketingManager"
+  level="secondary"
+></app-collaborator>
+<app-collaborator
+  [collaborator]="collaborators.key.developer"
+  level="secondary"
+></app-collaborator>
+}

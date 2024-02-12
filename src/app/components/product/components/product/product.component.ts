@@ -6,7 +6,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import { GlobalVariableService } from 'src/app/services/global-variables/global-variable.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
+import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 import { kebabCase } from 'lodash-es';
 
 @Component({
@@ -16,7 +16,7 @@ import { kebabCase } from 'lodash-es';
 })
 export class ProductComponent implements OnInit {
   @Input({ required: true }) product!: IProduct;
-  @Input() storeGeneralSettings!: IStoreGeneralSettings | undefined;
+  @Input() storeGeneralSettings!: IGeneralSettings | undefined;
 
   public newPeriod!: Timestamp;
   public showMoreDetails: boolean = false;

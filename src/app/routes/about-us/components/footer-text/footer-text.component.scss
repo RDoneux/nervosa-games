@@ -1,0 +1,19 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    width: 100%;
+}
+
+hr {
+    margin-top: 5rem;
+    color: #aaa;
+    width: 100%;
+}
+
+p {
+    line-height: 40px;
+}

@@ -11,4 +11,5 @@ export const environment: IEnvironment = {
     measurementId: 'G-6MPXZZQJGB',
   },
   debug: ['error'],
+  siteKey: '6LdN-W0pAAAAAMySlu0NUzcilMMIfmJvYAeQTk2s'
 };

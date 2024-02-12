@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductSearchComponent } from './product-search.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
-import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
+import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { TopNavigationModule } from '../../top-navigation.module';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
@@ -12,10 +12,11 @@ describe('ProductSearchComponent', () => {
   let component: ProductSearchComponent;
   let fixture: ComponentFixture<ProductSearchComponent>;
 
-  let payload: IStoreGeneralSettings = {
+  let payload: IGeneralSettings = {
     redirectToSumupStore: true,
     sumupStoreURL: 'test-sumup-store-url',
     openInNewTab: true,
+    contactFormDestinationAddress: 'test-destination-address'
   };
 
   beforeEach(() => {

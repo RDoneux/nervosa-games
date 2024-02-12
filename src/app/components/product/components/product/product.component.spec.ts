@@ -7,7 +7,7 @@ import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { mockedCartItem, mockedProduct } from 'src/app/data/test-data.spec';
 import { UserService } from 'src/app/services/user/user.service';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
+import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 import { IProduct } from '../../interfaces/i-product.interface';
 
 describe('ProductComponent', () => {
@@ -121,7 +121,7 @@ describe('ProductComponent', () => {
 
       component.storeGeneralSettings = {
         openInNewTab: false,
-      } as IStoreGeneralSettings;
+      } as IGeneralSettings;
 
       component.onClick();
 
@@ -133,6 +133,7 @@ describe('ProductComponent', () => {
         openInNewTab: true,
         sumupStoreURL: 'test-url',
         redirectToSumupStore: true,
+        contactFormDestinationAddress: 'test-destination-address'
       };
       component.product = { title: 'Test Title' } as IProduct;
 
@@ -149,6 +150,7 @@ describe('ProductComponent', () => {
         openInNewTab: false,
         sumupStoreURL: 'test-url',
         redirectToSumupStore: true,
+        contactFormDestinationAddress: 'test-destination-address'
       };
       component.product = { title: 'Test Title' } as IProduct;
 

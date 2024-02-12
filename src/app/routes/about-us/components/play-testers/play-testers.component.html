@@ -1,0 +1,19 @@
+<h3>
+  Nervosa Games would also like to thank the many people who have supported it's
+  development:
+</h3>
+
+<div class="scroll-wrapper">
+  @if(playTesters) {
+  <div class="play-testers__one">
+    @for(tester of playTesters.data; track tester) {
+    <div #playTester class="play-tester__container">{{ tester }}</div>
+    }
+  </div>
+  <div class="play-testers__two">
+    @for(tester of playTesters.data; track tester) {
+    <div #playTester class="play-tester__container">{{ tester }}</div>
+    }
+  </div>
+  }
+</div>

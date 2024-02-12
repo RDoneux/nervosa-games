@@ -1,10 +1,11 @@
-<h1>Store</h1>
 @if(storeGeneralSettings) {
 <form
   #generalSettingsForm="ngForm"
   class="store-settings__form nervosa-games__form"
   (submit)="onSubmit(generalSettingsForm)"
 >
+  <!-- STORE SETTINGS -->
+  <h1>Store</h1>
   <app-form-control label="Redirect to Sumup store">
     <input
       type="checkbox"
@@ -29,8 +30,22 @@
     />
   </app-form-control>
 
+  <!-- MAIL SETTINGS -->
+  <h1>Mail</h1>
+  <app-form-control
+    class="full-width"
+    label="Nervosa Games contact form destination address"
+  >
+    <input
+      type="email"
+      [(ngModel)]="storeGeneralSettings.contactFormDestinationAddress"
+      name="desitnationAddress"
+    />
+  </app-form-control>
+
+  <!-- SUBMIT BUTTON -->
   <input
-    class="button-full-width"
+    class="full-width"
     type="submit"
     value="Save"
     [disabled]="!generalSettingsForm.valid || generalSettingsForm.pristine"

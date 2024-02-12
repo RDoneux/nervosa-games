@@ -1,0 +1,39 @@
+@import 'variables';
+
+h3 {
+    margin-top: 5rem;
+}
+
+.scroll-wrapper {
+    // overflow-x: hidden;
+    display: flex;
+    width: 100vw;
+
+
+    .play-testers__one,
+    .play-testers__two {
+        display: flex;
+        width: fit-content;
+        animation: scroll infinite linear 25s;
+
+
+        .play-tester__container {
+            white-space: nowrap;
+            margin: 0 20px;
+            padding: 10px 20px;
+            background: transparentize(black, .4);
+            border-radius: 5px;
+            color: $text-light-colour;
+        }
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0)
+    }
+
+    100% {
+        transform: translateX(-100%)
+    }
+}
