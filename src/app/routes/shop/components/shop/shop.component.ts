@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
+import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 
 @Component({
@@ -17,11 +17,11 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.firestoreService
       .getFirestore()
-      .collection('general-settings')
-      .doc<IStoreGeneralSettings>('store')
+      .collection('general')
+      .doc<IGeneralSettings>('settings')
       .valueChanges()
       .subscribe({
-        next: (res: IStoreGeneralSettings | undefined) => {
+        next: (res: IGeneralSettings | undefined) => {
           this.redirectToSumupStore = res?.redirectToSumupStore ?? true;
           this.redirectUrl = res?.sumupStoreURL ?? '/'
           this.shouldRedirect(res);
@@ -30,7 +30,7 @@ export class ShopComponent implements OnInit {
   }
 
   /* istanbul ignore next */
-  shouldRedirect(generalSettings: IStoreGeneralSettings | undefined): void {
+  shouldRedirect(generalSettings: IGeneralSettings | undefined): void {
     if (generalSettings?.redirectToSumupStore) {
       // site is configured to redirect to the sumup store
       if (window.history.state.navigationId > 1) {

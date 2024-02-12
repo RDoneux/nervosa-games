@@ -8,11 +8,15 @@
 
 }
 
+h1 {
+    grid-column: 1 / span 3;
+}
+
 .store-settings__form.nervosa-games__form {
     grid-template-columns: auto auto 1fr;
     column-gap: 25px
 }
 
-.button-full-width {
+.full-width {
     grid-column: 1 / span 3
 }

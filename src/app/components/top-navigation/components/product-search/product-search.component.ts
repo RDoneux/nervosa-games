@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ISocialMediaIconLink } from '../../interfaces/i-social-media-icon-link.interface';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
-import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
+import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 
 @Component({
   selector: 'app-product-search',
@@ -13,18 +13,18 @@ export class ProductSearchComponent implements OnInit {
 
   public searchTerm!: string;
 
-  private storeGeneralSettings!: IStoreGeneralSettings;
+  private storeGeneralSettings!: IGeneralSettings;
 
   constructor(private firestoreService: FirestoreService) {}
 
   ngOnInit(): void {
     this.firestoreService
       .getFirestore()
-      .collection('general-settings')
-      .doc<IStoreGeneralSettings>('store')
+      .collection('general')
+      .doc<IGeneralSettings>('settings')
       .valueChanges()
       .subscribe({
-        next: (res: IStoreGeneralSettings | undefined) => {
+        next: (res: IGeneralSettings | undefined) => {
           if (res) this.storeGeneralSettings = res;
         },
       });

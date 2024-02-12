@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { of } from 'rxjs';
-import { IStoreGeneralSettings } from 'src/app/interfaces/i-store-general-settings.interface';
+import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 import { NotificationType } from 'src/app/modules/notification/interfaces/i-notification';
 import { NotificationService } from 'src/app/modules/notification/services/notification.service';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
@@ -12,7 +12,7 @@ import { FirestoreService } from 'src/app/services/firestore/firestore.service';
   styleUrl: './general-settings.component.scss',
 })
 export class GeneralSettingsComponent implements OnInit {
-  public storeGeneralSettings!: IStoreGeneralSettings;
+  public storeGeneralSettings!: IGeneralSettings;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -22,11 +22,11 @@ export class GeneralSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.firestoreService
       .getFirestore()
-      .collection('general-settings')
-      .doc<IStoreGeneralSettings>('store')
+      .collection('general')
+      .doc<IGeneralSettings>('settings')
       .valueChanges()
       .subscribe({
-        next: (res: IStoreGeneralSettings | undefined) => {
+        next: (res: IGeneralSettings | undefined) => {
           if (res) {
             this.storeGeneralSettings = res;
           }
@@ -38,8 +38,8 @@ export class GeneralSettingsComponent implements OnInit {
     of(
       this.firestoreService
         .getFirestore()
-        .collection('general-settings')
-        .doc<IStoreGeneralSettings>('store')
+        .collection('general')
+        .doc<IGeneralSettings>('settings')
         .update(this.storeGeneralSettings)
     ).subscribe({
       next: () => {
