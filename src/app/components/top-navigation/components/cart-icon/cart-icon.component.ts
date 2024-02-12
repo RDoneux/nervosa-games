@@ -1,11 +1,7 @@
 import {
   Component,
-  ElementRef,
-  HostListener,
   OnInit,
-  ViewChild,
 } from '@angular/core';
-import { debug } from 'src/app/services/debug/debug';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ICartItem } from 'src/app/interfaces/i-cart-item.interface';
 

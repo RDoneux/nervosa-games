@@ -7,7 +7,9 @@
     [routes]="routes"
   ></app-navigation-links-desktop>
 
+  @if(!settings?.redirectToSumupStore) {
   <app-cart-icon></app-cart-icon>
+  }
 </nav>
 
 <app-product-search
