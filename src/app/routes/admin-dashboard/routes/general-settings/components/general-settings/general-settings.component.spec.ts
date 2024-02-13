@@ -5,7 +5,7 @@ import { GeneralSettingsModule } from '../../general-settings.module';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { NgForm } from '@angular/forms';
-import { IStoreGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
+import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 
 describe('GeneralSettingsComponent', () => {
   let component: GeneralSettingsComponent;
@@ -13,10 +13,11 @@ describe('GeneralSettingsComponent', () => {
 
   let firestoreStub: any;
 
-  const payload: IStoreGeneralSettings = {
+  const payload: IGeneralSettings = {
     redirectToSumupStore: true,
     sumupStoreURL: 'test-sumupstore-url',
     openInNewTab: false,
+    contactFormDestinationAddress: 'test-destination-address',
   };
 
   beforeEach(async () => {
