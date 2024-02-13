@@ -8,6 +8,7 @@ const routes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',
+    data: { animation: 'fadeInOutRoute' },
   },
   {
     path: 'shop',
@@ -16,6 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'services',
+    data: { animation: 'fadeInOutRoute' },
     loadChildren: () =>
       import('./routes/services/services.module').then((m) => m.ServicesModule),
   },
