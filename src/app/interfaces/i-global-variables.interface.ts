@@ -1,3 +1,5 @@
 export interface IGlobalVariables {
-    periodProductsAreConsideredNewInWeeks: number
+  periodProductsAreConsideredNewInWeeks: number;
+  recaptchaSiteKey: string;
+  apiKey: string;
 }

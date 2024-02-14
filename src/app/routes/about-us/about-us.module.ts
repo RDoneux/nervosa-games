@@ -9,8 +9,6 @@ import { CollaboratorComponent } from './components/collaborator/collaborator.co
 import { ContactUsComponent } from 'src/app/components/contact-us/contact-us.component';
 import { FooterTextComponent } from './components/footer-text/footer-text.component';
 import { PlayTestersComponent } from './components/play-testers/play-testers.component';
-import { HttpClientModule } from '@angular/common/http';
-
 @NgModule({
   declarations: [
     AboutUsComponent,
@@ -20,6 +18,6 @@ import { HttpClientModule } from '@angular/common/http';
     FooterTextComponent,
     PlayTestersComponent,
   ],
-  imports: [CommonModule, AboutUsRoutingModule, ContactUsComponent, HttpClientModule],
+  imports: [CommonModule, AboutUsRoutingModule, ContactUsComponent],
 })
 export class AboutUsModule {}

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import {
@@ -6,12 +5,13 @@ import {
   RecaptchaFormsModule,
   RecaptchaModule,
 } from 'ng-recaptcha';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
 import { NotificationService } from 'src/app/modules/notification/services/notification.service';
 import { UserInterfaceModule } from 'src/app/modules/user-interface/user-interface.module';
 import { debug } from 'src/app/services/debug/debug';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
+import { RecaptchaService } from 'src/app/services/recaptcha/recaptcha.service';
 import { UtilsService } from 'src/app/services/utils/utils.service';
 import { environment } from 'src/environments/environment';
 
@@ -34,7 +34,7 @@ export class ContactUsComponent implements OnInit {
   constructor(
     private firestoreService: FirestoreService,
     private notificationService: NotificationService,
-    private httpClient: HttpClient,
+    private recaptchaService: RecaptchaService,
     private utilsService: UtilsService
   ) {}
 
@@ -72,21 +72,12 @@ export class ContactUsComponent implements OnInit {
       );
     }
     if (form.valid) {
-      this.checkRecaptchaKey(this.token ?? '').subscribe({
-        next: (response: any) => {
-          console.log(response.tokenProperties.valid);
-          if (response.tokenProperties.valid) {
-            if (this.utilsService.isDevMode()) {
-              debug('info')(
-                'Message not queued for sending because applciation is in development mode'
-              );
-            } else {
-              this.queueMessageForSending();
-            }
-          } else {
-            debug('error')('Invalid recaptcha token');
-          }
+      this.recaptchaService.checkRecapthaKey(this.token ?? '').subscribe({
+        next: () => {
+          this.queueMessageForSending();
         },
+        error: (error: any) =>
+          debug('error')('There was an error checking the recaptcha key'),
       });
 
       form.resetForm();
@@ -94,6 +85,14 @@ export class ContactUsComponent implements OnInit {
   }
 
   private queueMessageForSending(): void {
+    if (this.utilsService.isDevMode()) {
+      this.notificationService.showNotification(
+        'Message not queued for sending because application is in dev mode',
+        'info'
+      );
+      return;
+    }
+
     of(
       this.firestoreService
         .getFirestore()
@@ -123,17 +122,5 @@ export class ContactUsComponent implements OnInit {
           5000
         ),
     });
-  }
-
-  private checkRecaptchaKey(response: string): Observable<any> {
-    return this.httpClient.post(
-      'https://recaptchaenterprise.googleapis.com/v1/projects/nervosa-games/assessments?key=AIzaSyCXbEJlPpMWYxOFimUR3OxwD4xs9QM10Xo',
-      {
-        event: {
-          token: response,
-          siteKey: '6LdN-W0pAAAAAMySlu0NUzcilMMIfmJvYAeQTk2s',
-        },
-      }
-    );
   }
 }
