@@ -10,6 +10,6 @@ export const environment: IEnvironment = {
     messagingSenderId: '630663851149',
     measurementId: 'G-6MPXZZQJGB',
   },
-  debug: ['welcome', 'method-not-implemented', 'error'],
+  debug: ['welcome', 'method-not-implemented', 'error', 'info'],
   siteKey: '6LdN-W0pAAAAAMySlu0NUzcilMMIfmJvYAeQTk2s',
 };
