@@ -1,6 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
+:host {
+    backdrop-filter: blur(3px);
+    background: linear-gradient(180deg, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
 nav.top-navigation {
     width: 100%;
     height: 100px;

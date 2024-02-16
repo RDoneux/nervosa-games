@@ -33,7 +33,7 @@ export class ProductComponent implements OnInit {
         (this.newPeriod = Timestamp.fromDate(
           addWeeks(
             new Date(),
-            variables?.periodProductsAreConsideredNewInWeeks ?? -2
+            variables?.periodProductsAreConsideredNewInWeeks ?? 2
           )
         )),
     });
