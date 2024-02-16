@@ -1,5 +1,5 @@
 export interface ISocialMediaIconLink {
     href: string;
-    assetLink: string;
+    name: string;
     alt: string
 }

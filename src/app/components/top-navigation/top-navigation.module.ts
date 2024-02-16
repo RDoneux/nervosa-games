@@ -11,6 +11,7 @@ import { ProductSearchComponent } from './components/product-search/product-sear
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { FormsModule } from '@angular/forms';
 import { CartModule } from 'src/app/modules/cart/cart.module';
+import { IconComponent } from '../icon/icon.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CartModule } from 'src/app/modules/cart/cart.module';
     LeftDrawComponent,
     FormsModule,
     CartModule,
+    IconComponent
   ],
   exports: [TopNavigationComponent],
 })

@@ -3,27 +3,27 @@ import { ISocialMediaIconLink } from '../components/top-navigation/interfaces/i-
 export const socialMediaIcons: ISocialMediaIconLink[] = [
   {
     href: 'https://discord.gg/keuxHtG',
-    assetLink: 'assets/icons/discord-icon.svg',
+    name: 'discord',
     alt: 'discord-link',
   },
   {
     href: 'https://www.facebook.com/gaming/NGtabletop',
-    assetLink: 'assets/icons/facebook-icon.svg',
+    name: 'facebook',
     alt: 'facebook-link',
   },
   {
     href: 'https://www.instagram.com/nervosagames/',
-    assetLink: 'assets/icons/instagram-icon.svg',
+    name: 'instagram',
     alt: 'instragram-link',
   },
   {
     href: 'https://twitter.com/NervosaGames',
-    assetLink: 'assets/icons/twitter-icon.svg',
+    name: 'twitter',
     alt: 'twitter-link',
   },
   {
     href: 'https://www.youtube.com/@NervosaGames',
-    assetLink: 'assets/icons/youtube-icon.svg',
+    name: 'youtube',
     alt: 'youtube-link',
   },
 ];

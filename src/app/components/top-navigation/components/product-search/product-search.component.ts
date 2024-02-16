@@ -2,13 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ISocialMediaIconLink } from '../../interfaces/i-social-media-icon-link.interface';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  NavigationStart,
-  Router,
-} from '@angular/router';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-product-search',

@@ -5,7 +5,12 @@
       [href]="icon.href"
       target="_blank"
     >
-      <img [src]="icon.assetLink" [alt]="icon.alt" />
+      <!-- <img [src]="icon.assetLink" [alt]="icon.alt" /> -->
+
+      <app-icon [iconName]="icon.name"></app-icon>
+      <!-- <svg width="40" height="40" preserveAspectRatio="xMidYMid meet" viewBox="0 0 90 90">
+        <use [attr.xlink:href]="icon.assetLink + '#discord'"></use>
+      </svg> -->
     </a>
   </span>
   <input
