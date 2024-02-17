@@ -24,7 +24,7 @@
     overflow: hidden;
     height: 42px;
 
-    background: white;
+    background: transparentize($color: white, $amount: .5);
     width: fit-content;
 
     border-radius: 30px;

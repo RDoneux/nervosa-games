@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, take } from 'rxjs';
+import { Observable, ReplaySubject, filter, take } from 'rxjs';
 import { FirestoreService } from '../firestore/firestore.service';
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import {
@@ -135,12 +135,18 @@ export class LoginService {
     } else {
       this._loginRequests.next('OPEN');
     }
-    return this._loginDetails.pipe(take(1));
+    return this._loginDetails.pipe(
+      filter((value: IUser | null) => value != null),
+      take(1)
+    );
   }
 
   /* istanbul ignore next */
   getCurrentLoggedInUser(): Observable<IUser | null> {
-    return this._loginDetails.pipe(take(1));
+    return this._loginDetails.pipe(
+      filter((value: IUser | null) => value != null),
+      take(1)
+    );
   }
 
   /* istanbul ignore next */
