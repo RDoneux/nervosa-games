@@ -34,38 +34,46 @@ div.product-search {
         }
     }
 
-    .product-search__search-input {
-        margin-left: 30px;
+    .product-search__search-input-wrapper {
+        width: 100%;
+        display: flex;
+        position: relative;
+        .product-search__search-input-icon{
+            position: absolute;
+            left: 40px;
+            top: 3px;
+            color: lighten($text-dark-colour, 10);
+        }
+        .product-search__search-input {
+            margin-left: 30px;
 
-        height: 44px;
+            height: 44px;
 
-        border-radius: 30px;
-        outline: none;
-        border: 1px solid $text-light-colour;
+            border-radius: 30px;
+            outline: none;
+            border: 1px solid $text-dark-colour;
 
-        padding: 0 50px;
-        color: $text-light-colour;
-        font-size: 16px;
+            padding: 0 50px;
+            color: $text-dark-colour;
+            font-size: 16px;
 
-        flex: 1 1 auto;
+            flex: 1 1 auto;
 
-        background-image: url('/assets/icons/magnifying-glass.svg');
-        background-repeat: no-repeat;
-        background-size: 30px;
-        background-position-y: 50%;
-        background-position-x: 10px;
+            background-color: transparentize($text-light-colour, .8);
 
-        @include mobile-down {
-            order: -1;
-            margin-bottom: 10px;
-            width: 100%;
-            margin-left: 0;
+            @include mobile-down {
+                order: -1;
+                margin-bottom: 10px;
+                width: 100%;
+                margin-left: 0;
+            }
         }
     }
 
     &.home {
         .product-search__search-input {
             background-color: transparentize(white, .9);
+            border-color: transparentize(white, .7);
             color: white;
 
 

@@ -5,21 +5,19 @@
       [href]="icon.href"
       target="_blank"
     >
-      <!-- <img [src]="icon.assetLink" [alt]="icon.alt" /> -->
-
       <app-icon [iconName]="icon.name"></app-icon>
-      <!-- <svg width="40" height="40" preserveAspectRatio="xMidYMid meet" viewBox="0 0 90 90">
-        <use [attr.xlink:href]="icon.assetLink + '#discord'"></use>
-      </svg> -->
     </a>
   </span>
-  <input
-    class="product-search__search-input"
-    type="search"
-    placeholder="Search our products..."
-    name="globalSearch"
-    [(ngModel)]="searchTerm"
-    (keypress)="onKeyPress($event)"
-  />
+  <div class="product-search__search-input-wrapper">
+    <app-icon iconName="search" class="product-search__search-input-icon"></app-icon>
+    <input
+      class="product-search__search-input"
+      type="search"
+      placeholder="Search our products..."
+      name="globalSearch"
+      [(ngModel)]="searchTerm"
+      (keypress)="onKeyPress($event)"
+    />
+  </div>
   <app-sign-in></app-sign-in>
 </div>
