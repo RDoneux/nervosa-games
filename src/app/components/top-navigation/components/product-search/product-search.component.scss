@@ -38,35 +38,39 @@ div.product-search {
         width: 100%;
         display: flex;
         position: relative;
-        .product-search__search-input-icon{
-            position: absolute;
-            left: 40px;
+        border-radius: 30px;
+        border: 1px solid $text-dark-colour;
+        background-color: transparentize($text-light-colour, .8);
+        margin-left: 30px;
+        padding: 0 10px;
+
+        .product-search__search-input-icon {
+            position: relative;
             top: 3px;
             color: lighten($text-dark-colour, 10);
         }
+
         .product-search__search-input {
-            margin-left: 30px;
 
             height: 44px;
 
-            border-radius: 30px;
             outline: none;
-            border: 1px solid $text-dark-colour;
 
-            padding: 0 50px;
             color: $text-dark-colour;
             font-size: 16px;
 
             flex: 1 1 auto;
+            background-color: transparent;
+            border: none;
 
-            background-color: transparentize($text-light-colour, .8);
 
-            @include mobile-down {
-                order: -1;
-                margin-bottom: 10px;
-                width: 100%;
-                margin-left: 0;
-            }
+
+        }
+        @include mobile-down {
+            // order: -1;
+            margin-bottom: 10px;
+            width: 100%;
+            margin: 0;
         }
     }
 

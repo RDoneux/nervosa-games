@@ -9,9 +9,13 @@
 
     position: absolute;
     right: 1px;
-    top: 1px;
+    top: 2px;
 
     border-radius: 25px;
+
+    @include mobile-down {
+        top: 46px;
+    }
 
 }
 
