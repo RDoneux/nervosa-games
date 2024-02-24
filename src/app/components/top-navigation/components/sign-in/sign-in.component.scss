@@ -52,7 +52,7 @@
     }
 
     .material-symbols-outlined {
-        color: #999999;
+        color: $text-dark-colour;
         font-size: 60px;
         font-weight: 0;
         font-variation-settings: "FILL" 0, "wght" 100, "GRAD" 0, "opsz" 24;
@@ -60,10 +60,6 @@
         position: relative;
         top: 0px;
         right: 8px;
-
-        &:hover {
-            filter: invert(60%)
-        }
 
         &.icon {
             font-size: 30px;
@@ -101,7 +97,6 @@
 
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-
         }
     }
 

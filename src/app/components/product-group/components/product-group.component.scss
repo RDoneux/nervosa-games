@@ -51,8 +51,7 @@
             }
 
             @include mobile-down {
-                // width: 100%;
-                // width: calc(100% / 2);
+                width: calc(100% / 2);
                 margin: 0px;
             }
         }
