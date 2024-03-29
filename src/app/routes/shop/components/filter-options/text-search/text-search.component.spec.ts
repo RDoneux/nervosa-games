@@ -26,7 +26,7 @@ describe('TextSearchComponent', () => {
 
   describe('#ngOnInit', () => {
     it('should call #onChange after debounce time', fakeAsync(() => {
-      spyOn(component, 'onChange');
+      jest.spyOn(component, 'onChange').mockImplementation(() => {});
 
       component.ngOnInit();
 
@@ -38,7 +38,7 @@ describe('TextSearchComponent', () => {
     }));
 
     it('should not call #onChange before debounce time', () => {
-      spyOn(component, 'onChange');
+      jest.spyOn(component, 'onChange').mockImplementation(() => {});
 
       component.ngOnInit();
 
@@ -50,7 +50,7 @@ describe('TextSearchComponent', () => {
 
   describe('#onChange', () => {
     it('should call update #emit with lowercase version of input', () => {
-      spyOn(component.update, 'emit');
+      jest.spyOn(component.update, 'emit').mockImplementation(() => {});
 
       component.onChange('tEsT-vAlUe');
 

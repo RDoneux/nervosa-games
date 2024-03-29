@@ -35,7 +35,7 @@ describe('CollapsableSectionComponent', () => {
 
   describe('#ngAfterViewInit', () => {
     it('should set contentHeight equal to collapsableContent scrollHeight', () => {
-      spyOnProperty(component, 'content').and.returnValue({
+      spyOnProperty(component, 'content').mockReturnValue({
         scrollHeight: 1,
       } as HTMLElement);
 

@@ -43,7 +43,7 @@ describe('NavigationLinksMobileComponent', () => {
     });
     it('should do nothing if the click event is inside the component', () => {
       component.showMenu = true;
-      spyOn(component, 'getElement').and.returnValue({
+      jest.spyOn(component, 'getElement').mockReturnValue({
         contains: (event: MouseEvent) => true
       });
       component.menuClosed(new MouseEvent('click'));

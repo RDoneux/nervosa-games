@@ -20,11 +20,13 @@ describe('ProductComponent', () => {
 
   beforeEach(() => {
     firestoreServiceMock = getFirestoreStub('');
-    userServiceMock = jasmine.createSpyObj('UserService', [
-      'addProductToLikedList',
-      'removeProductFromLikedList',
-    ]);
-    cartServiceMock = jasmine.createSpyObj('CartService', ['addCartItem']);
+    userServiceMock = {
+      'addProductToLikedList': jest.fn(),
+      'removeProductFromLikedList': jest.fn()
+    };
+    cartServiceMock = {
+      'addCartItem': jest.fn()
+    };
     TestBed.configureTestingModule({
       imports: [ProductModule],
       providers: [
@@ -110,7 +112,7 @@ describe('ProductComponent', () => {
 
   describe('#onClick', () => {
     beforeEach(() => {
-      spyOn(window, 'open');
+      jest.spyOn(window, 'open').mockImplementation(() => {});
     });
     it('should do nothing if store general settings is false or if openInNewTab is false', () => {
       component.storeGeneralSettings = undefined;

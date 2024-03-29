@@ -39,7 +39,7 @@ describe('ProductSearchComponent', () => {
   describe('#onKeyPress', () => {
     it('should open given url if redirectToSumupStore is true', () => {
       component.searchTerm = 'test-search-term';
-      spyOn(window, 'open');
+      jest.spyOn(window, 'open').mockImplementation(() => {});
 
       component.ngOnInit();
 

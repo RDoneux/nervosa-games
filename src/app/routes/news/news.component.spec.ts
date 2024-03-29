@@ -40,7 +40,7 @@ describe('NewsComponent', () => {
       expect(firestoreServiceMock.getFirestore).toHaveBeenCalled();
       expect(
         firestoreServiceMock.getFirestore().collection
-      ).toHaveBeenCalledOnceWith('posts', jasmine.any(Function));
+      ).toHaveBeenCalledOnceWith('posts', expect.any(Function));
       expect(component.posts).toEqual([mockedAnnouncementPost]);
     });
   });

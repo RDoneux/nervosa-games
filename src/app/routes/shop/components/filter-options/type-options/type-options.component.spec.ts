@@ -34,7 +34,7 @@ describe('TypeOptionsComponent', () => {
       expect(component.typeArray).toEqual(['minature', 'supporting_material']);
     });
     it('should emit typeArray', () => {
-      spyOn(component.update, 'emit');
+      jest.spyOn(component.update, 'emit').mockImplementation(() => {});
       component.typeArray = ['minature'];
       component.onChange('scenery');
 

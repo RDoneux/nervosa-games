@@ -11,7 +11,9 @@ describe('FiltersComponent', () => {
   let messageServiceMock: jasmine.SpyObj<MessageService>;
 
   beforeEach(() => {
-    messageServiceMock = jasmine.createSpyObj('MessageService', ['send']);
+    messageServiceMock = {
+      'send': jest.fn()
+    };
 
     TestBed.configureTestingModule({
       imports: [ShopModule],
@@ -35,9 +37,9 @@ describe('FiltersComponent', () => {
     });
     it('should not change show if mobileDraw contains event', () => {
       const mobileDraw = {
-        contains: jasmine.createSpy().and.returnValue(true),
+        contains: jest.fn(() => true),
       };
-      spyOnProperty(component, 'mobileDraw').and.returnValue(mobileDraw);
+      spyOnProperty(component, 'mobileDraw').mockReturnValue(mobileDraw);
       component.show = true;
 
       component.onClick({} as MouseEvent);
@@ -48,7 +50,7 @@ describe('FiltersComponent', () => {
 
   describe('#ngAfterViewInit', () => {
     it('should call #send', () => {
-      spyOn(component, 'send');
+      jest.spyOn(component, 'send').mockImplementation(() => {});
 
       component.ngAfterViewInit();
 
@@ -86,7 +88,7 @@ describe('FiltersComponent', () => {
       expect(component.searchObject.types).toEqual(['scenery']);
     });
     it('all update methods should call #send', () => {
-      spyOn(component, 'send');
+      jest.spyOn(component, 'send').mockImplementation(() => {});
       component.onTextSearchUpdate('');
       expect(component.send).toHaveBeenCalledTimes(1);
       component.onGameSelectUpdate('');

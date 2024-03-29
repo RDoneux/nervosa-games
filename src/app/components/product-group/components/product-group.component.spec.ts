@@ -17,13 +17,13 @@ describe('ProductGroupComponent', () => {
   let userService: jasmine.SpyObj<UserService>;
 
   beforeEach(() => {
-    productGroupServiceMock = jasmine.createSpyObj('ProductGroupService', [
-      'getProductsFromTag',
-      'sortProductsByFavorites',
-    ]);
-    userService = jasmine.createSpyObj('UserService', [
-      'getUserProductLikedList',
-    ]);
+    productGroupServiceMock = {
+      'getProductsFromTag': jest.fn(),
+      'sortProductsByFavorites': jest.fn()
+    };
+    userService = {
+      'getUserProductLikedList': jest.fn()
+    };
     TestBed.configureTestingModule({
       imports: [ProductGroupComponent],
       providers: [
@@ -36,7 +36,7 @@ describe('ProductGroupComponent', () => {
     fixture = TestBed.createComponent(ProductGroupComponent);
     component = fixture.componentInstance;
 
-    productGroupServiceMock.getProductsFromTag.and.returnValue(of([]));
+    productGroupServiceMock.getProductsFromTag.mockReturnValue(of([]));
 
     fixture.detectChanges();
   });

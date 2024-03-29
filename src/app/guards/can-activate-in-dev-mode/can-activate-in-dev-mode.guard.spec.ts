@@ -36,7 +36,7 @@ describe('canActivateInDevModeGuard', () => {
     });
     it('should redirect to unauthorised if in not in dev mode', () => {
       isInDevMode = false;
-      spyOn(router, 'navigate');
+      jest.spyOn(router, 'navigate').mockImplementation(() => {});
       executeGuard(dummyRoute, fakeRouterState(''));
       expect(router.navigate).toHaveBeenCalledOnceWith(['/unauthorised']);
     });

@@ -10,10 +10,10 @@ describe('LocalStorageService', () => {
     TestBed.configureTestingModule({});
     localStore = {};
 
-    spyOn(window.localStorage, 'getItem').and.callFake((key) =>
+    jest.spyOn(window.localStorage, 'getItem').mockImplementation((key) =>
       key in localStore ? localStore[key] : null
     );
-    spyOn(window.localStorage, 'setItem').and.callFake(
+    jest.spyOn(window.localStorage, 'setItem').mockImplementation(
       (key, value) => (localStore[key] = value + '')
     );
   });

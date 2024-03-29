@@ -15,12 +15,12 @@ describe('SlidingDrawComponent', () => {
   let cartServiceMock: jasmine.SpyObj<CartService>;
 
   beforeEach(() => {
-    cartServiceMock = jasmine.createSpyObj('CartService', [
-      'getCartItems$',
-      'getPrice$',
-      'removeCartItem',
-      'updateCartItem',
-    ]);
+    cartServiceMock = {
+      'getCartItems$': jest.fn(),
+      'getPrice$': jest.fn(),
+      'removeCartItem': jest.fn(),
+      'updateCartItem': jest.fn()
+    };
 
     TestBed.configureTestingModule({
       imports: [CartModule, QuantitySelectorComponent, RouterTestingModule],
@@ -36,10 +36,10 @@ describe('SlidingDrawComponent', () => {
 
   describe('#onClick', () => [
     it('should do nothing if draw contains event target', () => {
-      spyOnProperty(component, 'draw', 'get').and.returnValue({
+      spyOnProperty(component, 'draw', 'get').mockReturnValue({
         contains: () => true,
       });
-      spyOn(component, 'onClose');
+      jest.spyOn(component, 'onClose').mockImplementation(() => {});
 
       component.onClick({
         target: '',
@@ -49,11 +49,11 @@ describe('SlidingDrawComponent', () => {
     }),
 
     it('should call #onClose if draw does not contain event target', () => {
-      spyOnProperty(component, 'draw', 'get').and.returnValue({
+      spyOnProperty(component, 'draw', 'get').mockReturnValue({
         contains: () => false,
       });
 
-      spyOn(component, 'onClose');
+      jest.spyOn(component, 'onClose').mockImplementation(() => {});
       component.onClick({ target: '' } as unknown as MouseEvent);
 
       expect(component.onClose).toHaveBeenCalledOnceWith();
@@ -62,8 +62,8 @@ describe('SlidingDrawComponent', () => {
 
   describe('#ngOnInit', () => {
     beforeEach(() => {
-      cartServiceMock.getCartItems$.and.returnValue(of([mockedCartItem]));
-      cartServiceMock.getPrice$.and.returnValue(of(1));
+      cartServiceMock.getCartItems$.mockReturnValue(of([mockedCartItem]));
+      cartServiceMock.getPrice$.mockReturnValue(of(1));
     });
     it('should request cart items from CartService', () => {
       component.ngOnInit();
@@ -99,7 +99,7 @@ describe('SlidingDrawComponent', () => {
 
   describe('#onClose', () => {
     it('should call requestClose #emit', () => {
-      spyOn(component.requestClose, 'emit');
+      jest.spyOn(component.requestClose, 'emit').mockImplementation(() => {});
 
       component.onClose();
 

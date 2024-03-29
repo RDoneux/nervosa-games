@@ -27,9 +27,9 @@ describe('CommentSectionComponent', () => {
 
   beforeEach(() => {
     firestoreServiceMock = getFirestoreStub([mockedAnnouncementPost]);
-    loginServiceMock = jasmine.createSpyObj('LoginService', [
-      'requestUserLogsIn',
-    ]);
+    loginServiceMock = {
+      'requestUserLogsIn': jest.fn()
+    };
     TestBed.configureTestingModule({
       imports: [
         CommentSectionComponent,
@@ -73,11 +73,11 @@ describe('CommentSectionComponent', () => {
 
       expect(
         firestoreServiceMock.getFirestore().collection
-      ).toHaveBeenCalledWith('posts', jasmine.any(Function));
+      ).toHaveBeenCalledWith('posts', expect.any(Function));
     });
 
     it('should request recieved data is sorted', () => {
-      spyOn(component, 'sortData');
+      jest.spyOn(component, 'sortData').mockImplementation(() => {});
 
       component.ngOnInit();
 
@@ -126,7 +126,7 @@ describe('CommentSectionComponent', () => {
 
   describe('#onPublish', () => {
     it('should call #onFocus if user is not defined', () => {
-      spyOn(component, 'onFocus');
+      jest.spyOn(component, 'onFocus').mockImplementation(() => {});
 
       component.user = null;
 
@@ -158,7 +158,7 @@ describe('CommentSectionComponent', () => {
 
   describe('#onFocus', () => {
     beforeEach(() => {
-      loginServiceMock.requestUserLogsIn.and.returnValue(of(mockedUser));
+      loginServiceMock.requestUserLogsIn.mockReturnValue(of(mockedUser));
     });
     it('should update global hasFocus variable to true', () => {
       component.hasFocus = false;

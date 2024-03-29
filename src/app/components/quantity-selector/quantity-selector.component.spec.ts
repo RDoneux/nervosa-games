@@ -21,18 +21,18 @@ describe('QuantitySelectorComponent', () => {
 
   describe('#onAdd', () => {
     it('should increment current value and emit new value', () => {
-      spyOn(component.valueChanged, 'emit');
+      jest.spyOn(component.valueChanged, 'emit').mockImplementation(() => {});
       component.value = 1;
 
       component.onAdd();
 
-      expect(component.valueChanged.emit).toHaveBeenCalledOnceWith(2);
+      expect(component.valueChanged.emit).toHaveBeenCalledWith(2);
     });
   });
 
   describe('#onRemove', () => {
     it('should do nothing if current value is 0', () => {
-      spyOn(component.valueChanged, 'emit');
+      jest.spyOn(component.valueChanged, 'emit').mockImplementation(() => {});
       component.value = 0;
 
       component.onRemove();
@@ -40,12 +40,12 @@ describe('QuantitySelectorComponent', () => {
       expect(component.valueChanged.emit).not.toHaveBeenCalled();
     });
     it('should decrement value and emit new value if current value is greater than 0', () => {
-      spyOn(component.valueChanged, 'emit');
+      jest.spyOn(component.valueChanged, 'emit').mockImplementation(() => {});
       component.value = 3;
 
       component.onRemove();
 
-      expect(component.valueChanged.emit).toHaveBeenCalledOnceWith(2);
+      expect(component.valueChanged.emit).toHaveBeenCalledWith(2);
     });
   });
 });

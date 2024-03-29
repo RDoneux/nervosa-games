@@ -25,7 +25,7 @@ describe('CartSlidingDrawProductComponent', () => {
 
   describe('#onQuantityChanged', () => {
     it('should request remove if event is 0', () => {
-      spyOn(component.requestRemoved, 'emit');
+      jest.spyOn(component.requestRemoved, 'emit').mockImplementation(() => {});
 
       component.onQuantityChanged(0);
 
@@ -33,7 +33,7 @@ describe('CartSlidingDrawProductComponent', () => {
     });
 
     it('should not request removed if event is > 0', () => {
-      spyOn(component.requestRemoved, 'emit');
+      jest.spyOn(component.requestRemoved, 'emit').mockImplementation(() => {});
 
       component.onQuantityChanged(1);
 
@@ -49,7 +49,7 @@ describe('CartSlidingDrawProductComponent', () => {
     });
 
     it('should emit udpated cart item', () => {
-      spyOn(component.updated, 'emit');
+      jest.spyOn(component.updated, 'emit').mockImplementation(() => {});
       component.cartItem = { ...mockedCartItem, quantity: 2 };
 
       component.onQuantityChanged(3);

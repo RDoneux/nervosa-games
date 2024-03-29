@@ -14,11 +14,11 @@ describe('CartItemComponent', () => {
   let cartServiceMock: jasmine.SpyObj<CartService>;
 
   beforeEach(() => {
-    cartServiceMock = jasmine.createSpyObj('CartService', [
-      'calculateProductPriceIncludingQuantity',
-      'updateCartItem',
-      'removeCartItem',
-    ]);
+    cartServiceMock = {
+      'calculateProductPriceIncludingQuantity': jest.fn(),
+      'updateCartItem': jest.fn(),
+      'removeCartItem': jest.fn()
+    };
 
     TestBed.configureTestingModule({
       imports: [CheckoutModule, QuantitySelectorComponent],
@@ -35,7 +35,7 @@ describe('CartItemComponent', () => {
 
   describe('#ngOninit', () => {
     it('should call CartService #calculateProductPriceIncludingQuantity', () => {
-      cartServiceMock.calculateProductPriceIncludingQuantity.and.returnValue(1);
+      cartServiceMock.calculateProductPriceIncludingQuantity.mockReturnValue(1);
 
       component.ngOnInit();
 
@@ -48,7 +48,7 @@ describe('CartItemComponent', () => {
 
   describe('#onQuantityChanged', () => {
     it('should only call #onRemoveItem if event is 0', () => {
-      spyOn(component, 'onRemoveItem');
+      jest.spyOn(component, 'onRemoveItem').mockImplementation(() => {});
 
       component.onQuantityChanged(0);
 

@@ -10,10 +10,10 @@ describe('UserService', () => {
   let loginServiceMock: jasmine.SpyObj<LoginService>;
 
   beforeEach(() => {
-    loginServiceMock = jasmine.createSpyObj('LoginService', [
-      'getCurrentLoggedInUser',
-      'saveUserToDatabase',
-    ]);
+    loginServiceMock = {
+      'getCurrentLoggedInUser': jest.fn(),
+      'saveUserToDatabase': jest.fn()
+    };
     TestBed.configureTestingModule({
       providers: [{ provide: LoginService, useValue: loginServiceMock }],
     });
@@ -26,7 +26,7 @@ describe('UserService', () => {
 
   describe('#getUserProductLikedList', () => {
     beforeEach(() => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(mockedUser));
     });
 
     it('should return userLikedProducts', () => {
@@ -36,7 +36,7 @@ describe('UserService', () => {
     });
 
     it('should return null if user is undefined', () => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(null));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(null));
       service
         .getUserProductLikedList()
         .subscribe((res) => expect(res).toBeNull());
@@ -45,7 +45,7 @@ describe('UserService', () => {
 
   describe('#addProductToLikedList', () => {
     beforeEach(() => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(mockedUser));
     });
 
     it('should request #currentLoggedInUser from loginService', () => {
@@ -58,7 +58,7 @@ describe('UserService', () => {
     });
 
     it('should do nothing if returned user is null', () => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(null));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(null));
 
       service.addProductToLikedList('new-testing-liked-list-item');
 
@@ -69,7 +69,7 @@ describe('UserService', () => {
 
   describe('#removeProductFromLikedList', () => {
     beforeEach(() => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(mockedUser));
     });
 
     it('should request #currentLoggedInUser from loginService', () => {
@@ -82,7 +82,7 @@ describe('UserService', () => {
     });
 
     it('should do nothing if returned user is null', () => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(null));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(null));
 
       service.removeProductFromLikedList('liked-product-one');
 

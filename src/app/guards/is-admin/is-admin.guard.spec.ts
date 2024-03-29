@@ -22,9 +22,9 @@ describe('isAdminGuard', () => {
     TestBed.runInInjectionContext(() => isAdminGuard(...guardParameters));
 
   beforeEach(() => {
-    loginServiceMock = jasmine.createSpyObj('LoginService', [
-      'getCurrentLoggedInUser',
-    ]);
+    loginServiceMock = {
+      'getCurrentLoggedInUser': jest.fn()
+    };
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
       providers: [{ provide: LoginService, useValue: loginServiceMock }],
@@ -41,7 +41,7 @@ describe('isAdminGuard', () => {
       let mockedUserWhoIsAdmin = mockedUser;
       mockedUserWhoIsAdmin.isAdmin = true;
 
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(
         of(mockedUserWhoIsAdmin)
       );
       const result = await executeGuard(dummyRoute, fakeRouterState(''));
@@ -50,8 +50,8 @@ describe('isAdminGuard', () => {
     });
 
     it('should redirect to unauthorised if user is not defined', async () => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(null));
-      spyOn(router, 'navigate');
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(null));
+      jest.spyOn(router, 'navigate').mockImplementation(() => {});
 
       await executeGuard(dummyRoute, fakeRouterState(''));
       expect(router.navigate).toHaveBeenCalledOnceWith(['/unauthorised']);
@@ -60,10 +60,10 @@ describe('isAdminGuard', () => {
     it('should redirect to unauthorised if user is not admin', async () => {
       let mockedUserWhoIsNotAdmin = mockedUser;
       mockedUserWhoIsNotAdmin.isAdmin = false;
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(
         of(mockedUserWhoIsNotAdmin)
       );
-      spyOn(router, 'navigate');
+      jest.spyOn(router, 'navigate').mockImplementation(() => {});
 
       await executeGuard(dummyRoute, fakeRouterState(''));
 

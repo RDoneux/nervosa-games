@@ -13,10 +13,10 @@ describe('CheckoutComponent', () => {
   let cartServiceMock: jasmine.SpyObj<CartService>;
 
   beforeEach(() => {
-    cartServiceMock = jasmine.createSpyObj('CartService', [
-      'getPrice$',
-      'getCartItems$',
-    ]);
+    cartServiceMock = {
+      'getPrice$': jest.fn(),
+      'getCartItems$': jest.fn()
+    };
     TestBed.configureTestingModule({
       imports: [CheckoutModule],
       providers: [{ provide: CartService, useValue: cartServiceMock }],
@@ -31,8 +31,8 @@ describe('CheckoutComponent', () => {
 
   describe('#ngOnInit', () => {
     it('should call CartService #getPrice$ and #getCartItems$', () => {
-      cartServiceMock.getPrice$.and.returnValue(of(2));
-      cartServiceMock.getCartItems$.and.returnValue(of([mockedCartItem]));
+      cartServiceMock.getPrice$.mockReturnValue(of(2));
+      cartServiceMock.getCartItems$.mockReturnValue(of([mockedCartItem]));
 
       component.ngOnInit();
 

@@ -19,9 +19,9 @@ describe('SignInComponent', () => {
   let loginServiceMock: jasmine.SpyObj<LoginService>;
 
   beforeEach(() => {
-    loginServiceMock = jasmine.createSpyObj('LoginService', [
-      'requestUserLogsIn',
-    ]);
+    loginServiceMock = {
+      'requestUserLogsIn': jest.fn()
+    };
     TestBed.configureTestingModule({
       declarations: [SignInComponent],
       providers: [

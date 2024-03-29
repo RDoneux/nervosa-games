@@ -17,9 +17,9 @@ describe('CreateComponentComponent', () => {
 
   beforeEach(() => {
     firestoreStorageMock = getStorageStub('');
-    createProductServiceMock = jasmine.createSpyObj('CreateProductService', [
-      'uploadNewProduct',
-    ]);
+    createProductServiceMock = {
+      'uploadNewProduct': jest.fn()
+    };
     TestBed.configureTestingModule({
       imports: [ProductAdminModule],
       providers: [

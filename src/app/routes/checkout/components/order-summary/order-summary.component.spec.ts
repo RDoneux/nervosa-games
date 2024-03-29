@@ -11,7 +11,9 @@ describe('OrderSummaryComponent', () => {
   let cartServiceMock: jasmine.SpyObj<CartService>;
 
   beforeEach(() => {
-    cartServiceMock = jasmine.createSpyObj('CartService', ['getPrice$']);
+    cartServiceMock = {
+      'getPrice$': jest.fn()
+    };
 
     TestBed.configureTestingModule({
       declarations: [OrderSummaryComponent],
@@ -28,7 +30,7 @@ describe('OrderSummaryComponent', () => {
   describe('#ngOnInit', () => {
     it('should request price from CartService', () => {
       component.delivery = 1;
-      cartServiceMock.getPrice$.and.returnValue(of(5));
+      cartServiceMock.getPrice$.mockReturnValue(of(5));
 
       component.ngOnInit();
 

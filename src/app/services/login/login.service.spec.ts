@@ -44,11 +44,11 @@ describe('LoginService', () => {
       service.loginRequests().subscribe({
         next: (state: 'OPEN' | 'CLOSE') => expect(state).toEqual('CLOSE'),
       });
-      spyOn(service, 'submitLoginDetails');
+      jest.spyOn(service, 'submitLoginDetails').mockImplementation(() => {});
       service.loginSuccess(mockedUser as unknown as User);
     });
     it('should call submit details with user', () => {
-      spyOn(service, 'submitLoginDetails');
+      jest.spyOn(service, 'submitLoginDetails').mockImplementation(() => {});
       service.loginSuccess(mockedUser as unknown as User);
 
       expect(service.submitLoginDetails).toHaveBeenCalledWith(
@@ -59,7 +59,7 @@ describe('LoginService', () => {
 
   describe('#updateOrCreateNervosaGamesUser', () => {
     it('should request users collection from firestore', () => {
-      spyOn(service, 'generateNervosaUserFromGoogleUser').and.returnValue(
+      jest.spyOn(service, 'generateNervosaUserFromGoogleUser').mockReturnValue(
         of(mockedUser)
       );
       service.updateOrCreateNervosaGamesUser(mockedUser as unknown as User);
@@ -72,7 +72,7 @@ describe('LoginService', () => {
     });
 
     it('should call #generateNervosaUserFromGoogleUser if returned IUser is null', () => {
-      spyOn(service, 'generateNervosaUserFromGoogleUser').and.returnValue(
+      jest.spyOn(service, 'generateNervosaUserFromGoogleUser').mockReturnValue(
         of(mockedUser)
       );
 
@@ -84,10 +84,10 @@ describe('LoginService', () => {
     });
 
     it('should call #saveUserToDatabase with generated IUser if return IUser is null', () => {
-      spyOn(service, 'generateNervosaUserFromGoogleUser').and.returnValue(
+      jest.spyOn(service, 'generateNervosaUserFromGoogleUser').mockReturnValue(
         of(mockedUser)
       );
-      spyOn(service, 'saveUserToDatabase');
+      jest.spyOn(service, 'saveUserToDatabase').mockImplementation(() => {});
 
       service.updateOrCreateNervosaGamesUser(mockedUser as unknown as User);
 
@@ -95,10 +95,10 @@ describe('LoginService', () => {
     });
 
     it('should emit generated IUser if returned IUser is null', () => {
-      spyOn(service, 'generateNervosaUserFromGoogleUser').and.returnValue(
+      jest.spyOn(service, 'generateNervosaUserFromGoogleUser').mockReturnValue(
         of(mockedUser)
       );
-      spyOn(service, 'saveUserToDatabase');
+      jest.spyOn(service, 'saveUserToDatabase').mockImplementation(() => {});
 
       service
         .updateOrCreateNervosaGamesUser(mockedUser as unknown as User)
@@ -109,8 +109,8 @@ describe('LoginService', () => {
       firestoreServiceMock
         .getFirestore()
         .collection()
-        .valueChanges.and.returnValue(of([mockedUser]));
-      spyOn(service, 'updateExistingNervosaUserFromGoogleUser').and.returnValue(
+        .valueChanges.mockReturnValue(of([mockedUser]));
+      jest.spyOn(service, 'updateExistingNervosaUserFromGoogleUser').mockReturnValue(
         of(mockedUser)
       );
 
@@ -125,12 +125,12 @@ describe('LoginService', () => {
       firestoreServiceMock
         .getFirestore()
         .collection()
-        .valueChanges.and.returnValue(of([mockedUser]));
-      spyOn(service, 'updateExistingNervosaUserFromGoogleUser').and.returnValue(
+        .valueChanges.mockReturnValue(of([mockedUser]));
+      jest.spyOn(service, 'updateExistingNervosaUserFromGoogleUser').mockReturnValue(
         of(mockedUser)
       );
 
-      spyOn(service, 'saveUserToDatabase');
+      jest.spyOn(service, 'saveUserToDatabase').mockImplementation(() => {});
 
       service.updateOrCreateNervosaGamesUser(mockedUser as unknown as User);
 
@@ -141,12 +141,12 @@ describe('LoginService', () => {
       firestoreServiceMock
         .getFirestore()
         .collection()
-        .valueChanges.and.returnValue(of([mockedUser]));
-      spyOn(service, 'updateExistingNervosaUserFromGoogleUser').and.returnValue(
+        .valueChanges.mockReturnValue(of([mockedUser]));
+      jest.spyOn(service, 'updateExistingNervosaUserFromGoogleUser').mockReturnValue(
         of(mockedUser)
       );
 
-      spyOn(service, 'saveUserToDatabase');
+      jest.spyOn(service, 'saveUserToDatabase').mockImplementation(() => {});
 
       service
         .updateOrCreateNervosaGamesUser(mockedUser as unknown as User)
@@ -169,7 +169,7 @@ describe('LoginService', () => {
     let getAdminListSpy: jasmine.Spy;
 
     beforeEach(() => {
-      getAdminListSpy = spyOn(service, 'getAdminList').and.returnValue(
+      getAdminListSpy = jest.spyOn(service, 'getAdminList').mockReturnValue(
         of(adminList)
       );
     });
@@ -224,7 +224,7 @@ describe('LoginService', () => {
     });
 
     it('should set isAdmin to false if adminList is null', () => {
-      getAdminListSpy.and.returnValue(of(undefined));
+      getAdminListSpy.mockReturnValue(of(undefined));
 
       service
         .generateNervosaUserFromGoogleUser({
@@ -253,7 +253,7 @@ describe('LoginService', () => {
     let getAdminListSpy: jasmine.Spy;
 
     beforeEach(() => {
-      getAdminListSpy = spyOn(service, 'getAdminList').and.returnValue(
+      getAdminListSpy = jest.spyOn(service, 'getAdminList').mockReturnValue(
         of(adminList)
       );
     });
@@ -321,7 +321,7 @@ describe('LoginService', () => {
     });
 
     it('should set isAdmin to false if adminList is null', () => {
-      getAdminListSpy.and.returnValue(of(undefined));
+      getAdminListSpy.mockReturnValue(of(undefined));
 
       service
         .updateExistingNervosaUserFromGoogleUser(

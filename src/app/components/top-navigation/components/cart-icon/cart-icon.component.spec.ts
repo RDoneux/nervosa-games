@@ -14,7 +14,9 @@ describe('CartIconComponent', () => {
   let cartServiceMock: jasmine.SpyObj<CartService>;
 
   beforeEach(() => {
-    cartServiceMock = jasmine.createSpyObj('CartService', ['getCartItems$']);
+    cartServiceMock = {
+      'getCartItems$': jest.fn()
+    };
 
     TestBed.configureTestingModule({
       imports: [TopNavigationModule, RouterTestingModule],
@@ -30,7 +32,7 @@ describe('CartIconComponent', () => {
 
   describe('#ngOnInit', () => {
     it('should request #getCartItems from CartService', () => {
-      cartServiceMock.getCartItems$.and.returnValue(of([mockedCartItem]));
+      cartServiceMock.getCartItems$.mockReturnValue(of([mockedCartItem]));
       component.ngOnInit();
 
       expect(cartServiceMock.getCartItems$).toHaveBeenCalledOnceWith();
@@ -40,7 +42,7 @@ describe('CartIconComponent', () => {
 
   describe('#onCartSelected', () => {
     it('should showDraw and stop event propagation', () => {
-      const event = { stopPropagation: jasmine.createSpy() };
+      const event = { stopPropagation: jest.fn() };
 
       component.onCartSelected(event as unknown as MouseEvent);
 

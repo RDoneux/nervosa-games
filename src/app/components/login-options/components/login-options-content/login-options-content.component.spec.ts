@@ -16,13 +16,15 @@ describe('LoginOptionsContentComponent', () => {
   let facebookSigninServiceMock: jasmine.SpyObj<FacebookSignInService>;
 
   beforeEach(() => {
-    loginServiceMock = jasmine.createSpyObj('LoginService', ['loginSuccess']);
-    googleSigninServiceMock = jasmine.createSpyObj('GoogleSigninService', [
-      'signInWithPopup',
-    ]);
-    facebookSigninServiceMock = jasmine.createSpyObj('FacebookSigninService', [
-      'signInWithPopup',
-    ]);
+    loginServiceMock = {
+      'loginSuccess': jest.fn()
+    };
+    googleSigninServiceMock = {
+      'signInWithPopup': jest.fn()
+    };
+    facebookSigninServiceMock = {
+      'signInWithPopup': jest.fn()
+    };
     TestBed.configureTestingModule({
       declarations: [LoginOptionsContentComponent],
       providers: [
@@ -42,7 +44,7 @@ describe('LoginOptionsContentComponent', () => {
 
   describe('#loginWithGoogle', () => {
     it('should call loginService with user obtained from googleSigninService', () => {
-      googleSigninServiceMock.signInWithPopup.and.returnValue(
+      googleSigninServiceMock.signInWithPopup.mockReturnValue(
         of(mockedUser as unknown as User)
       );
       component.loginWithGoogle();
@@ -56,7 +58,7 @@ describe('LoginOptionsContentComponent', () => {
 
   describe('#loginWithFacebook', () => {
     it('should call loginService with user obtained from facebookLoginService', () => {
-      facebookSigninServiceMock.signInWithPopup.and.returnValue(
+      facebookSigninServiceMock.signInWithPopup.mockReturnValue(
         of(mockedUser as unknown as User)
       );
       component.loginWithFacebook();

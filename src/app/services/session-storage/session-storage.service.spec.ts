@@ -11,10 +11,10 @@ describe('SessionStorageService', () => {
 
     sessionStore = {};
 
-    spyOn(window.sessionStorage, 'getItem').and.callFake((key) =>
+    jest.spyOn(window.sessionStorage, 'getItem').mockImplementation((key) =>
       key in sessionStore ? sessionStore[key] : null
     );
-    spyOn(window.sessionStorage, 'setItem').and.callFake(
+    jest.spyOn(window.sessionStorage, 'setItem').mockImplementation(
       (key, value) => (sessionStore[key] = value + '')
     );
   });

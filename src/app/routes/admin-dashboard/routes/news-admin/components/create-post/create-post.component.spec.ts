@@ -20,12 +20,12 @@ describe('CreatePostComponent', () => {
   let createPostServiceMock: jasmine.SpyObj<CreatePostService>;
 
   beforeEach(() => {
-    loginServiceMock = jasmine.createSpyObj('LoginService', [
-      'getCurrentLoggedInUser',
-    ]);
-    createPostServiceMock = jasmine.createSpyObj('CreatePostService', [
-      'uploadPost',
-    ]);
+    loginServiceMock = {
+      'getCurrentLoggedInUser': jest.fn()
+    };
+    createPostServiceMock = {
+      'uploadPost': jest.fn()
+    };
     TestBed.configureTestingModule({
       imports: [NewsAdminModule],
       providers: [
@@ -54,7 +54,7 @@ describe('CreatePostComponent', () => {
 
   describe('#onSubmit', () => {
     beforeEach(() => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(mockedUser));
     });
 
     it('should request #getCurrentLoggedInUser from LoginService', () => {
@@ -75,7 +75,7 @@ describe('CreatePostComponent', () => {
     });
 
     it('should set posterId to INVALID if user is not set', () => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(null));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(null));
 
       component.onSubmit();
 

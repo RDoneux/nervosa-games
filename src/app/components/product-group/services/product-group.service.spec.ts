@@ -31,7 +31,7 @@ describe('ProductGroupService', () => {
       expect(angularFirestoreMock.getFirestore).toHaveBeenCalledTimes(1);
       expect(
         angularFirestoreMock.getFirestore().collection
-      ).toHaveBeenCalledOnceWith('products', jasmine.any(Function));
+      ).toHaveBeenCalledOnceWith('products', expect.any(Function));
       expect(
         angularFirestoreMock.getFirestore().collection().valueChanges
       ).toHaveBeenCalledTimes(1);

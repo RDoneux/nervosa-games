@@ -22,7 +22,7 @@ describe('GameSelectComponent', () => {
 
   describe('#onChange', () => {
     it('should emit value converted to lower case', () => {
-      spyOn(component.update, 'emit');
+      jest.spyOn(component.update, 'emit').mockImplementation(() => {});
 
       component.onChange('ThIs Is ThE vAlUe');
 

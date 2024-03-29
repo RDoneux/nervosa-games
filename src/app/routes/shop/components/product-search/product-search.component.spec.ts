@@ -17,10 +17,12 @@ describe('ProductSearchComponent', () => {
   let messageServiceMock: jasmine.SpyObj<MessageService>;
 
   beforeEach(() => {
-    filtersServiceMock = jasmine.createSpyObj('FiltersService', ['search']);
-    messageServiceMock = jasmine.createSpyObj('MessageService', [
-      'getStreams$',
-    ]);
+    filtersServiceMock = {
+      'search': jest.fn()
+    };
+    messageServiceMock = {
+      'getStreams$': jest.fn()
+    };
 
     TestBed.configureTestingModule({
       imports: [ShopModule],
@@ -31,8 +33,8 @@ describe('ProductSearchComponent', () => {
       ],
     });
 
-    filtersServiceMock.search.and.returnValue(of([mockedProduct]));
-    messageServiceMock.getStreams$.and.returnValue(
+    filtersServiceMock.search.mockReturnValue(of([mockedProduct]));
+    messageServiceMock.getStreams$.mockReturnValue(
       of({ payload: {}, stream: '', sender: '' })
     );
 

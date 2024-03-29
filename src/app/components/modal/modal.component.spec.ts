@@ -36,7 +36,7 @@ describe('ModalComponent', () => {
   describe('#onClickOutsidePage', () => {
     it('should call request close if click is ouside page', () => {
       component.modalPage = { nativeElement: { contains: () => false } };
-      spyOn(component, 'requestClose');
+      jest.spyOn(component, 'requestClose').mockImplementation(() => {});
 
       component.onClickOutsidePage(new MouseEvent('click'));
 
@@ -45,7 +45,7 @@ describe('ModalComponent', () => {
 
     it('should do nothing if click is inside page', () => {
       component.modalPage = { nativeElement: { contains: () => true } };
-      spyOn(component, 'requestClose');
+      jest.spyOn(component, 'requestClose').mockImplementation(() => {});
 
       component.onClickOutsidePage(new MouseEvent('click'));
 
@@ -55,11 +55,11 @@ describe('ModalComponent', () => {
 
   describe('#requestClose', () => {
     it('should emit request close', () => {
-      spyOn(component.closeRequested, 'emit');
+      jest.spyOn(component.closeRequested, 'emit').mockImplementation(() => {});
 
       component.requestClose();
 
-      expect(component.closeRequested.emit).toHaveBeenCalledOnceWith();
+      expect(component.closeRequested.emit).toHaveBeenCalledWith();
     });
   });
 
@@ -68,7 +68,7 @@ describe('ModalComponent', () => {
       component.show = false;
       // component.orderedViewContainer = inject(ViewContainerRef)
       component.orderedViewContainer = new ViewContainerRefMock();
-      spyOn(component.orderedViewContainer, 'createComponent').and.callThrough();
+      jest.spyOn(component.orderedViewContainer, 'createComponent');
 
       component.ngOnChanges();
       expect(
@@ -81,7 +81,7 @@ describe('ModalComponent', () => {
       component.component = PrivacyPolicyComponent;
 
       component.orderedViewContainer = new ViewContainerRefMock();
-      spyOn(component.orderedViewContainer, 'createComponent');
+      jest.spyOn(component.orderedViewContainer, 'createComponent').mockImplementation(new Component());
 
       component.ngOnChanges();
       tick();

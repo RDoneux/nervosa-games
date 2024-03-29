@@ -19,7 +19,7 @@ describe('CartService', () => {
   describe('#addCartItem', () => {
     it('should do nothing if product is already in cart', () => {
       service.cartItems = [{ ...mockedCartItem, id: 'test-id' }];
-      spyOn(service.cartItems, 'push');
+      jest.spyOn(service.cartItems, 'push').mockImplementation(() => {});
 
       service.addCartItem({ ...mockedCartItem, id: 'test-id' });
 
@@ -27,7 +27,7 @@ describe('CartService', () => {
     });
 
     it('should push new item to cartItem array and trigger price and cart items observable', () => {
-      spyOn(service.cartItems, 'push');
+      jest.spyOn(service.cartItems, 'push').mockImplementation(() => {});
 
       service
         .getCartItems$()

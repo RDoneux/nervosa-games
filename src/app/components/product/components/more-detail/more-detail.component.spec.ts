@@ -28,7 +28,7 @@ describe('MoreDetailComponent', () => {
 
   describe('#onCloseRequested', () => {
     it('should emit on closeRequested eventEmitter', () => {
-      spyOn(component.closeRequested, 'emit');
+      jest.spyOn(component.closeRequested, 'emit').mockImplementation(() => {});
       component.onCloseRequested();
       expect(component.closeRequested.emit).toHaveBeenCalled();
     });

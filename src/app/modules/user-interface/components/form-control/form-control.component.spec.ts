@@ -34,19 +34,19 @@ describe('FormControlComponent', () => {
 
   describe('#afterViewInit', () => {
     it('should call the validate component method', fakeAsync(() => {
-      spyOn(component, 'validateComponent');
+      jest.spyOn(component, 'validateComponent').mockImplementation(() => {});
       component.ngAfterViewInit();
       tick();
       expect(component.validateComponent).toHaveBeenCalledTimes(1);
     }));
     it('should call #determinLayout', fakeAsync(() => {
-      spyOn(component, 'determineLayout');
+      jest.spyOn(component, 'determineLayout').mockImplementation(() => {});
       component.ngAfterViewInit();
       tick();
       expect(component.determineLayout).toHaveBeenCalledTimes(1);
     }));
     it('should call #handleViewChange when ngModel value changes', () => {
-      spyOn(component, 'handleValueChange');
+      jest.spyOn(component, 'handleValueChange').mockImplementation(() => {});
       component.ngModel = { valueChanges: from('new value') } as NgModel;
 
       component.ngAfterViewInit();

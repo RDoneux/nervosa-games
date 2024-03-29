@@ -2,10 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnnouncmentPostComponent } from './announcment-post.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { environment } from '../../../../environments/environment';
 import { IAnnouncementPost } from '../interfaces/i-announcement-post.interface';
-import { mockedAnnouncementPost } from 'src/app/data/test-data.spec';
+import { mockedAnnouncementPost } from '../../../data/test-data.spec';
 
 describe('AnnouncmentPostComponent', () => {
   const mockAnnouncementPost: IAnnouncementPost = mockedAnnouncementPost
@@ -13,12 +12,13 @@ describe('AnnouncmentPostComponent', () => {
   let component: AnnouncmentPostComponent;
   let fixture: ComponentFixture<AnnouncmentPostComponent>;
 
-  let angularFirestoreMock: jasmine.SpyObj<AngularFirestore>;
+  let angularFirestoreMock: {'collection': jest.Mock}
 
   beforeEach(async () => {
-    angularFirestoreMock = jasmine.createSpyObj('AngularFirestore', [
-      'collection',
-    ]);
+    angularFirestoreMock = {
+      'collection': jest.fn()
+    };
+
     TestBed.configureTestingModule({
       imports: [AnnouncmentPostComponent],
       providers: [
@@ -38,7 +38,7 @@ describe('AnnouncmentPostComponent', () => {
   describe('#ngAfterViewInit', () => {
     it('should call #findPosterInformation if announcementPost is defined', () => {
       component.announcementPost = mockAnnouncementPost;
-      spyOn(component, 'findPosterInformation');
+      jest.spyOn(component, 'findPosterInformation').mockImplementation(() => {});
 
       component.ngAfterViewInit();
 

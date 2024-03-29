@@ -21,15 +21,15 @@ describe('PostComponent', () => {
   let loginServiceMock: jasmine.SpyObj<LoginService>;
 
   beforeEach(() => {
-    postServiceMock = jasmine.createSpyObj('PostService', [
-      'getPost',
-      'getUser',
-      'updateSeenBy',
-    ]);
-    loginServiceMock = jasmine.createSpyObj('LoginService', [
-      'requestUserLogsIn',
-      'getCurrentLoggedInUser',
-    ]);
+    postServiceMock = {
+      'getPost': jest.fn(),
+      'getUser': jest.fn(),
+      'updateSeenBy': jest.fn()
+    };
+    loginServiceMock = {
+      'requestUserLogsIn': jest.fn(),
+      'getCurrentLoggedInUser': jest.fn()
+    };
     TestBed.configureTestingModule({
       declarations: [PostComponent],
       imports: [RouterTestingModule],
@@ -43,7 +43,7 @@ describe('PostComponent', () => {
     fixture = TestBed.createComponent(PostComponent);
     component = fixture.componentInstance;
 
-    loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+    loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(mockedUser));
 
     fixture.detectChanges();
   });
@@ -54,8 +54,8 @@ describe('PostComponent', () => {
 
   describe('#fetchPost', () => {
     beforeEach(() => {
-      postServiceMock.getPost.and.returnValue(of([mockedAnnouncementPost]));
-      postServiceMock.getUser.and.returnValue(of([mockedUser]));
+      postServiceMock.getPost.mockReturnValue(of([mockedAnnouncementPost]));
+      postServiceMock.getUser.mockReturnValue(of([mockedUser]));
     });
 
     it('should set the post', () => {

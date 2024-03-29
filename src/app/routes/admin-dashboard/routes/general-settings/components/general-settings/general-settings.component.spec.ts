@@ -77,7 +77,7 @@ describe('GeneralSettingsComponent', () => {
     });
 
     it('should reset form', () => {
-      const resetFunction = { reset: jasmine.createSpy() };
+      const resetFunction = { reset: jest.fn() };
 
       component.onSubmit(resetFunction as unknown as NgForm);
 
