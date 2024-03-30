@@ -105,7 +105,6 @@
             "styles": [
               "src/styles.scss"
             ],
-            "maxWorkers": 1,
             "scripts": []
           }
         },
