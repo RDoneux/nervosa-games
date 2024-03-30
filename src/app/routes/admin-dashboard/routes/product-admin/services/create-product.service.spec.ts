@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { CreateProductService } from './create-product.service';
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
-import { mockedProduct } from 'src/app/data/test-data.spec';
+import { mockedProduct } from 'src/app/data/test-data';
 
 describe('CreateProductService', () => {
   let service: CreateProductService;
@@ -28,9 +28,9 @@ describe('CreateProductService', () => {
       service.uploadNewProduct(mockedProduct);
 
       expect(angularFirestoreMock.getFirestore).toHaveBeenCalledTimes(1);
-      expect(angularFirestoreMock.getFirestore().collection).toHaveBeenCalledOnceWith('products');
+      expect(angularFirestoreMock.getFirestore().collection).toHaveBeenCalledWith('products');
       expect(angularFirestoreMock.getFirestore().collection().doc).toHaveBeenCalledTimes(1);
-      expect(angularFirestoreMock.getFirestore().collection().doc().set).toHaveBeenCalledOnceWith(mockedProduct);
+      expect(angularFirestoreMock.getFirestore().collection().doc().set).toHaveBeenCalledWith(mockedProduct);
 
     })
   })

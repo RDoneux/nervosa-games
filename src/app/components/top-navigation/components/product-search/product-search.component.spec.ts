@@ -16,7 +16,7 @@ describe('ProductSearchComponent', () => {
     redirectToSumupStore: true,
     sumupStoreURL: 'test-sumup-store-url',
     openInNewTab: true,
-    contactFormDestinationAddress: 'test-destination-address'
+    contactFormDestinationAddress: 'test-destination-address',
   };
 
   beforeEach(() => {
@@ -29,6 +29,11 @@ describe('ProductSearchComponent', () => {
     });
     fixture = TestBed.createComponent(ProductSearchComponent);
     component = fixture.componentInstance;
+
+    component.socialMediaIconLinks = [
+      { href: 'test-href', name: 'test-name', alt: 'test-alt' },
+    ];
+
     fixture.detectChanges();
   });
 
@@ -39,13 +44,13 @@ describe('ProductSearchComponent', () => {
   describe('#onKeyPress', () => {
     it('should open given url if redirectToSumupStore is true', () => {
       component.searchTerm = 'test-search-term';
-      jest.spyOn(window, 'open').mockImplementation(() => {});
+      jest.spyOn(window, 'open').mockImplementation();
 
       component.ngOnInit();
 
       component.onKeyPress({ key: 'Enter' } as KeyboardEvent);
 
-      expect(window.open).toHaveBeenCalledOnceWith(
+      expect(window.open).toHaveBeenCalledWith(
         `${payload.sumupStoreURL}/search?search=test-search-term`,
         '_blank'
       );

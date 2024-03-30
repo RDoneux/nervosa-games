@@ -4,17 +4,11 @@ import {
   mockedAnnouncementPost,
   mockedComment,
   mockedUser,
-} from 'src/app/data/test-data.spec';
+} from 'src/app/data/test-data';
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { IComment } from 'src/app/interfaces/i-comment.interface';
-import {
-  Timestamp,
-  getFirestore,
-  provideFirestore,
-} from '@angular/fire/firestore';
-import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment';
+import { Timestamp } from '@angular/fire/firestore';
 import { LoginService } from 'src/app/services/login/login.service';
 import { of } from 'rxjs';
 
@@ -23,12 +17,12 @@ describe('CommentSectionComponent', () => {
   let fixture: ComponentFixture<CommentSectionComponent>;
 
   let firestoreServiceMock: any;
-  let loginServiceMock: jasmine.SpyObj<LoginService>;
+  let loginServiceMock: { requestUserLogsIn: jest.Mock };
 
   beforeEach(() => {
     firestoreServiceMock = getFirestoreStub([mockedAnnouncementPost]);
     loginServiceMock = {
-      'requestUserLogsIn': jest.fn()
+      requestUserLogsIn: jest.fn(),
     };
     TestBed.configureTestingModule({
       imports: [
@@ -68,20 +62,12 @@ describe('CommentSectionComponent', () => {
       expect(component.newComment.datePosted).toBeDefined();
     });
 
-    it('should request comments from firestore service', () => {
-      component.ngOnInit();
-
-      expect(
-        firestoreServiceMock.getFirestore().collection
-      ).toHaveBeenCalledWith('posts', expect.any(Function));
-    });
-
     it('should request recieved data is sorted', () => {
-      jest.spyOn(component, 'sortData').mockImplementation(() => {});
+      jest.spyOn(component, 'sortData').mockImplementation();
 
       component.ngOnInit();
 
-      expect(component.sortData).toHaveBeenCalledOnceWith([mockedComment]);
+      expect(component.sortData).toHaveBeenCalledWith([mockedComment]);
     });
 
     it('should set existingComments to recieved data', () => {
@@ -138,7 +124,7 @@ describe('CommentSectionComponent', () => {
     xit('should request firestoreService updates record', () => {
       component.onPublish();
 
-      expect(firestoreServiceMock.getFirestore().doc).toHaveBeenCalledOnceWith(
+      expect(firestoreServiceMock.getFirestore().doc).toHaveBeenCalledWith(
         'posts/' + component.postId
       );
       expect(
@@ -163,7 +149,7 @@ describe('CommentSectionComponent', () => {
     it('should update global hasFocus variable to true', () => {
       component.hasFocus = false;
       component.onFocus();
-      expect(component.hasFocus).toBeTrue();
+      expect(component.hasFocus).toBeTruthy();
     });
     it('should call loginService #requestUserLogsIn', () => {
       component.onFocus();

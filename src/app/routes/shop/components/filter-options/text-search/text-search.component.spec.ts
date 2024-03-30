@@ -34,7 +34,7 @@ describe('TextSearchComponent', () => {
 
       tick(1000);
 
-      expect(component.onChange).toHaveBeenCalledOnceWith('test-value');
+      expect(component.onChange).toHaveBeenCalledWith('test-value');
     }));
 
     it('should not call #onChange before debounce time', () => {
@@ -44,7 +44,7 @@ describe('TextSearchComponent', () => {
 
       component.updateNotifier.next('test-value');
 
-      expect(component.onChange).not.toHaveBeenCalledOnceWith('test-value');
+      expect(component.onChange).not.toHaveBeenCalledWith('test-value');
     });
   });
 
@@ -54,7 +54,7 @@ describe('TextSearchComponent', () => {
 
       component.onChange('tEsT-vAlUe');
 
-      expect(component.update.emit).toHaveBeenCalledOnceWith('test-value');
+      expect(component.update.emit).toHaveBeenCalledWith('test-value');
     });
   });
 });

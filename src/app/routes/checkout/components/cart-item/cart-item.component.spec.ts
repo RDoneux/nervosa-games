@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CartItemComponent } from './cart-item.component';
 import { CheckoutModule } from '../../checkout.module';
 import { QuantitySelectorComponent } from 'src/app/components/quantity-selector/quantity-selector.component';
-import { mockedProduct } from 'src/app/data/test-data.spec';
+import { mockedProduct } from 'src/app/data/test-data';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IProduct } from 'src/app/components/product/interfaces/i-product.interface';
 
@@ -11,13 +11,17 @@ describe('CartItemComponent', () => {
   let component: CartItemComponent;
   let fixture: ComponentFixture<CartItemComponent>;
 
-  let cartServiceMock: jasmine.SpyObj<CartService>;
+  let cartServiceMock: {
+    calculateProductPriceIncludingQuantity: jest.Mock;
+    updateCartItem: jest.Mock;
+    removeCartItem: jest.Mock;
+  };
 
   beforeEach(() => {
     cartServiceMock = {
-      'calculateProductPriceIncludingQuantity': jest.fn(),
-      'updateCartItem': jest.fn(),
-      'removeCartItem': jest.fn()
+      calculateProductPriceIncludingQuantity: jest.fn(),
+      updateCartItem: jest.fn(),
+      removeCartItem: jest.fn(),
     };
 
     TestBed.configureTestingModule({
@@ -41,7 +45,7 @@ describe('CartItemComponent', () => {
 
       expect(
         cartServiceMock.calculateProductPriceIncludingQuantity
-      ).toHaveBeenCalledOnceWith({ ...mockedProduct, quantity: 1 });
+      ).toHaveBeenCalledWith({ ...mockedProduct, quantity: 1 });
       expect(component.totalPrice).toEqual(1);
     });
   });
@@ -52,7 +56,7 @@ describe('CartItemComponent', () => {
 
       component.onQuantityChanged(0);
 
-      expect(component.onRemoveItem).toHaveBeenCalledOnceWith();
+      expect(component.onRemoveItem).toHaveBeenCalledWith();
       expect(
         cartServiceMock.calculateProductPriceIncludingQuantity
       ).not.toHaveBeenCalled();
@@ -69,8 +73,8 @@ describe('CartItemComponent', () => {
 
       expect(
         cartServiceMock.calculateProductPriceIncludingQuantity
-      ).toHaveBeenCalledOnceWith({ ...mockedProduct, quantity: 3 });
-      expect(cartServiceMock.updateCartItem).toHaveBeenCalledOnceWith({
+      ).toHaveBeenCalledWith({ ...mockedProduct, quantity: 3 });
+      expect(cartServiceMock.updateCartItem).toHaveBeenCalledWith({
         ...mockedProduct,
         quantity: 3,
       });
@@ -81,7 +85,7 @@ describe('CartItemComponent', () => {
     it('should call CartService #removeCartItem', () => {
       component.onRemoveItem();
 
-      expect(cartServiceMock.removeCartItem).toHaveBeenCalledOnceWith({
+      expect(cartServiceMock.removeCartItem).toHaveBeenCalledWith({
         ...mockedProduct,
         quantity: 1,
       } as IProduct);

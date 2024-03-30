@@ -8,7 +8,7 @@ import { PostService } from './services/post/post.service';
 import {
   mockedAnnouncementPost,
   mockedUser,
-} from 'src/app/data/test-data.spec';
+} from 'src/app/data/test-data';
 import { of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -16,9 +16,9 @@ import { LoginService } from 'src/app/services/login/login.service';
 describe('PostComponent', () => {
   let component: PostComponent;
   let fixture: ComponentFixture<PostComponent>;
-  let postServiceMock: jasmine.SpyObj<PostService>;
+  let postServiceMock: {getPost: jest.Mock, getUser: jest.Mock, updateSeenBy: jest.Mock}
   let mockedRoute = { queryParams: of('') };
-  let loginServiceMock: jasmine.SpyObj<LoginService>;
+  let loginServiceMock: {requestUserLogsIn: jest.Mock, getCurrentLoggedInUser: jest.Mock}
 
   beforeEach(() => {
     postServiceMock = {

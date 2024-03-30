@@ -69,7 +69,7 @@ describe('PriceSelectComponent', () => {
       component.priceRange = { min: 1, max: 2 };
       component.updateMinValue();
 
-      expect(component.updateNotifier.next).toHaveBeenCalledOnceWith(null);
+      expect(component.updateNotifier.next).toHaveBeenCalledWith(null);
     });
   });
 
@@ -94,7 +94,7 @@ describe('PriceSelectComponent', () => {
       component.priceRange = { min: 1, max: 2 };
       component.updateMaxValue();
 
-      expect(component.updateNotifier.next).toHaveBeenCalledOnceWith(null);
+      expect(component.updateNotifier.next).toHaveBeenCalledWith(null);
     });
   });
 
@@ -106,7 +106,7 @@ describe('PriceSelectComponent', () => {
 
       component.onModelChange();
 
-      expect(component.update.emit).toHaveBeenCalledOnceWith({
+      expect(component.update.emit).toHaveBeenCalledWith({
         min: 1,
         max: 2,
       });

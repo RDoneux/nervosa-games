@@ -5,7 +5,7 @@ import { ProductAdminModule } from '../../product-admin.module';
 import { getStorageStub } from 'src/app/services/cloud-storage/storage-testing';
 import { StorageService } from 'src/app/services/cloud-storage/storage.service';
 import { CreateProductService } from '../../services/create-product.service';
-import { mockedProduct } from 'src/app/data/test-data.spec';
+import { mockedProduct } from 'src/app/data/test-data';
 
 describe('CreateComponentComponent', () => {
   let component: CreateComponentComponent;
@@ -13,7 +13,7 @@ describe('CreateComponentComponent', () => {
 
   let firestoreStorageMock: any;
 
-  let createProductServiceMock: jasmine.SpyObj<CreateProductService>;
+  let createProductServiceMock: {uploadNewProduct: jest.Mock}
 
   beforeEach(() => {
     firestoreStorageMock = getStorageStub('');
@@ -65,7 +65,7 @@ describe('CreateComponentComponent', () => {
 
       expect(
         createProductServiceMock.uploadNewProduct
-      ).toHaveBeenCalledOnceWith(mockedProduct);
+      ).toHaveBeenCalledWith(mockedProduct);
     });
     it('should reset product after submit', () => {
       component.product = mockedProduct;
@@ -81,7 +81,7 @@ describe('CreateComponentComponent', () => {
 
       expect(component.product.id).toBeDefined();
       expect(component.product.dateUploaded).toBeDefined();
-      expect(component.product.isLiked).toBeFalse();
+      expect(component.product.isLiked).toBeFalsy();
     });
   });
 });

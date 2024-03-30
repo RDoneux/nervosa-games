@@ -14,7 +14,7 @@ describe('NotificationComponent', () => {
   let component: NotificationComponent;
   let fixture: ComponentFixture<NotificationComponent>;
 
-  let notificationServiceMock: jasmine.SpyObj<NotificationService>;
+  let notificationServiceMock: {removeNotification: jest.Mock}
 
   beforeEach(async () => {
     notificationServiceMock = {
@@ -76,7 +76,7 @@ describe('NotificationComponent', () => {
 
       expect(
         notificationServiceMock.removeNotification
-      ).toHaveBeenCalledOnceWith('test-id');
+      ).toHaveBeenCalledWith('test-id');
     });
   });
 });

@@ -4,7 +4,7 @@ import { ProductComponent } from './product.component';
 import { ProductModule } from '../../product.module';
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
-import { mockedCartItem, mockedProduct } from 'src/app/data/test-data.spec';
+import { mockedCartItem, mockedProduct } from 'src/app/data/test-data';
 import { UserService } from 'src/app/services/user/user.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IGeneralSettings } from 'src/app/interfaces/i-general-settings.interface';
@@ -15,8 +15,9 @@ describe('ProductComponent', () => {
   let fixture: ComponentFixture<ProductComponent>;
 
   let firestoreServiceMock: any;
-  let userServiceMock: jasmine.SpyObj<UserService>;
-  let cartServiceMock: jasmine.SpyObj<CartService>;
+
+  let userServiceMock: {addProductToLikedList: jest.Mock, removeProductFromLikedList: jest.Mock}
+  let cartServiceMock: {addCartItem: jest.Mock}
 
   beforeEach(() => {
     firestoreServiceMock = getFirestoreStub('');
@@ -48,7 +49,7 @@ describe('ProductComponent', () => {
     it('should set showMoreDetails to true', () => {
       component.showMoreDetails = false;
       component.onShowMoreDetail();
-      expect(component.showMoreDetails).toBeTrue();
+      expect(component.showMoreDetails).toBeTruthy();
     });
   });
 
@@ -56,7 +57,7 @@ describe('ProductComponent', () => {
     it('should set showMoreDetails to false', () => {
       component.showMoreDetails = true;
       component.onRequestClose();
-      expect(component.showMoreDetails).toBeFalse();
+      expect(component.showMoreDetails).toBeFalsy();
     });
   });
 
@@ -69,18 +70,18 @@ describe('ProductComponent', () => {
 
       component.onFavorite();
 
-      expect(component.product.isLiked).toBeTrue();
+      expect(component.product.isLiked).toBeTruthy();
 
       component.onFavorite();
 
-      expect(component.product.isLiked).toBeFalse();
+      expect(component.product.isLiked).toBeFalsy();
     }),
       it('should call userService #addProductToLikedList if product is liked', () => {
         component.product.isLiked = false;
 
         component.onFavorite();
 
-        expect(userServiceMock.addProductToLikedList).toHaveBeenCalledOnceWith(
+        expect(userServiceMock.addProductToLikedList).toHaveBeenCalledWith(
           mockedProduct.id
         );
         expect(
@@ -94,7 +95,7 @@ describe('ProductComponent', () => {
 
         expect(
           userServiceMock.removeProductFromLikedList
-        ).toHaveBeenCalledOnceWith(mockedProduct.id);
+        ).toHaveBeenCalledWith(mockedProduct.id);
         expect(userServiceMock.addProductToLikedList).not.toHaveBeenCalled();
       });
   });
@@ -104,7 +105,7 @@ describe('ProductComponent', () => {
       component.product = mockedCartItem;
       component.onAddToCart();
 
-      expect(cartServiceMock.addCartItem).toHaveBeenCalledOnceWith(
+      expect(cartServiceMock.addCartItem).toHaveBeenCalledWith(
         mockedCartItem
       );
     });
@@ -112,7 +113,7 @@ describe('ProductComponent', () => {
 
   describe('#onClick', () => {
     beforeEach(() => {
-      jest.spyOn(window, 'open').mockImplementation(() => {});
+      jest.spyOn(window, 'open').mockImplementation();
     });
     it('should do nothing if store general settings is false or if openInNewTab is false', () => {
       component.storeGeneralSettings = undefined;
@@ -141,7 +142,7 @@ describe('ProductComponent', () => {
 
       component.onClick();
 
-      expect(window.open).toHaveBeenCalledOnceWith(
+      expect(window.open).toHaveBeenCalledWith(
         'test-url/product/test-title',
         '_blank'
       );
@@ -158,7 +159,7 @@ describe('ProductComponent', () => {
 
       component.onClick();
 
-      expect(window.open).toHaveBeenCalledOnceWith(
+      expect(window.open).toHaveBeenCalledWith(
         'test-url/product/test-title',
         ''
       );

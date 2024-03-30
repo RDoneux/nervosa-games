@@ -26,7 +26,7 @@ describe('GameSelectComponent', () => {
 
       component.onChange('ThIs Is ThE vAlUe');
 
-      expect(component.update.emit).toHaveBeenCalledOnceWith(
+      expect(component.update.emit).toHaveBeenCalledWith(
         'this is the value'
       );
     });

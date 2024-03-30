@@ -4,7 +4,7 @@ import { AnnouncmentPostComponent } from './announcment-post.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from '../../../../environments/environment';
 import { IAnnouncementPost } from '../interfaces/i-announcement-post.interface';
-import { mockedAnnouncementPost } from '../../../data/test-data.spec';
+import { mockedAnnouncementPost } from '../../../data/test-data';
 
 describe('AnnouncmentPostComponent', () => {
   const mockAnnouncementPost: IAnnouncementPost = mockedAnnouncementPost

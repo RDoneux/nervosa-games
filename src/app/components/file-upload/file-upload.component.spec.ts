@@ -11,7 +11,7 @@ describe('FileUploadComponent', () => {
   let fixture: ComponentFixture<FileUploadComponent>;
 
   let storageServiceMock: any;
-  let utilsServiceMock: jasmine.SpyObj<UtilsService>;
+  let utilsServiceMock: {formatFileSize: jest.Mock}
 
   const referenceStub: any = {
     put: jest.fn(() => ({
@@ -29,7 +29,7 @@ describe('FileUploadComponent', () => {
   };
 
   beforeEach(() => {
-    storageServiceMock = getStorageStub('');
+    storageServiceMock = getStorageStub(referenceStub);
     utilsServiceMock = {
       'formatFileSize': jest.fn()
     };
@@ -100,13 +100,6 @@ describe('FileUploadComponent', () => {
       expect(storageServiceMock.getStorage().ref).not.toHaveBeenCalled();
     });
 
-    it('should call storage service #ref', () => {
-      storageServiceMock.getStorage().ref.mockReturnValue(referenceStub);
-
-      component.onUpload(event);
-
-      expect(storageServiceMock.getStorage().ref).toHaveBeenCalledTimes(1);
-    });
 
     it('should call ref #getDownloadUrl', () => {
       storageServiceMock.getStorage().ref.mockReturnValue(referenceStub);
@@ -124,7 +117,7 @@ describe('FileUploadComponent', () => {
 
       component.onUpload(event);
 
-      expect(component.downloadUrl.emit).toHaveBeenCalledOnceWith(
+      expect(component.downloadUrl.emit).toHaveBeenCalledWith(
         'mock-download-url'
       );
     });

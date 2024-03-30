@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 
 /* istanbul ignore next */
 export const debug = (namespace: string) =>
-  dbg(`${packageJson.name}:${namespace}`);
+  dbg(`${packageJson?.name ?? 'DEFAULT'}:${namespace}`);
 
 /* istanbul ignore next */
 export function debugInit(): void {

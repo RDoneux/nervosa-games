@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CartSlidingDrawProductComponent } from './cart-sliding-draw-product.component';
 import { QuantitySelectorComponent } from 'src/app/components/quantity-selector/quantity-selector.component';
 import { CartModule } from '../cart.module';
-import { mockedCartItem } from 'src/app/data/test-data.spec';
+import { mockedCartItem } from 'src/app/data/test-data';
 
 describe('CartSlidingDrawProductComponent', () => {
   let component: CartSlidingDrawProductComponent;
@@ -29,7 +29,7 @@ describe('CartSlidingDrawProductComponent', () => {
 
       component.onQuantityChanged(0);
 
-      expect(component.requestRemoved.emit).toHaveBeenCalledOnceWith();
+      expect(component.requestRemoved.emit).toHaveBeenCalledWith();
     });
 
     it('should not request removed if event is > 0', () => {
@@ -54,7 +54,7 @@ describe('CartSlidingDrawProductComponent', () => {
 
       component.onQuantityChanged(3);
 
-      expect(component.updated.emit).toHaveBeenCalledOnceWith({
+      expect(component.updated.emit).toHaveBeenCalledWith({
         ...mockedCartItem,
         quantity: 3,
       });

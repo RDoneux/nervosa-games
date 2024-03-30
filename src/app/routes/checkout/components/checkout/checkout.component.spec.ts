@@ -4,18 +4,18 @@ import { CheckoutComponent } from './checkout.component';
 import { CheckoutModule } from '../../checkout.module';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { of } from 'rxjs';
-import { mockedCartItem } from 'src/app/data/test-data.spec';
+import { mockedCartItem } from 'src/app/data/test-data';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
   let fixture: ComponentFixture<CheckoutComponent>;
 
-  let cartServiceMock: jasmine.SpyObj<CartService>;
+  let cartServiceMock: { getPrice$: jest.Mock; getCartItems$: jest.Mock };
 
   beforeEach(() => {
     cartServiceMock = {
-      'getPrice$': jest.fn(),
-      'getCartItems$': jest.fn()
+      getPrice$: jest.fn(),
+      getCartItems$: jest.fn(),
     };
     TestBed.configureTestingModule({
       imports: [CheckoutModule],
@@ -36,8 +36,8 @@ describe('CheckoutComponent', () => {
 
       component.ngOnInit();
 
-      expect(cartServiceMock.getPrice$).toHaveBeenCalledOnceWith();
-      expect(cartServiceMock.getCartItems$).toHaveBeenCalledOnceWith();
+      expect(cartServiceMock.getPrice$).toHaveBeenCalledWith();
+      expect(cartServiceMock.getCartItems$).toHaveBeenCalledWith();
 
       expect(component.price).toEqual(2);
       expect(component.cartItems).toEqual([mockedCartItem]);

@@ -6,25 +6,22 @@ import { CreatePostService } from '../../services/create-post.service';
 import { NewsAdminModule } from '../../news-admin.module';
 import { StorageService } from 'src/app/services/cloud-storage/storage.service';
 import { getStorageStub } from 'src/app/services/cloud-storage/storage-testing';
-import {
-  mockedAnnouncementPost,
-  mockedUser,
-} from 'src/app/data/test-data.spec';
+import { mockedAnnouncementPost, mockedUser } from 'src/app/data/test-data';
 import { of } from 'rxjs';
 
 describe('CreatePostComponent', () => {
   let component: CreatePostComponent;
   let fixture: ComponentFixture<CreatePostComponent>;
 
-  let loginServiceMock: jasmine.SpyObj<LoginService>;
-  let createPostServiceMock: jasmine.SpyObj<CreatePostService>;
+  let loginServiceMock: { getCurrentLoggedInUser: jest.Mock };
+  let createPostServiceMock: { uploadPost: jest.Mock };
 
   beforeEach(() => {
     loginServiceMock = {
-      'getCurrentLoggedInUser': jest.fn()
+      getCurrentLoggedInUser: jest.fn(),
     };
     createPostServiceMock = {
-      'uploadPost': jest.fn()
+      uploadPost: jest.fn(),
     };
     TestBed.configureTestingModule({
       imports: [NewsAdminModule],

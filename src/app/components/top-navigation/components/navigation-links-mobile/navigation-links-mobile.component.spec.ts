@@ -1,8 +1,6 @@
 import {
   ComponentFixture,
   TestBed,
-  fakeAsync,
-  tick,
 } from '@angular/core/testing';
 
 import { NavigationLinksMobileComponent } from './navigation-links-mobile.component';
@@ -39,7 +37,7 @@ describe('NavigationLinksMobileComponent', () => {
     it('should set menu to closed state on click outside component', () => {
       component.showMenu = true;
       component.menuClosed(new MouseEvent('click'));
-      expect(component.showMenu).toBeFalse();
+      expect(component.showMenu).toBeFalsy();
     });
     it('should do nothing if the click event is inside the component', () => {
       component.showMenu = true;
@@ -48,7 +46,7 @@ describe('NavigationLinksMobileComponent', () => {
       });
       component.menuClosed(new MouseEvent('click'));
       expect(component.getElement).toHaveBeenCalled();
-      expect(component.showMenu).toBeTrue();
+      expect(component.showMenu).toBeTruthy();
     });
   });
 });

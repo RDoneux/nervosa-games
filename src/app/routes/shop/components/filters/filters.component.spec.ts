@@ -8,11 +8,11 @@ describe('FiltersComponent', () => {
   let component: FiltersComponent;
   let fixture: ComponentFixture<FiltersComponent>;
 
-  let messageServiceMock: jasmine.SpyObj<MessageService>;
+  let messageServiceMock: { send: jest.Mock };
 
   beforeEach(() => {
     messageServiceMock = {
-      'send': jest.fn()
+      send: jest.fn(),
     };
 
     TestBed.configureTestingModule({
@@ -33,18 +33,18 @@ describe('FiltersComponent', () => {
       component.show = true;
       component.onClick({} as MouseEvent);
 
-      expect(component.show).toBeFalse();
+      expect(component.show).toBeFalsy();
     });
     it('should not change show if mobileDraw contains event', () => {
       const mobileDraw = {
         contains: jest.fn(() => true),
       };
-      spyOnProperty(component, 'mobileDraw').mockReturnValue(mobileDraw);
+      jest.spyOn(component, 'mobileDraw', 'get').mockReturnValue(mobileDraw);
       component.show = true;
 
       component.onClick({} as MouseEvent);
 
-      expect(component.show).toBeTrue();
+      expect(component.show).toBeTruthy();
     });
   });
 

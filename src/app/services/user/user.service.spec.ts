@@ -2,12 +2,12 @@ import { TestBed } from '@angular/core/testing';
 
 import { UserService } from './user.service';
 import { LoginService } from '../login/login.service';
-import { mockedUser } from 'src/app/data/test-data.spec';
+import { mockedUser } from 'src/app/data/test-data';
 import { of } from 'rxjs';
 
 describe('UserService', () => {
   let service: UserService;
-  let loginServiceMock: jasmine.SpyObj<LoginService>;
+  let loginServiceMock: {getCurrentLoggedInUser: jest.Mock, saveUserToDatabase: jest.Mock}
 
   beforeEach(() => {
     loginServiceMock = {
@@ -52,7 +52,7 @@ describe('UserService', () => {
       service.addProductToLikedList('new-testing-liked-list-item');
 
       expect(loginServiceMock.getCurrentLoggedInUser).toHaveBeenCalledTimes(1);
-      expect(loginServiceMock.saveUserToDatabase).toHaveBeenCalledOnceWith({
+      expect(loginServiceMock.saveUserToDatabase).toHaveBeenCalledWith({
         ...mockedUser,
       });
     });
@@ -76,7 +76,7 @@ describe('UserService', () => {
       service.removeProductFromLikedList('liked-product-one');
 
       expect(loginServiceMock.getCurrentLoggedInUser).toHaveBeenCalledTimes(1);
-      expect(loginServiceMock.saveUserToDatabase).toHaveBeenCalledOnceWith({
+      expect(loginServiceMock.saveUserToDatabase).toHaveBeenCalledWith({
         ...mockedUser,
       });
     });

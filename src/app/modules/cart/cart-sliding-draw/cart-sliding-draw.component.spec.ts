@@ -5,21 +5,26 @@ import { CartModule } from '../cart.module';
 import { QuantitySelectorComponent } from 'src/app/components/quantity-selector/quantity-selector.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { mockedCartItem } from 'src/app/data/test-data.spec';
+import { mockedCartItem } from 'src/app/data/test-data';
 import { of } from 'rxjs';
 
 describe('SlidingDrawComponent', () => {
   let component: CartSlidingDrawComponent;
   let fixture: ComponentFixture<CartSlidingDrawComponent>;
 
-  let cartServiceMock: jasmine.SpyObj<CartService>;
+  let cartServiceMock: {
+    getCartItems$: jest.Mock;
+    getPrice$: jest.Mock;
+    removeCartItem: jest.Mock;
+    updateCartItem: jest.Mock;
+  };
 
   beforeEach(() => {
     cartServiceMock = {
-      'getCartItems$': jest.fn(),
-      'getPrice$': jest.fn(),
-      'removeCartItem': jest.fn(),
-      'updateCartItem': jest.fn()
+      getCartItems$: jest.fn(),
+      getPrice$: jest.fn(),
+      removeCartItem: jest.fn(),
+      updateCartItem: jest.fn(),
     };
 
     TestBed.configureTestingModule({
@@ -34,9 +39,9 @@ describe('SlidingDrawComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('#onClick', () => [
+  describe('#onClick', () => {
     it('should do nothing if draw contains event target', () => {
-      spyOnProperty(component, 'draw', 'get').mockReturnValue({
+      jest.spyOn(component, 'draw', 'get').mockReturnValue({
         contains: () => true,
       });
       jest.spyOn(component, 'onClose').mockImplementation(() => {});
@@ -46,19 +51,18 @@ describe('SlidingDrawComponent', () => {
       } as unknown as MouseEvent);
 
       expect(component.onClose).not.toHaveBeenCalled();
-    }),
-
+    });
     it('should call #onClose if draw does not contain event target', () => {
-      spyOnProperty(component, 'draw', 'get').mockReturnValue({
+      jest.spyOn(component, 'draw', 'get').mockReturnValue({
         contains: () => false,
       });
 
       jest.spyOn(component, 'onClose').mockImplementation(() => {});
       component.onClick({ target: '' } as unknown as MouseEvent);
 
-      expect(component.onClose).toHaveBeenCalledOnceWith();
-    }),
-  ]);
+      expect(component.onClose).toHaveBeenCalledWith();
+    });
+  });
 
   describe('#ngOnInit', () => {
     beforeEach(() => {
@@ -81,7 +85,7 @@ describe('SlidingDrawComponent', () => {
     it('should call CartService #removeCartItem', () => {
       component.onRequestProductRemoved(mockedCartItem);
 
-      expect(cartServiceMock.removeCartItem).toHaveBeenCalledOnceWith(
+      expect(cartServiceMock.removeCartItem).toHaveBeenCalledWith(
         mockedCartItem
       );
     });
@@ -91,7 +95,7 @@ describe('SlidingDrawComponent', () => {
     it('should call CartService #updateCartItem', () => {
       component.onProductUpdated(mockedCartItem);
 
-      expect(cartServiceMock.updateCartItem).toHaveBeenCalledOnceWith(
+      expect(cartServiceMock.updateCartItem).toHaveBeenCalledWith(
         mockedCartItem
       );
     });
@@ -103,7 +107,7 @@ describe('SlidingDrawComponent', () => {
 
       component.onClose();
 
-      expect(component.requestClose.emit).toHaveBeenCalledOnceWith();
-    })
-  })
+      expect(component.requestClose.emit).toHaveBeenCalledWith();
+    });
+  });
 });

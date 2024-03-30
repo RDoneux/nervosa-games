@@ -12,7 +12,7 @@ describe('LoginOptionsComponent', () => {
   let component: LoginOptionsComponent;
   let fixture: ComponentFixture<LoginOptionsComponent>;
 
-  let loginServiceMock: jasmine.SpyObj<LoginService>;
+  let loginServiceMock: {loginRequests: jest.Mock}
 
   beforeEach(() => {
     loginServiceMock = {
@@ -41,13 +41,13 @@ describe('LoginOptionsComponent', () => {
       loginServiceMock.loginRequests.mockReturnValue(of('OPEN'));
       component.show = false;
       component.ngOnInit();
-      expect(component.show).toBeTrue();
+      expect(component.show).toBeTruthy();
     });
     it('should set show to false if state === CLOSE', () => {
       loginServiceMock.loginRequests.mockReturnValue(of('CLOSE'));
       component.show = true;
       component.ngOnInit();
-      expect(component.show).toBeFalse();
+      expect(component.show).toBeFalsy();
     });
   });
 
@@ -55,7 +55,7 @@ describe('LoginOptionsComponent', () => {
     it('should set show to false', () => {
       component.show = true;
       component.handleClose();
-      expect(component.show).toBeFalse();
+      expect(component.show).toBeFalsy();
     });
   });
 });

@@ -38,7 +38,7 @@ describe('TypeOptionsComponent', () => {
       component.typeArray = ['minature'];
       component.onChange('scenery');
 
-      expect(component.update.emit).toHaveBeenCalledOnceWith([
+      expect(component.update.emit).toHaveBeenCalledWith([
         'minature',
         'scenery',
       ]);

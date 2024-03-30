@@ -5,17 +5,17 @@ import { TopNavigationModule } from '../../top-navigation.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { of } from 'rxjs';
-import { mockedCartItem } from 'src/app/data/test-data.spec';
+import { mockedCartItem } from 'src/app/data/test-data';
 
 describe('CartIconComponent', () => {
   let component: CartIconComponent;
   let fixture: ComponentFixture<CartIconComponent>;
 
-  let cartServiceMock: jasmine.SpyObj<CartService>;
+  let cartServiceMock: { getCartItems$: jest.Mock };
 
   beforeEach(() => {
     cartServiceMock = {
-      'getCartItems$': jest.fn()
+      getCartItems$: jest.fn(),
     };
 
     TestBed.configureTestingModule({
@@ -35,7 +35,7 @@ describe('CartIconComponent', () => {
       cartServiceMock.getCartItems$.mockReturnValue(of([mockedCartItem]));
       component.ngOnInit();
 
-      expect(cartServiceMock.getCartItems$).toHaveBeenCalledOnceWith();
+      expect(cartServiceMock.getCartItems$).toHaveBeenCalledWith();
       expect(component.itemsInCart).toEqual([mockedCartItem]);
     });
   });
@@ -46,8 +46,8 @@ describe('CartIconComponent', () => {
 
       component.onCartSelected(event as unknown as MouseEvent);
 
-      expect(component.showDraw).toBeTrue();
-      expect(event.stopPropagation).toHaveBeenCalledOnceWith();
+      expect(component.showDraw).toBeTruthy();
+      expect(event.stopPropagation).toHaveBeenCalledWith();
     });
   });
 
@@ -56,7 +56,7 @@ describe('CartIconComponent', () => {
       component.showDraw = true;
       component.onCloseDraw();
 
-      expect(component.showDraw).toBeFalse();
+      expect(component.showDraw).toBeFalsy();
     });
   });
 });

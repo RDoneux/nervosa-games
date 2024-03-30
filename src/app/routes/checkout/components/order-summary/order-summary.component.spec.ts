@@ -8,11 +8,11 @@ describe('OrderSummaryComponent', () => {
   let component: OrderSummaryComponent;
   let fixture: ComponentFixture<OrderSummaryComponent>;
 
-  let cartServiceMock: jasmine.SpyObj<CartService>;
+  let cartServiceMock: { getPrice$: jest.Mock };
 
   beforeEach(() => {
     cartServiceMock = {
-      'getPrice$': jest.fn()
+      getPrice$: jest.fn(),
     };
 
     TestBed.configureTestingModule({
@@ -34,7 +34,7 @@ describe('OrderSummaryComponent', () => {
 
       component.ngOnInit();
 
-      expect(cartServiceMock.getPrice$).toHaveBeenCalledOnceWith();
+      expect(cartServiceMock.getPrice$).toHaveBeenCalledWith();
       expect(component.subtotal).toEqual(5);
       expect(component.total).toEqual(6);
     });

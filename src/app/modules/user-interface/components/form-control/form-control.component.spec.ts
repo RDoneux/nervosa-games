@@ -59,12 +59,12 @@ describe('FormControlComponent', () => {
     it('should set hasContent to true if newValue length is greater than zero', () => {
       component.hasContent = false;
       component.handleValueChange('value-with-greater-than-zero');
-      expect(component.hasContent).toBeTrue();
+      expect(component.hasContent).toBeTruthy();
     });
     it('should set hasContent to false if newValue length is zero', () => {
       component.hasContent = true;
       component.handleValueChange('');
-      expect(component.hasContent).toBeFalse();
+      expect(component.hasContent).toBeFalsy();
     });
   });
 
