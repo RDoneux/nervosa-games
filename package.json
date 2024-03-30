@@ -7,8 +7,7 @@
     "build": "ng build && cd functions && npm run build",
     "watch": "ng build --watch --configuration development",
     "test:commit": "npm run test:production && npm run build",
-    "test:development": "ng test --karma-config karma-development.conf.js",
-    "test:production": "ng test --karma-config karma-production.conf.js",
+    "test": "npx jest",
     "deploy": "firebase deploy --only functions,hosting"
   },
   "private": true,
