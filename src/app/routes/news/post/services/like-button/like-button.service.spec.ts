@@ -9,13 +9,13 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 describe('LikeButtonService', () => {
   let service: LikeButtonService;
   let postServiceMock = { getPost: (postId: string) => {} };
-  let localStorageServiceMock: jasmine.SpyObj<LocalStorageService>;
+  let localStorageServiceMock: {get: jest.Mock, save: jest.Mock}
 
   beforeEach(() => {
-    localStorageServiceMock = jasmine.createSpyObj('LocalStorageService', [
-      'get',
-      'save',
-    ]);
+    localStorageServiceMock = {
+      'get': jest.fn(),
+      'save': jest.fn()
+    };
     TestBed.configureTestingModule({
       providers: [
         { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
@@ -32,22 +32,22 @@ describe('LikeButtonService', () => {
 
   describe('#getLikedNumber', () => {
     it('should call PostService #getPost with post id', () => {
-      spyOn(postServiceMock, 'getPost');
+      jest.spyOn(postServiceMock, 'getPost').mockImplementation(() => {});
       service.getLikedNumber('test-post-id');
 
-      expect(postServiceMock.getPost).toHaveBeenCalledOnceWith('test-post-id');
+      expect(postServiceMock.getPost).toHaveBeenCalledWith('test-post-id');
     });
   });
 
   describe('#storeLikedPost', () => {
     it('should do nothing if likedPosts does includes postId', () => {
-      localStorageServiceMock.get.and.returnValue('["test-post-id"]');
+      localStorageServiceMock.get.mockReturnValue('["test-post-id"]');
       service.storeLikedPost('test-post-id');
       expect(localStorageServiceMock.save).not.toHaveBeenCalled();
     });
     it('should save likedPosts to local storage if not already saved', () => {
       service.storeLikedPost('test-post-id');
-      expect(localStorageServiceMock.save).toHaveBeenCalledOnceWith(
+      expect(localStorageServiceMock.save).toHaveBeenCalledWith(
         'LP',
         '["test-post-id"]'
       );
@@ -60,19 +60,19 @@ describe('LikeButtonService', () => {
       expect(localStorageServiceMock.save).not.toHaveBeenCalled();
     });
     it('should remove likedPosts from local storage if previously saved', () => {
-      localStorageServiceMock.get.and.returnValue('["test-post-id"]');
+      localStorageServiceMock.get.mockReturnValue('["test-post-id"]');
       service.removeLikedPost('test-post-id');
-      expect(localStorageServiceMock.save).toHaveBeenCalledOnceWith('LP', '[]');
+      expect(localStorageServiceMock.save).toHaveBeenCalledWith('LP', '[]');
     });
   });
 
   describe('#postIsLiked', () => {
     it('should return true if postId is saved in local storage', () => {
-      localStorageServiceMock.get.and.returnValue('["test-post-id"]');
-      expect(service.postIsLiked('test-post-id')).toBeTrue();
+      localStorageServiceMock.get.mockReturnValue('["test-post-id"]');
+      expect(service.postIsLiked('test-post-id')).toBeTruthy();
     });
     it('should return false if postId is not saved in local storage', () => {
-      expect(service.postIsLiked('test-post-id')).toBeFalse();
+      expect(service.postIsLiked('test-post-id')).toBeFalsy();
     });
   });
 });

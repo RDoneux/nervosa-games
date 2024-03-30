@@ -4,18 +4,23 @@ import { LocalStorageService } from './local-storage.service';
 
 describe('LocalStorageService', () => {
   let service: LocalStorageService;
-  let localStore: any;
+  let localStore: any = {};
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    localStore = {};
 
-    spyOn(window.localStorage, 'getItem').and.callFake((key) =>
-      key in localStore ? localStore[key] : null
-    );
-    spyOn(window.localStorage, 'setItem').and.callFake(
-      (key, value) => (localStore[key] = value + '')
-    );
+    const localStorageMock = (function () {
+      return {
+        getItem: (key: string) => localStore[key],
+        setItem: (key: string, value: string) =>
+          (localStore[key] = value.toString()),
+      };
+    })();
+
+    Object.defineProperty(window, 'localStorage', {
+      value: localStorageMock,
+    });
+
   });
 
   it('should be created', () => {

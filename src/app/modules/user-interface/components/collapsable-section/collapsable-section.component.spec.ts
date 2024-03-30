@@ -25,17 +25,17 @@ describe('CollapsableSectionComponent', () => {
 
       component.onToggleCollapse();
 
-      expect(component.collapsed).toBeTrue();
+      expect(component.collapsed).toBeTruthy();
 
       component.onToggleCollapse();
 
-      expect(component.collapsed).toBeFalse();
+      expect(component.collapsed).toBeFalsy();
     });
   });
 
   describe('#ngAfterViewInit', () => {
     it('should set contentHeight equal to collapsableContent scrollHeight', () => {
-      spyOnProperty(component, 'content').and.returnValue({
+      jest.spyOn(component, 'content', 'get').mockReturnValue({
         scrollHeight: 1,
       } as HTMLElement);
 

@@ -45,12 +45,12 @@ describe('GeneralSettingsComponent', () => {
     it('should request correct data from firestore service', () => {
       component.ngOnInit();
 
-      expect(firestoreStub.getFirestore().collection).toHaveBeenCalledOnceWith(
-        'general-settings'
+      expect(firestoreStub.getFirestore().collection).toHaveBeenCalledWith(
+        'general'
       );
       expect(
         firestoreStub.getFirestore().collection().doc
-      ).toHaveBeenCalledOnceWith('store');
+      ).toHaveBeenCalledWith('settings');
       expect(
         firestoreStub.getFirestore().collection().doc().valueChanges
       ).toHaveBeenCalledTimes(1);
@@ -65,19 +65,19 @@ describe('GeneralSettingsComponent', () => {
 
       component.onSubmit({ reset: () => {} } as NgForm);
 
-      expect(firestoreStub.getFirestore().collection).toHaveBeenCalledOnceWith(
-        'general-settings'
+      expect(firestoreStub.getFirestore().collection).toHaveBeenCalledWith(
+        'general'
       );
       expect(
         firestoreStub.getFirestore().collection().doc
-      ).toHaveBeenCalledOnceWith('store');
+      ).toHaveBeenCalledWith('settings');
       expect(
         firestoreStub.getFirestore().collection().doc().update
-      ).toHaveBeenCalledOnceWith(payload);
+      ).toHaveBeenCalledWith(payload);
     });
 
     it('should reset form', () => {
-      const resetFunction = { reset: jasmine.createSpy() };
+      const resetFunction = { reset: jest.fn() };
 
       component.onSubmit(resetFunction as unknown as NgForm);
 

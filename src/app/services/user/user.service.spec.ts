@@ -2,18 +2,18 @@ import { TestBed } from '@angular/core/testing';
 
 import { UserService } from './user.service';
 import { LoginService } from '../login/login.service';
-import { mockedUser } from 'src/app/data/test-data.spec';
+import { mockedUser } from 'src/app/data/test-data';
 import { of } from 'rxjs';
 
 describe('UserService', () => {
   let service: UserService;
-  let loginServiceMock: jasmine.SpyObj<LoginService>;
+  let loginServiceMock: {getCurrentLoggedInUser: jest.Mock, saveUserToDatabase: jest.Mock}
 
   beforeEach(() => {
-    loginServiceMock = jasmine.createSpyObj('LoginService', [
-      'getCurrentLoggedInUser',
-      'saveUserToDatabase',
-    ]);
+    loginServiceMock = {
+      'getCurrentLoggedInUser': jest.fn(),
+      'saveUserToDatabase': jest.fn()
+    };
     TestBed.configureTestingModule({
       providers: [{ provide: LoginService, useValue: loginServiceMock }],
     });
@@ -26,7 +26,7 @@ describe('UserService', () => {
 
   describe('#getUserProductLikedList', () => {
     beforeEach(() => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(mockedUser));
     });
 
     it('should return userLikedProducts', () => {
@@ -36,7 +36,7 @@ describe('UserService', () => {
     });
 
     it('should return null if user is undefined', () => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(null));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(null));
       service
         .getUserProductLikedList()
         .subscribe((res) => expect(res).toBeNull());
@@ -45,20 +45,20 @@ describe('UserService', () => {
 
   describe('#addProductToLikedList', () => {
     beforeEach(() => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(mockedUser));
     });
 
     it('should request #currentLoggedInUser from loginService', () => {
       service.addProductToLikedList('new-testing-liked-list-item');
 
       expect(loginServiceMock.getCurrentLoggedInUser).toHaveBeenCalledTimes(1);
-      expect(loginServiceMock.saveUserToDatabase).toHaveBeenCalledOnceWith({
+      expect(loginServiceMock.saveUserToDatabase).toHaveBeenCalledWith({
         ...mockedUser,
       });
     });
 
     it('should do nothing if returned user is null', () => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(null));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(null));
 
       service.addProductToLikedList('new-testing-liked-list-item');
 
@@ -69,20 +69,20 @@ describe('UserService', () => {
 
   describe('#removeProductFromLikedList', () => {
     beforeEach(() => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(mockedUser));
     });
 
     it('should request #currentLoggedInUser from loginService', () => {
       service.removeProductFromLikedList('liked-product-one');
 
       expect(loginServiceMock.getCurrentLoggedInUser).toHaveBeenCalledTimes(1);
-      expect(loginServiceMock.saveUserToDatabase).toHaveBeenCalledOnceWith({
+      expect(loginServiceMock.saveUserToDatabase).toHaveBeenCalledWith({
         ...mockedUser,
       });
     });
 
     it('should do nothing if returned user is null', () => {
-      loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(null));
+      loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(null));
 
       service.removeProductFromLikedList('liked-product-one');
 

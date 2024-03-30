@@ -8,7 +8,7 @@ import { PostService } from './services/post/post.service';
 import {
   mockedAnnouncementPost,
   mockedUser,
-} from 'src/app/data/test-data.spec';
+} from 'src/app/data/test-data';
 import { of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -16,20 +16,20 @@ import { LoginService } from 'src/app/services/login/login.service';
 describe('PostComponent', () => {
   let component: PostComponent;
   let fixture: ComponentFixture<PostComponent>;
-  let postServiceMock: jasmine.SpyObj<PostService>;
+  let postServiceMock: {getPost: jest.Mock, getUser: jest.Mock, updateSeenBy: jest.Mock}
   let mockedRoute = { queryParams: of('') };
-  let loginServiceMock: jasmine.SpyObj<LoginService>;
+  let loginServiceMock: {requestUserLogsIn: jest.Mock, getCurrentLoggedInUser: jest.Mock}
 
   beforeEach(() => {
-    postServiceMock = jasmine.createSpyObj('PostService', [
-      'getPost',
-      'getUser',
-      'updateSeenBy',
-    ]);
-    loginServiceMock = jasmine.createSpyObj('LoginService', [
-      'requestUserLogsIn',
-      'getCurrentLoggedInUser',
-    ]);
+    postServiceMock = {
+      'getPost': jest.fn(),
+      'getUser': jest.fn(),
+      'updateSeenBy': jest.fn()
+    };
+    loginServiceMock = {
+      'requestUserLogsIn': jest.fn(),
+      'getCurrentLoggedInUser': jest.fn()
+    };
     TestBed.configureTestingModule({
       declarations: [PostComponent],
       imports: [RouterTestingModule],
@@ -43,7 +43,7 @@ describe('PostComponent', () => {
     fixture = TestBed.createComponent(PostComponent);
     component = fixture.componentInstance;
 
-    loginServiceMock.getCurrentLoggedInUser.and.returnValue(of(mockedUser));
+    loginServiceMock.getCurrentLoggedInUser.mockReturnValue(of(mockedUser));
 
     fixture.detectChanges();
   });
@@ -54,8 +54,8 @@ describe('PostComponent', () => {
 
   describe('#fetchPost', () => {
     beforeEach(() => {
-      postServiceMock.getPost.and.returnValue(of([mockedAnnouncementPost]));
-      postServiceMock.getUser.and.returnValue(of([mockedUser]));
+      postServiceMock.getPost.mockReturnValue(of([mockedAnnouncementPost]));
+      postServiceMock.getUser.mockReturnValue(of([mockedUser]));
     });
 
     it('should set the post', () => {

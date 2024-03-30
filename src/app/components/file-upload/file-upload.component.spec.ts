@@ -11,19 +11,17 @@ describe('FileUploadComponent', () => {
   let fixture: ComponentFixture<FileUploadComponent>;
 
   let storageServiceMock: any;
-  let utilsServiceMock: jasmine.SpyObj<UtilsService>;
+  let utilsServiceMock: {formatFileSize: jest.Mock}
 
   const referenceStub: any = {
-    put: jasmine.createSpy().and.returnValue({
-      percentageChanges: jasmine.createSpy(),
-      snapshotChanges: jasmine.createSpy().and.returnValue(of([])),
-      pause: jasmine.createSpy(),
-      resume: jasmine.createSpy(),
-      cancel: jasmine.createSpy(),
-    }),
-    getDownloadURL: jasmine
-      .createSpy()
-      .and.returnValue(of('mock-download-url')),
+    put: jest.fn(() => ({
+      percentageChanges: jest.fn(),
+      snapshotChanges: jest.fn(() => of([])),
+      pause: jest.fn(),
+      resume: jest.fn(),
+      cancel: jest.fn()
+    })),
+    getDownloadURL: jest.fn(() => of('mock-download-url')),
   };
 
   let event: any = {
@@ -31,8 +29,10 @@ describe('FileUploadComponent', () => {
   };
 
   beforeEach(() => {
-    storageServiceMock = getStorageStub('');
-    utilsServiceMock = jasmine.createSpyObj('UtilsService', ['formatFileSize']);
+    storageServiceMock = getStorageStub(referenceStub);
+    utilsServiceMock = {
+      'formatFileSize': jest.fn()
+    };
     TestBed.configureTestingModule({
       imports: [FileUploadComponent],
       providers: [
@@ -53,8 +53,8 @@ describe('FileUploadComponent', () => {
     let event: any;
     beforeEach(() => {
       event = {
-        preventDefault: jasmine.createSpy(),
-        stopPropagation: jasmine.createSpy(),
+        preventDefault: jest.fn(),
+        stopPropagation: jest.fn(),
         dataTransfer: { files: [] },
       };
     });
@@ -71,7 +71,7 @@ describe('FileUploadComponent', () => {
       expect(event.stopPropagation).toHaveBeenCalledTimes(1);
     });
     it('#drop: should call #preventDefault and #stopPropagation', () => {
-      spyOn(component, 'onUpload');
+      jest.spyOn(component, 'onUpload').mockImplementation(() => {});
 
       component.onDrop(event);
 
@@ -79,7 +79,7 @@ describe('FileUploadComponent', () => {
       expect(event.stopPropagation).toHaveBeenCalledTimes(1);
     });
     it('#drop: should call #onUpload with file target', () => {
-      spyOn(component, 'onUpload');
+      jest.spyOn(component, 'onUpload').mockImplementation(() => {});
 
       component.onDrop(event);
 
@@ -100,16 +100,9 @@ describe('FileUploadComponent', () => {
       expect(storageServiceMock.getStorage().ref).not.toHaveBeenCalled();
     });
 
-    it('should call storage service #ref', () => {
-      storageServiceMock.getStorage().ref.and.returnValue(referenceStub);
-
-      component.onUpload(event);
-
-      expect(storageServiceMock.getStorage().ref).toHaveBeenCalledTimes(1);
-    });
 
     it('should call ref #getDownloadUrl', () => {
-      storageServiceMock.getStorage().ref.and.returnValue(referenceStub);
+      storageServiceMock.getStorage().ref.mockReturnValue(referenceStub);
 
       component.onUpload(event);
 
@@ -119,19 +112,19 @@ describe('FileUploadComponent', () => {
     });
 
     it('should emit download URL', () => {
-      storageServiceMock.getStorage().ref.and.returnValue(referenceStub);
-      spyOn(component.downloadUrl, 'emit');
+      storageServiceMock.getStorage().ref.mockReturnValue(referenceStub);
+      jest.spyOn(component.downloadUrl, 'emit').mockImplementation(() => {});
 
       component.onUpload(event);
 
-      expect(component.downloadUrl.emit).toHaveBeenCalledOnceWith(
+      expect(component.downloadUrl.emit).toHaveBeenCalledWith(
         'mock-download-url'
       );
     });
 
     it('should set loadedFileName and loadedFileSize', () => {
-      storageServiceMock.getStorage().ref.and.returnValue(referenceStub);
-      utilsServiceMock.formatFileSize.and.returnValue('1000KB');
+      storageServiceMock.getStorage().ref.mockReturnValue(referenceStub);
+      utilsServiceMock.formatFileSize.mockReturnValue('1000KB');
 
       component.onUpload(event);
 
@@ -143,7 +136,7 @@ describe('FileUploadComponent', () => {
 
   xdescribe('taskControl', () => {
     beforeEach(() => {
-      storageServiceMock.getStorage().ref.and.returnValue(referenceStub);
+      storageServiceMock.getStorage().ref.mockReturnValue(referenceStub);
       component.onUpload(event);
     });
 

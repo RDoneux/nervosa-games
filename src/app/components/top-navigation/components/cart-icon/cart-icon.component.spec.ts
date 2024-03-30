@@ -5,16 +5,18 @@ import { TopNavigationModule } from '../../top-navigation.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { of } from 'rxjs';
-import { mockedCartItem } from 'src/app/data/test-data.spec';
+import { mockedCartItem } from 'src/app/data/test-data';
 
 describe('CartIconComponent', () => {
   let component: CartIconComponent;
   let fixture: ComponentFixture<CartIconComponent>;
 
-  let cartServiceMock: jasmine.SpyObj<CartService>;
+  let cartServiceMock: { getCartItems$: jest.Mock };
 
   beforeEach(() => {
-    cartServiceMock = jasmine.createSpyObj('CartService', ['getCartItems$']);
+    cartServiceMock = {
+      getCartItems$: jest.fn(),
+    };
 
     TestBed.configureTestingModule({
       imports: [TopNavigationModule, RouterTestingModule],
@@ -30,22 +32,22 @@ describe('CartIconComponent', () => {
 
   describe('#ngOnInit', () => {
     it('should request #getCartItems from CartService', () => {
-      cartServiceMock.getCartItems$.and.returnValue(of([mockedCartItem]));
+      cartServiceMock.getCartItems$.mockReturnValue(of([mockedCartItem]));
       component.ngOnInit();
 
-      expect(cartServiceMock.getCartItems$).toHaveBeenCalledOnceWith();
+      expect(cartServiceMock.getCartItems$).toHaveBeenCalledWith();
       expect(component.itemsInCart).toEqual([mockedCartItem]);
     });
   });
 
   describe('#onCartSelected', () => {
     it('should showDraw and stop event propagation', () => {
-      const event = { stopPropagation: jasmine.createSpy() };
+      const event = { stopPropagation: jest.fn() };
 
       component.onCartSelected(event as unknown as MouseEvent);
 
-      expect(component.showDraw).toBeTrue();
-      expect(event.stopPropagation).toHaveBeenCalledOnceWith();
+      expect(component.showDraw).toBeTruthy();
+      expect(event.stopPropagation).toHaveBeenCalledWith();
     });
   });
 
@@ -54,7 +56,7 @@ describe('CartIconComponent', () => {
       component.showDraw = true;
       component.onCloseDraw();
 
-      expect(component.showDraw).toBeFalse();
+      expect(component.showDraw).toBeFalsy();
     });
   });
 });

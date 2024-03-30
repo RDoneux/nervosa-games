@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CollaboratorsComponent } from './collaborators.component';
+import { AboutUsModule } from '../../about-us.module';
 
 describe('CollaboratorsComponent', () => {
   let component: CollaboratorsComponent;
@@ -8,7 +9,7 @@ describe('CollaboratorsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CollaboratorsComponent]
+      imports: [AboutUsModule]
     })
     .compileComponents();
     

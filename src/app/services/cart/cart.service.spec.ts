@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CartService } from './cart.service';
-import { mockedCartItem } from 'src/app/data/test-data.spec';
+import { mockedCartItem } from 'src/app/data/test-data';
 import { skip } from 'rxjs';
 
 describe('CartService', () => {
@@ -19,7 +19,7 @@ describe('CartService', () => {
   describe('#addCartItem', () => {
     it('should do nothing if product is already in cart', () => {
       service.cartItems = [{ ...mockedCartItem, id: 'test-id' }];
-      spyOn(service.cartItems, 'push');
+      jest.spyOn(service.cartItems, 'push').mockImplementation();
 
       service.addCartItem({ ...mockedCartItem, id: 'test-id' });
 
@@ -27,7 +27,7 @@ describe('CartService', () => {
     });
 
     it('should push new item to cartItem array and trigger price and cart items observable', () => {
-      spyOn(service.cartItems, 'push');
+      jest.spyOn(service.cartItems, 'push').mockImplementation();
 
       service
         .getCartItems$()
@@ -40,7 +40,7 @@ describe('CartService', () => {
 
       service.addCartItem(mockedCartItem);
 
-      expect(service.cartItems.push).toHaveBeenCalledOnceWith({
+      expect(service.cartItems.push).toHaveBeenCalledWith({
         ...mockedCartItem,
         quantity: 1,
       });

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MoreDetailComponent } from './more-detail.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ProductModule } from '../../product.module';
-import { mockedProduct } from 'src/app/data/test-data.spec';
+import { mockedProduct } from 'src/app/data/test-data';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('MoreDetailComponent', () => {
@@ -28,7 +28,7 @@ describe('MoreDetailComponent', () => {
 
   describe('#onCloseRequested', () => {
     it('should emit on closeRequested eventEmitter', () => {
-      spyOn(component.closeRequested, 'emit');
+      jest.spyOn(component.closeRequested, 'emit').mockImplementation(() => {});
       component.onCloseRequested();
       expect(component.closeRequested.emit).toHaveBeenCalled();
     });

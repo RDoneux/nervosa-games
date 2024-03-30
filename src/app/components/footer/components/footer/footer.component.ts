@@ -10,7 +10,7 @@ import packageJson from '../../../../../../package.json';
 })
 export class FooterComponent {
   public footerLinks: IFooterLink[] = footerLinks;
-  public version: string = packageJson.version;
+  public version: string = packageJson?.version ?? 'unknown';
 
   public showModal: boolean = false;
   public modalContent!: Type<unknown>;

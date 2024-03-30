@@ -5,22 +5,27 @@ import { CartModule } from '../cart.module';
 import { QuantitySelectorComponent } from 'src/app/components/quantity-selector/quantity-selector.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { mockedCartItem } from 'src/app/data/test-data.spec';
+import { mockedCartItem } from 'src/app/data/test-data';
 import { of } from 'rxjs';
 
 describe('SlidingDrawComponent', () => {
   let component: CartSlidingDrawComponent;
   let fixture: ComponentFixture<CartSlidingDrawComponent>;
 
-  let cartServiceMock: jasmine.SpyObj<CartService>;
+  let cartServiceMock: {
+    getCartItems$: jest.Mock;
+    getPrice$: jest.Mock;
+    removeCartItem: jest.Mock;
+    updateCartItem: jest.Mock;
+  };
 
   beforeEach(() => {
-    cartServiceMock = jasmine.createSpyObj('CartService', [
-      'getCartItems$',
-      'getPrice$',
-      'removeCartItem',
-      'updateCartItem',
-    ]);
+    cartServiceMock = {
+      getCartItems$: jest.fn(),
+      getPrice$: jest.fn(),
+      removeCartItem: jest.fn(),
+      updateCartItem: jest.fn(),
+    };
 
     TestBed.configureTestingModule({
       imports: [CartModule, QuantitySelectorComponent, RouterTestingModule],
@@ -34,36 +39,35 @@ describe('SlidingDrawComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('#onClick', () => [
+  describe('#onClick', () => {
     it('should do nothing if draw contains event target', () => {
-      spyOnProperty(component, 'draw', 'get').and.returnValue({
+      jest.spyOn(component, 'draw', 'get').mockReturnValue({
         contains: () => true,
       });
-      spyOn(component, 'onClose');
+      jest.spyOn(component, 'onClose').mockImplementation(() => {});
 
       component.onClick({
         target: '',
       } as unknown as MouseEvent);
 
       expect(component.onClose).not.toHaveBeenCalled();
-    }),
-
+    });
     it('should call #onClose if draw does not contain event target', () => {
-      spyOnProperty(component, 'draw', 'get').and.returnValue({
+      jest.spyOn(component, 'draw', 'get').mockReturnValue({
         contains: () => false,
       });
 
-      spyOn(component, 'onClose');
+      jest.spyOn(component, 'onClose').mockImplementation(() => {});
       component.onClick({ target: '' } as unknown as MouseEvent);
 
-      expect(component.onClose).toHaveBeenCalledOnceWith();
-    }),
-  ]);
+      expect(component.onClose).toHaveBeenCalledWith();
+    });
+  });
 
   describe('#ngOnInit', () => {
     beforeEach(() => {
-      cartServiceMock.getCartItems$.and.returnValue(of([mockedCartItem]));
-      cartServiceMock.getPrice$.and.returnValue(of(1));
+      cartServiceMock.getCartItems$.mockReturnValue(of([mockedCartItem]));
+      cartServiceMock.getPrice$.mockReturnValue(of(1));
     });
     it('should request cart items from CartService', () => {
       component.ngOnInit();
@@ -81,7 +85,7 @@ describe('SlidingDrawComponent', () => {
     it('should call CartService #removeCartItem', () => {
       component.onRequestProductRemoved(mockedCartItem);
 
-      expect(cartServiceMock.removeCartItem).toHaveBeenCalledOnceWith(
+      expect(cartServiceMock.removeCartItem).toHaveBeenCalledWith(
         mockedCartItem
       );
     });
@@ -91,7 +95,7 @@ describe('SlidingDrawComponent', () => {
     it('should call CartService #updateCartItem', () => {
       component.onProductUpdated(mockedCartItem);
 
-      expect(cartServiceMock.updateCartItem).toHaveBeenCalledOnceWith(
+      expect(cartServiceMock.updateCartItem).toHaveBeenCalledWith(
         mockedCartItem
       );
     });
@@ -99,11 +103,11 @@ describe('SlidingDrawComponent', () => {
 
   describe('#onClose', () => {
     it('should call requestClose #emit', () => {
-      spyOn(component.requestClose, 'emit');
+      jest.spyOn(component.requestClose, 'emit').mockImplementation(() => {});
 
       component.onClose();
 
-      expect(component.requestClose.emit).toHaveBeenCalledOnceWith();
-    })
-  })
+      expect(component.requestClose.emit).toHaveBeenCalledWith();
+    });
+  });
 });

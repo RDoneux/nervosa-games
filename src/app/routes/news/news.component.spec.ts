@@ -4,7 +4,7 @@ import { NewsComponent } from './news.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
-import { mockedAnnouncementPost } from 'src/app/data/test-data.spec';
+import { mockedAnnouncementPost } from 'src/app/data/test-data';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AnnouncmentPostComponent } from 'src/app/components/announcment-post/components/announcment-post.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -40,7 +40,7 @@ describe('NewsComponent', () => {
       expect(firestoreServiceMock.getFirestore).toHaveBeenCalled();
       expect(
         firestoreServiceMock.getFirestore().collection
-      ).toHaveBeenCalledOnceWith('posts', jasmine.any(Function));
+      ).toHaveBeenCalledWith('posts', expect.any(Function));
       expect(component.posts).toEqual([mockedAnnouncementPost]);
     });
   });

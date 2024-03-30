@@ -4,19 +4,31 @@ import { SessionStorageService } from './session-storage.service';
 
 describe('SessionStorageService', () => {
   let service: SessionStorageService;
-  let sessionStore: any;
+  let sessionStore: any = {};
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
 
-    sessionStore = {};
+    const localStorageMock = (function () {
+      return {
+        getItem: (key: string) => sessionStore[key],
+        setItem: (key: string, value: string) =>
+          (sessionStore[key] = value.toString()),
+      };
+    })();
 
-    spyOn(window.sessionStorage, 'getItem').and.callFake((key) =>
-      key in sessionStore ? sessionStore[key] : null
-    );
-    spyOn(window.sessionStorage, 'setItem').and.callFake(
-      (key, value) => (sessionStore[key] = value + '')
-    );
+    Object.defineProperty(window, 'sessionStorage', {
+      value: localStorageMock,
+    });
+
+    // jest
+    //   .spyOn(window.sessionStorage, 'getItem')
+    //   .mockImplementation((key) =>
+    //     key in sessionStore ? sessionStore[key] : null
+    //   );
+    // jest
+    //   .spyOn(window.sessionStorage, 'setItem')
+    //   .mockImplementation((key, value) => (sessionStore[key] = value + ''));
   });
 
   it('should have saved session id', () => {

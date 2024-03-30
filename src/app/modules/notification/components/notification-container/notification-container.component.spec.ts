@@ -3,24 +3,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NotificationContainerComponent } from './notification-container.component';
 import { NotificationModule } from '../../notification.module';
 import { NotificationService } from '../../services/notification.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { NotificationType } from '../../interfaces/i-notification';
 
 describe('NotificationContainerComponent', () => {
   let component: NotificationContainerComponent;
   let fixture: ComponentFixture<NotificationContainerComponent>;
 
-  let notificationServiceMock: jasmine.SpyObj<NotificationService>;
+  let notificationServiceMock: {globalNotifications$: Observable<any>}
 
   beforeEach(async () => {
-    notificationServiceMock = jasmine.createSpyObj('NotificationService', [], {
+    notificationServiceMock =  {
       globalNotifications$: of([
         {
           title: 'test-title',
           type: NotificationType.SUCCESS,
         },
       ]),
-    });
+    };
     await TestBed.configureTestingModule({
       imports: [NotificationModule],
       providers: [

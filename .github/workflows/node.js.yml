@@ -5,9 +5,19 @@ jobs:
     runs-on: ubuntu-latest    
     
     steps:
-      - uses: actions/checkout@v2      
-      - name: npm install and npm run CI commands
-        run: |
-          npm i
-          npm run test:production
-          npm run build
+      - name: Checkout Repo
+        uses: actions/checkout@v4     
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependenciesnpm install and npm run CI commands
+        run: npm i
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Run Build
+        run: npm run build

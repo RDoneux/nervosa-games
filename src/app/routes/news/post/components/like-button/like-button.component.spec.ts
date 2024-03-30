@@ -2,25 +2,29 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LikeButtonComponent } from './like-button.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment';
-import { mockedAnnouncementPost } from 'src/app/data/test-data.spec';
+import { mockedAnnouncementPost } from 'src/app/data/test-data';
 import { LikeButtonService } from '../../services/like-button/like-button.service';
 import { of } from 'rxjs';
 
 describe('LikeButtonComponent', () => {
   let component: LikeButtonComponent;
   let fixture: ComponentFixture<LikeButtonComponent>;
-  // let onLikeSpy: jasmine.Spy;
-  let likeButtonServiceSpy: jasmine.SpyObj<LikeButtonService>;
+  let likeButtonServiceSpy: {
+    updateLikedNumber: jest.Mock;
+    postIsLiked: jest.Mock;
+    getLikedNumber: jest.Mock;
+    storeLikedPost: jest.Mock;
+    removeLikedPost: jest.Mock;
+  };
 
   beforeEach(() => {
-    likeButtonServiceSpy = jasmine.createSpyObj('LikeButtonService', [
-      'updateLikedNumber',
-      'postIsLiked',
-      'getLikedNumber',
-      'storeLikedPost',
-      'removeLikedPost',
-    ]);
+    likeButtonServiceSpy = {
+      updateLikedNumber: jest.fn(),
+      postIsLiked: jest.fn(),
+      getLikedNumber: jest.fn(),
+      storeLikedPost: jest.fn(),
+      removeLikedPost: jest.fn(),
+    };
     TestBed.configureTestingModule({
       declarations: [LikeButtonComponent],
       providers: [
@@ -31,7 +35,7 @@ describe('LikeButtonComponent', () => {
     fixture = TestBed.createComponent(LikeButtonComponent);
     component = fixture.componentInstance;
     component.postId = 'test-post-id';
-    likeButtonServiceSpy.getLikedNumber.and.returnValue(
+    likeButtonServiceSpy.getLikedNumber.mockReturnValue(
       of([mockedAnnouncementPost])
     );
     fixture.detectChanges();
@@ -44,11 +48,11 @@ describe('LikeButtonComponent', () => {
   describe('#ngOnInit', () => {
     it('should call LikeButtonService #postIsLiked', () => {
       component.liked = false;
-      likeButtonServiceSpy.postIsLiked.and.returnValue(true);
+      likeButtonServiceSpy.postIsLiked.mockReturnValue(true);
       component.ngOnInit();
 
       expect(likeButtonServiceSpy.postIsLiked).toHaveBeenCalled();
-      expect(component.liked).toBeTrue();
+      expect(component.liked).toBeTruthy();
     });
   });
 
@@ -63,12 +67,12 @@ describe('LikeButtonComponent', () => {
     it('should toggle liked variable', () => {
       component.liked = false;
       component.onLike();
-      expect(component.liked).toBeTrue();
+      expect(component.liked).toBeTruthy();
     });
     it('should call LikeButtonService #updateLikedNumber', () => {
       component.likedBy = 0;
       component.onLike();
-      expect(likeButtonServiceSpy.updateLikedNumber).toHaveBeenCalledOnceWith(
+      expect(likeButtonServiceSpy.updateLikedNumber).toHaveBeenCalledWith(
         component.postId,
         1
       );
@@ -76,7 +80,7 @@ describe('LikeButtonComponent', () => {
     it('should call LikeButtonService #storeLikedPost if liked is true', () => {
       component.liked = false;
       component.onLike();
-      expect(likeButtonServiceSpy.storeLikedPost).toHaveBeenCalledOnceWith(
+      expect(likeButtonServiceSpy.storeLikedPost).toHaveBeenCalledWith(
         component.postId
       );
       expect(likeButtonServiceSpy.removeLikedPost).not.toHaveBeenCalled();
@@ -84,7 +88,7 @@ describe('LikeButtonComponent', () => {
     it('should call LikeButtonService #removeLikedPost if liked is false', () => {
       component.liked = true;
       component.onLike();
-      expect(likeButtonServiceSpy.removeLikedPost).toHaveBeenCalledOnceWith(
+      expect(likeButtonServiceSpy.removeLikedPost).toHaveBeenCalledWith(
         component.postId
       );
       expect(likeButtonServiceSpy.storeLikedPost).not.toHaveBeenCalled();

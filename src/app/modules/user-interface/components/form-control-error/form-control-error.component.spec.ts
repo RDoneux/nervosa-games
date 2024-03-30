@@ -24,7 +24,7 @@ describe('FormControlErrorComponent', () => {
   describe('#ngAfterViewInit', () => {
     it('should call #updateError on ngModel value change', () => {
       component.ngModel = { valueChanges: from('i') } as NgModel;
-      spyOn(component, 'updateError');
+      jest.spyOn(component, 'updateError').mockImplementation(() => {});
       component.ngAfterViewInit();
 
       expect(component.updateError).toHaveBeenCalledTimes(1);

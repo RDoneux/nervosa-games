@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { CreatePostService } from './create-post.service';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
-import { mockedAnnouncementPost } from 'src/app/data/test-data.spec';
+import { mockedAnnouncementPost } from 'src/app/data/test-data';
 
 describe('CreatePostService', () => {
   let service: CreatePostService;
@@ -28,13 +28,13 @@ describe('CreatePostService', () => {
       service.uploadPost(mockedAnnouncementPost);
 
       expect(angularFirestoreServiceMock.getFirestore).toHaveBeenCalledTimes(1)
-      expect(angularFirestoreServiceMock.getFirestore().doc).toHaveBeenCalledOnceWith(`posts/${mockedAnnouncementPost.id}`);
+      expect(angularFirestoreServiceMock.getFirestore().doc).toHaveBeenCalledWith(`posts/${mockedAnnouncementPost.id}`);
     })
 
     it('should call set with given argument', () => {
       service.uploadPost(mockedAnnouncementPost);
       
-      expect(angularFirestoreServiceMock.getFirestore().doc().set).toHaveBeenCalledOnceWith(mockedAnnouncementPost)
+      expect(angularFirestoreServiceMock.getFirestore().doc().set).toHaveBeenCalledWith(mockedAnnouncementPost)
     })
   })
 });

@@ -95,14 +95,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
             "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.svg",
               "src/assets"
@@ -110,14 +105,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "./src/pre-processor-styles"
-              ]
-            },
-            "codeCoverage": true,
-            "scripts": [],
-            "karmaConfig": "karma-development.conf.js"
+            "scripts": []
           }
         },
         "deploy": {

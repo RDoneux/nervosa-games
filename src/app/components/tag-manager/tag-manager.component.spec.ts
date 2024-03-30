@@ -23,7 +23,7 @@ describe('TagManagerComponent', () => {
     it('should do nothing if event.key does not equal enter', () => {
       const event: KeyboardEvent = {
         key: 'not-enter',
-        preventDefault: jasmine.createSpy(),
+        preventDefault: jest.fn(),
       } as unknown as KeyboardEvent;
       component.onKeyPress(event);
 
@@ -33,7 +33,7 @@ describe('TagManagerComponent', () => {
       component.tagDraft = '';
       const event: KeyboardEvent = {
         key: 'Enter',
-        preventDefault: jasmine.createSpy(),
+        preventDefault: jest.fn(),
       } as unknown as KeyboardEvent;
 
       component.onKeyPress(event);
@@ -44,7 +44,7 @@ describe('TagManagerComponent', () => {
       component.tagDraft = 'test-tag';
       const event: KeyboardEvent = {
         key: 'Enter',
-        preventDefault: jasmine.createSpy(),
+        preventDefault: jest.fn(),
       } as unknown as KeyboardEvent;
 
       component.onKeyPress(event);

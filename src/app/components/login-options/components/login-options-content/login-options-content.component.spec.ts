@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginOptionsContentComponent } from './login-options-content.component';
 import { LoginService } from 'src/app/services/login/login.service';
 import { GoogleSignInService } from 'src/app/services/auth/google/google-sign-in.service';
-import { mockedUser } from 'src/app/data/test-data.spec';
+import { mockedUser } from 'src/app/data/test-data';
 import { of } from 'rxjs';
 import { User } from 'firebase/auth';
 import { FacebookSignInService } from 'src/app/services/auth/facebook/facebook-sign-in.service';
@@ -11,18 +11,20 @@ describe('LoginOptionsContentComponent', () => {
   let component: LoginOptionsContentComponent;
   let fixture: ComponentFixture<LoginOptionsContentComponent>;
 
-  let loginServiceMock: jasmine.SpyObj<LoginService>;
-  let googleSigninServiceMock: jasmine.SpyObj<GoogleSignInService>;
-  let facebookSigninServiceMock: jasmine.SpyObj<FacebookSignInService>;
+  let loginServiceMock: { loginSuccess: jest.Mock };
+  let googleSigninServiceMock: { signInWithPopup: jest.Mock };
+  let facebookSigninServiceMock: { signInWithPopup: jest.Mock };
 
   beforeEach(() => {
-    loginServiceMock = jasmine.createSpyObj('LoginService', ['loginSuccess']);
-    googleSigninServiceMock = jasmine.createSpyObj('GoogleSigninService', [
-      'signInWithPopup',
-    ]);
-    facebookSigninServiceMock = jasmine.createSpyObj('FacebookSigninService', [
-      'signInWithPopup',
-    ]);
+    loginServiceMock = {
+      loginSuccess: jest.fn(),
+    };
+    googleSigninServiceMock = {
+      signInWithPopup: jest.fn(),
+    };
+    facebookSigninServiceMock = {
+      signInWithPopup: jest.fn(),
+    };
     TestBed.configureTestingModule({
       declarations: [LoginOptionsContentComponent],
       providers: [
@@ -42,13 +44,13 @@ describe('LoginOptionsContentComponent', () => {
 
   describe('#loginWithGoogle', () => {
     it('should call loginService with user obtained from googleSigninService', () => {
-      googleSigninServiceMock.signInWithPopup.and.returnValue(
+      googleSigninServiceMock.signInWithPopup.mockReturnValue(
         of(mockedUser as unknown as User)
       );
       component.loginWithGoogle();
 
       expect(googleSigninServiceMock.signInWithPopup).toHaveBeenCalled();
-      expect(loginServiceMock.loginSuccess).toHaveBeenCalledOnceWith(
+      expect(loginServiceMock.loginSuccess).toHaveBeenCalledWith(
         mockedUser as unknown as User
       );
     });
@@ -56,13 +58,13 @@ describe('LoginOptionsContentComponent', () => {
 
   describe('#loginWithFacebook', () => {
     it('should call loginService with user obtained from facebookLoginService', () => {
-      facebookSigninServiceMock.signInWithPopup.and.returnValue(
+      facebookSigninServiceMock.signInWithPopup.mockReturnValue(
         of(mockedUser as unknown as User)
       );
       component.loginWithFacebook();
 
       expect(facebookSigninServiceMock.signInWithPopup).toHaveBeenCalled();
-      expect(loginServiceMock.loginSuccess).toHaveBeenCalledOnceWith(
+      expect(loginServiceMock.loginSuccess).toHaveBeenCalledWith(
         mockedUser as unknown as User
       );
     });

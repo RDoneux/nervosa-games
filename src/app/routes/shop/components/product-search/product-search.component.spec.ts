@@ -5,7 +5,7 @@ import { FiltersService } from '../../services/filters/filters.service';
 import { MessageService } from 'src/app/services/message/message.service';
 import { ShopModule } from '../../shop.module';
 import { of } from 'rxjs';
-import { mockedProduct } from 'src/app/data/test-data.spec';
+import { mockedProduct } from 'src/app/data/test-data';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { getFirestoreStub } from 'src/app/services/firestore/firestore-testing';
 
@@ -13,14 +13,16 @@ describe('ProductSearchComponent', () => {
   let component: ProductSearchComponent;
   let fixture: ComponentFixture<ProductSearchComponent>;
 
-  let filtersServiceMock: jasmine.SpyObj<FiltersService>;
-  let messageServiceMock: jasmine.SpyObj<MessageService>;
+  let filtersServiceMock: { search: jest.Mock };
+  let messageServiceMock: { getStreams$: jest.Mock };
 
   beforeEach(() => {
-    filtersServiceMock = jasmine.createSpyObj('FiltersService', ['search']);
-    messageServiceMock = jasmine.createSpyObj('MessageService', [
-      'getStreams$',
-    ]);
+    filtersServiceMock = {
+      search: jest.fn(),
+    };
+    messageServiceMock = {
+      getStreams$: jest.fn(),
+    };
 
     TestBed.configureTestingModule({
       imports: [ShopModule],
@@ -31,8 +33,8 @@ describe('ProductSearchComponent', () => {
       ],
     });
 
-    filtersServiceMock.search.and.returnValue(of([mockedProduct]));
-    messageServiceMock.getStreams$.and.returnValue(
+    filtersServiceMock.search.mockReturnValue(of([mockedProduct]));
+    messageServiceMock.getStreams$.mockReturnValue(
       of({ payload: {}, stream: '', sender: '' })
     );
 

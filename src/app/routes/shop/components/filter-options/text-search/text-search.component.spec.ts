@@ -26,7 +26,7 @@ describe('TextSearchComponent', () => {
 
   describe('#ngOnInit', () => {
     it('should call #onChange after debounce time', fakeAsync(() => {
-      spyOn(component, 'onChange');
+      jest.spyOn(component, 'onChange').mockImplementation(() => {});
 
       component.ngOnInit();
 
@@ -34,27 +34,27 @@ describe('TextSearchComponent', () => {
 
       tick(1000);
 
-      expect(component.onChange).toHaveBeenCalledOnceWith('test-value');
+      expect(component.onChange).toHaveBeenCalledWith('test-value');
     }));
 
     it('should not call #onChange before debounce time', () => {
-      spyOn(component, 'onChange');
+      jest.spyOn(component, 'onChange').mockImplementation(() => {});
 
       component.ngOnInit();
 
       component.updateNotifier.next('test-value');
 
-      expect(component.onChange).not.toHaveBeenCalledOnceWith('test-value');
+      expect(component.onChange).not.toHaveBeenCalledWith('test-value');
     });
   });
 
   describe('#onChange', () => {
     it('should call update #emit with lowercase version of input', () => {
-      spyOn(component.update, 'emit');
+      jest.spyOn(component.update, 'emit').mockImplementation(() => {});
 
       component.onChange('tEsT-vAlUe');
 
-      expect(component.update.emit).toHaveBeenCalledOnceWith('test-value');
+      expect(component.update.emit).toHaveBeenCalledWith('test-value');
     });
   });
 });

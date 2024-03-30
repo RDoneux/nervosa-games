@@ -14,12 +14,12 @@ describe('NotificationComponent', () => {
   let component: NotificationComponent;
   let fixture: ComponentFixture<NotificationComponent>;
 
-  let notificationServiceMock: jasmine.SpyObj<NotificationService>;
+  let notificationServiceMock: {removeNotification: jest.Mock}
 
   beforeEach(async () => {
-    notificationServiceMock = jasmine.createSpyObj('NotificationService', [
-      'removeNotification',
-    ]);
+    notificationServiceMock = {
+      'removeNotification': jest.fn()
+    };
     await TestBed.configureTestingModule({
       imports: [NotificationModule],
       providers: [
@@ -56,7 +56,7 @@ describe('NotificationComponent', () => {
       expect(component.timeLeft).toEqual(10);
     });
     it('should call #onClose after given duration is passed', fakeAsync(() => {
-      spyOn(component, 'onClose');
+      jest.spyOn(component, 'onClose').mockImplementation(() => {});
       component.notification.timer = 100;
       component.ngOnInit();
 
@@ -76,7 +76,7 @@ describe('NotificationComponent', () => {
 
       expect(
         notificationServiceMock.removeNotification
-      ).toHaveBeenCalledOnceWith('test-id');
+      ).toHaveBeenCalledWith('test-id');
     });
   });
 });

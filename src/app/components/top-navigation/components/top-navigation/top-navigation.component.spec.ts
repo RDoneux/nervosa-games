@@ -1,17 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TopNavigationComponent } from './top-navigation.component';
-import { NavigationLinksMobileComponent } from '../navigation-links-mobile/navigation-links-mobile.component';
-import { HomeIconComponent } from '../home-icon/home-icon.component';
 import { FormsModule } from '@angular/forms';
-import { NavigationLinksDesktopComponent } from '../navigation-links-desktop/navigation-links-desktop.component';
-import { CartIconComponent } from '../cart-icon/cart-icon.component';
-import { ProductSearchComponent } from '../product-search/product-search.component';
-import { SignInComponent } from '../sign-in/sign-in.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { LeftDrawComponent } from 'src/app/components/left-draw/components/left-draw.component';
 import { CartModule } from 'src/app/modules/cart/cart.module';
+import { TopNavigationModule } from '../../top-navigation.module';
 
 describe('TopNavigationComponent', () => {
   let component: TopNavigationComponent;
@@ -19,16 +14,7 @@ describe('TopNavigationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        TopNavigationComponent,
-        NavigationLinksMobileComponent,
-        NavigationLinksDesktopComponent,
-        HomeIconComponent,
-        CartIconComponent,
-        ProductSearchComponent,
-        SignInComponent,
-      ],
-      imports: [FormsModule, LeftDrawComponent, RouterTestingModule, CartModule],
+      imports: [FormsModule, LeftDrawComponent, RouterTestingModule, CartModule, TopNavigationModule],
       providers: [
         { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
       ],

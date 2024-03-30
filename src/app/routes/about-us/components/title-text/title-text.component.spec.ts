@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TitleTextComponent } from './title-text.component';
+import { AboutUsModule } from '../../about-us.module';
 
 describe('TitleTextComponent', () => {
   let component: TitleTextComponent;
@@ -8,7 +9,7 @@ describe('TitleTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TitleTextComponent]
+      imports: [AboutUsModule]
     })
     .compileComponents();
     

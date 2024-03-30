@@ -1,8 +1,6 @@
 import {
   ComponentFixture,
   TestBed,
-  fakeAsync,
-  tick,
 } from '@angular/core/testing';
 
 import { PostCarouselComponent } from './post-carousel.component';
@@ -13,9 +11,9 @@ import { environment } from 'src/environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { IAnnouncementPost } from '../announcment-post/interfaces/i-announcement-post.interface';
-import { mockedAnnouncementPost } from 'src/app/data/test-data.spec';
+import { mockedAnnouncementPost } from 'src/app/data/test-data';
 
-const mockAnnouncementPost: IAnnouncementPost = mockedAnnouncementPost
+const mockAnnouncementPost: IAnnouncementPost = mockedAnnouncementPost;
 
 describe('PostCarouselComponent', () => {
   let component: PostCarouselComponent;
@@ -23,12 +21,10 @@ describe('PostCarouselComponent', () => {
 
   const firestoreData = from([[{}]]);
   const collectionStub = {
-    valueChanges: jasmine
-      .createSpy('valueChanges')
-      .and.returnValue(firestoreData),
+    valueChanges: jest.fn(() => firestoreData),
   };
   const angularFirestoreStub = {
-    collection: jasmine.createSpy('collection').and.returnValue(collectionStub),
+    collection: jest.fn(() => collectionStub),
   };
 
   beforeEach(() => {
@@ -54,9 +50,9 @@ describe('PostCarouselComponent', () => {
 
   describe('#incrementCarousel', () => {
     it('should increment offsetX when posts.length is less than offsetWidth', () => {
-      spyOnProperty(component, 'carouselContainer').and.returnValue({
-        offsetWidth: 3,
-      } as HTMLDivElement);
+      jest
+        .spyOn(component, 'carouselContainer', 'get')
+        .mockReturnValue({ offsetWidth: 3 } as HTMLDivElement);
 
       component.posts = [
         mockAnnouncementPost,
@@ -71,9 +67,9 @@ describe('PostCarouselComponent', () => {
 
     it('should reset offsetX to 0 when post.length is less than offsetWidth', () => {
       component.offsetX = 1;
-      spyOnProperty(component, 'carouselContainer').and.returnValue({
-        offsetWidth: 3,
-      } as HTMLDivElement);
+      jest
+        .spyOn(component, 'carouselContainer', 'get')
+        .mockReturnValue({ offsetWidth: 3 } as HTMLDivElement);
       component.posts = [];
       component.incrementCarousel();
 

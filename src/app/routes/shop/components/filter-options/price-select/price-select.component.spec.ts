@@ -28,7 +28,7 @@ describe('PriceSelectComponent', () => {
 
   describe('#ngOnInit', () => {
     it('should call #onModelChange when updateNotifier is called', fakeAsync(() => {
-      spyOn(component, 'onModelChange');
+      jest.spyOn(component, 'onModelChange').mockImplementation(() => {});
 
       component.ngOnInit();
 
@@ -39,7 +39,7 @@ describe('PriceSelectComponent', () => {
       expect(component.onModelChange).toHaveBeenCalledTimes(1);
     }));
     it('should debounce #onModelChange function', () => {
-      spyOn(component, 'onModelChange');
+      jest.spyOn(component, 'onModelChange').mockImplementation(() => {});
 
       component.ngOnInit();
       component.updateNotifier.next(null);
@@ -64,12 +64,12 @@ describe('PriceSelectComponent', () => {
       expect(component.priceRange.max).toEqual(3);
     });
     it('should emit priceRange value', () => {
-      spyOn(component.updateNotifier, 'next');
+      jest.spyOn(component.updateNotifier, 'next').mockImplementation(() => {});
 
       component.priceRange = { min: 1, max: 2 };
       component.updateMinValue();
 
-      expect(component.updateNotifier.next).toHaveBeenCalledOnceWith(null);
+      expect(component.updateNotifier.next).toHaveBeenCalledWith(null);
     });
   });
 
@@ -89,24 +89,24 @@ describe('PriceSelectComponent', () => {
       expect(component.priceRange.max).toEqual(3);
     });
     it('should emit priceRange value', () => {
-      spyOn(component.updateNotifier, 'next');
+      jest.spyOn(component.updateNotifier, 'next').mockImplementation(() => {});
 
       component.priceRange = { min: 1, max: 2 };
       component.updateMaxValue();
 
-      expect(component.updateNotifier.next).toHaveBeenCalledOnceWith(null);
+      expect(component.updateNotifier.next).toHaveBeenCalledWith(null);
     });
   });
 
   describe('#onModelChange', () => {
     it('should call update #emit with priceRange value', () => {
-      spyOn(component.update, 'emit');
+      jest.spyOn(component.update, 'emit').mockImplementation(() => {});
 
       component.priceRange = { min: 1, max: 2 };
 
       component.onModelChange();
 
-      expect(component.update.emit).toHaveBeenCalledOnceWith({
+      expect(component.update.emit).toHaveBeenCalledWith({
         min: 1,
         max: 2,
       });

@@ -13,22 +13,23 @@ describe('ProductGroupComponent', () => {
   let component: ProductGroupComponent;
   let fixture: ComponentFixture<ProductGroupComponent>;
 
-  let productGroupServiceMock: jasmine.SpyObj<ProductGroupService>;
-  let userService: jasmine.SpyObj<UserService>;
+
+  let productGroupServiceMock: {getProductsFromTag: jest.Mock, sortProductsByFavorites: jest.Mock};
+  let userServiceMock: {getUserProductLikedList: jest.Mock}
 
   beforeEach(() => {
-    productGroupServiceMock = jasmine.createSpyObj('ProductGroupService', [
-      'getProductsFromTag',
-      'sortProductsByFavorites',
-    ]);
-    userService = jasmine.createSpyObj('UserService', [
-      'getUserProductLikedList',
-    ]);
+    productGroupServiceMock = {
+      'getProductsFromTag': jest.fn(),
+      'sortProductsByFavorites': jest.fn()
+    };
+    userServiceMock = {
+      'getUserProductLikedList': jest.fn()
+    };
     TestBed.configureTestingModule({
       imports: [ProductGroupComponent],
       providers: [
         { provide: ProductGroupService, useValue: productGroupServiceMock },
-        { provide: UserService, useValue: userService },
+        { provide: UserService, useValue: userServiceMock },
         { provide: FirestoreService, useValue: getFirestoreStub('') },
         { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
       ],
@@ -36,7 +37,7 @@ describe('ProductGroupComponent', () => {
     fixture = TestBed.createComponent(ProductGroupComponent);
     component = fixture.componentInstance;
 
-    productGroupServiceMock.getProductsFromTag.and.returnValue(of([]));
+    productGroupServiceMock.getProductsFromTag.mockReturnValue(of([]));
 
     fixture.detectChanges();
   });

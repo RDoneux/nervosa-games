@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, CanActivateFn, Router } from '@angular/router';
 import { canActivateInDevModeGuard } from './can-activate-in-dev-mode.guard';
 import { UtilsService } from '../../services/utils/utils.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { fakeRouterState } from 'src/app/data/test-data.spec';
+import { fakeRouterState } from 'src/app/data/test-data';
 
 describe('canActivateInDevModeGuard', () => {
   let isInDevMode: boolean = false;
@@ -32,13 +32,13 @@ describe('canActivateInDevModeGuard', () => {
   describe('#canActivateInDevMode', () => {
     it('should return true if in dev mode', () => {
       isInDevMode = true;
-      expect(executeGuard(dummyRoute, fakeRouterState(''))).toBeTrue();
+      expect(executeGuard(dummyRoute, fakeRouterState(''))).toBeTruthy();
     });
     it('should redirect to unauthorised if in not in dev mode', () => {
       isInDevMode = false;
-      spyOn(router, 'navigate');
+      jest.spyOn(router, 'navigate').mockImplementation();
       executeGuard(dummyRoute, fakeRouterState(''));
-      expect(router.navigate).toHaveBeenCalledOnceWith(['/unauthorised']);
+      expect(router.navigate).toHaveBeenCalledWith(['/unauthorised']);
     });
   });
 });

@@ -31,7 +31,7 @@ describe('FooterComponent', () => {
         url: 'test-url',
       };
       component.openModal(footer);
-      expect(component.showModal).toBeTrue();
+      expect(component.showModal).toBeTruthy();
       expect(component.modalContent).toBeDefined();
     });
   });

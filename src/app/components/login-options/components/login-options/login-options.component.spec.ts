@@ -12,10 +12,12 @@ describe('LoginOptionsComponent', () => {
   let component: LoginOptionsComponent;
   let fixture: ComponentFixture<LoginOptionsComponent>;
 
-  let loginServiceMock: jasmine.SpyObj<LoginService>;
+  let loginServiceMock: {loginRequests: jest.Mock}
 
   beforeEach(() => {
-    loginServiceMock = jasmine.createSpyObj('LoginService', ['loginRequests']);
+    loginServiceMock = {
+      'loginRequests': jest.fn()
+    };
     TestBed.configureTestingModule({
       declarations: [LoginOptionsComponent],
       imports: [ModalComponent, BrowserAnimationsModule],
@@ -24,7 +26,7 @@ describe('LoginOptionsComponent', () => {
         { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
       ],
     });
-    loginServiceMock.loginRequests.and.returnValue(of('OPEN'));
+    loginServiceMock.loginRequests.mockReturnValue(of('OPEN'));
     fixture = TestBed.createComponent(LoginOptionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -36,16 +38,16 @@ describe('LoginOptionsComponent', () => {
 
   describe('#ngOnInit', () => {
     it('should set show to true if state === OPEN', () => {
-      loginServiceMock.loginRequests.and.returnValue(of('OPEN'));
+      loginServiceMock.loginRequests.mockReturnValue(of('OPEN'));
       component.show = false;
       component.ngOnInit();
-      expect(component.show).toBeTrue();
+      expect(component.show).toBeTruthy();
     });
     it('should set show to false if state === CLOSE', () => {
-      loginServiceMock.loginRequests.and.returnValue(of('CLOSE'));
+      loginServiceMock.loginRequests.mockReturnValue(of('CLOSE'));
       component.show = true;
       component.ngOnInit();
-      expect(component.show).toBeFalse();
+      expect(component.show).toBeFalsy();
     });
   });
 
@@ -53,7 +55,7 @@ describe('LoginOptionsComponent', () => {
     it('should set show to false', () => {
       component.show = true;
       component.handleClose();
-      expect(component.show).toBeFalse();
+      expect(component.show).toBeFalsy();
     });
   });
 });
