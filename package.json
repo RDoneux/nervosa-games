@@ -8,7 +8,6 @@
     "watch": "ng build --watch --configuration development",
     "test:commit": "npm run test:production && npm run build",
     "test": "ng test",
-    "test:production": "npx jest --maxWorkers=1",
     "test:coverage": "ng test --coverage",
     "deploy": "firebase deploy --only functions,hosting"
   },
