@@ -4,6 +4,13 @@
       "hosting": {
         "nervosa-games": [
           "nervosa-games"
+        ],
+        "redirects": [
+          {
+            "source": "",
+            "destination": "/home",
+            "type": 301
+          }
         ]
       }
     }
