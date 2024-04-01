@@ -14,6 +14,7 @@ export class FooterComponent {
 
   public showModal: boolean = false;
   public modalContent!: Type<unknown>;
+  public currentYear: number = new Date().getFullYear();
 
   openModal(footer: IFooterLink): void {
     this.showModal = true;
