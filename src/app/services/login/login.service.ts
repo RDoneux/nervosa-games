@@ -187,7 +187,7 @@ export class LoginService {
       .getFirestore()
       .collection('users')
       .doc(user.email)
-      .update(user);
+      .set(user, {merge: true});
   }
 
   /* istanbul ignore next */
