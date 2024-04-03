@@ -4,12 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && cd functions && npm run build",
-    "watch": "ng build --watch --configuration development",
-    "test:commit": "npm run test:production && npm run build",
+    "build": "ng build",
     "test": "ng test",
     "test:coverage": "ng test --coverage",
-    "deploy": "firebase deploy --only functions,hosting"
+    "deploy:staging": "ng build --configuration staging && firebase use staging && firebase deploy --only hosting:nervosa-games-dev",
+    "deploy:production": "ng build --configuration production && firebase use default && firebase deploy --only hosting:nervosa-games"
   },
   "private": true,
   "dependencies": {

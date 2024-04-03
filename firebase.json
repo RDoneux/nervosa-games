@@ -1,8 +1,14 @@
 {
   "hosting": [
     {
-      "target": "nervosa-games",
-      "source": ".",
+      "site": "nervosa-games",
+      "public": "dist/production",
+      "frameworksBackend": {},
+      "rewrites": [{ "source": "**", "destination": "/index.html" }]
+    },
+    {
+      "site": "nervosa-games-dev",
+      "public": "dist/staging",
       "frameworksBackend": {},
       "rewrites": [{ "source": "**", "destination": "/index.html" }]
     }

@@ -1,5 +1,8 @@
+import { TEnvironmentName } from "./environment-names";
+
 export interface IEnvironment {
     debug: string[];
     firebase: any;
-    siteKey: string
+    siteKey: string;
+    name: TEnvironmentName;
 }

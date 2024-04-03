@@ -20,31 +20,20 @@
             "outputPath": "dist/nervosa-games",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.svg",
-              "src/assets"
-            ],
-            "allowedCommonJsDependencies": [
-              "debug",
-              "lodash"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.svg", "src/assets"],
+            "allowedCommonJsDependencies": ["debug", "lodash"],
+            "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "./src/pre-processor-styles"
-              ]
+              "includePaths": ["./src/pre-processor-styles"]
             },
             "scripts": []
           },
           "configurations": {
             "production": {
+              "outputPath": "dist/production",
               "budgets": [
                 {
                   "type": "initial",
@@ -59,6 +48,21 @@
               ],
               "outputHashing": "all"
             },
+            "staging": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "outputPath": "dist/staging",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -66,6 +70,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
+              "outputPath": "dist/development",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -98,13 +103,8 @@
           "builder": "@angular-builders/jest:run",
           "options": {
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.svg",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.svg", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },

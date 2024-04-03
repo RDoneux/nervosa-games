@@ -13,9 +13,17 @@
           }
         ]
       }
+    },
+    "nervosa-games-dev": {
+      "hosting": {
+        "nervosa-games": [
+          "nervosa-games-dev"
+        ]
+      }
     }
   },
   "projects": {
-    "default": "nervosa-games"
+    "default": "nervosa-games",
+    "staging": "nervosa-games-dev"
   }
 }

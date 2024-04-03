@@ -2,6 +2,8 @@ import { Component, Type } from '@angular/core';
 import { IFooterLink } from '../../interfaces/i-footer-link.interface';
 import { footerLinks } from 'src/app/data/footer-links.data';
 import packageJson from '../../../../../../package.json';
+import { TEnvironmentName } from 'src/environments/environment-names';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -15,6 +17,7 @@ export class FooterComponent {
   public showModal: boolean = false;
   public modalContent!: Type<unknown>;
   public currentYear: number = new Date().getFullYear();
+  public environmentName: TEnvironmentName = environment.name;
 
   openModal(footer: IFooterLink): void {
     this.showModal = true;

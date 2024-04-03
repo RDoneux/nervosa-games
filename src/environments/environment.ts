@@ -1,3 +1,4 @@
+import { TEnvironmentName } from './environment-names';
 import { IEnvironment } from './i-environment';
 
 export const environment: IEnvironment = {
@@ -11,5 +12,6 @@ export const environment: IEnvironment = {
     measurementId: 'G-6MPXZZQJGB',
   },
   debug: ['error'],
-  siteKey: '6LdN-W0pAAAAAMySlu0NUzcilMMIfmJvYAeQTk2s'
+  siteKey: '6LdN-W0pAAAAAMySlu0NUzcilMMIfmJvYAeQTk2s',
+  name: TEnvironmentName.PRODUCTION,
 };

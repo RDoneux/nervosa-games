@@ -13,5 +13,5 @@ export const environment: IEnvironment = {
   },
   debug: ['welcome', 'method-not-implemented', 'error', 'info'],
   siteKey: '6LdN-W0pAAAAAMySlu0NUzcilMMIfmJvYAeQTk2s',
-  name: TEnvironmentName.DEVELOPMENT
+  name: TEnvironmentName.STAGING
 };
