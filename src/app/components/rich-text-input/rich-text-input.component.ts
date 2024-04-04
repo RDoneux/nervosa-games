@@ -17,7 +17,7 @@ import { UtilsService } from 'src/app/services/utils/utils.service';
 })
 export class RichTextInputComponent implements AfterViewInit {
   @Input() placeholder!: string;
-  @Input() text!: string; // Delta object stringified
+  @Input() text: string = '{}'; // Delta object stringified
   @Input() mode: 'edit' | 'display' = 'edit';
 
   @ViewChild('content')
@@ -32,7 +32,6 @@ export class RichTextInputComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     let options: any = {
-      debug: this.utilsService.isDevMode() ? 'log' : 'warn',
       modules: {
         toolbar: [
           [{ header: [1, 2, 3, false] }],
