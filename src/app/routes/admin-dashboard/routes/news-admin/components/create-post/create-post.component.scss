@@ -11,11 +11,23 @@
     h1,
     app-form-control,
     app-file-upload {
-        grid-column: 1 / span 2;
+        @extend .full-width;
     }
 
     textarea {
         white-space: pre-wrap;
     }
 
+    .post-content-wrapper {
+        height: 500px
+    }
+
+    .quill-wrapper>div:first-child {
+        height: unset;
+    }
+
+}
+
+.full-width {
+    grid-column: 1 / span 2;
 }

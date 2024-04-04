@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
+
 @import 'variables';
 @import 'mixins';
 
@@ -90,4 +93,10 @@ button {
         cursor: not-allowed;
     }
 
+}
+
+
+// --------------- OVERRIDING QUILL STYLES --------------- //
+.ql-container.ql-snow {
+    height: calc(100% - 40px);
 }

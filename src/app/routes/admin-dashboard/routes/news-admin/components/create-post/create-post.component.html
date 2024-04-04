@@ -8,14 +8,11 @@
     <input type="text" [(ngModel)]="post.title" name="title" required />
   </app-form-control>
 
-  <app-form-control label="Post Sub Title">
-    <textarea
-      placeholder="Post overview here..."
-      [(ngModel)]="post.subTitle"
-      name="subTitle"
-      rows="5"
-    ></textarea>
-  </app-form-control>
+  <app-rich-text-input
+    #postSubtitle
+    placeholder="Post Subtitle"
+    class="full-width"
+  ></app-rich-text-input>
 
   <app-file-upload
     [uploadPath]="'site-announcement-post-images'"
@@ -30,16 +27,11 @@
     />
   </app-form-control>
 
-  <app-form-control label="Content">
-    <textarea
-      class="content-text-area"
-      placeholder="Main body here..."
-      [(ngModel)]="post.content"
-      name="content"
-      rows="15"
-      required
-    ></textarea>
-  </app-form-control>
+  <app-rich-text-input
+    #postContent
+    placeholder="Post Content"
+    class="full-width post-content-wrapper"
+  ></app-rich-text-input>
 
   <input class="button-half-width" type="reset" value="Cancel" />
   <input
