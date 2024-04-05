@@ -28,7 +28,7 @@ export class RichTextInputComponent implements AfterViewInit {
 
   private quillInput!: Quill;
 
-  constructor(private utilsService: UtilsService) {}
+  constructor() {}
 
   ngAfterViewInit(): void {
     let options: any = {
