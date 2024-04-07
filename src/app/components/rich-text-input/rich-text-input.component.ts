@@ -69,7 +69,7 @@ export class RichTextInputComponent implements AfterViewInit {
 
   // IMAGE UPLOAD TO SERVER LOGIC //
 
-  imageUploaded(): void {
+  private imageUploaded(): void {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.click();
@@ -87,7 +87,7 @@ export class RichTextInputComponent implements AfterViewInit {
     };
   }
 
-  saveToFirebase(file: File): void {
+  private saveToFirebase(file: File): void {
     this.insertLoadingAnimation();
 
     const randomId = Math.random().toString(36).substring(2);
@@ -109,7 +109,7 @@ export class RichTextInputComponent implements AfterViewInit {
   }
 
   private loadingAnimationLocation!: number;
-  insertLoadingAnimation(): void {
+  private insertLoadingAnimation(): void {
     const range = this.quillInput.getSelection();
     if (!range) return;
     this.loadingAnimationLocation = range.index;
@@ -120,7 +120,7 @@ export class RichTextInputComponent implements AfterViewInit {
     );
   }
 
-  insertToEditor(url: string) {
+  private insertToEditor(url: string) {
     // push image url to rich editor.
     const range = this.quillInput.getSelection();
     if (!range) return;
