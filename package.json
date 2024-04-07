@@ -7,8 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "test:coverage": "ng test --coverage",
-    "deploy:staging": "ng build --configuration staging && firebase use staging && firebase deploy --only hosting:nervosa-games-dev",
-    "deploy:production": "ng build --configuration production && firebase use default && firebase deploy --only hosting:nervosa-games"
+    "deploy:staging": "ng build --configuration staging && firebase use staging && firebase deploy --only functions,hosting:nervosa-games-dev",
+    "deploy:production": "ng build --configuration production && firebase use default && firebase deploy --only functions,hosting:nervosa-games"
   },
   "private": true,
   "dependencies": {
