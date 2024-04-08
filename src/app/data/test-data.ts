@@ -31,6 +31,7 @@ export const mockedAnnouncementPost: IAnnouncementPost = {
   backgroundImageUrl: 'test-background-url',
   content: 'test-content',
   subTitle: 'test-subtitle',
+  subTitlePlainText: 'test-subtitle-plain-text',
   tags: ['test-tag-one', 'test-tag-two'],
   comments: [mockedComment],
 };

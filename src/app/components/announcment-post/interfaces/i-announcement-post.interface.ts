@@ -10,6 +10,7 @@ export interface IAnnouncementPost {
 
   title: string;
   subTitle: string;
+  subTitlePlainText: string;
   content: string;
 
   tags: string[];

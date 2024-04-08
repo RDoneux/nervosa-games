@@ -1,4 +1,4 @@
-import { TEnvironmentName } from './environment-names';
+import { TAPIRoot, TEnvironmentName } from './environment-names';
 import { IEnvironment } from './i-environment';
 
 export const environment: IEnvironment = {
@@ -13,5 +13,6 @@ export const environment: IEnvironment = {
   },
   debug: ['welcome', 'method-not-implemented', 'error', 'info'],
   siteKey: '6LdN-W0pAAAAAMySlu0NUzcilMMIfmJvYAeQTk2s',
-  name: TEnvironmentName.STAGING
+  name: TEnvironmentName.STAGING,
+  apiRoot: TAPIRoot.STAGING
 };

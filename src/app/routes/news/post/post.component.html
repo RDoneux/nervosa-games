@@ -4,17 +4,28 @@
     {{ post.timestamp.toDate() | date : "MMM dd" }}
   </h5>
   <h1 class="post__title">{{ post.title }}</h1>
-  <app-rich-text-input mode="display" [text]="post.subTitle"></app-rich-text-input>
+  <app-rich-text-input
+    mode="display"
+    [text]="post.subTitle"
+    (textChange)="updatePostPlainText()"
+  ></app-rich-text-input>
   <img
     class="post__image"
     [src]="post.backgroundImageUrl"
     [alt]="post.backgroundImageAlt"
   />
 
-  <app-rich-text-input mode="display" [text]="post.content"></app-rich-text-input>
+  <app-rich-text-input
+    mode="display"
+    [text]="post.content"
+  ></app-rich-text-input>
 
   <div class="post__share-tag-wrapper">
-    <span class="material-symbols-outlined"> share </span>
+    <app-share
+      [image]="post.backgroundImageUrl"
+      [subTitle]="post.subTitlePlainText"
+      [title]="post.title"
+    ></app-share>
 
     <div class="share-tag__tag-wrapper">
       <h5 *ngFor="let tag of post.tags">{{ tag }}</h5>

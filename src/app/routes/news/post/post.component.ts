@@ -38,6 +38,10 @@ export class PostComponent implements OnInit {
     });
   }
 
+  updatePostPlainText(): void {
+    console.log("called")
+  }
+
   private fetchPost(value: any): void {
     this.postSubscription = this.postService.getPost(value['id']).subscribe({
       next: (post: IAnnouncementPost[]) => {

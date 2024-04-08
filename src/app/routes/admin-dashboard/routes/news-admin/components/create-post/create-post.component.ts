@@ -41,6 +41,7 @@ export class CreatePostComponent {
     timestamp: Timestamp.now(),
     title: '',
     subTitle: '',
+    subTitlePlainText: '',
     content: '',
     tags: [],
     comments: [],
@@ -58,6 +59,7 @@ export class CreatePostComponent {
         this.post.posterId = user?.email ?? 'INVALID';
         this.post.timestamp = Timestamp.now();
         this.post.subTitle = this.postSubtitle.getContent();
+        this.post.subTitlePlainText = this.postSubtitle.getPlainTextContent();
         this.post.content = this.postContent.getContent();
         this.createPostService.uploadPost(this.post);
       },

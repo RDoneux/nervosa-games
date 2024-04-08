@@ -2,7 +2,9 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
+  Output,
   ViewChild,
 } from '@angular/core';
 import Quill from 'quill';
@@ -20,6 +22,8 @@ export class RichTextInputComponent implements AfterViewInit {
   @Input() placeholder!: string;
   @Input() text: string = '{}'; // Delta object stringified
   @Input() mode: 'edit' | 'display' = 'edit';
+
+  @Output() textChange: EventEmitter<string> = new EventEmitter();
 
   private readonly DB_DIRECTORY: string = 'post-images';
   private readonly LOADING_ANIMATION_PATH: string =
@@ -61,14 +65,19 @@ export class RichTextInputComponent implements AfterViewInit {
         .addHandler('image', () => this.imageUploaded());
     }
     if (this.mode === 'display') this.quillInput.disable();
+
+    this.quillInput.on('text-change', () => this.textChange.emit(this.quillInput.getText()))
   }
 
   getContent(): string {
     return JSON.stringify(this.quillInput.getContents());
   }
 
-  // IMAGE UPLOAD TO SERVER LOGIC //
+  getPlainTextContent(): string {
+    return this.quillInput.getText();
+  }
 
+  // IMAGE UPLOAD TO SERVER LOGIC //
   private imageUploaded(): void {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
