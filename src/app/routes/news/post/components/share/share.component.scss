@@ -1,0 +1,72 @@
+@import 'variables';
+
+:host {
+    display: flex;
+    align-items: center;
+}
+
+.share-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: white;
+    z-index: 1;
+
+    transition: transform 50ms linear;
+
+    cursor: pointer;
+
+    span {
+        position: relative;
+        left: -1px;
+        transition: transform 300ms ease-out;
+    }
+
+    &.copied {
+        animation: spin 300ms ease-out;
+
+        span {
+            color: $success-colour;
+            transform: scale(1.5);
+        }
+    }
+
+    &:hover:not(.copied) {
+        transform: scale(1.05) rotate(-5deg);
+    }
+
+
+}
+
+.confirmation-text {
+    position: absolute;
+    opacity: 0;
+    transform: translateX(-21px);
+    color: $text-dark-colour;
+
+    transition: opacity 300ms linear, transform 300ms ease-out;
+
+    &.copied {
+        opacity: 1;
+        transform: translateX(50px);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+
+    80% {
+        transform: rotate(350deg)
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,7 +1,6 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import copy from 'copy-to-clipboard'
 
 @Component({
   selector: 'app-share',
@@ -13,18 +12,19 @@ export class ShareComponent {
   @Input({ required: true }) subTitle!: string;
   @Input({ required: true }) title!: string;
 
-  constructor() {}
+  public copied: boolean = false;
 
   saveValueToClipboard(): void {
-    const url: string = `${environment.apiRoot}/share?${
-      new HttpParams()
-        .set('image', this.image)
-        .set('url', location.href)
-        .set('subTitle', this.subTitle)
-        .set('title', this.title)
-        .toString()
-    }`;
+    navigator.clipboard.writeText(this.createUrl());
+    this.copied = true;
+  }
 
-    copy(url)
+  private createUrl(): string {
+    return `${environment.apiRoot}/share?${new HttpParams()
+      .set('image', this.image)
+      .set('url', location.href)
+      .set('subTitle', this.subTitle)
+      .set('title', this.title)
+      .toString()}`;
   }
 }
