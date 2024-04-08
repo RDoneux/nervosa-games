@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RichTextInputComponent } from './rich-text-input.component';
 import { By } from '@angular/platform-browser';
+import { StorageService } from 'src/app/services/cloud-storage/storage.service';
+import { getStorageStub } from 'src/app/services/cloud-storage/storage-testing';
 
 describe('RichTextInputComponent', () => {
   let component: RichTextInputComponent;
@@ -10,6 +12,7 @@ describe('RichTextInputComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RichTextInputComponent],
+      providers: [{provide: StorageService, useValue: getStorageStub('')}]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RichTextInputComponent);
