@@ -9,6 +9,8 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { v4 } from 'uuid';
 import { CreatePostService } from '../../services/create-post.service';
 import { RichTextInputComponent } from 'src/app/components/rich-text-input/rich-text-input.component';
+import { Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-post',
@@ -30,7 +32,8 @@ export class CreatePostComponent {
 
   constructor(
     private loginService: LoginService,
-    private createPostService: CreatePostService
+    private createPostService: CreatePostService,
+    private router: Router
   ) {}
 
   post: IAnnouncementPost = {
@@ -64,5 +67,7 @@ export class CreatePostComponent {
         this.createPostService.uploadPost(this.post);
       },
     });
+
+    this.router.navigateByUrl(`news/post?${new HttpParams().set("id", this.post.id)}`)
   }
 }

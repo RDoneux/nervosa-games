@@ -8,6 +8,8 @@ import { StorageService } from 'src/app/services/cloud-storage/storage.service';
 import { getStorageStub } from 'src/app/services/cloud-storage/storage-testing';
 import { mockedAnnouncementPost, mockedUser } from 'src/app/data/test-data';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 describe('CreatePostComponent', () => {
   let component: CreatePostComponent;
@@ -15,6 +17,7 @@ describe('CreatePostComponent', () => {
 
   let loginServiceMock: { getCurrentLoggedInUser: jest.Mock };
   let createPostServiceMock: { uploadPost: jest.Mock };
+  let routerServiceMock: { navigateByUrl: jest.Mock };
 
   beforeEach(() => {
     loginServiceMock = {
@@ -23,12 +26,16 @@ describe('CreatePostComponent', () => {
     createPostServiceMock = {
       uploadPost: jest.fn(),
     };
+    routerServiceMock = {
+      navigateByUrl: jest.fn(),
+    };
     TestBed.configureTestingModule({
       imports: [NewsAdminModule],
       providers: [
         { provide: LoginService, useValue: loginServiceMock },
         { provide: CreatePostService, useValue: createPostServiceMock },
         { provide: StorageService, useValue: getStorageStub('') },
+        { provide: Router, useValue: routerServiceMock },
       ],
     });
     fixture = TestBed.createComponent(CreatePostComponent);
@@ -77,6 +84,17 @@ describe('CreatePostComponent', () => {
       component.onSubmit();
 
       expect(component.post.posterId).toEqual('INVALID');
+    });
+
+    it('should redirect to the new post', () => {
+      component.post = mockedAnnouncementPost;
+      component.post.id = 'test-id';
+
+      component.onSubmit();
+
+      expect(routerServiceMock.navigateByUrl).toHaveBeenCalledWith(
+        `news/post?${new HttpParams().set('id', 'test-id')}`
+      );
     });
   });
 });
