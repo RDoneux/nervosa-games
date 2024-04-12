@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IAnnouncementPost } from 'src/app/components/announcment-post/interfaces/i-announcement-post.interface';
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import { PostService } from './services/post/post.service';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/services/login/login.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-post',
@@ -21,6 +22,7 @@ export class PostComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private postService: PostService,
     private loginService: LoginService
   ) {}
@@ -28,8 +30,10 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.loginService.getCurrentLoggedInUser().subscribe({
       next: (user: IUser | null) => {
+        console.log("called", user)
         this.currentLoggedInUser = user;
       },
+      error: (error: any) => console.log(error)
     });
 
     // get the post id from query params
@@ -38,8 +42,8 @@ export class PostComponent implements OnInit {
     });
   }
 
-  updatePostPlainText(): void {
-    console.log("called")
+  public editPost(): void {
+    this.router.navigateByUrl(`/admin-dashboard/news-admin?${new HttpParams().set('id', this.post.id)}`)
   }
 
   private fetchPost(value: any): void {

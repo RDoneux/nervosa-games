@@ -66,7 +66,9 @@ export class RichTextInputComponent implements AfterViewInit {
     }
     if (this.mode === 'display') this.quillInput.disable();
 
-    this.quillInput.on('text-change', () => this.textChange.emit(this.quillInput.getText()))
+    this.quillInput.on('text-change', () =>
+      this.textChange.emit(this.quillInput.getText())
+    );
   }
 
   getContent(): string {
@@ -75,6 +77,10 @@ export class RichTextInputComponent implements AfterViewInit {
 
   getPlainTextContent(): string {
     return this.quillInput.getText();
+  }
+
+  setContent(value: string): void {
+    this.quillInput.setContents(JSON.parse(value));
   }
 
   // IMAGE UPLOAD TO SERVER LOGIC //

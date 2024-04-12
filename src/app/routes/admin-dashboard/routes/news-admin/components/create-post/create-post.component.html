@@ -19,6 +19,13 @@
     (downloadUrl)="addDownloadUrl($event)"
   ></app-file-upload>
 
+  @if(post.backgroundImageUrl) {
+  <div class="image-preview">
+    <div><span class="material-symbols-outlined" (click)="removeTitleImage()"> close </span></div>
+    <img [src]="post.backgroundImageUrl" [alt]="post.backgroundImageAlt" />
+  </div>
+  }
+
   <app-form-control label="Image Description">
     <input
       type="text"
@@ -37,7 +44,7 @@
   <input
     class="button-half-width"
     type="submit"
-    value="Create Post"
+    [value]="(mode === 'create' ? 'Create' : 'Update') + ' Post'"
     [disabled]="!createPostForm.valid"
   />
 </form>

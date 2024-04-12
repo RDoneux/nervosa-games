@@ -2,12 +2,14 @@
   <h5 class="post__username">
     {{ user.displayName }} |
     {{ post.timestamp.toDate() | date : "MMM dd" }}
+    @if(currentLoggedInUser?.email === post.posterId) { |
+    <span class="material-symbols-rounded" (click)="editPost()">edit</span>
+    }
   </h5>
   <h1 class="post__title">{{ post.title }}</h1>
   <app-rich-text-input
     mode="display"
     [text]="post.subTitle"
-    (textChange)="updatePostPlainText()"
   ></app-rich-text-input>
   <img
     class="post__image"

@@ -1,3 +1,5 @@
+@import 'variables';
+
 :host {
     width: 100%;
 
@@ -7,6 +9,8 @@
 }
 
 .create-post__form {
+
+    margin-bottom: 40px;
 
     h1,
     app-form-control,
@@ -24,6 +28,31 @@
 
     .quill-wrapper>div:first-child {
         height: unset;
+    }
+
+    .image-preview {
+        @extend .full-width;
+        position: relative;
+
+
+        div {
+            width: 100%;
+            background: rgb(37, 37, 37);
+            height: 26px;
+
+            span {
+                position: absolute;
+                right: 5px;
+                top: 0;
+                color: $text-light-colour;
+                cursor: pointer;
+            }
+        }
+
+        img {
+            object-fit: cover;
+            width: 100%;
+        }
     }
 
 }
