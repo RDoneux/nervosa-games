@@ -1,9 +1,14 @@
 <div class="notification-container" [class]="notification.type">
   <span class="material-symbols-outlined">
     @switch(notification.type) { @case('success') { check_circle } @case('info')
-    {info} @case('warning') {warning} @case('danger') {error} }
+    {info} @case('warning') {warning} @case('danger') {error} @case('sure')
+    {help} }
   </span>
   {{ notification.title }}
+  @if(notification.type === 'sure') {
+  <button (click)="answerQuestion(true)">{{ notification.yesLabel }}</button>
+  <button (click)="answerQuestion(false)">{{ notification.noLabel }}</button>
+  }
   <span class="material-symbols-outlined close" (click)="onClose()">close</span>
   @if(notification.timer){
   <div

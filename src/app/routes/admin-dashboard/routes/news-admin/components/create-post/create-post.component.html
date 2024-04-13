@@ -3,7 +3,7 @@
   class="create-post__form nervosa-games__form"
   (submit)="onSubmit()"
 >
-  <h1>Create new post...</h1>
+  <h1 class="post-header"><span>{{mode === 'create' ? 'Create new post...' : 'Update existing post...'}}</span> <span class="material-symbols-outlined" (click)="areYouSure()"> delete </span> </h1>
   <app-form-control label="Post Title">
     <input type="text" [(ngModel)]="post.title" name="title" required />
   </app-form-control>

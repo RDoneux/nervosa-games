@@ -18,6 +18,17 @@
         @extend .full-width;
     }
 
+    .post-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .material-symbols-outlined {
+            cursor: pointer;
+            font-size: 28px;
+        }
+    }
+
     textarea {
         white-space: pre-wrap;
     }

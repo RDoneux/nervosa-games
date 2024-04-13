@@ -11,6 +11,7 @@ import { HttpParams } from '@angular/common/http';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { IPostMode } from '../../interfaces/i-post-mode';
 import { NotificationService } from 'src/app/modules/notification/services/notification.service';
+import { NotificationType } from 'src/app/modules/notification/interfaces/i-notification';
 
 @Component({
   selector: 'app-create-post',
@@ -121,5 +122,25 @@ export class CreatePostComponent implements OnInit {
     this.router.navigateByUrl(
       `news/post?${new HttpParams().set('id', this.post.id)}`
     );
+  }
+
+  areYouSure(): void {
+    this.notificationService.askBinaryQuestion('Delete Post?').subscribe({
+      next: (response: boolean) => {
+        if (response) this.createPostService.deletePost(this.post.id);
+        this.notificationService.showNotification(
+          'Post successfully deleted',
+          NotificationType.SUCCESS,
+          3000
+        );
+        this.router.navigateByUrl('news');
+      },
+      error: (error: any) =>
+        this.notificationService.showNotification(
+          `Error deleting post. Please try again later ${error}`,
+          NotificationType.DANGER,
+          3000
+        ),
+    });
   }
 }
