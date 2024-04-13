@@ -98,7 +98,6 @@ export class CreatePostComponent implements OnInit {
   onSubmit(): void {
     this.loginService.getCurrentLoggedInUser().subscribe({
       next: (user: IUser | null) => {
-
         // if no user is returned, show notification and break
         if (!user) {
           this.notificationService.showNotification(
@@ -127,13 +126,15 @@ export class CreatePostComponent implements OnInit {
   areYouSure(): void {
     this.notificationService.askBinaryQuestion('Delete Post?').subscribe({
       next: (response: boolean) => {
-        if (response) this.createPostService.deletePost(this.post.id);
-        this.notificationService.showNotification(
-          'Post successfully deleted',
-          NotificationType.SUCCESS,
-          3000
-        );
-        this.router.navigateByUrl('news');
+        if (response) {
+          this.createPostService.deletePost(this.post.id);
+          this.notificationService.showNotification(
+            'Post successfully deleted',
+            NotificationType.SUCCESS,
+            3000
+          );
+          this.router.navigateByUrl('news');
+        }
       },
       error: (error: any) =>
         this.notificationService.showNotification(

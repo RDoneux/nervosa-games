@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { NotificationService } from './notification.service';
 import { INotification, NotificationType } from '../interfaces/i-notification';
 import { take } from 'rxjs';
+import { Component } from '@angular/core';
 
 describe('NotificationService', () => {
   let service: NotificationService;
@@ -72,4 +73,5 @@ describe('NotificationService', () => {
       service.removeNotification('test-id');
     });
   });
+
 });
