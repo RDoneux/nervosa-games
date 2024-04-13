@@ -1,17 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  Timestamp,
-} from '@angular/fire/firestore';
+import { Timestamp } from '@angular/fire/firestore';
 import { IAnnouncementPost } from 'src/app/components/announcment-post/interfaces/i-announcement-post.interface';
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import { LoginService } from 'src/app/services/login/login.service';
 import { v4 } from 'uuid';
 import { CreatePostService } from '../../services/create-post.service';
 import { RichTextInputComponent } from 'src/app/components/rich-text-input/rich-text-input.component';
-import { ActivatedRoute, Params, Route, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { IPostMode } from '../../interfaces/i-post-mode';
+import { NotificationService } from 'src/app/modules/notification/services/notification.service';
 
 @Component({
   selector: 'app-create-post',
@@ -38,10 +37,11 @@ export class CreatePostComponent implements OnInit {
     private createPostService: CreatePostService,
     private firestoreService: FirestoreService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notificationService: NotificationService
   ) {}
 
-  post: IAnnouncementPost = {
+  public post: IAnnouncementPost = {
     id: v4(),
     seenBy: 0,
     likedBy: 0,
@@ -90,18 +90,30 @@ export class CreatePostComponent implements OnInit {
   }
 
   removeTitleImage(): void {
-    this.post.backgroundImageAlt = ''
-    this.post.backgroundImageUrl = ''
+    this.post.backgroundImageAlt = '';
+    this.post.backgroundImageUrl = '';
   }
 
   onSubmit(): void {
     this.loginService.getCurrentLoggedInUser().subscribe({
       next: (user: IUser | null) => {
+
+        // if no user is returned, show notification and break
+        if (!user) {
+          this.notificationService.showNotification(
+            'Invalid User - cannot create post',
+            'danger',
+            3000
+          );
+          return;
+        }
+
         this.post.posterId = user?.email ?? 'INVALID';
         this.post.timestamp = Timestamp.now();
         this.post.subTitle = this.postSubtitle.getContent();
         this.post.subTitlePlainText = this.postSubtitle.getPlainTextContent();
         this.post.content = this.postContent.getContent();
+
         this.createPostService.uploadPost(this.post);
       },
     });

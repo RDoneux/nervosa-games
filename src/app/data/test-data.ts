@@ -5,6 +5,7 @@ import { IComment } from '../interfaces/i-comment.interface';
 import { RouterStateSnapshot } from '@angular/router';
 import { IProduct } from '../components/product/interfaces/i-product.interface';
 import { ICartItem } from '../interfaces/i-cart-item.interface';
+import { v4 } from 'uuid';
 
 export function fakeRouterState(url: string): RouterStateSnapshot {
   return {
@@ -61,3 +62,19 @@ export const mockedProduct: IProduct = {
 };
 
 export const mockedCartItem: ICartItem = { ...mockedProduct, quantity: 1 };
+
+export const testPost: IAnnouncementPost = {
+  id: v4(),
+  seenBy: 1,
+  likedBy: 2,
+  posterId: 'test-poster-id',
+  timestamp: Timestamp.now(),
+  title: 'test-title',
+  subTitle: 'test-sub-title',
+  subTitlePlainText: 'test-sub-title-plain-text',
+  content: 'test-content',
+  tags: ['test-tag'],
+  comments: [],
+  backgroundImageAlt: 'test-background-image-alt',
+  backgroundImageUrl: 'test-background-image-url',
+};

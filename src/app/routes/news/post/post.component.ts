@@ -30,7 +30,6 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.loginService.getCurrentLoggedInUser().subscribe({
       next: (user: IUser | null) => {
-        console.log("called", user)
         this.currentLoggedInUser = user;
       },
       error: (error: any) => console.log(error)
