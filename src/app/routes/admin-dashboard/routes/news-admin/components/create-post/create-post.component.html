@@ -3,8 +3,8 @@
   class="create-post__form nervosa-games__form"
   (submit)="onSubmit()"
 >
-  <h1 class="post-header"><span>{{mode === 'create' ? 'Create new post...' : 'Update existing post...'}}</span> <span class="material-symbols-outlined" (click)="areYouSure()"> delete </span> </h1>
-  <app-form-control label="Post Title">
+  <h1 class="post-header full-width"><span>{{mode === 'create' ? 'Create new post...' : 'Update existing post...'}}</span> <span class="material-symbols-outlined" (click)="areYouSure()"> delete </span> </h1>
+  <app-form-control class="full-width" label="Post Title">
     <input type="text" [(ngModel)]="post.title" name="title" required />
   </app-form-control>
 
@@ -15,18 +15,19 @@
   ></app-rich-text-input>
 
   <app-file-upload
+    class="full-width"
     [uploadPath]="'site-announcement-post-images'"
     (downloadUrl)="addDownloadUrl($event)"
   ></app-file-upload>
 
   @if(post.backgroundImageUrl) {
-  <div class="image-preview">
+  <div class="image-preview full-width">
     <div><span class="material-symbols-outlined" (click)="removeTitleImage()"> close </span></div>
     <img [src]="post.backgroundImageUrl" [alt]="post.backgroundImageAlt" />
   </div>
   }
 
-  <app-form-control label="Image Description">
+  <app-form-control class="full-width" label="Image Description">
     <input
       type="text"
       [(ngModel)]="post.backgroundImageAlt"
@@ -39,6 +40,14 @@
     placeholder="Post Content"
     class="full-width post-content-wrapper"
   ></app-rich-text-input>
+
+
+  <app-form-control label="Schedule Post Date">
+    <input #postDate type="date" [ngModel]="post.postDate | date:'yyyy-MM-dd'" (ngModelChange)="setScheduledPost($event, postTime.value)" name="schedule post date" required />
+  </app-form-control>
+  <app-form-control label="Schedule Post Time">
+    <input #postTime type="time" [ngModel]="post.postDate | date: 'hh:mm'" (ngModelChange)="setScheduledPost(postDate.value, $event)" name="schedule post time" required />
+  </app-form-control>
 
   <input class="button-half-width" type="reset" value="Cancel" />
   <input

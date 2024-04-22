@@ -18,6 +18,8 @@ export class PostComponent implements OnInit {
 
   public currentLoggedInUser: IUser | null = null;
 
+  public currentDateTime: Date = new Date();
+
   private postSubscription!: Subscription;
 
   constructor(

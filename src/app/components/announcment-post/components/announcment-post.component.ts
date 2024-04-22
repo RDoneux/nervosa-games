@@ -17,6 +17,7 @@ export class AnnouncmentPostComponent implements AfterViewInit {
 
   public poster!: IUser;
   public linkBase: string = '/news/post';
+  public currentDateTime = new Date().getTime() / 1000;
 
   constructor(
     private firebase: AngularFirestore,
@@ -24,6 +25,9 @@ export class AnnouncmentPostComponent implements AfterViewInit {
   ) {}
 
   async ngAfterViewInit(): Promise<void> {
+
+    console.log(this.announcementPost.postDate?.seconds, this.currentDateTime)
+
     new Promise<void>(() => {
       const checkForAnnouncementPostToBeDefined = () => {
         this.announcementPost

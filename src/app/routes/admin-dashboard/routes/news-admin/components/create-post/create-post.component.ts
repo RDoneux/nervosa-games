@@ -56,6 +56,7 @@ export class CreatePostComponent implements OnInit {
     comments: [],
     backgroundImageAlt: '',
     backgroundImageUrl: '',
+    postDate: new Date(),
   };
 
   ngOnInit(): void {
@@ -80,8 +81,7 @@ export class CreatePostComponent implements OnInit {
         (response: IAnnouncementPost | undefined) => (
           (this.post = response ?? this.post),
           this.postSubtitle.setContent(this.post.subTitle),
-          this.postContent.setContent(this.post.content),
-          console.log(this.post)
+          this.postContent.setContent(this.post.content)
         )
       );
   }
@@ -93,6 +93,10 @@ export class CreatePostComponent implements OnInit {
   removeTitleImage(): void {
     this.post.backgroundImageAlt = '';
     this.post.backgroundImageUrl = '';
+  }
+
+  setScheduledPost(date: string, time: string): void {
+    this.post.postDate = new Date(`${date}T${time}:00.000Z`);
   }
 
   onSubmit(): void {

@@ -12,12 +12,6 @@
 
     margin-bottom: 40px;
 
-    h1,
-    app-form-control,
-    app-file-upload {
-        @extend .full-width;
-    }
-
     .post-header {
         display: flex;
         align-items: center;

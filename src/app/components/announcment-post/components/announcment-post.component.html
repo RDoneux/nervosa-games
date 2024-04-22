@@ -1,5 +1,5 @@
+@if(announcementPost && announcementPost.postDate?.seconds <= currentDateTime) {
 <div
-  *ngIf="announcementPost"
   class="announcement-post__container"
   [routerLink]="linkBase"
   [queryParams]="{ id: announcementPost.id }"
@@ -11,7 +11,7 @@
   />
   <div class="header">
     <h5 *ngIf="poster">
-      {{poster.displayName}}
+      {{ poster.displayName }}
       <span
         *ngIf="poster.isAdmin"
         class="material-symbols-outlined padding-left"
@@ -40,3 +40,4 @@
     </h5>
   </div>
 </div>
+}

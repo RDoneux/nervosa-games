@@ -19,4 +19,6 @@ export interface IAnnouncementPost {
   backgroundImageAlt: string;
 
   comments: IComment[];
+
+  postDate: any;
 }
