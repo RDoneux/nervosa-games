@@ -144,7 +144,6 @@ export class LoginService {
   /* istanbul ignore next */
   getCurrentLoggedInUser(): Observable<IUser | null> {
     return this._loginDetails.pipe(
-      filter((value: IUser | null) => value != null),
       take(1)
     );
   }

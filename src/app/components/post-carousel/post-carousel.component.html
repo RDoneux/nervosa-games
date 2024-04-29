@@ -4,11 +4,13 @@
   class="post-carousel__container"
   [style.--total-posts]="posts.length"
 >
+  @for(post of posts; track post.id) { @if(post.postDate?.seconds <=
+  currentDateTime){
   <app-announcment-post
-    *ngFor="let post of posts"
     [style.--desired-translation]="offsetX + 'px'"
     class="post"
     #announcmentPost
     [announcementPost]="post"
   ></app-announcment-post>
+  } }
 </div>

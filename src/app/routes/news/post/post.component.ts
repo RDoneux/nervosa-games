@@ -6,6 +6,8 @@ import { PostService } from './services/post/post.service';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/services/login/login.service';
 import { HttpParams } from '@angular/common/http';
+import { NotificationService } from 'src/app/modules/notification/services/notification.service';
+import { NotificationType } from 'src/app/modules/notification/interfaces/i-notification';
 
 @Component({
   selector: 'app-post',
@@ -26,7 +28,8 @@ export class PostComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private postService: PostService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +37,7 @@ export class PostComponent implements OnInit {
       next: (user: IUser | null) => {
         this.currentLoggedInUser = user;
       },
-      error: (error: any) => console.log(error)
+      error: (error: any) => console.log(error),
     });
 
     // get the post id from query params
@@ -44,7 +47,9 @@ export class PostComponent implements OnInit {
   }
 
   public editPost(): void {
-    this.router.navigateByUrl(`/admin-dashboard/news-admin?${new HttpParams().set('id', this.post.id)}`)
+    this.router.navigateByUrl(
+      `/admin-dashboard/news-admin?${new HttpParams().set('id', this.post.id)}`
+    );
   }
 
   private fetchPost(value: any): void {
@@ -53,6 +58,12 @@ export class PostComponent implements OnInit {
         this.post = post[0];
         this.fetchUser(post[0].posterId);
         this.updateSeenBy(post[0].id, post[0].seenBy);
+        if (this.post.postDate.seconds > new Date().getTime() / 1000) {
+          this.notificationService.showNotification(
+            `This post is scheduled to be released on ${this.post.postDate.toDate()} and will not be visible to non-admin users until then.`,
+            NotificationType.INFO
+          );
+        }
       },
     });
   }

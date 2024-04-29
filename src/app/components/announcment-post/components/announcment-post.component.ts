@@ -4,6 +4,7 @@ import { IAnnouncementPost } from '../interfaces/i-announcement-post.interface';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IUser } from 'src/app/interfaces/i-user.interface';
 import { RouterModule } from '@angular/router';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-announcment-post',
@@ -18,15 +19,19 @@ export class AnnouncmentPostComponent implements AfterViewInit {
   public poster!: IUser;
   public linkBase: string = '/news/post';
   public currentDateTime = new Date().getTime() / 1000;
+  public currentUser!: IUser | null
 
   constructor(
     private firebase: AngularFirestore,
-    public elementRef: ElementRef
+    public elementRef: ElementRef,
+    private loginService: LoginService
   ) {}
 
   async ngAfterViewInit(): Promise<void> {
 
-    console.log(this.announcementPost.postDate?.seconds, this.currentDateTime)
+    this.loginService.getCurrentLoggedInUser().subscribe({
+      next: (user: IUser | null) => this.currentUser = user
+    });
 
     new Promise<void>(() => {
       const checkForAnnouncementPostToBeDefined = () => {

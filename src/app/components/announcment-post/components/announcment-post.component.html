@@ -1,9 +1,13 @@
-@if(announcementPost && announcementPost.postDate?.seconds <= currentDateTime) {
+@if(announcementPost) {
 <div
   class="announcement-post__container"
   [routerLink]="linkBase"
   [queryParams]="{ id: announcementPost.id }"
 >
+  @if(currentUser?.email === announcementPost.posterId &&
+  announcementPost.postDate?.seconds <= currentDateTime) {
+  <div style="position: absolute">WARNING BANNER</div>
+  }
   <img
     class="announcement-post__background-image"
     [src]="announcementPost.backgroundImageUrl"

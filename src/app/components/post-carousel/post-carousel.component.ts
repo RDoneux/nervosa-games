@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IAnnouncementPost } from '../announcment-post/interfaces/i-announcement-post.interface';
 import { AnnouncmentPostComponent } from '../announcment-post/components/announcment-post.component';
+import { IUser } from 'src/app/interfaces/i-user.interface';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-post-carousel',
@@ -20,6 +22,7 @@ export class PostCarouselComponent implements OnInit {
   public get carouselContainer(): HTMLDivElement {
     return this._carouselContainer.nativeElement;
   }
+  public currentDateTime = new Date().getTime() / 1000;
 
   public posts!: IAnnouncementPost[];
   public offsetX: number = 0;
@@ -39,6 +42,8 @@ export class PostCarouselComponent implements OnInit {
 
     if (window.innerWidth > 576)
       setInterval(() => this.incrementCarousel(), this.advanceTimeIncrement);
+
+
   }
 
   incrementCarousel(): void {
