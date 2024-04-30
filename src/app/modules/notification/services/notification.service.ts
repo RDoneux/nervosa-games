@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { INotification, NotificationType } from '../interfaces/i-notification';
 import { v4 } from 'uuid';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,12 @@ export class NotificationService {
   public readonly globalNotifications$: Observable<INotification[]> =
     this._globalNotifications.asObservable();
 
-  constructor() {}
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.notifications = []
+      this._globalNotifications.next(this.notifications)
+    })
+  }
 
   showNotification(
     title: string,
