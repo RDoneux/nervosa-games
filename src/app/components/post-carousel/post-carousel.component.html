@@ -4,13 +4,16 @@
   class="post-carousel__container"
   [style.--total-posts]="posts.length"
 >
-  @for(post of posts; track post.id) { @if(post.postDate?.seconds <=
-  currentDateTime){
+<!-- {{currentLoggedInUser | json}} -->
+
+  @for(post of posts; track post.id) { 
+  @if(post.postDate?.seconds <= currentDateTime || currentLoggedInUser?.isAdmin){
   <app-announcment-post
     [style.--desired-translation]="offsetX + 'px'"
     class="post"
     #announcmentPost
     [announcementPost]="post"
   ></app-announcment-post>
-  } }
+  } 
+  }
 </div>

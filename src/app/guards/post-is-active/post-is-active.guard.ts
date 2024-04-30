@@ -21,16 +21,14 @@ export const postIsActiveGuard: CanActivateFn = (route, state) => {
         postService.getPost(id),
       ]).subscribe({
         next: ([user, post]) => {
-
-          console.log(user)
+          console.log(user);
           if (!user) router.navigate(['/unauthorised']);
-          if (user?.isAdmin) res(true);
-          // if (post[0].postDate.seconds < new Date().getTime() / 1000)
-          //   router.navigate(['/unauthorised']);
+          else if (user?.isAdmin) res(true);
+          else if (post[0].postDate.seconds < new Date().getTime() / 1000)
+            router.navigate(['/unauthorised']);
         },
         error: (error: any) => console.log('error', error),
       });
     }
-
   });
 };

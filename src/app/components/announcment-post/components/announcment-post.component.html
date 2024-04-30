@@ -4,10 +4,6 @@
   [routerLink]="linkBase"
   [queryParams]="{ id: announcementPost.id }"
 >
-  @if(currentUser?.email === announcementPost.posterId &&
-  announcementPost.postDate?.seconds <= currentDateTime) {
-  <div style="position: absolute">WARNING BANNER</div>
-  }
   <img
     class="announcement-post__background-image"
     [src]="announcementPost.backgroundImageUrl"
@@ -43,5 +39,17 @@
       >{{ announcementPost.likedBy }}
     </h5>
   </div>
+
+  @if(currentUser?.isAdmin && announcementPost.postDate?.seconds >=
+  currentDateTime) {
+  <div class="scheduled-post">
+    <span class="material-symbols-outlined"> error </span>
+    <span>
+      This post is scheduled to be published on
+      {{ announcementPost.postDate.toDate() | date }}. Until this date, the post
+      is only viewable by admin users
+    </span>
+  </div>
+  }
 </div>
 }
