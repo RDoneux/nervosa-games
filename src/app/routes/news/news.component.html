@@ -1,6 +1,9 @@
 <div class="news__container">
+  @for(post of posts; track post.id) {
+  @if(post.postDate?.seconds <= currentDateTime || currentLoggedInUser?.isAdmin){
   <app-announcment-post
-    *ngFor="let post of posts"
     [announcementPost]="post"
   ></app-announcment-post>
+  }
+  }
 </div>
