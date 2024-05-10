@@ -4,7 +4,9 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import Quill from 'quill';
@@ -18,7 +20,7 @@ import { StorageService } from 'src/app/services/cloud-storage/storage.service';
   templateUrl: './rich-text-input.component.html',
   styleUrl: './rich-text-input.component.scss',
 })
-export class RichTextInputComponent implements AfterViewInit {
+export class RichTextInputComponent implements AfterViewInit, OnChanges {
   @Input() placeholder!: string;
   @Input() text: string = '{}'; // Delta object stringified
   @Input() mode: 'edit' | 'display' = 'edit';
@@ -74,6 +76,14 @@ export class RichTextInputComponent implements AfterViewInit {
     this.quillInput.on('text-change', () =>
       this.textChange.emit(this.quillInput.getText())
     );
+  }
+
+  ngOnChanges(simpleChanges: SimpleChanges): void {
+    if (
+      simpleChanges['text'].previousValue != simpleChanges['text'].currentValue
+    ) {
+      this.quillInput.setContents(JSON.parse(this.text));
+    }
   }
 
   getContent(): string {
