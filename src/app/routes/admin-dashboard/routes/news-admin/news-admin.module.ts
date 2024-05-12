@@ -8,6 +8,7 @@ import { UserInterfaceModule } from 'src/app/modules/user-interface/user-interfa
 import { FormsModule } from '@angular/forms';
 import { FileUploadComponent } from 'src/app/components/file-upload/file-upload.component';
 import { RichTextInputComponent } from 'src/app/components/rich-text-input/rich-text-input.component';
+import { TagsInputComponent } from 'src/app/components/tags-input/tags-input.component';
 
 @NgModule({
   declarations: [NewsAdminComponent, CreatePostComponent],
@@ -17,7 +18,8 @@ import { RichTextInputComponent } from 'src/app/components/rich-text-input/rich-
     UserInterfaceModule,
     FormsModule,
     FileUploadComponent,
-    RichTextInputComponent
+    RichTextInputComponent,
+    TagsInputComponent
   ],
 })
 export class NewsAdminModule {}

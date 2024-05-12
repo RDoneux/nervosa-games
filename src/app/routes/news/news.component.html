@@ -1,9 +1,14 @@
+<div class="tags-wrapper">
+  <h4>Search by tag:</h4>
+  <app-tags-input
+    [tags]="searchTags"
+    (tagSelected)="filterPosts($event)"
+  ></app-tags-input>
+</div>
+
 <div class="news__container">
-  @for(post of posts; track post.id) {
-  @if(post.postDate?.seconds <= currentDateTime || currentLoggedInUser?.isAdmin){
-  <app-announcment-post
-    [announcementPost]="post"
-  ></app-announcment-post>
-  }
-  }
+  @for(post of filteredPosts; track post.id) { @if(post.postDate?.seconds <=
+  currentDateTime || currentLoggedInUser?.isAdmin){
+  <app-announcment-post [announcementPost]="post"></app-announcment-post>
+  } }
 </div>

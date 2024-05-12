@@ -1,0 +1,25 @@
+@if(mode === 'edit') {
+<button type="submit" disabled style="display: none" aria-hidden="true"></button
+><!-- disable form submission on enter -->
+<app-form-control label="Tags">
+  <input
+    name="tag-input"
+    (keyup.enter)="addTag($event)"
+    [(ngModel)]="tagInput"
+  />
+</app-form-control>
+}
+<div class="tag-container">
+  @for(tag of tags; track tag.id) {
+  <div class="tag" (click)="tagSelected.emit(tag)">
+    {{ tag.label }}
+    {{tag.id}}
+    {{tag.selected}}
+    @if(mode === 'edit' || tag.selected) {
+    <span class="material-symbols-outlined" (click)="removeTag(tag.id)"
+      >close</span
+    >
+    }
+  </div>
+  }
+</div>
