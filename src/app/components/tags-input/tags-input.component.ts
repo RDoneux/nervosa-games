@@ -16,7 +16,7 @@ export class TagsInputComponent {
   @Input() tags!: ITag[];
   @Input() mode: ITagMode = ITagMode.DISPLAY;
   @Input() multiple: boolean = false;
-  @Output() tagChanged: EventEmitter<ITag[]> = new EventEmitter();
+  @Output() tagsChange: EventEmitter<ITag[]> = new EventEmitter();
 
   public tagInput: string = '';
 
@@ -31,16 +31,17 @@ export class TagsInputComponent {
   handleTagClick(tag: ITag): void {
     if (tag.selected === true) return;
     tag.selected = true;
-    this.tagChanged.emit(this.tags);
+    this.tagsChange.emit(this.tags);
   }
 
   tagXClicked(tag: ITag): void {
     if (this.mode === ITagMode.EDIT) {
       this.removeTag(tag.id);
+      this.tagsChange.emit(this.tags);
     } else {
       tag.selected = false;
 
-      this.tagChanged.emit(this.tags);
+      this.tagsChange.emit(this.tags);
     }
   }
 

@@ -8,7 +8,7 @@
     <input type="text" [(ngModel)]="post.title" name="title" required />
   </app-form-control>
 
-  <app-tags-input class="full-width" mode="edit" [tags]="post.tags"></app-tags-input>
+  <app-tags-input class="full-width" mode="edit" [(tags)]="post.tags"></app-tags-input>
 
   <app-rich-text-input
     #postSubtitle
