@@ -11,12 +11,10 @@
 }
 <div class="tag-container">
   @for(tag of tags; track tag.id) {
-  <div class="tag" (click)="tagSelected.emit(tag)">
-    {{ tag.label }}
-    {{tag.id}}
-    {{tag.selected}}
+  <div class="tag">
+    <span (click)="handleTagClick(tag)">{{ tag.label }} </span>
     @if(mode === 'edit' || tag.selected) {
-    <span class="material-symbols-outlined" (click)="removeTag(tag.id)"
+    <span class="material-symbols-outlined" (click)="tagXClicked(tag)"
       >close</span
     >
     }

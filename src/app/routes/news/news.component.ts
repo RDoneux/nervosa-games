@@ -5,7 +5,7 @@ import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { debug } from 'src/app/services/debug/debug';
 import { ITag } from 'src/app/components/tags-input/interfaces/i-tag.interface';
-import { uniqBy } from 'lodash-es';
+import { intersection, uniqBy } from 'lodash-es';
 
 @Component({
   selector: 'app-news',
@@ -47,10 +47,19 @@ export class NewsComponent implements OnInit {
     });
   }
 
-  filterPosts(tag: ITag): void {
-    this.filteredPosts = this.posts.filter((post: IAnnouncementPost) => {
-      const tagLabels: string[] = post.tags.map((tag) => tag.label);
-      return tagLabels.includes(tag.label);
+  filterPosts(tag: ITag[]): void {
+    const appliedTags = tag
+      .filter((tag: ITag) => tag.selected)
+      .map((tag: ITag) => tag.label);
+
+    if (!appliedTags.length) {
+      this.removeTagFilter();
+      return;
+    }
+
+    this.filteredPosts = this.posts.filter((value: IAnnouncementPost) => {
+      const tagLabels: string[] = value.tags.map((tag) => tag.label);
+      return intersection(appliedTags, tagLabels).length;
     });
   }
 
