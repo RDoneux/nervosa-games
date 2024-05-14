@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IAnnouncementPost } from '../announcment-post/interfaces/i-announcement-post.interface';
 import { AnnouncmentPostComponent } from '../announcment-post/components/announcment-post.component';
+import { IUser } from 'src/app/interfaces/i-user.interface';
+import { LoginService } from 'src/app/services/login/login.service';
+import { debug } from 'src/app/services/debug/debug';
 
 @Component({
   selector: 'app-post-carousel',
@@ -20,11 +23,16 @@ export class PostCarouselComponent implements OnInit {
   public get carouselContainer(): HTMLDivElement {
     return this._carouselContainer.nativeElement;
   }
+  public currentDateTime = new Date().getTime() / 1000;
+  public currentLoggedInUser!: IUser | null;
 
   public posts!: IAnnouncementPost[];
   public offsetX: number = 0;
 
-  constructor(private firebase: AngularFirestore) {}
+  constructor(
+    private firebase: AngularFirestore,
+    private loginService: LoginService
+  ) {}
 
   /* istanbul ignore next */
   ngOnInit(): void {
@@ -39,6 +47,11 @@ export class PostCarouselComponent implements OnInit {
 
     if (window.innerWidth > 576)
       setInterval(() => this.incrementCarousel(), this.advanceTimeIncrement);
+
+    this.loginService.getCurrentLoggedInUser().subscribe({
+      next: (user: IUser | null) => (this.currentLoggedInUser = user),
+      error: (error: any) => debug('error')(error),
+    });
   }
 
   incrementCarousel(): void {

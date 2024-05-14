@@ -27,7 +27,7 @@ export const socialMediaIcons: ISocialMediaIconLink[] = [
     alt: 'youtube-link',
   },
   {
-    href: 'https://www.tiktik.com/@nervosa.games',
+    href: 'https://www.tiktok.com/@nervosa.games',
     name: 'tiktok',
     alt: 'tiktok-link'
   }

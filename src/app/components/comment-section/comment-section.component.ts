@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IComment } from 'src/app/interfaces/i-comment.interface';
 import { UserInterfaceModule } from 'src/app/modules/user-interface/user-interface.module';
@@ -16,7 +22,7 @@ import { LoginService } from 'src/app/services/login/login.service';
   templateUrl: './comment-section.component.html',
   styleUrls: ['./comment-section.component.scss'],
 })
-export class CommentSectionComponent implements OnInit {
+export class CommentSectionComponent implements OnInit, OnChanges {
   @Input({ required: true }) postId!: string;
   @Input({ required: true }) user!: IUser | null;
 
@@ -39,7 +45,13 @@ export class CommentSectionComponent implements OnInit {
       userImageUrl: this.user?.profilePicture ?? '',
       datePosted: new Timestamp(0, 0),
     };
+  }
 
+  ngOnChanges(simpleChanges: SimpleChanges): void {
+    const postId = simpleChanges['postId'];
+    if (postId.firstChange) return;
+    if (postId.previousValue === postId.currentValue) return;
+    
     this.firestoreService
       .getFirestore()
       .collection<IAnnouncementPost>('posts', (ref) =>

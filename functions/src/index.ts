@@ -13,7 +13,7 @@ import {onRequest} from "firebase-functions/v2/https";
 // import express from 'express';
 // import { Express, Request, Response } from 'express';
 import * as express from "express";
-import axios from "axios";
+import {createShareLink} from "./share/share";
 
 const app: express.Express = express();
 
@@ -27,8 +27,10 @@ const app: express.Express = express();
 
 export const api = onRequest(app);
 
-app.get("/", (req: express.Request, ress: express.Response) => {
-  axios.get("https://emojihub.yurace.pro/api/random").then((response) => {
-    ress.status(response.status).send(response.data);
-  });
-});
+// app.get('/', (req: express.Request, ress: express.Response) => {
+//   axios.get('https://emojihub.yurace.pro/api/random').then((response) => {
+//     ress.status(response.status).send(response.data);
+//   });
+// });
+
+app.get("/share", createShareLink);

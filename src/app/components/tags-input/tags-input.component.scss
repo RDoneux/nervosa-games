@@ -1,0 +1,43 @@
+@import 'variables';
+
+.tag-container {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    .tag {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 20px;
+        background-color: $text-dark-colour;
+        color: $text-light-colour;
+
+        width: fit-content;
+        padding: 3px 8px;
+
+        margin: 3px 5px;
+
+        cursor: pointer;
+        transition: box-shadow 100ms linear;
+
+        &:hover {
+            box-shadow: 0 0 2px 1px $secondary-accent-colour;
+        }
+
+        .material-symbols-outlined {
+            font-size: 20px;
+            margin-left: 5px;
+            cursor: pointer;
+
+            transition: transform 200ms linear;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+}

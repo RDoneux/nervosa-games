@@ -3,6 +3,8 @@ export interface INotification {
   type: NotificationType;
   timer?: number;
   id?: string;
+  yesLabel?: string;
+  noLabel?: string;
 }
 
 export const NotificationType = {
@@ -10,6 +12,7 @@ export const NotificationType = {
   WARNING: 'warning',
   DANGER: 'danger',
   INFO: 'info',
+  ARE_YOU_SURE: 'sure'
 } as const;
 
 export type NotificationType =

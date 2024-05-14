@@ -143,10 +143,7 @@ export class LoginService {
 
   /* istanbul ignore next */
   getCurrentLoggedInUser(): Observable<IUser | null> {
-    return this._loginDetails.pipe(
-      filter((value: IUser | null) => value != null),
-      take(1)
-    );
+    return this._loginDetails.pipe(take(1));
   }
 
   /* istanbul ignore next */
@@ -187,7 +184,7 @@ export class LoginService {
       .getFirestore()
       .collection('users')
       .doc(user.email)
-      .set(user, {merge: true});
+      .set(user, { merge: true });
   }
 
   /* istanbul ignore next */

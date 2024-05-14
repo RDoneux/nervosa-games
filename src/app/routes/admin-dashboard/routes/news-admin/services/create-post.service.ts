@@ -14,4 +14,8 @@ export class CreatePostService {
       .doc(`posts/${post.id}`)
       .set(post);
   }
+
+  deletePost(id: string): void {
+    this.angularFirestoreService.getFirestore().doc(`posts/${id}`).delete();
+  }
 }

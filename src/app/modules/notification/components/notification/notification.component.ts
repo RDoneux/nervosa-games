@@ -16,7 +16,7 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.notification?.timer) {
-      this.timeLeft = this.notification.timer
+      this.timeLeft = this.notification.timer;
       const interval = setInterval(() => {
         (this.timeLeft as number) -= 10;
         if ((this.timeLeft as number) <= 0) {
@@ -29,5 +29,12 @@ export class NotificationComponent implements OnInit {
 
   onClose(): void {
     this.notificationService.removeNotification(this.notification.id as string);
+  }
+
+  answerQuestion(response: boolean): void {
+    this.notificationService.answerQuestion(
+      response,
+      this.notification.id ?? ''
+    );
   }
 }

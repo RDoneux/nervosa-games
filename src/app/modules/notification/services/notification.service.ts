@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { INotification, NotificationType } from '../interfaces/i-notification';
 import { v4 } from 'uuid';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +10,17 @@ import { v4 } from 'uuid';
 export class NotificationService {
   private _globalNotifications: Subject<INotification[]> = new Subject();
   private notifications: INotification[] = [];
+  private question: Subject<boolean> | undefined = undefined;
 
   public readonly globalNotifications$: Observable<INotification[]> =
     this._globalNotifications.asObservable();
 
-  constructor() {}
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.notifications = []
+      this._globalNotifications.next(this.notifications)
+    })
+  }
 
   showNotification(
     title: string,
@@ -31,4 +38,30 @@ export class NotificationService {
     );
     this._globalNotifications.next(this.notifications);
   }
+
+  askBinaryQuestion(
+    title: string,
+    yesLabel: string = 'Yes',
+    noLabel: string = 'No'
+  ): Observable<boolean> {
+    if(this.question) return this.question;
+    this.question = new Subject();
+    this.notifications.push({
+      title,
+      type: NotificationType.ARE_YOU_SURE,
+      id: v4(),
+      yesLabel: yesLabel,
+      noLabel: noLabel,
+    });
+    this._globalNotifications.next(this.notifications);
+    return this.question;
+  }
+
+  answerQuestion(response: boolean, id: string): void {
+    if(!this.question) return;
+    this.question.next(response)
+    this.question = undefined;
+    this.removeNotification(id)
+  }
+
 }

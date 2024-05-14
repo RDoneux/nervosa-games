@@ -1,0 +1,11 @@
+<span class="confirmation-text" [class.copied]="copied">Copied!</span>
+
+<div
+  class="share-container"
+  [class.copied]="copied"
+  (click)="saveValueToClipboard()"
+>
+  <span class="material-symbols-rounded">
+    {{ copied ? "done" : "share" }}
+  </span>
+</div>

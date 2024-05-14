@@ -78,6 +78,15 @@
         }
     }
 
+    &.sure {
+        @extend .info;
+        grid-template-columns: auto 1fr auto auto auto;
+
+        button {
+            min-width: 100px;
+        }
+    }
+
     span.material-symbols-outlined {
         font-size: 32px;
         padding-left: 10px;

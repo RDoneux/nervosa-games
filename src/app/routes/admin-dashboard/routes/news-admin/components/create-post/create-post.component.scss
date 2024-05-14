@@ -1,3 +1,5 @@
+@import 'variables';
+
 :host {
     width: 100%;
 
@@ -8,14 +10,58 @@
 
 .create-post__form {
 
-    h1,
-    app-form-control,
-    app-file-upload {
-        grid-column: 1 / span 2;
+    margin-bottom: 40px;
+
+    .post-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .material-symbols-outlined {
+            cursor: pointer;
+            font-size: 28px;
+        }
     }
 
     textarea {
         white-space: pre-wrap;
     }
 
+    .post-content-wrapper {
+        height: 500px
+    }
+
+    .quill-wrapper>div:first-child {
+        height: unset;
+    }
+
+    .image-preview {
+        @extend .full-width;
+        position: relative;
+
+
+        div {
+            width: 100%;
+            background: rgb(37, 37, 37);
+            height: 26px;
+
+            span {
+                position: absolute;
+                right: 5px;
+                top: 0;
+                color: $text-light-colour;
+                cursor: pointer;
+            }
+        }
+
+        img {
+            object-fit: cover;
+            width: 100%;
+        }
+    }
+
+}
+
+.full-width {
+    grid-column: 1 / span 2;
 }

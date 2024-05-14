@@ -91,4 +91,29 @@
         }
     }
 
+    .scheduled-post {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        column-gap: 10px;
+
+        color: white;
+
+        padding: 5px 10px;
+
+        border-radius: 3px 3px 0 0;
+
+        height: fit-content;
+        background: $secondary-accent-colour;
+
+        >span:first-child {
+            font-size: 35px;
+        }
+    }
+
 }

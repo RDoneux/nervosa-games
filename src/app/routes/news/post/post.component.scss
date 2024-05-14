@@ -12,6 +12,14 @@
 
     .post__username {
         font-weight: 100;
+        display: flex;
+
+        .material-symbols-rounded {
+            position: relative;
+            left: 2px;
+            font-size: 15px;
+            cursor: pointer;
+        }
     }
 
     .post__title {
